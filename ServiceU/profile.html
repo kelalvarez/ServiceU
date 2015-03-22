@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>ServiceU</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    
+
+    <!-- Custom CSS -->
+    <link href="css/stylish-portfolio.css" rel="stylesheet">
+
+    <!-- Custom Fonts -->
+    <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css">
+
+</head>
+
+    
+<body>
+        
+    <!-- Navigation -->
+    <a id="menu-toggle" href="#" class="btn btn-dark btn-lg toggle"><i class="fa fa-bars"></i></a>
+    <nav id="sidebar-wrapper">
+        <ul class="sidebar-nav">
+            <a id="menu-close" href="#" class="btn btn-light btn-lg pull-right toggle"><i class="fa fa-times"></i></a>
+            <li class="sidebar-brand">
+                <a href="#top">Home</a>
+            </li>
+            <li>
+                <a href="#top">My Profile</a>
+            </li>
+            <li>
+                <a href="#about">My Dashboard</a>
+            </li>
+            <li>
+                <a href="#services">Services</a>
+            </li>
+            <li>
+                <a href="#portfolio">Help</a>
+            </li>
+            <li>
+                <a href="#contact">Contact</a>
+            </li>
+        </ul>
+    </nav>
+    
+        
+    
+
+<!-- About -->
+
+    <!-- Services -->
+    <!-- The circle icons use Font Awesome's stacked icon classes. For more information, visit http://fontawesome.io/examples/ -->
+    <section id="services" class="services bg-primary">
+        <div class="container">
+            <div class="row text-center">
+                <div class="col-lg-10 col-lg-offset-1">
+                    <h2>My Profile</h2>
+                    <hr class="small">
+ 
+                        <div class="row">
+                                    <div class="col-md-4 col-lg-offset-2"><p>Name:</p></div>
+                                    <div class="col-md-2 col-lg-pull-1"> Retrieve Name from DB</div>
+                        </div>
+                    <br>     
+                        <div class="row">
+                                    <div class="col-md-4 col-lg-offset-2"><p>Email: </p></div>
+                                    <div class="col-md-2 col-lg-pull-1">Retrieve email from DB</div>
+                        </div>
+                    <br>
+                        <div class="row">
+                                    <div class="col-md-4 col-lg-offset-2"><p>Verify</p></div>
+                                    <div class="col-md-2 col-lg-pull-1"> Check verification or not</div>
+                        </div>
+                    <br>
+                        <div class="row">
+                                    <div class="col-md-4 col-lg-offset-2"><p>Password:</p></div>
+                                    <div class="col-md-2 col-lg-pull-1"> xxxxxxxxxxx </div>
+                                    <div class="col-md-3 col-lg-pull-1"><a href="#" class="btn btn-light btn-xs">Edit</a></div>
+                        </div>
+                    <br>
+                        <div class="row">
+                                    <div class="col-md-4 col-lg-offset-2"><p>Degree: </p></div>
+                                    <div class="col-md-2 col-lg-pull-1"> Retrieve degree from DB </div>
+                                    <div class="col-md-3 col-lg-pull-1"><a href="#" class="btn btn-light btn-xs">Edit</a></div>
+                        </div>
+                    <br>
+                        <div class="row">
+                                    <div class="col-md-4 col-lg-offset-2"><p>Interests:</p></div>
+                                    <div class="col-md-2 col-lg-pull-1"> Retrieve interests from DB </div>
+                                    <div class="col-md-3 col-lg-pull-1"><a href="#" class="btn btn-light btn-xs">Edit</a></div>
+                        </div>
+                    
+                    
+                        
+                        
+                                
+                                
+                            
+                        
+                        
+                        
+                       
+                        
+                    
+                    <!-- /.row (nested) -->
+                </div>
+                <!-- /.col-lg-10 -->
+            </div>
+            <!-- /.row -->
+        </div>
+        <!-- /.container -->
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-10 col-lg-offset-1 text-center">
+                    <h4><strong>Start Bootstrap</strong>
+                    </h4>
+                    <p>3481 Melrose Place<br>Beverly Hills, CA 90210</p>
+                    <ul class="list-unstyled">
+                        <li><i class="fa fa-phone fa-fw"></i> (123) 456-7890</li>
+                        <li><i class="fa fa-envelope-o fa-fw"></i>  <a href="mailto:name@example.com">name@example.com</a>
+                        </li>
+                    </ul>
+                    <br>
+                    <ul class="list-inline">
+                        <li>
+                            <a href="#"><i class="fa fa-facebook fa-fw fa-3x"></i></a>
+                        </li>
+                        <li>
+                            <a href="#"><i class="fa fa-twitter fa-fw fa-3x"></i></a>
+                        </li>
+                        <li>
+                            <a href="#"><i class="fa fa-dribbble fa-fw fa-3x"></i></a>
+                        </li>
+                    </ul>
+                    <hr class="small">
+                    <p class="text-muted">Copyright &copy; Your Website 2014</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- jQuery -->
+    <script src="js/jquery.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="js/bootstrap.min.js"></script>
+
+    <!-- Custom Theme JavaScript -->
+    <script>
+    // Closes the sidebar menu
+    $("#menu-close").click(function(e) {
+        e.preventDefault();
+        $("#sidebar-wrapper").toggleClass("active");
+    });
+
+    // Opens the sidebar menu
+    $("#menu-toggle").click(function(e) {
+        e.preventDefault();
+        $("#sidebar-wrapper").toggleClass("active");
+    });
+
+    
+    </script>
+    
+     
+
+</body>
+</html>
