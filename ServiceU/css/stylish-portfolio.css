@@ -27,6 +27,101 @@ body {
     padding: 0;
     font-size: 4.5em;
     font-weight: 700;
+
+}
+
+h4{
+    font-family: inherit;
+    font-weight: 500;
+    line-height: 1.1;
+    color: black;
+    font-size: 26px;
+}
+
+h5{
+    font-family: inherit;
+    font-weight: 500;
+    line-height: 1.1;
+    color: black;
+    font-size: 18px;
+}
+
+.title-top{
+    position: fixed;
+    top: 6%;
+    width: 100%;
+    vertical-align: middle;
+    
+}
+
+.left-side{
+    float: left;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    //display: block;
+    z-index: 99;
+    
+}
+
+.left-square{
+    position: absolute;
+    top: 30%;
+    left: 5%;
+    width: 40%;
+    height: 35%;
+    background-color: #9d9d9d; 
+   // z-index: 1;
+    
+    /* IE 8 */
+    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=50)";
+
+    /* IE 5-7 */
+    filter: alpha(opacity=50);
+
+    /* Netscape */
+    -moz-opacity: 0.5;
+
+    /* Safari 1.x */
+    -khtml-opacity: 0.5;
+
+    /* Good browsers */
+    opacity: 0.5;
+}
+
+.right-side {
+    float: left;
+    width: 100%;
+    overflow: hidden;
+    display:block;
+     z-index: 5
+
+}
+
+
+.right-square{
+    position: absolute;
+    top: 30%;
+    left: 60%;
+    width: 30%;
+    height: 35%;
+    background-color: #9d9d9d; 
+     z-index: 3;
+    
+    /* IE 8 */
+    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=50)";
+
+    /* IE 5-7 */
+    filter: alpha(opacity=50);
+
+    /* Netscape */
+    -moz-opacity: 0.5;
+
+    /* Safari 1.x */
+    -khtml-opacity: 0.5;
+
+    /* Good browsers */
+    opacity: 0.5;
 }
 
 /* Custom Button Styles */
@@ -71,7 +166,7 @@ hr.small {
     right: 0;
     width: 250px;
     height: 100%;
-    margin-right: -250px;
+    margin-right: 1110px;
     overflow-y: auto;
     background: #222;
     -webkit-transition: all 0.4s ease 0s;
@@ -131,7 +226,7 @@ hr.small {
     z-index: 1;
     position: fixed;
     top: 0;
-    right: 0;
+    left: 0;
 }
 
 #sidebar-wrapper.active {
@@ -237,3 +332,76 @@ hr.small {
 footer {
     padding: 100px 0;
 }
+
+
+//LOGIN CSS
+.right-side {
+    	position: absolute;
+	top: calc(50% - 75px);
+	left: calc(50% - 50px);
+	height: 150px;
+	width: 350px;
+	padding: 10px;
+	z-index: 2;
+}
+
+.right-side input[type=password], input[type=text]{
+	width: 250px;
+	height: 30px;
+	background: transparent;
+	border: 1px solid rgba(255,255,255,0.6);
+	border-radius: 2px;
+	font-size: 16px;
+	font-weight: 400;
+	padding: 4px;
+	margin-top: 10px;
+}
+
+
+.right-side input[type=button]{
+	width: 260px;
+	height: 35px;
+	background: #fff;
+	border: 1px solid #fff;
+	cursor: pointer;
+	border-radius: 2px;
+	color: #a18d6c;
+	font-size: 16px;
+	font-weight: 400;
+	padding: 6px;
+	margin-top: 10px;
+}
+
+.right-side input[type=button]:hover{
+	opacity: 0.8;
+}
+
+.right-side input[type=button]:active{
+	opacity: 0.6;
+}
+
+.right-side input[type=text]:focus{
+	outline: none;
+	border: 1px solid rgba(255,255,255,0.9);
+}
+
+.right-side input[type=password]:focus{
+	outline: none;
+	border: 1px solid rgba(255,255,255,0.9);
+}
+
+.right-side input[type=button]:focus{
+	outline: none;
+}
+
+::-webkit-input-placeholder{
+   color: black;
+}
+
+.text-forget {
+    margin: 0;
+    padding: 0;
+    font-size: 10px;
+    font-weight: 100;   
+}
+// End Login CSS
