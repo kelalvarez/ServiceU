@@ -13,7 +13,10 @@
 
     <!-- Bootstrap Core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
-    
+    <link href="css/mycss.css" rel="stylesheet" />    
+
+	<!-- JSS -->
+	<script src="js/myjs.js"></script>
 
     <!-- Custom CSS -->
     <link href="css/stylish-portfolio.css" rel="stylesheet">
@@ -38,6 +41,7 @@
             </div>
             <div class="left-square">
                 <div class="left-side">
+                
                     # JOBS<br>
                     1. ...<br>
                     2. ...<br>
@@ -53,7 +57,8 @@
                 <input type="password" placeholder="password" name="password"><br>
                 <span class="text-forget">Forget Password?</span><br>
                 <input type="button" value="Login"><br>
-                or Sign up
+                or 
+                <input id = "btn1" type="button" name="submit" type="submit" value ="Sign Up"> <!-- can change later -->
                 <br>
                
                 </div>
@@ -64,7 +69,45 @@
 
     </header>
     
+    <!-- registration code start here -->
+    <div class="blackout"></div>
+	
+	<div class="RegistrationBox"> <!-- start of msgbox div -->
+		
+		<div class ="headerBox">
+			
+			<h3>Register on ServiceU</h3> <!-- Header -->
+			<div class="closeBox">Close</div>
+		
+		</div>
+	      <!-- registration code end here -->
 
+    </div>
+    
+    
+<!--  //This is the function that closes the pop-up-->
+<script>
+function endBlackout(){
+$(".blackout").css("display", "none");
+$(".RegistrationBox").css("display", "none");
+}
+
+//This is the function that starts the pop-up
+function strtBlackout(){
+$(".RegistrationBox").css("display", "block");
+$(".blackout").css("display", "block");
+}
+
+//Sets the buttons to trigger the blackout on clicks
+$(document).ready(function(){
+$("#btn1").click(strtBlackout); // open if btn is pressed
+$(".blackout").click(endBlackout); // close if click outside of popup
+$(".closeBox").click(endBlackout); // close if close btn clicked
+
+// Automatically trigger the pop-up after 10 seconds
+//setTimeout( strtBlackout, 10000);
+});
+</script>
     
 </body>
 
