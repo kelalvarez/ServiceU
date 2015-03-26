@@ -1,4 +1,8 @@
 <!DOCTYPE html>
+<?php
+
+include("DatabaseFunctions.php"); ?>
+
 <html lang="en">
 
 <head>
@@ -13,7 +17,7 @@
 
     <!-- Bootstrap Core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
-    
+    <link href="css/bootstrap.css" rel="stylesheet">
 
     <!-- Custom CSS -->
     <link href="css/stylish-portfolio.css" rel="stylesheet">
@@ -26,35 +30,9 @@
 
     
 <body>
-        
-    <!-- Navigation -->
-    <a id="menu-toggle" href="#" class="btn btn-dark btn-lg toggle"><i class="fa fa-bars"></i></a>
-    <nav id="sidebar-wrapper">
-        <ul class="sidebar-nav">
-            <a id="menu-close" href="#" class="btn btn-light btn-lg pull-right toggle"><i class="fa fa-times"></i></a>
-            <li class="sidebar-brand">
-                <a href="#top">Home</a>
-            </li>
-            <li>
-                <a href="#top">My Profile</a>
-            </li>
-            <li>
-                <a href="#about">My Dashboard</a>
-            </li>
-            <li>
-                <a href="#services">Services</a>
-            </li>
-            <li>
-                <a href="#portfolio">Help</a>
-            </li>
-            <li>
-                <a href="#contact">Contact</a>
-            </li>
-        </ul>
-    </nav>
-    
-        
-    
+
+<!-- Navigation Sidebar -->
+    <?php include 'navigationSidebar.php' ?>
 
 <!-- About -->
 
@@ -69,17 +47,32 @@
  
                         <div class="row">
                                     <div class="col-md-4 col-lg-offset-2"><p>Name:</p></div>
-                                    <div class="col-md-2 col-lg-pull-1"> Retrieve Name from DB</div>
+                                    <div class="col-md-4 col-lg-pull-2"> 
+                                        <?php 
+                                            echo getFullName(1);
+                                        ?> 
+                                    </div>
                         </div>
                     <br>     
                         <div class="row">
                                     <div class="col-md-4 col-lg-offset-2"><p>Email: </p></div>
-                                    <div class="col-md-2 col-lg-pull-1">Retrieve email from DB</div>
+                                    <div class="col-md-4 col-lg-pull-2">
+                                        <?php 
+                                            echo getEmail(1);
+                                        ?> 
+                                    </div>
                         </div>
                     <br>
                         <div class="row">
                                     <div class="col-md-4 col-lg-offset-2"><p>Verify</p></div>
-                                    <div class="col-md-2 col-lg-pull-1"> Check verification or not</div>
+                                    <div class="col-md-4 col-lg-pull-2">
+                                        <?php
+                                            if(checkVerification(1) == 1)
+                                                echo '<span class="glyphicon glyphicon-ok"></span>';
+                                            else
+                                                echo '<span class="glyphicon glyphicon-remove"></span>';
+                                        ?>
+                                    </div>
                         </div>
                     <br>
                         <div class="row">
@@ -90,28 +83,31 @@
                     <br>
                         <div class="row">
                                     <div class="col-md-4 col-lg-offset-2"><p>Degree: </p></div>
-                                    <div class="col-md-2 col-lg-pull-1"> Retrieve degree from DB </div>
-                                    <div class="col-md-3 col-lg-pull-1"><a href="#" class="btn btn-light btn-xs">Edit</a></div>
+                                    <div class="col-md-2 col-lg-pull-1"> 
+                                        <?php 
+                                            echo getDegree(1);
+                                        ?>  
+                                    </div>
+                                    <div class="col-md-3 col-lg-pull-1">
+                                        <a href="#editDegree" data-toggle="modal" data-target="#editDegree" class="btn btn-light btn-xs">Edit</a>
+                                        <?php include 'editDegreeModal.php' ?>
+                                        
+
+                                    </div>
                         </div>
                     <br>
                         <div class="row">
                                     <div class="col-md-4 col-lg-offset-2"><p>Interests:</p></div>
-                                    <div class="col-md-2 col-lg-pull-1"> Retrieve interests from DB </div>
-                                    <div class="col-md-3 col-lg-pull-1"><a href="#" class="btn btn-light btn-xs">Edit</a></div>
-                        </div>
-                    
-                    
-                        
-                        
-                                
-                                
-                            
-                        
-                        
-                        
-                       
-                        
-                    
+                                    <div class="col-md-2 col-lg-pull-1"> 
+                                        <?php 
+                                            echo getInterests(2);
+                                        ?> 
+                                    </div>
+                                    <div class="col-md-3 col-lg-pull-1">
+                                        <a href="#editInterest" data-toggle="modal" data-target="#editInterest" class="btn btn-light btn-xs">Edit</a>
+                                        <?php include 'editInterestModal.php' ?>
+                                    </div>
+                        </div>                    
                     <!-- /.row (nested) -->
                 </div>
                 <!-- /.col-lg-10 -->
@@ -126,28 +122,15 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-10 col-lg-offset-1 text-center">
-                    <h4><strong>Start Bootstrap</strong>
+                    <h4><strong>ServiceU</strong>
                     </h4>
                     <p>3481 Melrose Place<br>Beverly Hills, CA 90210</p>
                     <ul class="list-unstyled">
-                        <li><i class="fa fa-phone fa-fw"></i> (123) 456-7890</li>
                         <li><i class="fa fa-envelope-o fa-fw"></i>  <a href="mailto:name@example.com">name@example.com</a>
                         </li>
                     </ul>
-                    <br>
-                    <ul class="list-inline">
-                        <li>
-                            <a href="#"><i class="fa fa-facebook fa-fw fa-3x"></i></a>
-                        </li>
-                        <li>
-                            <a href="#"><i class="fa fa-twitter fa-fw fa-3x"></i></a>
-                        </li>
-                        <li>
-                            <a href="#"><i class="fa fa-dribbble fa-fw fa-3x"></i></a>
-                        </li>
-                    </ul>
                     <hr class="small">
-                    <p class="text-muted">Copyright &copy; Your Website 2014</p>
+                    <p class="text-muted">Copyright &copy; ServiceU 2015</p>
                 </div>
             </div>
         </div>
@@ -155,6 +138,8 @@
 
     <!-- jQuery -->
     <script src="js/jquery.js"></script>
+    <script src="js/bootbox.js"></script>
+    <script src="js/bootbox.min.js"></script>
 
     <!-- Bootstrap Core JavaScript -->
     <script src="js/bootstrap.min.js"></script>
@@ -173,8 +158,22 @@
         $("#sidebar-wrapper").toggleClass("active");
     });
 
+   $('[data-dismiss=modal]').on('click', function (e) {
+        var $t = $(this),
+            target = $t[0].href || $t.data("target") || $t.parents('.modal') || [];
+
+      $(target)
+        .find("input,textarea")
+           .val('')
+           .end();
+   
+      $('select option:first-child').attr("selected", "selected");
     
+    });
     </script>
+    
+    <!-- Custom for project -->
+    <script src="js/editProfileactions.js"></script>
     
      
 
