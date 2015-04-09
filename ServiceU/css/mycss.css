@@ -79,3 +79,12 @@ html, body{
   width: 100%;
   height: 100%;
 }
+
+#PanelLogin{
+	position: fixed;
+	left: 55%;
+	top: 30%;
+	width: 25%;
+	height: 28%;
+	z-index: 1;
+}
