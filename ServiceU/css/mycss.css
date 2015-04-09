@@ -85,6 +85,18 @@ html, body{
 	left: 55%;
 	top: 30%;
 	width: 25%;
-	height: 28%;
+	height: 30%;
 	z-index: 1;
+}
+
+#btnlogin{
+	margin-left: 75px;
+}
+
+#labelor{
+	margin-left: 20px;
+}
+
+#btnsignup{
+	margin-left: 20px;
 }
