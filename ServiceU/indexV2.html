@@ -82,6 +82,8 @@
 
 			</div> <!--end of container -->
 
+
+			 <!--Start Login Panel Here-->
 		  	 <div class="panel panel-default" id="PanelLogin">
 					
 					<div class="panel-heading text-center">
@@ -93,6 +95,7 @@
 					<div class="panel-body">
 						  	<form>
 
+						  		  <!--Start Email Address-->
 								  <div class="form-group">
 									    <label class="sr-only" for="exampleInputEmail3">Email address</label>
 									   	
@@ -102,9 +105,9 @@
 									    	<input type="email" class="form-control" id="exampleInputEmail3" placeholder="Enter email">
 									    
 									    </div>
-								  </div>
-					
-
+								  </div> <!--End Email Address-->
+						
+								  <!--Start Password-->
 								  <div class="form-group">
 									    <label class="sr-only" for="exampleInputPassword3">Password</label>
 
@@ -113,24 +116,50 @@
 										      <input type="password" class="form-control" id="exampleInputPassword3" placeholder="Password">
 										 </div>
 
-								  </div>
+								  </div><!--End Password-->
+
 								  <div class="checkbox">
 									    <label><input type="checkbox">Remember me</label>
+									    <button type="button" class="btn btn-link">Forgot password?</button>
 								  </div>
-								  <button type="submit" class="btn btn-default">Sign in</button>
 
+								  
+								  <button type="submit" class="btn btn-primary" id="btnlogin">Sign in</button>
+								  
+								  <label id="labelor">Or</label>
+								  
+								  <button type="button" class="btn btn-success" id="btnsignup">Sign Up!</button>
+								
 							</form>
 
 					</div>
 
-			  </div>
-
-				
-
+			  </div> <!--End Login Panel Here-->
 
 		</div><!--End of full container-->
 
 		
+
+
+<!--registration pop  up start here-->
+    <div class="blackout"></div>
+	
+	<div class="RegistrationBox"> <!-- start of msgbox div -->
+		
+		<div class ="headerBox">
+			
+			<h3>Register on ServiceU</h3> <!-- Header -->
+			<div class="closeBox">Close</div>
+		
+		</div>
+	      <!-- registration code end here -->
+
+    </div>
+    
+<!-- registration pop up start here --> 
+
+
+
 
 		<!--Start online JSS first-->
 		<script src="https://code.jquery.com/jquery-1.11.2.min.js"></script>
@@ -141,7 +170,35 @@
 
 		<!--Customized JSS-->
 		<script src="js/myjs.js"></script>
-	
+
+
+
+
+
+<!--  //This is the function that closes the pop-up-->
+<script>
+		function endBlackout(){
+		$(".blackout").css("display", "none");
+		$(".RegistrationBox").css("display", "none");
+		
+		}
+
+	//This is the function that starts the pop-up
+	function strtBlackout(){
+		$(".RegistrationBox").css("display", "block");
+		$(".blackout").css("display", "block");
+		}
+
+	//Sets the buttons to trigger the blackout on clicks
+	$(document).ready(function(){
+		$("#btnsignup").click(strtBlackout); // open if btn is pressed
+		$(".blackout").click(endBlackout); // close if click outside of popup
+		$(".closeBox").click(endBlackout); // close if close btn clicked
+
+		// Automatically trigger the pop-up after 10 seconds
+		//setTimeout( strtBlackout, 10000);
+	});
+</script>
 
 
 	</body> <!--End Body-->

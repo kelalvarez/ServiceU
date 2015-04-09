@@ -19,7 +19,7 @@ color:#000;
 width:30%;
 height:70%;
 position:fixed;
-top:5%;
+top:20%;
 left:15%;
 border-radius: 3px;
 padding:10px;
@@ -70,7 +70,7 @@ html, body{
 }
 
 #backg{
-	background-color: white;
+	background-color: gray;
 }
 
 /* Custom container */
