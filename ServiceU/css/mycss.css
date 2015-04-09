@@ -1,52 +1,75 @@
 .blackout {
-background-color:#000;
-opacity:.7;
-filter:alpha(opacity=70);
-height:100%;
-width:100%;
-position:fixed;
-top:0;
-left:0;
-z-index:100;
-display:none;
-cursor:pointer;
+	background-color:#000;
+	opacity:.7;
+	filter:alpha(opacity=70);
+	height:100%;
+	width:100%;
+	position:fixed;
+	top:0;
+	left:0;
+	z-index:2;
+	display:none;
+	cursor:pointer;
 }
 
-.RegistrationBox {
-background-color:#ccc;
-border:1px solid #ccc;
-color:#000;
-width:30%;
-height:70%;
-position:fixed;
-top:20%;
-left:15%;
-border-radius: 3px;
-padding:10px;
-z-index:101;
-display:none;
-margin-left: 20%;
-box-shadow: 0 0 200px rgba(255, 255, 255, 0.5), 0 1px 2px rgba(0, 0, 0, 0.3);
-
-}
-
-.closeBox {
-background-color:BLACK;
-color:#FFFFFF;
-padding:4px;
-float:right;
-border-radius:3px;
-cursor:pointer;
-text-transform:uppercase;
+#RegistrationBox {
+	background-color:#ccc;
+	border:1px solid #ccc;
+	color:#000;
+	width:25%;
+	height:55%;
+	position:fixed;
+	top:20%;
+	left:18%;
+	border-radius: 3px;
+	z-index:3;
+	display:none;
+	margin-left: 20%;
+	box-shadow: 0 0 200px rgba(255, 255, 255, 0.5), 0 1px 2px rgba(0, 0, 0, 0.3);
 
 }
 
+#Rhead{
+	width:80%;
+	height:6%;
+	margin-left: 10%;
+	padding-bottom: 7%;
+	background-color:#ccc;
+	border-bottom:1px solid #47A3FF;
+}
+
+#ptRegister{
+	margin-right: 60px;
+	margin-left: 50px;
+}
+
+#Rform{
+	padding-top: 10px;
+	width:80%;
+	height:6%;
+	margin-left: 10%;
+}
+
+#btnTP{
+	padding: 0px;
+	font-size: 12px;
+}
+
+#btnSignup{
+	padding-top: 10px;
+	width:80%;
+	height:6%;
+	margin-left: 10%;
+	border-top:1px solid #47A3FF;
+}
+
+/*no need this
 .headerBox{
 	background-color:#ccc;
 	margin-top: -0.5cm;
 	text-align: center;
 	border-bottom:1px solid #EDEDED;
-}
+}*/
 
 
 html, body{
@@ -75,9 +98,9 @@ html, body{
 
 /* Custom container */
 .container-full {
-  margin: 0 auto;
-  width: 100%;
-  height: 100%;
+	  margin: 0 auto;
+	  width: 100%;
+	  height: 100%;
 }
 
 #PanelLogin{
