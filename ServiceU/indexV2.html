@@ -124,7 +124,7 @@
 								  </div>
 
 								  
-								  <button type="submit" class="btn btn-primary" id="btnlogin">Sign in</button>
+								  <button type="button" class="btn btn-primary" id="btnlogin">Sign in</button>
 								  
 								  <label id="labelor">Or</label>
 								  
@@ -140,24 +140,51 @@
 
 		
 
-
 <!--registration pop  up start here-->
-    <div class="blackout"></div>
+  <div class="blackout"></div>
 	
-	<div class="RegistrationBox"> <!-- start of msgbox div -->
+  <div class="panel panel-default" id="RegistrationBox">
 		
-		<div class ="headerBox">
+			<div class="panel-heading text-center" id="Rhead">
+							  	  
+				<h3 class="panel-title pull-left" id="ptRegister"><b>Join ServiceU Today</b></h3>
+				<span class="glyphicon glyphicon-remove active" id="xbox"></span>
 			
-			<h3>Register on ServiceU</h3> <!-- Header -->
-			<div class="closeBox">Close</div>
-		
-		</div>
-	      <!-- registration code end here -->
+							  	  			
+			</div>
+			
+			<form>
 
-    </div>
-    
-<!-- registration pop up start here --> 
+				<div class="form-group" id="Rform">
+				    <label for="InputFullname">Full name</label>
+				    <input type="fullName" class="form-control" id="InputFullname" placeholder="Enter Full name">
+			  	</div>
 
+			 	 <div class="form-group" id="Rform">
+				    <label for="InputPassword">Password</label>
+				    <input type="password" class="form-control" id="InputPassword1" placeholder="Password">
+			  	</div>
+
+			  	 <div class="form-group" id="Rform">
+				    <label for="InputEmailAdress">Email Address</label>
+				    <input type="email" class="form-control" id="InputPassword1" placeholder="Enter Email">
+			  	</div>
+
+			  	<div id="Rform">
+			  		<h5><small>By clicking Sign Up, you are indicating that you have read and agree to the <button type="button" class="btn btn-link" id="btnTP">Terms of Service </button> and <button type="button" class="btn btn-link" id="btnTP">Privacy Policy</button>.</small></h5>
+			  	</div>
+
+			  	<div class="text-center" id="btnSignup">
+
+			  		<button type="button" class="btn btn-primary">Sign up</button>
+
+				</div>
+
+			</form>	
+		      
+	   	
+
+   </div> <!-- registration pop up end here --> 
 
 
 
@@ -179,13 +206,13 @@
 <script>
 		function endBlackout(){
 		$(".blackout").css("display", "none");
-		$(".RegistrationBox").css("display", "none");
+		$("#RegistrationBox").css("display", "none");
 		
 		}
 
 	//This is the function that starts the pop-up
 	function strtBlackout(){
-		$(".RegistrationBox").css("display", "block");
+		$("#RegistrationBox").css("display", "block");
 		$(".blackout").css("display", "block");
 		}
 
@@ -193,7 +220,7 @@
 	$(document).ready(function(){
 		$("#btnsignup").click(strtBlackout); // open if btn is pressed
 		$(".blackout").click(endBlackout); // close if click outside of popup
-		$(".closeBox").click(endBlackout); // close if close btn clicked
+		$("#xbox").click(endBlackout); // close if close btn clicked
 
 		// Automatically trigger the pop-up after 10 seconds
 		//setTimeout( strtBlackout, 10000);
@@ -204,3 +231,12 @@
 	</body> <!--End Body-->
 
 </html> <!--End HTML-->
+
+
+<!--
+<div class ="headerBox">
+			
+			<h3>Register on ServiceU</h3> 
+			<div class="closeBox">Close</div>
+		
+		</div> -->
