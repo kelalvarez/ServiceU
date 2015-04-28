@@ -1,9 +1,9 @@
 <?php
 
 // Change it if necessary for your localhost
-$con=mysqli_connect("localhost","root","","serviceU");
+$con=mysqli_connect("localhost","root","","serviceu");
 
-function register($email, $password, $firstName, $lastName)
+function register($email, $firstName, $lastName, $password)
 {
     global $con;
         
@@ -29,6 +29,7 @@ function emailAvailable($email) {
     else
     	return TRUE;
 }
+
 
 function validateLogin($email, $password) {
     global $con;
@@ -157,6 +158,15 @@ function getInterests($userID){
         return FALSE;
 
 }
+
+ function test_user_input($data) 
+       {
+              $data = trim($data);
+              $data = stripslashes($data);
+              $data = htmlspecialchars($data);
+              return $data;
+        }
+
 
 
 

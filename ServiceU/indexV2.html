@@ -138,8 +138,67 @@
 
 		</div><!--End of full container-->
 
+<?php  
+  
+include("connectDB.php");//make connection here  
+if(isset($_POST['submit']))  
+{  
+    $user_fname = $_POST['firstName'];//here getting result from the post array after submitting the form.  
+    $user_lname = $_POST['lastName'];//same 
+    $user_password = $_POST['password'];//same  
+    $user_email = $_POST['email'];//same  
+  
+  
+    if($user_fname=='')  
+    {  
+        //javascript use for input checking  
+        echo"<script>alert('Please enter the name')</script>";  
+		exit();//this use if first is not work then other will not show  
+    }  
+  
+    if($user_lname=='')  
+    {  
+        echo"<script>alert('Please enter the password')</script>";  
+		exit();  
+    }  
+  
+    if($user_password=='')  
+    {  
+        echo"<script>alert('Please enter the password')</script>";  
+   		exit();  
+    }
+
+    if($user_email=='')  
+    {  
+        echo"<script>alert('Please enter the email')</script>";  
+   		 exit();  
+    }   
+
+	//here query check weather if user already registered so can't register again.  
+    $check_email_query = "select * from usertable WHERE email = '$user_email'";  
+    $run_query=mysqli_query($dbcon, $check_email_query);  
+  
+    if(mysqli_num_rows($run_query)>0)  
+    {  
+			echo "<script>alert('Email $user_email is already exist in our database, Please try another one!')</script>";  
+			exit();  
+    }  
+
+	//insert the user into the database.  
+    $insert_user="insert into usertable (user_email, user_fname, user_lname, user_password) VALUE ('$user_email','$user_fname','$user_lname','$user_password')";  
+    if(mysqli_query($dbcon,$insert_user))  
+    {  
+        echo"<script>window.open('welcome.php','_self')</script>";  
+    }  
+  
+  
+  
+}  
+  
+?>  
 		
 
+	
 <!--registration pop  up start here-->
   <div class="blackout"></div>
 	
@@ -158,22 +217,22 @@
 
 				<div class="form-group" id="Rform">
 				    <label for="InputFirstName">First name</label>
-				    <input type="firstName" class="form-control" id="InputFirstname" placeholder="Enter first name">
+				    <input type="firstName" name="firstName" class="form-control" id="InputFirstname" placeholder="Enter first name">
 			  	</div>
 
 			  	<div class="form-group" id="Rform">
 				    <label for="InputLastName">Last name</label>
-				    <input type="lastName" class="form-control" id="InputLastname" placeholder="Enter last name">
+				    <input type="lastName" name="lastName" class="form-control" id="InputLastname" placeholder="Enter last name">
 			  	</div>
 
 			 	 <div class="form-group" id="Rform">
 				    <label for="InputPassword">Password</label>
-				    <input type="password" class="form-control" id="InputPassword1" placeholder="Password">
+				    <input type="password" name="password" class="form-control" id="InputPassword1" placeholder="Password">
 			  	</div>
 
 			  	 <div class="form-group" id="Rform">
 				    <label for="InputEmailAdress">Email Address</label>
-				    <input type="email" class="form-control" id="InputPassword1" placeholder="Enter Email">
+				    <input type="email" name="email" class="form-control" id="InputPassword1" placeholder="Enter Email">
 			  	</div>
 
 			  	<div id="Rform">
@@ -182,7 +241,7 @@
 
 			  	<div class="text-center" id="btnSignup">
 
-			  		<button type="button" class="btn btn-primary">Sign up</button>
+			  		<button type="submit" value="Register" name="submit" class="btn btn-primary">Register</button>
 
 				</div>
 
@@ -190,7 +249,10 @@
 		      
 	   	
 
-   </div> <!-- registration pop up end here --> 
+   </div> <!-- registration pop up end here -->
+
+
+
 
 
 
@@ -232,6 +294,9 @@
 		//setTimeout( strtBlackout, 10000);
 	});
 </script>
+
+
+
 
 
 	</body> <!--End Body-->
