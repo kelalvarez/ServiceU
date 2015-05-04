@@ -101,7 +101,7 @@
                     </div>
 
                     <div class="panel-body">
-                            <form>
+                            <form method="POST">
 
                                   <!--Start Email Address-->
                                   <div class="form-group">
@@ -172,7 +172,7 @@ if(isset($_POST['login']))
     }
      
  
-    if(validateLogin($user_email, $user_pass))  
+    if(validateLogin($user_email, $user_pass) == True)  
     {  
         echo "<script>window.open('home.php','_self')</script>";  
   
@@ -225,7 +225,7 @@ if(isset($_POST['submit']))
        if(!empty($user_email) && !empty($user_fname) && !empty($user_lname) && !empty($user_password))
        {
             register($user_email, $user_fname, $user_lname, $user_password);
-            echo"<script>window.open('home.php','_self')</script>";  
+            echo"<script>window.open('IndexV2.php','_self')</script>";  
         }
       
     }  
