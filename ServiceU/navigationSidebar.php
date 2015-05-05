@@ -21,5 +21,8 @@
             <li>
                 <a href="#contact">Contact</a>
             </li>
+             <li>
+                <a href="#logout">Log Out</a>
+            </li>
         </ul>
     </nav>

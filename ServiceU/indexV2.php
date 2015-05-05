@@ -223,9 +223,13 @@ if(isset($_POST['submit']))
       }
 
        if(!empty($user_email) && !empty($user_fname) && !empty($user_lname) && !empty($user_password))
-       {
+        {
             register($user_email, $user_fname, $user_lname, $user_password);
             echo"<script>window.open('IndexV2.php','_self')</script>";  
+        }
+       else
+        {
+          echo "<script>alert('Cant Register, Some fields are missing!')</script>"; 
         }
       
     }  
