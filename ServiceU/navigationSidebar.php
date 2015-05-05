@@ -4,7 +4,7 @@
         <ul class="sidebar-nav">
             <a id="menu-close" href="#" class="btn btn-light btn-lg pull-right toggle"><i class="fa fa-times"></i></a>
             <li class="sidebar-brand">
-                <a href="#top">Home</a>
+                <a href="home.php">Home</a>
             </li>
             <li>
                 <a href="profile.php">My Profile</a>
