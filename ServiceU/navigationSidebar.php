@@ -10,7 +10,7 @@
                 <a href="profile.php">My Profile</a>
             </li>
             <li>
-                <a href="#about">My Dashboard</a>
+                <a href="mydashboard.php">My Dashboard</a>
             </li>
             <li>
                 <a href="#services">Services</a>
@@ -22,7 +22,7 @@
                 <a href="#contact">Contact</a>
             </li>
              <li>
-                <a href="#logout">Log Out</a>
+                <a href="#LogOut">Log Out</a>
             </li>
         </ul>
     </nav>
