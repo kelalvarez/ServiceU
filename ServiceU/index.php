@@ -1,4 +1,12 @@
 <!DOCTYPE html> 
+<?php //session starts here 
+    session_start(); 
+    include('DatabaseFunctions.php');//make connection here 
+    include("functions.php");
+?>
+
+
+
 <html lang="en"> <!--Start HTML-->
 
     <head> <!--Start Head-->
@@ -84,13 +92,6 @@
 
 
 
-            <?php //session starts here 
-                session_start(); 
-              
-            ?>
-
-
-
              <!--Start Login Panel Here-->
              <div class="panel panel-default" id="PanelLogin" style="height: 37%">
                     
@@ -147,9 +148,6 @@
         </div><!--End of full container-->
 
 <?php  
-   
-include('DatabaseFunctions.php');//make connection here 
-
 if(isset($_POST['login']))  
 {  
     $user_email ="";
@@ -225,7 +223,7 @@ if(isset($_POST['submit']))
        if(!empty($user_email) && !empty($user_fname) && !empty($user_lname) && !empty($user_password))
         {
             register($user_email, $user_fname, $user_lname, $user_password);
-            echo"<script>window.open('IndexV2.php','_self')</script>";  
+            echo"<script>window.open('index.php','_self')</script>";  
         }
        else
         {
