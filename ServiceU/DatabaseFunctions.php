@@ -6,17 +6,18 @@ $con=mysqli_connect("localhost","root","","serviceu");
 function register($email, $firstName, $lastName, $password)
 {
     global $con;
-        
+    $code = generateRandomString();
+    
     mysqli_query($con,
-                "INSERT INTO userTable (email, firstName, lastName, password) "
-                . "values('$email', '$firstName', '$lastName', '$password');"
+                "INSERT INTO userTable (email, firstName, lastName, password, verificationCode) "
+                . "values('$email', '$firstName', '$lastName', '$password', '$code');"
                 );
     
     mysqli_query($con,
                 "INSERT INTO degreeTable (emailID) "
                 . "values('$email');"
                 );
-    
+    sendVerificationCode($email, $code);
     return TRUE;    
 }
 
@@ -36,6 +37,46 @@ function emailAvailable($email) {
     	return TRUE;
 }
 
+function sendVerificationCode($email, $code){
+    require('phpMailer/PHPMailerAutoload.php');
+
+    $mail = new PHPMailer(); 
+    $mail->SMTPDebug = 2;
+    $mail->IsSMTP(); // send via SMTP
+    $mail->SMTPSecure = 'ssl';
+    $mail->Host = "smtp.gmail.com";
+    $mail->Port = 2525;
+    $mail->SMTPAuth = true; // turn on SMTP authentication
+
+    $mail->Username = "serviceuconfirmation@gmail.com"; // SMTP username
+    $mail->Password = "alvarez12"; // SMTP password
+
+    $webmaster_email = "serviceuconfirmation@gmail.com"; //Reply to this email ID
+    $email="misha.neko@gmail.com"; // Recipients email ID
+    $name=""; // Recipient's name
+    $mail->From = $webmaster_email;
+    $mail->AddAddress($email,$name);
+    $mail->SetFrom('serviceuconfirmation@gmail.com', 'ServiceU Team');
+    $mail->WordWrap = 50; // set word wrap
+
+    $mail->IsHTML(true); // send as HTML
+    $mail->Subject = "Verification Code";
+    $mail->Body = "Welcome to ServiceU,
+        <br>
+        Here's your verification code: " . $code .  
+        "<br>
+        <br>Sincerely,
+        <br>The ServiceU Team
+        <br>"; //HTML Body
+    if(!$mail->Send())
+    {
+        echo "Mailer Error: " . $mail->ErrorInfo;
+    }
+    else
+    {
+        echo "Message has been sent";
+    }
+}
 
 function validateLogin($email, $password) {
     global $con;
@@ -113,6 +154,31 @@ function checkVerification($userEmail){
         return TRUE;
     else
         return FALSE;
+}
+
+function verifyCode($userEmail, $code)
+{
+    global $con;
+        
+    $query = "SELECT verificationCode FROM userTable 
+              WHERE email = '$userEmail'";
+        
+    $result = mysqli_query($con, $query);
+    $row = mysqli_fetch_assoc($result);
+        
+    if($row['verificationCode'] == $code)
+        return TRUE;
+    else
+        return FALSE;
+}
+
+function verifyAccount($email)
+{
+    global $con;
+    mysqli_query($con,
+                "UPDATE userTable SET verify=1 WHERE email ='$email';");
+    
+    return TRUE;
 }
 
 function verifyPassword($userEmail, $potentialPassword)
@@ -269,9 +335,19 @@ function numberofJobs()
 {
     global $con;
     
-     mysqli_query($con, "SELECT COUNT(*) FROM jobTable");
+    mysqli_query($con, "SELECT COUNT(*) FROM jobTable");
     
     return TRUE;       
+}
+
+function getJob()
+{
+    global $con;
+
+    $query = "SELECT * FROM jobTable";
+    $result = mysqli_query($con, $query);        
+    
+    return $result;
 }
 
 function numApplications($jobID){
@@ -288,13 +364,121 @@ function numApplications($jobID){
     return $total;
 }
 
-function getJob()
+function getJobPost($postID)
 {
     global $con;
 
-    $query = "SELECT * FROM jobTable";
+    $query = "SELECT * FROM jobTable WHERE='$postID'";
     $result = mysqli_query($con, $query);        
     
     return $result;
+} 
+
+function getJobDescription($jobID){
+    global $con;
+
+    $query = "SELECT jobDescription FROM jobTable
+              WHERE jobID = '$jobID'";
+
+    $result = mysqli_query($con, $query);        
+    $row = mysqli_fetch_assoc($result);
+        
+    $jobDescription = $row['jobDescription'];
+        
+    return $jobDescription;
 }
 
+function getJobTitle($jobID){
+    global $con;
+
+    $query = "SELECT jobTitle FROM jobTable
+              WHERE jobID = '$jobID'";
+
+    $result = mysqli_query($con, $query);        
+    $row = mysqli_fetch_assoc($result);
+        
+    $jobTitle = $row['jobTitle'];
+        
+    return $jobTitle;
+}
+
+function getJobOwner($jobID){
+    global $con;
+
+    $query = "SELECT employeerID FROM jobTable
+              WHERE jobID = '$jobID'";
+
+    $result = mysqli_query($con, $query);        
+    $row = mysqli_fetch_assoc($result);
+        
+    $employeerID= $row['employeerID'];
+        
+    return $employeerID;
+}
+
+function getJobPayment($jobID){
+    global $con;
+
+    $query = "SELECT payment FROM jobTable
+              WHERE jobID = '$jobID'";
+
+    $result = mysqli_query($con, $query);        
+    $row = mysqli_fetch_assoc($result);
+        
+    $payment = $row['payment'];
+        
+    return $payment;
+}
+
+function getJobCategory($jobID){
+    global $con;
+
+    $query = "SELECT category FROM jobTable
+              WHERE jobID = '$jobID'";
+
+    $result = mysqli_query($con, $query);        
+    $row = mysqli_fetch_assoc($result);
+        
+    $jobCategory = $row['category'];
+        
+    return $jobCategory;
+}
+
+function existApp($emailApp, $jobID){
+    global $con;
+    
+    $query = "SELECT COUNT(*) as total FROM appTable"
+            . " WHERE jobID='$jobID' AND employeeID='$emailApp'";
+    
+    $result = mysqli_query($con, $query);        
+    $row = mysqli_fetch_assoc($result);
+    
+    return $row['total'];
+
+    
+}
+
+function submitApp($email, $jobID){
+    global $con;
+    
+    $num = numApplications($jobID) + 1;
+    
+    newTotalApp($jobID, $num);
+    
+    mysqli_query($con,
+                "INSERT INTO appTable (jobID, employeeID, orderApp)"
+                . "values('$jobID', '$email', '$num');"
+                );
+    
+    return TRUE;
+    
+}
+
+function newTotalApp($jobID, $num){
+    global $con;
+    
+    $query = "UPDATE jobTable SET totalApp = '$num' WHERE jobID = '$jobID'";
+    mysqli_query($con, $query);
+    
+    return TRUE;
+}

@@ -1,5 +1,23 @@
 <!DOCTYPE html>
 <html lang="en">
+<?php 
+    include("DatabaseFunctions.php"); 
+    include("functions.php");
+?>
+<?php 
+session_start();
+  if (!isset($_SESSION["loginEmail"]))
+   {
+      header("location: index.php");
+      exit();
+   }
+   else{
+       $userEmail = $_SESSION["loginEmail"];
+    }
+   
+?>
+    
+    
 <head>
 
     <meta charset="utf-8">
@@ -28,7 +46,7 @@
 
 <!-- Navigation Sidebar -->
     <?php include 'navigationSidebar.php' ?>
-
+    <?php //include 'postInfo.php' ?>
 <!-- About -->
 
 
@@ -103,14 +121,26 @@
         $("#sidebar-wrapper").toggleClass("active");
     });
 
-
+    //$('#postInformation').on('show.bs.modal', function(e) {
+    //var jobId = $(e.relatedTarget).data('job-id');
+    //$(e.currentTarget).find('input[name="jobId"]').val(jobId);
+   // });
+    
+    
     </script>
     
     <!-- Custom for project -->
     <script src="js/editProfileactions.js"></script>
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
  
-
+    <script>
+ 
+ // $(function() {
+   //     $('#postInformation').someDialogPlug({ some: options });
+    //});
+    
+    
+    </script>
      
 
 </body>

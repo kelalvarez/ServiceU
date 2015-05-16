@@ -13,11 +13,7 @@ session_start();
    }
    else{
        $userEmail = $_SESSION["loginEmail"];
-   }
-   if (!isset($_GET['email'])) {
-	
-                    
-   }
+    }
    
    if (isset($_POST['submitDegree'])) {
         $D1P1 = $_POST['degree1Part1'];
@@ -33,7 +29,6 @@ session_start();
         
         insertInterest($userEmail, $newInterest);
     }
-    
     
     if (isset($_POST['changePassword'])) {
 	$oldPassword = $_POST['oldpassword'];
@@ -57,6 +52,22 @@ session_start();
             }
 
     }
+    
+    if (isset($_POST['verifyCode'])) {
+        $code = $_POST['verificationCode'];
+        
+        if (verifyCode($userEmail, $code)) {
+            verifyAccount($userEmail);
+            echo '<script type="text/javascript">';
+            echo 'alert("Account has been verify")';
+            echo '</script>';
+        } else {
+            echo '<script type="text/javascript">';
+            echo 'alert("Invalid Verification Code")';
+            echo '</script>';
+	}
+    }
+    
        
 ?>
 
@@ -91,7 +102,7 @@ session_start();
 
 <!-- Navigation Sidebar -->
     <?php include 'navigationSidebar.php' ?>
-
+    
 <!-- About -->
 
     <!-- Services -->
@@ -102,7 +113,7 @@ session_start();
                 <div class="col-lg-10 col-lg-offset-1">
                     <h2>My Profile</h2>
                     <hr class="small">
- 
+                        <?php include 'confirmCode.php' ?>  
                         <div class="row">
                                     <div class="col-md-4 col-lg-offset-2"><p>Name:</p></div>
                                     <div class="col-md-4 col-lg-pull-2"> 
@@ -231,12 +242,24 @@ session_start();
       $('select option:first-child').attr("selected", "selected");
     
     });
+    
+  
+
+
     </script>
     
     <!-- Custom for project -->
     <script src="js/editProfileactions.js"></script>
-    
-     
 
+    <script type="text/javascript">
+    <?php 
+        if(!checkVerification($userEmail))
+        {
+    ?>
+            $('#confirmCode').modal('show');
+    <?php 
+        }
+    ?>
+    </script>
 </body>
 </html>
