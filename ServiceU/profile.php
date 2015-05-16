@@ -1,9 +1,67 @@
 <!DOCTYPE html>
-<?php
-
-include("DatabaseFunctions.php"); ?>
-
 <html lang="en">
+<?php 
+    include("DatabaseFunctions.php"); 
+    include("functions.php");
+?>
+<?php 
+session_start();
+  if (!isset($_SESSION["loginEmail"]))
+   {
+      header("location: index.php");
+      exit();
+   }
+   else{
+       $userEmail = $_SESSION["loginEmail"];
+   }
+   if (!isset($_GET['email'])) {
+	
+                    
+   }
+   
+   if (isset($_POST['submitDegree'])) {
+        $D1P1 = $_POST['degree1Part1'];
+        $D1P2 = $_POST['degree1Part2'];
+
+        $degree1 = $D1P1. " " . $D1P2;
+        
+        editDegree1($userEmail, $degree1);
+    }
+    
+    if (isset($_POST['submitInterest'])) {
+        $newInterest = $_POST['interest1'];
+        
+        insertInterest($userEmail, $newInterest);
+    }
+    
+    
+    if (isset($_POST['changePassword'])) {
+	$oldPassword = $_POST['oldpassword'];
+	$newPassword = $_POST['newpassword'];
+	$confirmedPassword = $_POST['passverify'];
+	if (verifyPassword($userEmail, $oldPassword)) {
+            if ($newPassword == $confirmedPassword) {
+		editPassword($userEmail, $newPassword);
+		echo '<script type="text/javascript">';
+		echo 'alert("Password Updated")';
+		echo '</script>';
+            } else {
+		echo '<script type="text/javascript">';
+		echo 'alert("Passwords do not match, please try again")';
+		echo '</script>';
+			}
+            } else {
+		echo '<script type="text/javascript">';
+		echo 'alert("Old Password is invalid")';
+		echo '</script>';
+            }
+
+    }
+       
+?>
+
+
+
 
 <head>
 
@@ -49,7 +107,7 @@ include("DatabaseFunctions.php"); ?>
                                     <div class="col-md-4 col-lg-offset-2"><p>Name:</p></div>
                                     <div class="col-md-4 col-lg-pull-2"> 
                                         <?php 
-                                            echo getFullName(1);
+                                            echo getFullName($userEmail);
                                         ?> 
                                     </div>
                         </div>
@@ -58,7 +116,7 @@ include("DatabaseFunctions.php"); ?>
                                     <div class="col-md-4 col-lg-offset-2"><p>Email: </p></div>
                                     <div class="col-md-4 col-lg-pull-2">
                                         <?php 
-                                            echo getEmail(1);
+                                            echo $userEmail;
                                         ?> 
                                     </div>
                         </div>
@@ -67,7 +125,7 @@ include("DatabaseFunctions.php"); ?>
                                     <div class="col-md-4 col-lg-offset-2"><p>Verify</p></div>
                                     <div class="col-md-4 col-lg-pull-2">
                                         <?php
-                                            if(checkVerification(1) == 1)
+                                            if(checkVerification($userEmail) == 1)
                                                 echo '<span class="glyphicon glyphicon-ok"></span>';
                                             else
                                                 echo '<span class="glyphicon glyphicon-remove"></span>';
@@ -77,20 +135,23 @@ include("DatabaseFunctions.php"); ?>
                     <br>
                         <div class="row">
                                     <div class="col-md-4 col-lg-offset-2"><p>Password:</p></div>
-                                    <div class="col-md-2 col-lg-pull-1"> xxxxxxxxxxx </div>
-                                    <div class="col-md-3 col-lg-pull-1"><a href="#" class="btn btn-light btn-xs">Edit</a></div>
+                                    <div class="col-md-2 col-lg-pull-1"> ------------- </div>
+                                        <?php include 'changepasswordModal.php' ?>                         
+                                    <div class="col-md-3 col-lg-pull-1"><a href="#changePassword"  data-toggle="modal" data-target="#changePassword" class="btn btn-light btn-xs">Edit</a></div>
                         </div>
                     <br>
                         <div class="row">
                                     <div class="col-md-4 col-lg-offset-2"><p>Degree: </p></div>
                                     <div class="col-md-2 col-lg-pull-1"> 
                                         <?php 
-                                            echo getDegree(1);
-                                        ?>  
+                                            echo strtoupper(getDegree($userEmail));
+                                        ?>   
                                     </div>
                                     <div class="col-md-3 col-lg-pull-1">
                                         <a href="#editDegree" data-toggle="modal" data-target="#editDegree" class="btn btn-light btn-xs">Edit</a>
+                                        
                                         <?php include 'editDegreeModal.php' ?>
+                                        
                                         
 
                                     </div>
@@ -100,7 +161,7 @@ include("DatabaseFunctions.php"); ?>
                                     <div class="col-md-4 col-lg-offset-2"><p>Interests:</p></div>
                                     <div class="col-md-2 col-lg-pull-1"> 
                                         <?php 
-                                            echo getInterests(2);
+                                            echo stripInterest(getInterests($userEmail));
                                         ?> 
                                     </div>
                                     <div class="col-md-3 col-lg-pull-1">

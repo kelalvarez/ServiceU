@@ -13,7 +13,7 @@
                 <a href="mydashboard.php">My Dashboard</a>
             </li>
             <li>
-                <a href="#services">Services</a>
+                <a href="services.php">Services</a>
             </li>
             <li>
                 <a href="#portfolio">Help</a>
@@ -22,7 +22,7 @@
                 <a href="#contact">Contact</a>
             </li>
              <li>
-                <a href="#LogOut">Log Out</a>
+                 <a href="logout.php">Log Out</a>
             </li>
         </ul>
     </nav>

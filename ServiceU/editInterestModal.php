@@ -9,14 +9,14 @@
                         <button class="close" data-dismiss="modal"><span style="color: #fff">×</span></button>
                     </div>
                     <div class="panel-body" >
-                        <form id="editInterestform" class="form-horizontal" name="editDegree" action="sadas" method="POST">
+                        <form id="editInterestform" class="form-horizontal" name="editDegree" action="profile.php?email=<?php echo $_SESSION['loginEmail']; ?>" method="POST">
                             <div class="form-group">
                                 
                                 
                                 <div class="form-group">
                                     <div id="interest1" class="row">
                                         <div class="col-md-3 col-lg-offset-3">
-                                                <input name="degree1Part2" class="form-control" type="text" style="float: left;width: 300px; background-color: #fff; border-color:#cccccc " id="formGroupInputSmall" placeholder="Interest">
+                                                <input name="interest1" class="form-control" type="text" style="float: left;width: 300px; background-color: #fff; border-color:#cccccc " id="formGroupInputSmall" placeholder="Interest">
 
                                         </div>
                                     </div>
@@ -32,7 +32,7 @@
                                 <br>
                                 <br>
  
-                                <button name="submitInterest" type="submit" type="button" class="btn btn-primary"><i class="icon-hand-right"></i>Upload</button>
+                                <button name="submitInterest" type="submit" type="button" class="btn btn-primary"><i class="icon-hand-right"></i>Save</button>
                                 
                             </div>
                         </form>

@@ -11,6 +11,12 @@ function register($email, $firstName, $lastName, $password)
                 "INSERT INTO userTable (email, firstName, lastName, password) "
                 . "values('$email', '$firstName', '$lastName', '$password');"
                 );
+    
+    mysqli_query($con,
+                "INSERT INTO degreeTable (emailID) "
+                . "values('$email');"
+                );
+    
     return TRUE;    
 }
 
@@ -58,11 +64,11 @@ function getEmail($userID){
     return $row['email'];
 }
 
-function getFirstName($userID){
+function getFirstName($userEmail){
     global $con;
 
     $query = "SELECT firstName FROM userTable
-              WHERE userID = '$userID'";
+              WHERE email = '$userEmail'";
 
     $result = mysqli_query($con, $query);        
     $row = mysqli_fetch_assoc($result);
@@ -70,11 +76,11 @@ function getFirstName($userID){
     return $row['firstName'];        
 }
 
-function getLastName($userID){
+function getLastName($userEmail){
     global $con;
 
     $query = "SELECT lastName FROM userTable
-              WHERE userID = '$userID'";
+              WHERE email = '$userEmail'";
 
     $result = mysqli_query($con, $query);        
     $row = mysqli_fetch_assoc($result);
@@ -82,11 +88,11 @@ function getLastName($userID){
     return $row['lastName'];
 }
 
-function getFullName($userID){
+function getFullName($userEmail){
     global $con;
 
     $query = "SELECT firstName, lastName FROM userTable
-              WHERE userID = '$userID'";
+              WHERE email = '$userEmail'";
 
     $result = mysqli_query($con, $query);
     $row = mysqli_fetch_assoc($result);
@@ -94,11 +100,11 @@ function getFullName($userID){
     return $row['firstName'] . " " . $row['lastName'];    
 }
 
-function checkVerification($userID){
+function checkVerification($userEmail){
     global $con;
         
     $query = "SELECT verify FROM userTable 
-              WHERE userID = '$userID'";
+              WHERE email = '$userEmail'";
         
     $result = mysqli_query($con, $query);
     $row = mysqli_fetch_assoc($result);
@@ -109,46 +115,96 @@ function checkVerification($userID){
         return FALSE;
 }
 
-function getDegree($userID){
+function verifyPassword($userEmail, $potentialPassword)
+{
+    global $con;
+	
+    $result = mysqli_query($con,"SELECT password from userTable WHERE email='$userEmail'");
+    $row = mysqli_fetch_assoc($result);
+    if ($row['password'] == $potentialPassword){
+	return true;
+    }
+    else {
+	return false;
+    }
+}
+
+function editPassword($userEmail, $newPassword)
+{
+    global $con;
+
+    $result = mysqli_query($con, "UPDATE userTable SET password='$newPassword' WHERE email='$userEmail';");
+    return $result;
+    
+    
+}
+
+function getDegree($userEmail){
     global $con;
 
     $query = "SELECT degree FROM userTable
-              WHERE userID = '$userID'";
+              WHERE email = '$userEmail'";
 
     $result = mysqli_query($con, $query);        
     $row = mysqli_fetch_assoc($result);
+    
+    $nrDegree = $row['degree'];
+    
+    if( $nrDegree == 0)
+    {
+        return "Not defined";
+    }
+    else{
         
-    return $row['degree'];    
+        $query2 = "SELECT degree1, degree2, degree3, degree4 FROM degreetable
+              WHERE emailID = '$userEmail'";
+
+        $result2 = mysqli_query($con, $query2);        
+        $row2 = mysqli_fetch_assoc($result2);
+        
+        $res = $row2['degree1'];
+        return $res;
+    }
+    
 }
 
-function getInterests($userID){
+function getInterests($userEmail){
     global $con;
 
     $query = "SELECT interest FROM userTable
-              WHERE userID = '$userID'";
+              WHERE email = '$userEmail'";
 
     $result = mysqli_query($con, $query);        
     $row = mysqli_fetch_assoc($result);
         
     $interest = $row['interest'];
         
-    if (stripos($interest, ",") !== false) {
-        $r = " ";
-        $multipleInterests = explode(',', $interest);
-        foreach ( $multipleInterests as $i ) {
-            $r = $r . $i . "<br/> ";
-        }
-        return $r;
-            
-    }    
-    else
-        return $interest;
+    return $interest;
 }
 
-    function editDegree($userID, $newDegree){
+ function editDegree1($userEmail, $newDegree){
     global $con;
     
-    $query = "UPDATE userTable SET degree = '$newDegree' WHERE userID = '$userID'";
+    $query = "UPDATE degreeTable SET degree1 = '$newDegree' WHERE emailID = '$userEmail'";
+    
+    $result = mysqli_query($con, $query);
+    
+    
+    
+    if($result == 1){
+        $query1 = "UPDATE userTable SET degree = 1 WHERE email = '$userEmail'";
+        $result1 = mysqli_query($con, $query1);
+        return TRUE;
+    }
+    else
+        return FALSE;
+
+}
+
+ function editDegree2($userEmail, $newDegree){
+    global $con;
+    
+    $query = "UPDATE degreeTable SET degree2 = '$newDegree' WHERE emailID = '$userEmail'";
     
     $result = mysqli_query($con, $query);
     
@@ -159,15 +215,86 @@ function getInterests($userID){
 
 }
 
- function test_user_input($data) 
-       {
-              $data = trim($data);
-              $data = stripslashes($data);
-              $data = htmlspecialchars($data);
-              return $data;
-        }
+ function editDegree3($userEmail, $newDegree){
+    global $con;
+    
+    $query = "UPDATE degreeTable SET degree3 = '$newDegree' WHERE emailID = '$userEmail'";
+    
+    $result = mysqli_query($con, $query);
+    
+    if($result == 1)
+        return TRUE;
+    else
+        return FALSE;
 
+}
 
+ function editDegree4($userEmail, $newDegree){
+    global $con;
+    
+    $query = "UPDATE degreeTable SET degree4 = '$newDegree' WHERE emailID = '$userEmail'";
+    
+    $result = mysqli_query($con, $query);
+    
+    if($result == 1)
+        return TRUE;
+    else
+        return FALSE;
 
+}
 
+function insertInterest($userEmail, $newInterest)
+{
+    global $con;
+    
+    $interests = getInterests($userEmail);
+    
+    if($interests == "na"){
+        $query = "UPDATE userTable SET interest = '$newInterest' WHERE email = '$userEmail'";
+    }
+    else{
+        $interests = $interests . ", " . $newInterest;
+        $query = "UPDATE userTable SET interest = '$interests' WHERE email = '$userEmail'";
+    }
+        
+    $result = mysqli_query($con, $query);
+    
+    if($result == 1)
+        return TRUE;
+    else
+        return FALSE;
+}
+
+function numberofJobs()
+{
+    global $con;
+    
+     mysqli_query($con, "SELECT COUNT(*) FROM jobTable");
+    
+    return TRUE;       
+}
+
+function numApplications($jobID){
+    global $con;
+    
+    $query = "SELECT totalApp FROM jobTable
+              WHERE jobID = '$jobID'";
+
+    $result = mysqli_query($con, $query);        
+    $row = mysqli_fetch_assoc($result);
+        
+    $total = $row['totalApp'];
+        
+    return $total;
+}
+
+function getJob()
+{
+    global $con;
+
+    $query = "SELECT * FROM jobTable";
+    $result = mysqli_query($con, $query);        
+    
+    return $result;
+}
 
