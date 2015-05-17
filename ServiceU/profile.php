@@ -20,7 +20,6 @@ session_start();
         $D1P2 = $_POST['degree1Part2'];
 
         $degree1 = $D1P1. " " . $D1P2;
-        
         editDegree1($userEmail, $degree1);
     }
     

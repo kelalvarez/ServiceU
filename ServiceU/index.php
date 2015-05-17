@@ -172,7 +172,7 @@ if(isset($_POST['login']))
  
     if(validateLogin($user_email, $user_pass) == True)  
     {  
-        echo "<script>window.open('home.php','_self')</script>";  
+        echo "<script>window.open('services.php','_self')</script>";  
   
         $_SESSION['loginEmail']=$user_email;//here session is used and value of $user_email store in $_SESSION.  
   

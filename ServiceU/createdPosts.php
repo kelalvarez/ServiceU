@@ -45,7 +45,7 @@ include('functions.php');
     }
      
     if (mysqli_num_rows($result) == 0) {
-    echo "No rows found, nothing to print so am exiting";
+    echo "You haven't created any post yet.";
     exit;
     }
     ?>
