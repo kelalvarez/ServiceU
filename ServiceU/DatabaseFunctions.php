@@ -359,7 +359,7 @@ function getJob()
 {
     global $con;
 
-    $query = "SELECT * FROM jobTable";
+    $query = "SELECT * FROM jobTable ORDER BY `jobID` DESC";
     $result = mysqli_query($con, $query);        
     
     return $result;
@@ -537,7 +537,8 @@ function getUserJobs($email)
 {
     global $con;
 
-    $query = "SELECT * FROM jobTable WHERE employeerID='$email'";
+    $query = "SELECT * FROM jobTable WHERE employeerID='$email' "
+            . "ORDER BY `jobID` DESC";
     $result = mysqli_query($con, $query);        
     
     return $result;
@@ -547,7 +548,8 @@ function getUserApps($email)
 {
     global $con;
 
-    $query = "SELECT * FROM jobTable WHERE jobID IN ( SELECT jobID from appTable WHERE employeeID='$email')";
+    $query = "SELECT * FROM jobTable WHERE jobID IN ( SELECT jobID from appTable WHERE employeeID='$email')"
+            . " ORDER BY `jobID` DESC";
     $result = mysqli_query($con, $query);        
     
     return $result;
