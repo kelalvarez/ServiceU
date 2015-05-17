@@ -482,3 +482,58 @@ function newTotalApp($jobID, $num){
     
     return TRUE;
 }
+
+function isOwner($email, $jobID){
+    global $con;
+    
+    $query = "SELECT COUNT(*) as total FROM jobTable"
+            . " WHERE employeerID = '$email' AND jobID = '$jobID'";
+    $result = mysqli_query($con, $query);        
+    $row = mysqli_fetch_assoc($result);
+    
+    return $row['total'];
+}
+
+function createPost($email, $jobTitle, $jobDescription, $jobPayment, $jobCategory){
+    global $con;
+
+    mysqli_query($con,
+                "INSERT INTO jobTable (employeerID,jobTitle, jobDescription, payment, category)"
+                . "values('$email', '$jobTitle', '$jobDescription', '$jobPayment', '$jobCategory');"
+                );
+    
+    return TRUE;
+    
+}
+
+function updatePost($jobID, $jobTitle, $jobDescription, $jobPayment, $jobCategory){
+    global $con;
+    
+    $query = "UPDATE jobTable SET jobTitle ='$jobTitle', jobDescription='$jobDescription', "
+            . " payment='$jobPayment', category='$jobCategory' WHERE jobID = '$jobID'";
+    mysqli_query($con, $query);
+    
+    return TRUE;
+    
+    
+}
+
+function getUserJobs($email)
+{
+    global $con;
+
+    $query = "SELECT * FROM jobTable WHERE employeerID='$email'";
+    $result = mysqli_query($con, $query);        
+    
+    return $result;
+}
+
+function getUserApps($email)
+{
+    global $con;
+
+    $query = "SELECT * FROM jobTable WHERE jobID=( SELECT jobID from appTable WHERE employeeID='$email')";
+    $result = mysqli_query($con, $query);        
+    
+    return $result;
+}

@@ -1,7 +1,37 @@
 <!DOCTYPE html>
 <?php
+    include("DatabaseFunctions.php"); 
+    include("functions.php");
+?>
 
-include("DatabaseFunctions.php"); ?>
+
+<?php 
+    session_start();
+    if (!isset($_SESSION["loginEmail"]))
+    {
+        header("location: index.php");
+        exit();
+    }
+    else{
+       $userEmail = $_SESSION["loginEmail"];
+    }   
+
+    if (isset($_POST['createJob'])) {
+        
+        $jobTitle = $_POST['jobTitle'];
+        $jobDescription = $_POST['jobDescription'];
+	$jobPayment = $_POST['jobPayment'];
+	$jobCategory = $_POST['jobCategory'];
+
+        createPost($userEmail, $jobTitle, $jobDescription, $jobPayment, $jobCategory);
+        echo '<script type="text/javascript">';
+        echo 'alert("Update Done")';
+        echo '</script>';
+
+    }
+ 
+?>
+
 
 <html lang="en">
 
@@ -34,19 +64,52 @@ include("DatabaseFunctions.php"); ?>
 <!-- Navigation Sidebar -->
     <?php include 'navigationSidebar.php' ?>
 
-
-    <div class="container-fluid">
-              
-
-           <h1> WELCOME </h1>
-
-
-
-
-
-
+<section id="services" class="services bg-info">
+<div class="container">
+<div class="row text-center">
+    <div class="col-lg-10 col-lg-offset-1">
+        <h2>My Dashboard</h2>
+                <?php include('newPost.php'); ?>
+                <a href="#newPost" data-toggle="modal" data-target="#newPost" class="btn btn-info btn-sm">
+                    <span class="glyphicon glyphicon-plus"></span> New Post 
+                  </a>
+            <hr class="small">
+            
+            <div class="row">
+             <div class="post-left-square">
+                    <div class="post-left-side">
+                        <span style="color: #fff; font-weight: bold; font-size: 20px;"> My Posts</h3>
+                        <div id="result">
+                            
+                            <iframe src="createdPosts.php"></iframe>
+                        </div>
+                                          
+                    </div>
+                        
+                        </div>          
+            <div class="right-square">
+                <span style="color: #23527c; font-weight: bold; font-size: 20px;"> My Applications</h3>
+                
+                    <div class="right-side">
+                        <div id="result">
+                            
+                            <iframe src="appliedJobs.php"></iframe>
+                        </div>
+                                          
+                    </div>
+                        
+            </div>
+                            
+            </div>
+            
+            
+                </div>
+                <!-- /.col-lg-10 -->
+            </div>
+            <!-- /.row -->
         </div>
-
+        <!-- /.container -->
+    </section>
 
     <!-- Footer -->
     <footer>

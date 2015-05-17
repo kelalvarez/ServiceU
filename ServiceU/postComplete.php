@@ -39,7 +39,19 @@
         //do something if cancel app
     }
 
-    
+    if (isset($_POST['updateJob'])) {
+        
+        $jobTitle = $_POST['jobTitle'];
+        $jobDescription = $_POST['jobDescription'];
+	$jobPayment = $_POST['jobPayment'];
+	$jobCategory = $_POST['jobCategory'];
+
+        updatePost($jobID, $jobTitle, $jobDescription, $jobPayment, $jobCategory);
+        echo '<script type="text/javascript">';
+        echo 'alert("Update Done")';
+        echo '</script>';
+
+    }
     
 ?>
 
@@ -85,12 +97,12 @@
                             <div class="col-md-4 col-lg-push-4">
                                 <h5><span style="font-weight: bold">
                                     <?php 
-                                        echo getJobTitle($jobID);
+                                        echo $title = getJobTitle($jobID);
                                     ?>
                                 </span>
                                 <span class="badge">
                                     <?php
-                                        echo numApplications($jobID);
+                                        echo $numApp = numApplications($jobID);
                                     ?>
                                 </span>
                                 </h3>
@@ -98,7 +110,7 @@
                                 <span style="font-size: 11px">
                                     <?php
                                         echo "By: ";
-                                        echo getJobOwner($jobID);
+                                        echo $owner = getJobOwner($jobID);
                                     ?>
                                 </span>
                             </div>
@@ -107,7 +119,7 @@
                         <div class="row">
                             <div class="col-md-4 col-lg-push-4">
                                 <?php
-                                    echo getJobDescription($jobID);
+                                    echo $description = getJobDescription($jobID);
                                 ?>
                             </div>
                         </div>
@@ -122,7 +134,7 @@
                                     </span>
                                     <?php
                                         echo "$";
-                                        echo getJobPayment($jobID);
+                                        echo $payment = getJobPayment($jobID);
                                     ?>
                                 </span>        
                             </div>
@@ -136,7 +148,7 @@
                                         ?>
                                         </span>
                                         <?php    
-                                            echo getJobCategory($jobID);                                            
+                                            echo $category = getJobCategory($jobID);                                            
                                         ?>
                                     </span>
                                     </div>
@@ -146,10 +158,24 @@
                             <div class="col-md-4 col-lg-push-4">
                                 <br>
                                 <?php include ('confirmApplication.php'); ?>
+                                <?php include('editPost.php'); ?>
+                                
+                                <?php 
+                                    if (isOwner($userEmail, $jobID) == 0){
+                                ?>
                                 <a href="#confirmApplication" data-toggle="modal" data-target="#confirmApplication" class="btn btn-info">
                                     <i class="icon-hand-right"></i>Apply
                                 </a>
-                                
+                                <?php 
+                                    }
+                                    else {
+                                ?>
+                                <a href="#editPost" data-toggle="modal" data-target="#editPost" class="btn btn-info">
+                                    <i class="icon-hand-right"></i>Edit
+                                </a>
+                                <?php
+                                    }
+                                ?>
                             </div>
                         </div>
                     

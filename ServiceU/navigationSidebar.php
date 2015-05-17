@@ -4,7 +4,7 @@
         <ul class="sidebar-nav">
             <a id="menu-close" href="#" class="btn btn-light btn-lg pull-right toggle"><i class="fa fa-times"></i></a>
             <li class="sidebar-brand">
-                <a href="home.php">Home</a>
+                <a href="services.php">Home</a>
             </li>
             <li>
                 <a href="profile.php">My Profile</a>
@@ -13,7 +13,7 @@
                 <a href="mydashboard.php">My Dashboard</a>
             </li>
             <li>
-                <a href="services.php">Services</a>
+                <a href="services.php">Explore Services</a>
             </li>
             <li>
                 <a href="#portfolio">Help</a>
