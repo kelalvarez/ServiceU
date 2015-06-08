@@ -13,10 +13,6 @@ function register($email, $firstName, $lastName, $password)
                 . "values('$email', '$firstName', '$lastName', '$password', '$code');"
                 );
     
-    mysqli_query($con,
-                "INSERT INTO degreeTable (emailID) "
-                . "values('$email');"
-                );
     sendVerificationCode($email, $code);
     return TRUE;    
 }
@@ -37,7 +33,7 @@ function emailAvailable($email) {
     	return TRUE;
 }
 
-function sendVerificationCode($email, $code){
+function sendVerificationCode($email1, $code){
     require('phpMailer/PHPMailerAutoload.php');
 
     $mail = new PHPMailer(); 
@@ -52,7 +48,7 @@ function sendVerificationCode($email, $code){
     $mail->Password = "alvarez12"; // SMTP password
 
     $webmaster_email = "serviceuconfirmation@gmail.com"; //Reply to this email ID
-    $email="misha.neko@gmail.com"; // Recipients email ID
+    $email= $email1; // Recipients email ID
     $name=""; // Recipient's name
     $mail->From = $webmaster_email;
     $mail->AddAddress($email,$name);
@@ -208,7 +204,7 @@ function editPassword($userEmail, $newPassword)
 function getDegree($userEmail){
     global $con;
 
-    $query = "SELECT degree FROM userTable
+    $query = "SELECT degree FROM usertable
               WHERE email = '$userEmail'";
 
     $result = mysqli_query($con, $query);        
@@ -251,34 +247,34 @@ function getInterests($userEmail){
  function editDegree1($userEmail, $newDegree){
     global $con;
     
-    $query1 = "SELECT degree FROM userTable
+    $query = "SELECT degree FROM usertable
               WHERE email = '$userEmail'";
 
-    $result1 = mysqli_query($con, $query1);        
-    $row1 = mysqli_fetch_assoc($result1);
+    $result = mysqli_query($con, $query);        
+    $row = mysqli_fetch_assoc($result);
     
-    $nrDegree = $row1['degree'];
     
+    $nrDegree = $row['degree'];
+    
+ 
     if( $nrDegree == 0)
     {
-        $query = "INSERT INTO degreeTable (emailID, degree1) "
-                . "values('$userEmail','$newDegree')";
-    }
-    else{
-        $query = "UPDATE degreeTable SET degree1 = '$newDegree' WHERE emailID = '$userEmail'";
-    }
-    
-    $result = mysqli_query($con, $query);
-    
-    
-    
-    if($result == 1){
-        $query1 = "UPDATE userTable SET degree = 1 WHERE email = '$userEmail'";
-        $result1 = mysqli_query($con, $query1);
-        return TRUE;
-    }
+
+        mysqli_query($con,
+                "INSERT INTO degreetable(emailID, degree1) values('$userEmail','$newDegree');");
+        $query1 = "UPDATE usertable SET degree=1 WHERE email ='$userEmail';";
+        mysqli_query($con, $query1);
+        
+    }    
     else
-        return FALSE;
+    {
+        mysqli_query($con, 
+            "UPDATE degreetable SET degree1='$newDegree' WHERE emailID='$userEmail';");
+    }
+        
+
+
+    RETURN TRUE;
 
 }
 
