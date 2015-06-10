@@ -13,19 +13,19 @@
 }
 
 #RegistrationBox {
-	background-color:#ccc;
-	border:1px solid #ccc;
+	background-color: #F6F6F6;
 	color:#000;
-	width:25%;
+	width:30%;
 	height:55%;
-	position:fixed;
-	top:20%;
+	position: absolute;
+	top:15%;
 	left:18%;
 	border-radius: 3px;
-	z-index:3;
+	z-index:999;
 	display:none;
 	margin-left: 20%;
-	box-shadow: 0 0 200px rgba(255, 255, 255, 0.5), 0 1px 2px rgba(0, 0, 0, 0.3);
+	box-shadow: 0px 0px 10px 4px;
+	border-radius: 10px;
 
 }
 
@@ -44,10 +44,15 @@
 }
 
 #Rform{
-	padding-top: 10px;
+	padding-top: 5px;
 	width:80%;
 	height:6%;
 	margin-left: 10%;
+}
+
+#RformMSG{
+	margin-top: 4px;
+	margin-left: 7%;
 }
 
 #btnTP{
@@ -55,26 +60,19 @@
 	font-size: 12px;
 }
 
-#btnSignup{
-	padding-top: 10px;
-	width:80%;
-	height:6%;
-	margin-left: 10%;
-	border-top:1px solid #47A3FF;
+#xbox{
+	border:0px solid transparent;
+	font-family: Arial, Sans-serif;
+	background-color: #F6F6F6;
 }
-
-/*no need this
-.headerBox{
-	background-color:#ccc;
-	margin-top: -0.5cm;
-	text-align: center;
-	border-bottom:1px solid #EDEDED;
-}*/
 
 
 html, body{
 
+	position: relative;
 	height:100%;
+	min-width: 1200px;
+	min-height: 600px;
 }
 
 .carousel, .item, .active{
@@ -92,24 +90,12 @@ html, body{
 	width:100%;height:100%;background-position:center;background-size:cover;
 }
 
-#backg{
-	background-color: gray;
-}
 
 /* Custom container */
 .container-full {
 	  margin: 0 auto;
 	  width: 100%;
 	  height: 100%;
-}
-
-#PanelLogin{
-	position: fixed;
-	left: 55%;
-	top: 30%;
-	width: 25%;
-	height: 30%;
-	z-index: 1;
 }
 
 #btnlogin{
@@ -120,6 +106,79 @@ html, body{
 	margin-left: 20px;
 }
 
-#btnsignup{
-	margin-left: 20px;
+
+
+
+#mainCon{
+	padding: 0;
+}
+
+#loginContainer
+{
+	position: absolute;
+	background-color: gray;
+	width: 80%;
+	height: 60%;
+	z-index: 1;
+	left: 10%;
+    top: 20%;
+	padding: 0px;
+}
+
+#OuterloginContainer{
+
+	float: right;
+	height: 100%;
+	width: 35%;
+	background-color: #F6F6F6;
+	box-shadow: 0px 0px 10px 4px;
+	border-radius: 10px;
+}
+
+.innerLogin-Header{
+	width: 100%;
+	display: block;
+	/*border-color: blue;*/
+}
+
+
+.innerLogin-Header-text{
+	color: #337ab7;
+	display: block;
+	font-size: 20px;
+	font-weight: normal;
+	text-align: center;
+	font-family: Arial, Sans-serif;
+}
+
+.email2{
+	text-align: center;
+}
+
+#LoginCSS{
+	margin: auto;
+	margin-left: 10%;
+	width: 80%;
+
+}
+
+#RegisterCSS{
+	margin: auto;
+	margin-left: 10%;
+
+}
+
+/***BELOW CSS FOR NAVBAR**/
+
+#mainColor{
+	color: #2B2B2B;	
+}
+
+#body1{
+
+
+	background-color: #2B2B2B;
+	width: 100%;
+	z-index: 10;
+
 }

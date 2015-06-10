@@ -28,7 +28,7 @@
     <!--BODY-->
     <body> <!--Start Body-->
 
-        <div class="container-full"> <!--Start of full container-->
+        <div class="container-fluid" id="mainCon"> <!--Start of full container-->
 
             <!--Start Carousel Here-->
             <div class="carousel slide" id="myCarousel" data-ride="carousel"> <!--Start of background carousel-->
@@ -73,119 +73,205 @@
 
             </div> <!--End of background carousel-->
             <!--End Carousel Here-->
+      
 
+              <div class="container" id="loginContainer"> 
 
-            <div class="container" id="main"> <!--start of container -->
+                <div class="loginSection" id="OuterloginContainer">
+                    <div class="innerLoginSection">
 
-                <!--Start Navigation Bar Here-->
-                <div class="navbar navbar-fixed-top" id="backg"> <!--start of navbar -->
-                    <div class="container">
+                      <div class="innerLogin-Header">
 
-                        <a class="navbar-brand" href="#"><img src="img/logo2.png" alt="The Logo"></a>
+                        <h3 class="innerLogin-Header-text">Already have an account?</h3>
 
-                    </div>              
-
-                </div> <!--end of navbar-->
-                <!--End Navigation Bar Here-->
-
-            </div> <!--end of container -->
-
-
-
-             <!--Start Login Panel Here-->
-             <div class="panel panel-default" id="PanelLogin" style="height: 37%">
+                      </div>
                     
-                    <div class="panel-heading text-center">
-                              
-                             <h3 class="panel-title">Log in to ServiceU</h3>
-                                        
-                    </div>
+                      <div class="col-xs-12 col-sm-12">
 
-                    <div class="panel-body">
-                            <form method="POST">
+                          <form role="form" method="POST" class="form-horizontal">
 
-                                  <!--Start Email Address-->
+                              <div class="form-group">
+                                     <label class="sr-only" for="email">Email address</label>
+                                            
+                                            <div class="input-group" id="LoginCSS">
+                                                <span class="input-group-addon"><span class="glyphicon glyphicon-user"></span></span>
+
+                                                <input type="email" name="loginEmail" class="form-control" placeholder="Enter email">
+                                            
+                                            </div>
+                              </div>
+
+                              <!--Start Password-->
                                   <div class="form-group">
-                                        <label class="sr-only" for="exampleInputEmail3">Email address</label>
-                                        
-                                        <div class="input-group">
-                                            <span class="input-group-addon"><span class="glyphicon glyphicon-user"></span></span>
+                                        <label class="sr-only" for="password">Password</label>
 
-                                            <input type="email" name="loginEmail" class="form-control" id="exampleInputEmail3" placeholder="Enter email">
-                                        
-                                        </div>
-                                  </div> <!--End Email Address-->
-                        
-                                  <!--Start Password-->
-                                  <div class="form-group">
-                                        <label class="sr-only" for="exampleInputPassword3">Password</label>
-
-                                        <div class="input-group">   
+                                        <div class="input-group" id="LoginCSS">   
                                              <span class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></span>
                                               <input type="password" name="loginPassword" class="form-control" id="exampleInputPassword3" placeholder="Password">
                                          </div>
 
                                   </div><!--End Password-->
 
-                                  <div class="checkbox">
-                                        <label><input type="checkbox">Remember me</label>
-                                        <button type="button" class="btn btn-link">Forgot password?</button>
+                                  <div class="form-group">
+
+                                        <div class="checkbox" id="LoginCSS">
+                                              <label><input type="checkbox">Remember me</label>
+                                              <button type="button" class="btn btn-link">Forgot password?</button>
+                                        </div>
+
                                   </div>
 
-                                  
-                                  <button type="submit" value="login" name="login" class="btn btn-primary" id="btnlogin">Sign in</button>
-                                  
-                                  <label id="labelor">Or</label>
-                                  
-                                  <button type="button" class="btn btn-success" id="btnsignup">Sign Up!</button>
-                                
-                            </form>
+                                  <div class="form-group">
 
+                                        <div id="LoginCSS">
+                                          <button type="submit" name="login" class="btn btn-primary btn-lg btn-block">Log In</button>
+                                                
+
+                                        </div>
+                                  </div>
+
+                                  <div class="form-group">
+
+                                        <div id="LoginCSS">
+                                          <button type="button" class="btn btn-success btn-lg btn-block" role="button" id="btnsignup">Sign Up!</button>
+                                            
+                                        </div>
+                                  </div>
+
+                          </form>
+
+                      </div>
+
+
+                
+                </div>
+
+              </div>
+
+
+       </div> <!--Start of full container-->
+ </div> 
+
+
+    <!--registration pop  up start here-->
+  <div class="blackout"></div>
+
+      
+  <div class="RegisrationSection" id="RegistrationBox">
+
+        <span id="xbox" class="btn btn-default pull-right"><b>Close</b></span>
+
+        <div class="RegistrationBox-Header">
+              
+                <h3 class="innerLogin-Header-text">Sign Up Now</h3>
+              
+        </div>
+                    
+        <div>
+
+              <form role="form" method="POST" class="form-horizontal">
+
+                    <div class="form-group">
+                            <label class="sr-only" for="fname">First Name</label>
+                                              
+                               <div class="input-group" id="Rform">
+                                   <span class="input-group-addon"><span class="glyphicon glyphicon-user"></span></span>
+
+                                    <input type="firstName" name="firstName" class="form-control" placeholder="Enter First Name">
+
+
+                                      <input type="lastName" name="lastName" class="form-control" placeholder="Enter Last Name">
+                                                  
+                                </div>
                     </div>
 
-              </div> <!--End Login Panel Here-->
+                    <div class="form-group">
+                            <label class="sr-only" for="password">Password</label>
+                                              
+                                <div class="input-group" id="Rform">
+                                      <span class="input-group-addon"><span class="glyphicon glyphicon-lock"></span></span>
 
-        </div><!--End of full container-->
+                                      <input type="password" name="password" class="form-control" placeholder="Password">
+                                              
+                                </div>
+                      </div>
 
-<?php  
-if(isset($_POST['login']))  
-{  
-    $user_email ="";
-    $user_pass ="";
+                       <div class="form-group">
+                            <label class="sr-only" for="EmailAddress">Password</label>
+                                              
+                                <div class="input-group" id="Rform">
+                                      <span class="input-group-addon"><span class="glyphicon glyphicon-envelope"></span></span>
 
-    if(empty($_POST['loginEmail'])) {
-        //$emailErr = "Email is required";
-        //error here
+                                      <input type="email" name="email" class="form-control" placeholder="Email Address">
+                                              
+                                </div>
+                      </div>
+
+                              
+                      <div id="RformMSG">
+                          <h5><small>By clicking Register, you are indicating that you have read and agree to the <button type="button" class="btn btn-link" id="btnTP">Terms of Service </button> and <button type="button" class="btn btn-link" id="btnTP">Privacy Policy</button>.</small></h5>
+                      </div>
+
+                      <div class="text-center" id="btnSignup">
+
+                      <button type="submit" value="submit" name="submit" class="btn btn-primary">Register</button>
+
+                </div>
+                        
+                    
+
+                  </form>
+
+             </div>
+             
+   </div>
+
+        
+
+
+
+
+
+
+    <!-- LOG in and sign up php code start here -->
+    <?php 
+        if(isset($_POST['login']))  
+        {  
+            $user_email ="";
+            $user_pass ="";
+
+            if(empty($_POST['loginEmail'])) {
+                //$emailErr = "Email is required";
+                //error here
+                  
+            } else {
+                $user_email= test_user_input($_POST['loginEmail']); 
+            }
+            
+             if(empty($_POST['loginPassword'])) {
+                //$emailErr = "Email is required";
+                //error here
+                  
+            } else {
+                $user_pass= test_user_input($_POST['loginPassword']);  
+            }
+             
+         
+            if(validateLogin($user_email, $user_pass) == True)  
+            {  
+                echo "<script>window.open('services.php','_self')</script>";  
           
-    } else {
-        $user_email= test_user_input($_POST['loginEmail']); 
-    }
-    
-     if(empty($_POST['loginPassword'])) {
-        //$emailErr = "Email is required";
-        //error here
+                $_SESSION['loginEmail']=$user_email;//here session is used and value of $user_email store in $_SESSION.  
           
-    } else {
-        $user_pass= test_user_input($_POST['loginPassword']);  
-    }
-     
- 
-    if(validateLogin($user_email, $user_pass) == True)  
-    {  
-        echo "<script>window.open('services.php','_self')</script>";  
-  
-        $_SESSION['loginEmail']=$user_email;//here session is used and value of $user_email store in $_SESSION.  
-  
-    }  
-    else  
-    {  
-      echo "<script>alert('Email or password is incorrect!')</script>";  
-    }  
-}  
- 
+            }  
+            else  
+            {  
+              echo "<script>alert('Email or password is incorrect!')</script>";  
+            }  
+        }  
 
 
-if(isset($_POST['submit']))  
+        if(isset($_POST['submit']))  
     { 
         $firstnameErr = $user_emailErr = $lastnameErr = $passwordnameErr = "";
 
@@ -231,66 +317,11 @@ if(isset($_POST['submit']))
         }
       
     }  
-  
-?> 
 
 
 
-    
-<!--registration pop  up start here-->
-  <div class="blackout"></div>
-    
-  <div class="panel panel-default" id="RegistrationBox" style="height: 78%; z-index: 999">
-        
-            <div class="panel-heading text-center" id="Rhead" style="height: 10%">
-                                  
-                <h3 class="panel-title pull-left" id="ptRegister"><b>Join ServiceU Today</b></h3>
-                <div style="position: fixed; left:30%; right:8%;">
-                                <span class="glyphicon glyphicon-remove active" id="xbox"></span>
-                                </div>
-                                            
-            </div>
-            
-            <form method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
 
-                <div class="form-group" id="Rform">
-                    <label for="InputFirstName">First name</label>
-                    <input type="text" name="firstName" class="form-control" id="InputFirstname" placeholder="Enter first name">
-                   
-                </div>
-
-                <div class="form-group" id="Rform">
-                    <label for="InputLastName">Last name</label>
-                    <input type="lastName" name="lastName" class="form-control" id="InputLastname" placeholder="Enter last name">
-                </div>
-
-                 <div class="form-group" id="Rform">
-                    <label for="InputPassword">Password</label>
-                    <input type="password" name="password" class="form-control" id="InputPassword1" placeholder="Password">
-                </div>
-
-                 <div class="form-group" id="Rform">
-                    <label for="InputEmailAdress">Email Address</label>
-                    <input type="email" name="email" class="form-control" id="InputPassword1" placeholder="Enter Email">
-                </div>
-
-                <div id="Rform">
-                    <h5><small>By clicking Sign Up, you are indicating that you have read and agree to the <button type="button" class="btn btn-link" id="btnTP">Terms of Service </button> and <button type="button" class="btn btn-link" id="btnTP">Privacy Policy</button>.</small></h5>
-                </div>
-
-                <div class="text-center" id="btnSignup">
-
-                    <button type="submit" value="submit" name="submit" class="btn btn-primary">Register</button>
-
-                </div>
-
-            </form> 
-              
-        
-
-   </div> <!-- registration pop up end here -->
-
-
+    ?>
 
 
         <!--Start online JSS first-->
@@ -305,9 +336,7 @@ if(isset($_POST['submit']))
 
 
 
-
-
-<!--  //This is the function that closes the pop-up-->
+        <!--  //This is the function that closes the pop-up-->
 <script>
         function endBlackout(){
         $(".blackout").css("display", "none");
@@ -331,7 +360,6 @@ if(isset($_POST['submit']))
         //setTimeout( strtBlackout, 10000);
     });
 </script>
-
 
 
     </body> <!--End Body-->
