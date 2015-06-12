@@ -182,3 +182,17 @@ html, body{
 	z-index: 10;
 
 }
+
+#btnSearchHome{
+
+	outline: none;
+	border:0px solid transparent;
+	background-color: #fff;
+	padding: 3px;
+
+
+}
+
+#HomeNav{
+	border-radius: 0px;
+}
