@@ -29,7 +29,7 @@
 
  <body> <!--Start Body-->
 
-   <div class="container.fluid">
+   <div class="container">
      <nav role="navigation" class="navbar navbar-inverse" id="HomeNav">
         <!-- Brand and toggle get grouped for better mobile display -->
         <div class="navbar-header">
@@ -47,7 +47,7 @@
                 
                 <!--Home-->
                 <li class="active"><a href="Home.php"><span class="glyphicon glyphicon-home"></span> Home</a></li>
-                <li><a href="#">About</a></li>
+                <!--<li><a href="#">About</a></li>-->
                 <!--<li><a href="#">Profile</a></li>-->
 
 
@@ -91,7 +91,7 @@
                                               <li role="presentation"><a role="menuitem" tabindex="-1" href="#"><b>My Dashboard</b></a></li>
                                               <li role="presentation"><a role="menuitem" tabindex="-1" href="#"><b>Another</b></a></li>
                                               <li role="presentation"><a role="menuitem" tabindex="-1" href="#"><b>Something</b></a></li>
-                                              <li role="presentation"><a role="menuitem" tabindex="-1" href="#"><b>Log Out</b></a></li>
+                                              <li role="presentation"><a role="menuitem" tabindex="-1" href="logout.php"><b>Log Out</b></a></li>
                                             </ul>
 
                                     </li>
