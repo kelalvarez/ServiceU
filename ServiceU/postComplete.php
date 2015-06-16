@@ -53,6 +53,14 @@
 
     }
     
+    if (isset($_POST['confirmClosure'])) {
+        
+        closePost($jobID);
+        echo '<script type="text/javascript">';
+        echo 'alert("This Job post have been closed")';
+        echo '</script>';
+
+    }
 ?>
 
 
@@ -85,43 +93,94 @@
 <body>
 
 <!-- Navigation Sidebar -->
-    <?php include 'navigationSidebar.php' ?>
+    <?php include 'navigationbar.php' ?>
 
-<section id="services" class="services bg-info">
-        <div class="container">
-            <div class="row text-center">
-                <div class="col-lg-10 col-lg-offset-1">
-                    <h2>Job Information</h2>
+<div class="container">
+<div class="well">
+    
+    
+            <div class="row">
+                <div class="col-xs-6 col-md-3 text-center">
+                    <strong><span class="text-center input-lg">
+                    <?php
+                        $owner = isOwner($userEmail, $jobID);
+                        $existApplication = existApp($userEmail, $jobID);
+                        if($owner != 0 ){
+                    ?>
+                    Owner
+                    <?php } 
+                        else { ?>
+                    Applicant
+                    <?php } ?>
+                    </span></strong>
+                    
                     <hr class="small">  
+                       
+                        <?php
+                                $jobClose = jobIsClose($jobID);
+                                $numApp = numApplications($jobID);
+                                if ($owner != 0){
+                            ?>
+                        <a href="#viewApplication" data-toggle="modal" data-target="#viewApplication" class="btn btn-warning btn-block">View Applications <span class="badge"><?php echo $numApp ?></span></a>
+                       
+                        <a href="#editPost" data-toggle="modal" data-target="#editPost" class="btn btn-warning btn-block <?php if($numApp != 0 || $jobClose == 1) { echo "disabled"; }?>">
+                            <i class="icon-hand-right"></i>Edit
+                        </a>
+                       
+                        <a href="#closePost" data-toggle="modal" data-target="#closePost" class="btn btn-warning btn-block <?php if($jobClose == 1) { echo "disabled"; }?>">
+                                    <i class="icon-hand-right"></i>Close Job
+                        </a>
+                            <?php  }
+                            else { ?> 
+                                <a href="#confirmApplication" data-toggle="modal" data-target="#confirmApplication" class="btn btn-warning btn-block <?php if($existApplication != 0 || $jobClose == 1) { echo "disabled"; }?>">
+                                    <i class="icon-hand-right"></i> 
+                                <?php 
+                                    if($jobClose == 1){
+                                        echo "This Post have been Close";
+                                    }
+                                    else {
+                                        if ($existApplication != 0) 
+                                            {echo "Applied";}
+                                        else 
+                                            {echo "Apply"; }
+                                    }
+                                ?>
+                                </a>
+                            <?php } ?>
+                             
+                       
+                    </span>
+                </div>
+                
+                
+                <div class="col-xs-12 col-md-8">
+                <!---
+                <div class="col-lg-10 col-lg-offset-1">-->
+ 
                         <div class="row">
-                            <div class="col-md-4 col-lg-push-4">
-                                <h5><span style="font-weight: bold">
+                            <div class="col-sm-10 col-lg-push-4">
+                                <h1><span style="font-weight: bold">
                                     <?php 
                                         echo $title = getJobTitle($jobID);
                                     ?>
                                 </span>
+
                                 <span class="badge">
                                     <?php
-                                        echo $numApp = numApplications($jobID);
+                                        echo $numApp;
                                     ?>
                                 </span>
-                                </h3>
-                                        
-                                <span style="font-size: 11px">
-                                    <?php
-                                        echo "By: ";
-                                        echo $owner = getJobOwner($jobID);
-                                    ?>
-                                </span>
+                                </h1>
+
                             </div>
                         </div>
                     <br>
                         <div class="row">
-                            <div class="col-md-4 col-lg-push-4">
+                            <span class="input-sm"><strong>Description</strong></span>
+                            <br>
                                 <?php
                                     echo $description = getJobDescription($jobID);
                                 ?>
-                            </div>
                         </div>
                     <br>
                         <div class="row">
@@ -154,58 +213,28 @@
                                     </div>
                         </div>
                     
-                        <div class="row">
-                            <div class="col-md-4 col-lg-push-4">
-                                <br>
-                                <?php include ('confirmApplication.php'); ?>
-                                <?php include('editPost.php'); ?>
-                                
-                                <?php 
-                                    if (isOwner($userEmail, $jobID) == 0){
-                                ?>
-                                <a href="#confirmApplication" data-toggle="modal" data-target="#confirmApplication" class="btn btn-info">
-                                    <i class="icon-hand-right"></i>Apply
-                                </a>
-                                <?php 
-                                    }
-                                    else {
-                                ?>
-                                <a href="#editPost" data-toggle="modal" data-target="#editPost" class="btn btn-info">
-                                    <i class="icon-hand-right"></i>Edit
-                                </a>
-                                <?php
-                                    }
-                                ?>
-                            </div>
-                        </div>
-                    
+                        
                     <!-- /.row (nested) -->
                 </div>
+                
+              
+                <?php include ('confirmApplication.php'); ?>
+                <?php include('editPost.php'); ?>
+                <?php include('closeJobModal.php'); ?>
+                <?php include('viewAppModal.php'); ?>
                 <!-- /.col-lg-10 -->
             </div>
             <!-- /.row -->
+             
+                    
         </div>
         <!-- /.container -->
-    </section>
+</div>
 
-    <!-- Footer -->
-    <footer>
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-10 col-lg-offset-1 text-center">
-                    <h4><strong>ServiceU</strong>
-                    </h4>
-                    <p>3481 Melrose Place<br>Beverly Hills, CA 90210</p>
-                    <ul class="list-unstyled">
-                        <li><i class="fa fa-envelope-o fa-fw"></i>  <a href="mailto:name@example.com">name@example.com</a>
-                        </li>
-                    </ul>
-                    <hr class="small">
-                    <p class="text-muted">Copyright &copy; ServiceU 2015</p>
-                </div>
-            </div>
-        </div>
-    </footer>
+
+
+
+<!--------- NEED TO BE ADDED TO ALL DOCUMENT FROM HERE -------->
 
     <!-- jQuery -->
     <script src="js/jquery.js"></script>
@@ -229,24 +258,25 @@
         $("#sidebar-wrapper").toggleClass("active");
     });
 
-   $('[data-dismiss=modal]').on('click', function (e) {
-        var $t = $(this),
-            target = $t[0].href || $t.data("target") || $t.parents('.modal') || [];
-
-      $(target)
-        .find("input,textarea")
-           .val('')
-           .end();
    
-      $('select option:first-child').attr("selected", "selected");
-    
-    });
     </script>
     
     <!-- Custom for project -->
     <script src="js/editProfileactions.js"></script>
     
-     
+     <!--Start online JSS first-->
+    <script src="https://code.jquery.com/jquery-1.11.2.min.js"></script>
+    <!--Bootstrap JSS-->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+    <!--Customized JSS-->
+    <script src="js/myjs.js"></script>
+    <!--change active mode in the navbar-->
+    <script> 
+        $(".nav a").on("click", function(){
+           $(".nav").find(".active").removeClass("active");
+           $(this).parent().addClass("active");
+        });
+    </script>
 
 </body>
 </html>

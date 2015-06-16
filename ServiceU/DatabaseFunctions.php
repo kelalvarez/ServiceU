@@ -459,7 +459,7 @@ function existApp($emailApp, $jobID){
     global $con;
     
     $query = "SELECT COUNT(*) as total FROM appTable"
-            . " WHERE jobID='$jobID' AND employeeID='$emailApp'";
+            . " WHERE `jobID`='" . $jobID . "' AND  `employeeID`='" .$emailApp. "'";
     
     $result = mysqli_query($con, $query);        
     $row = mysqli_fetch_assoc($result);
@@ -482,7 +482,6 @@ function submitApp($email, $jobID){
                 );
     
     return TRUE;
-    
 }
 
 function newTotalApp($jobID, $num){
@@ -494,6 +493,16 @@ function newTotalApp($jobID, $num){
     return TRUE;
 }
 
+function getJobApplicants($jobID){
+    global $con;
+
+    $query = "SELECT * FROM appTable WHERE jobID='$jobID' "
+            . "ORDER BY `orderApp` ASC";
+    $result = mysqli_query($con, $query);        
+    
+    return $result;
+}
+
 function isOwner($email, $jobID){
     global $con;
     
@@ -503,6 +512,39 @@ function isOwner($email, $jobID){
     $row = mysqli_fetch_assoc($result);
     
     return $row['total'];
+}
+
+function jobHasEmployee($jobID){
+    global $con;
+    
+    $query = "SELECT COUNT(*) as selected FROM appTable"
+        . " WHERE selectedEmployee= '1' AND jobID='$jobID'";
+    
+    $result = mysqli_query($con, $query);
+    $row = mysqli_fetch_Assoc($result);
+    
+    return $row['selected']; 
+}
+
+
+function jobIsClose($jobID){
+    global $con;
+    
+    $query = "SELECT closeJob FROM jobTable"
+            . " WHERE jobID='$jobID'";
+    
+    $result = mysqli_query($con, $query);
+    $row = mysqli_fetch_Assoc($result);
+    
+    return $row['closeJob']; 
+}
+
+function closePost($jobID){
+    global $con;
+    
+    $result = mysqli_query($con, "UPDATE jobTable SET closeJob=1 WHERE jobID='$jobID';");
+    
+    return $result;
 }
 
 function createPost($email, $jobTitle, $jobDescription, $jobPayment, $jobCategory){
