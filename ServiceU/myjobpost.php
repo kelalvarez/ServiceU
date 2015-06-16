@@ -124,25 +124,9 @@
               </div>
               <div class="col-md-10">
 
-                     <div class="well well-lg">
+                     <div class="well">
 
-                                <header>
-
-                                        <h2 class="wellHeader text-center"><b>My Job Post</b></h2>
-
-                                </header>
-
-                                <div class="rowAddjobpost">
-                                        <span class="glyphicon glyphicon-wrench"> </span> 
-                                        <h3>Creating Job on ServiceU is effortless.</h3>
-                                        <p>Start now to provide service to your local community!</p>
-                                        <button type="submit" value="submit" name="submit" class="btn btn-success">Create Job Now!</button>
-                                        
-                                </div>
-                            
-                                   
-                                
-                            
+                            dsada
 
 
                      </div>

@@ -1,6 +1,68 @@
 
-.container-fluid{
-	background-color: #2B2B2B;
-	width: 100%;
-	height: 100%;
+#side-barDashboard{
+	height: 70%;
+	background-color: gray;
+}
+
+ul
+{
+    list-style-type: none;
+}
+
+
+
+a{
+
+	text-decoration: none;
+	color: #777;
+
+}
+
+
+a:hover{
+	color: #222;
+	text-decoration: none;
+	
+}
+
+
+.wellHeader{
+
+  font-family:'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-size: 26px;
+  font-style: normal;
+  font-variant: normal;
+  font-weight: 400;
+  font-stretch: normal;
+  line-height: 33px;
+  color: #2B2B2B;
+}
+
+.well-lg {
+  padding: 2px;
+  border-radius: 6px;
+}
+
+.rowAddjobpost{
+	text-align: center;
+	margin-top: 15%;
+	margin-right: auto;
+	margin-left: auto;
+	margin-bottom: 15px;
+}
+
+.rowAddjobpost h3{
+	background: transparent;
+	font-weight: bold;
+	color: #777;
+}
+
+.rowAddjobpost p{
+	background: transparent;
+	color: #BDBDBD;
+}
+
+
+.glyphicon.glyphicon-wrench {
+    font-size: 75px;
 }
