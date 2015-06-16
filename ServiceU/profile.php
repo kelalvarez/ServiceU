@@ -5,21 +5,24 @@
     include("functions.php");
 ?>
 <?php 
-session_start();
-  if (!isset($_SESSION["loginEmail"]))
-   {
-      header("location: index.php");
-      exit();
-   }
-   else{
+    session_start();
+    if (!isset($_SESSION["loginEmail"]))
+     {
+        header("location: index.php");
+        exit();
+    }
+    else{
        $userEmail = $_SESSION["loginEmail"];
     }
-   
-   if (isset($_POST['submitDegree'])) {
+   ?>
+   <?php
+    if (isset($_POST['submitDegree'])) {
         $D1P1 = $_POST['degree1Part1'];
         $D1P2 = $_POST['degree1Part2'];
 
-        $degree1 = $D1P1. " " . $D1P2;
+        $degree1 = $D1P1 . " " . $D1P2;
+        
+        
         editDegree1($userEmail, $degree1);
     }
     
@@ -93,32 +96,37 @@ session_start();
     <!-- Custom Fonts -->
     <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
     <link href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css">
-
+    
+    <!--Customized CSS-->
+    <link rel="stylesheet" href="css/mycss.css">
+    
+    
 </head>
 
     
 <body>
 
 <!-- Navigation Sidebar -->
-    <?php include 'navigationSidebar.php' ?>
+    <?php include 'navigationbar.php' ?>
     
 <!-- About -->
 
     <!-- Services -->
     <!-- The circle icons use Font Awesome's stacked icon classes. For more information, visit http://fontawesome.io/examples/ -->
-    <section id="services" class="services bg-primary">
-        <div class="container">
-            <div class="row text-center">
-                <div class="col-lg-10 col-lg-offset-1">
-                    <h2>My Profile</h2>
-                    <hr class="small">
-                        <?php include 'confirmCode.php' ?>  
-                        <div class="row">
-                                    <div class="col-md-4 col-lg-offset-2"><p>Name:</p></div>
-                                    <div class="col-md-4 col-lg-pull-2"> 
-                                        <?php 
-                                            echo getFullName($userEmail);
-                                        ?> 
+<div class="container">
+       
+    <div class="well well-lg">
+        <div class="row text-center">
+           
+            <h2>My Profile</h2>
+            <hr class="small">
+                <?php include 'confirmCode.php' ?>  
+                <div class="row">
+                <div class="col-md-4 col-lg-offset-2"><p>Name:</p></div>
+                <div class="col-md-4 col-lg-pull-2"> 
+                    <?php 
+                        echo getFullName($userEmail);
+                    ?> 
                                     </div>
                         </div>
                     <br>     
@@ -153,14 +161,15 @@ session_start();
                         <div class="row">
                                     <div class="col-md-4 col-lg-offset-2"><p>Degree: </p></div>
                                     <div class="col-md-2 col-lg-pull-1"> 
+                                        
                                         <?php 
                                             echo strtoupper(getDegree($userEmail));
                                         ?>   
                                     </div>
                                     <div class="col-md-3 col-lg-pull-1">
                                         <a href="#editDegree" data-toggle="modal" data-target="#editDegree" class="btn btn-light btn-xs">Edit</a>
+                                        <?php include('editDegreeModal.php') ?>
                                         
-                                        <?php include 'editDegreeModal.php' ?>
                                         
                                         
 
@@ -176,44 +185,18 @@ session_start();
                                     </div>
                                     <div class="col-md-3 col-lg-pull-1">
                                         <a href="#editInterest" data-toggle="modal" data-target="#editInterest" class="btn btn-light btn-xs">Edit</a>
-                                        <?php include 'editInterestModal.php' ?>
+                                        <?php include('editInterestModal.php') ?>
                                     </div>
                         </div>                    
                     <!-- /.row (nested) -->
                 </div>
                 <!-- /.col-lg-10 -->
-            </div>
+        </div>
             <!-- /.row -->
-        </div>
+    </div>
         <!-- /.container -->
-    </section>
-
-    <!-- Footer -->
-    <footer>
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-10 col-lg-offset-1 text-center">
-                    <h4><strong>ServiceU</strong>
-                    </h4>
-                    <p>3481 Melrose Place<br>Beverly Hills, CA 90210</p>
-                    <ul class="list-unstyled">
-                        <li><i class="fa fa-envelope-o fa-fw"></i>  <a href="mailto:name@example.com">name@example.com</a>
-                        </li>
-                    </ul>
-                    <hr class="small">
-                    <p class="text-muted">Copyright &copy; ServiceU 2015</p>
-                </div>
-            </div>
-        </div>
-    </footer>
-
-    <!-- jQuery -->
-    <script src="js/jquery.js"></script>
-    <script src="js/bootbox.js"></script>
-    <script src="js/bootbox.min.js"></script>
-
-    <!-- Bootstrap Core JavaScript -->
-    <script src="js/bootstrap.min.js"></script>
+    
+        
 
     <!-- Custom Theme JavaScript -->
     <script>
@@ -241,10 +224,6 @@ session_start();
       $('select option:first-child').attr("selected", "selected");
     
     });
-    
-  
-
-
     </script>
     
     <!-- Custom for project -->
@@ -260,5 +239,29 @@ session_start();
         }
     ?>
     </script>
+    
+      <!-- jQuery -->
+    <script src="js/jquery.js"></script>
+    <script src="js/bootbox.js"></script>
+    <script src="js/bootbox.min.js"></script>
+    <!-- Bootstrap Core JavaScript -->
+    <script src="js/bootstrap.min.js"></script> 
+    
+    <!--Start online JSS first-->
+    <script src="https://code.jquery.com/jquery-1.11.2.min.js"></script>
+    <!--Bootstrap JSS-->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+    <!--Customized JSS-->
+    <script src="js/myjs.js"></script>
+    <!--change active mode in the navbar-->
+    <script> 
+        $(".nav a").on("click", function(){
+           $(".nav").find(".active").removeClass("active");
+           $(this).parent().addClass("active");
+        });
+    </script>
+
+
+    
 </body>
 </html>

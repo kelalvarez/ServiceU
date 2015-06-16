@@ -38,20 +38,23 @@ session_start();
     <!-- Custom Fonts -->
     <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
     <link href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css">
-
+    
+    <!--Customized CSS-->
+    <link rel="stylesheet" href="css/mycss.css">
+    
 </head>
 
     
 <body>
 
 <!-- Navigation Sidebar -->
-    <?php include 'navigationSidebar.php' ?>
+    <?php include 'navigationbar.php' ?>
     <?php //include 'postInfo.php' ?>
 <!-- About -->
 
 
-<section id="services" class="services bg-primary">
 <div class="container">
+<div class="well well-lg">
 <div class="row text-center">
     <div class="col-lg-10 col-lg-offset-1">
         <h2>Services</h2>
@@ -75,29 +78,11 @@ session_start();
             </div>
             <!-- /.row -->
         </div>
-        <!-- /.container -->
-    </section>
+</div>
 
 
 
-    <!-- Footer -->
-    <footer>
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-10 col-lg-offset-1 text-center">
-                    <h4><strong>ServiceU</strong>
-                    </h4>
-                    <p>3481 Melrose Place<br>Beverly Hills, CA 90210</p>
-                    <ul class="list-unstyled">
-                        <li><i class="fa fa-envelope-o fa-fw"></i>  <a href="mailto:name@example.com">name@example.com</a>
-                        </li>
-                    </ul>
-                    <hr class="small">
-                    <p class="text-muted">Copyright &copy; ServiceU 2015</p>
-                </div>
-            </div>
-        </div>
-    </footer>
+
 
     <!-- jQuery -->
     <script src="js/jquery.js"></script>
@@ -107,38 +92,28 @@ session_start();
     <!-- Bootstrap Core JavaScript -->
     <script src="js/bootstrap.min.js"></script>
 
-    <!-- Custom Theme JavaScript -->
-    <script>
-    // Closes the sidebar menu
-    $("#menu-close").click(function(e) {
-        e.preventDefault();
-        $("#sidebar-wrapper").toggleClass("active");
-    });
-
-    // Opens the sidebar menu
-    $("#menu-toggle").click(function(e) {
-        e.preventDefault();
-        $("#sidebar-wrapper").toggleClass("active");
-    });
-
-    //$('#postInformation').on('show.bs.modal', function(e) {
-    //var jobId = $(e.relatedTarget).data('job-id');
-    //$(e.currentTarget).find('input[name="jobId"]').val(jobId);
-   // });
-    
-    
-    </script>
     
     <!-- Custom for project -->
     <script src="js/editProfileactions.js"></script>
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
- 
-    <script>
- 
- // $(function() {
-   //     $('#postInformation').someDialogPlug({ some: options });
-    //});
-    
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script> 
+    <script src="https://code.jquery.com/jquery-1.11.2.min.js"></script>
+    <!--Bootstrap JSS-->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+
+
+    <!--Customized JSS-->
+    <script src="js/myjs.js"></script>
+
+
+    <!--change acive mode in the navbar-->
+    <script> 
+
+        $(".nav a").on("click", function(){
+           $(".nav").find(".active").removeClass("active");
+           $(this).parent().addClass("active");
+        });
+
+    </script>
     
     </script>
      
