@@ -1,109 +1,73 @@
-<!DOCTYPE html> 
-<?php //session starts here 
-    session_start(); 
-    include('DatabaseFunctions.php');//make connection here 
+<!DOCTYPE html>
+<?php
+    include("DatabaseFunctions.php"); 
     include("functions.php");
 ?>
 
 
+<?php 
+    session_start();
+    if (!isset($_SESSION["loginEmail"]))
+    {
+        header("location: index.php");
+        exit();
+    }
+    else{
+       $userEmail = $_SESSION["loginEmail"];
+    }   
 
-<html lang="en"> <!--Start HTML-->
+    if (isset($_POST['createJob'])) {
+        
+        $jobTitle = $_POST['jobTitle'];
+        $jobDescription = $_POST['jobDescription'];
+    $jobPayment = $_POST['jobPayment'];
+    $jobCategory = $_POST['jobCategory'];
 
-    <head> <!--Start Head-->
+        createPost($userEmail, $jobTitle, $jobDescription, $jobPayment, $jobCategory);
+        echo '<script type="text/javascript">';
+        echo 'alert("Your post has been created")';
+        echo '</script>';
 
-        <meta charset="UTF-8">
-        <title>ServiceU Website</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, uer-scalable=no">
-
-        <!--Bootstrap CSS-->
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
-
-        <!--Customized CSS-->
-        <link rel="stylesheet" href="css/mycss.css">
-        <link rel="stylesheet" href="css/dashboardcss.css">
-
-    </head> <!--End Head-->
-
-
-
-    <!--BODY to have a dark background <body style="background-color: #101010"-->
-
- <body> <!--Start Body-->
-
-   <div class="container">
-
-     <nav role="navigation" class="navbar navbar-inverse" id="HomeNav">
-        <!-- Brand and toggle get grouped for better mobile display -->
-        <div class="navbar-header">
-            <button type="button" data-target="#navbarCollapse" data-toggle="collapse" class="navbar-toggle">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a href="Home.php" class="navbar-brand">ServiceU</a>
-        </div>
-        <!-- Collection of nav links, forms, and other content for toggling -->
-        <div id="navbarCollapse" class="collapse navbar-collapse">
-            <ul class="nav navbar-nav">
-                
-                <!--Home-->
-                <li class="active"><a href="Home.php"><span class="glyphicon glyphicon-home"></span> Home</a></li>
-                <!--<li><a href="#">About</a></li>-->
-                <!--<li><a href="#">Profile</a></li>-->
+    }
+ 
+?>
 
 
-                <!--Dropdown and separator-->
-                <!--<li class="dropdown">
-                    <a data-toggle="dropdown" class="dropdown-toggle" href="#">Messages <b class="caret"></b></a>
-                    <ul role="menu" class="dropdown-menu">
-                        <li><a href="#">Inbox</a></li>
-                        <li><a href="#">Drafts</a></li>
-                        <li><a href="#">Sent Items</a></li>
-                        <li class="divider"></li>
-                        <li><a href="#">Trash</a></li>
-                    </ul>
-                </li>
-            </ul>-->
-            <form role="search" class="navbar-form navbar-left">
-                <div class="form-group">
-                    <div class="input-group">
+<html lang="en">
 
-                        
-                        <input type="text" placeholder="Find Services" class="form-control">
-                        <div class="input-group-addon" id="btnSearchHome"><button type="button" class="btn btn-default" id="btnSearchHome">
-                        <span class="glyphicon glyphicon-search"></span></div>
-                   
-                    </div>
-                </div>
-            </form>
+<head>
 
-            </ul>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
 
+    <title>ServiceU</title>
 
-            <ul class="nav navbar-nav pull-right"> <!--user  nav bar-->
+    <!-- Bootstrap Core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/dashboardcss.css" rel="stylesheet">
 
-                                    <li class="dropdown">
-                                        <a href="#" data-toggle="dropdown"> <span class="glyphicon glyphicon-user"> </span> My Account
-                                          <span class="caret"</span></a>
+    <!-- Custom CSS -->
+    <link href="css/stylish-portfolio.css" rel="stylesheet">
+     <link href="css/stylish-portfolio.css" rel="stylesheet">
 
-                                            <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+    <!-- Custom Fonts -->
+    <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css">
 
-                                              <li role="presentation"><a role="menuitem" tabindex="-1" href="#"><b>My Inbox</b></a></li>
-                                              <li role="presentation"><a role="menuitem" tabindex="-1" href="mydashboard.php"><b>My Dashboard</b></a></li>
-                                              <li role="presentation"><a role="menuitem" tabindex="-1" href="#"><b>Another</b></a></li>
-                                              <li role="presentation"><a role="menuitem" tabindex="-1" href="#"><b>Something</b></a></li>
-                                              <li role="presentation"><a role="menuitem" tabindex="-1" href="logout.php"><b>Log Out</b></a></li>
-                                            </ul>
+</head>
 
-                                    </li>
+    
+<body>
 
-            </ul>
-        </div>
-    </nav>
+<!-- Navigation Sidebar -->
+    <?php include 'navigationbar.php' ?>
 
-
-    <div class="well text-center">
+<div class="container">
+       
+     <div class="well text-center">
 
 
             Maybe some kind of link or TITLE here
@@ -117,7 +81,7 @@
             <div class="row">
               <div class="col-md-2">
                 <ul>
-                    <li><b>My Job Post</b></li>
+                    <li><a href="myjobpost.php" ><b>My Job Post</b></a></li>
                     <li><a href="myapplications.php" ><b>My Applications</b></a></li>
                 </ul>
 
@@ -136,7 +100,7 @@
                                         <span class="glyphicon glyphicon-wrench"> </span> 
                                         <h3>Creating Job on ServiceU is effortless.</h3>
                                         <p>Start now to provide service to your local community!</p>
-                                        <button type="submit" value="submit" name="submit" class="btn btn-success">Create Job Now!</button>
+                                        <a class="btn btn-success" href="newPost.php" role="button">Create Job Now!</a>
                                         
                                 </div>
                             
@@ -168,44 +132,48 @@
          
 </footer>
 
+</div>
 
+    <!-- jQuery -->
+    <script src="js/jquery.js"></script>
+    <script src="js/bootbox.js"></script>
+    <script src="js/bootbox.min.js"></script>
 
+    <!-- Bootstrap Core JavaScript -->
+    <script src="js/bootstrap.min.js"></script>
 
+    <!-- Custom Theme JavaScript -->
+    <script>
 
+   $('[data-dismiss=modal]').on('click', function (e) {
+        var $t = $(this),
+            target = $t[0].href || $t.data("target") || $t.parents('.modal') || [];
 
-
-
+      $(target)
+        .find("input,textarea")
+           .val('')
+           .end();
+   
+      $('select option:first-child').attr("selected", "selected");
+    
+    });
+    </script>
+    
+    <!-- Custom for project -->
+    <script src="js/editProfileactions.js"></script>
     <!--Start online JSS first-->
     <script src="https://code.jquery.com/jquery-1.11.2.min.js"></script>
     <!--Bootstrap JSS-->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
-
-
     <!--Customized JSS-->
     <script src="js/myjs.js"></script>
-
-
     <!--change acive mode in the navbar-->
     <script> 
-
         $(".nav a").on("click", function(){
            $(".nav").find(".active").removeClass("active");
            $(this).parent().addClass("active");
         });
-
     </script>
 
-
-
-    </body> <!--End Body-->
-
-</html> <!--End HTML-->
-
-
-<!--
-<div class ="headerBox">
-            
-            <h3>Register on ServiceU</h3> 
-            <div class="closeBox">Close</div>
-        
-        </div> -->
+</body>
+</html>

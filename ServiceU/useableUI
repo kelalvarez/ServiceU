@@ -1,0 +1,14 @@
+   
+	<!--search butopn-->
+   <form role="search" class="navbar-form navbar-left">
+                <div class="form-group">
+                    <div class="input-group">
+
+                        
+                        <input type="text" placeholder="Find Services" class="form-control">
+                        <div class="input-group-addon" id="btnSearchHome"><button type="button" class="btn btn-default" id="btnSearchHome">
+                        <span class="glyphicon glyphicon-search"></span></div>
+                   
+                    </div>
+                </div>
+            </form>
