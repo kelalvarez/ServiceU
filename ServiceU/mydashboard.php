@@ -100,7 +100,8 @@
                                         <span class="glyphicon glyphicon-wrench"> </span> 
                                         <h3>Creating Job on ServiceU is effortless.</h3>
                                         <p>Start now to provide service to your local community!</p>
-                                        <a class="btn btn-success" href="newPost.php" role="button">Create Job Now!</a>
+                                        <?php include('newPost.php'); ?>
+                                        <a class="btn btn-success" href="#newPost" data-toggle="modal" data-target="#newPost" role="button">Create Job Now!</a>
                                         
                                 </div>
                             
