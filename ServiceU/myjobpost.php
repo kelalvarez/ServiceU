@@ -5,33 +5,19 @@
 ?>
 
 
-<?php 
+<?php
+
     session_start();
     if (!isset($_SESSION["loginEmail"]))
-    {
-        header("location: index.php");
-        exit();
-    }
-    else{
+   {
+      header("location: index.php");
+      exit();
+   }
+   else{
        $userEmail = $_SESSION["loginEmail"];
-    }   
-
-    if (isset($_POST['createJob'])) {
-        
-        $jobTitle = $_POST['jobTitle'];
-        $jobDescription = $_POST['jobDescription'];
-    $jobPayment = $_POST['jobPayment'];
-    $jobCategory = $_POST['jobCategory'];
-
-        createPost($userEmail, $jobTitle, $jobDescription, $jobPayment, $jobCategory);
-        echo '<script type="text/javascript">';
-        echo 'alert("Your post has been created")';
-        echo '</script>';
-
     }
- 
+   
 ?>
-
 
 <html lang="en">
 
@@ -48,10 +34,10 @@
     <!-- Bootstrap Core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="css/dashboardcss.css" rel="stylesheet">
+    <link href="css/myjobpostcss.css" rel="stylesheet">
 
     <!-- Custom CSS -->
     <link href="css/stylish-portfolio.css" rel="stylesheet">
-     <link href="css/stylish-portfolio.css" rel="stylesheet">
 
     <!-- Custom Fonts -->
     <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
@@ -61,6 +47,20 @@
 
     
 <body>
+
+    <?php 
+    
+            $result = getUserJobs($userEmail);
+
+            if (!$result) {
+            echo "Could not  successfully ";
+            }
+             
+            if (mysqli_num_rows($result) == 0) {
+            echo "You haven't created any post yet.";
+            exit;
+            }
+    ?>
 
 <!-- Navigation Sidebar -->
     <?php include 'navigationbar.php' ?>
@@ -90,9 +90,68 @@
 
                      <div class="well">
 
-                               dsada
+                               <header>
+
+                                        <h2 class="wellHeader text-center"><b>My Job Post</b></h2>
+
+                                </header>
                                    
-                                
+
+                                <table class="table table-bordered">
+
+                                    <thead>
+                                      <tr>
+                                        <th>Job Title</th>
+                                        <th>Payment</th>
+                                        <th>Category</th>
+                                      </tr>
+                                    </thead>
+
+                                    <tbody>
+
+                                        <?php     
+                                                while ($row = mysqli_fetch_assoc($result)) 
+                                                {
+                                                    echo ' <tr> ';
+                                                    echo ' <td> ';
+                                                    echo $row['jobTitle'];
+                                                    echo ' <td> ';
+                                                    echo '$' . $row['payment'];
+                                                    echo ' <td> ';
+                                                    echo $row['category'];
+                                                }    
+                
+                                        ?>
+
+
+                                    </tbody>
+
+  
+                                </table>
+                                <!--<div class="jobpostTable">
+                                  <table>
+                                       <thead>
+                                            <tr>
+
+                                                <td colspan="2">one</td>
+                                                <td>two</td>
+                                                <td>three</td>
+                                                <td>four</td>
+
+
+                                            </tr>
+                                        </thead>
+
+                                        <tbody>
+
+
+
+
+                                        </tbody>
+
+                                  </table>
+
+                                </div>-->
                             
 
 

@@ -5,31 +5,18 @@
 ?>
 
 
-<?php 
+<?php
+
     session_start();
     if (!isset($_SESSION["loginEmail"]))
-    {
-        header("location: index.php");
-        exit();
-    }
-    else{
+   {
+      header("location: index.php");
+      exit();
+   }
+   else{
        $userEmail = $_SESSION["loginEmail"];
-    }   
-
-    if (isset($_POST['createJob'])) {
-        
-        $jobTitle = $_POST['jobTitle'];
-        $jobDescription = $_POST['jobDescription'];
-    $jobPayment = $_POST['jobPayment'];
-    $jobCategory = $_POST['jobCategory'];
-
-        createPost($userEmail, $jobTitle, $jobDescription, $jobPayment, $jobCategory);
-        echo '<script type="text/javascript">';
-        echo 'alert("Your post has been created")';
-        echo '</script>';
-
     }
- 
+   
 ?>
 
 
@@ -48,6 +35,7 @@
     <!-- Bootstrap Core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="css/dashboardcss.css" rel="stylesheet">
+    <link href="css/myjobpostcss.css" rel="stylesheet">
 
     <!-- Custom CSS -->
     <link href="css/stylish-portfolio.css" rel="stylesheet">
@@ -61,6 +49,22 @@
 
     
 <body>
+
+
+    <?php 
+    
+        $result = getUserApps($userEmail);
+
+        if (!$result) {
+        echo "Could not  successfully ";
+        }
+         
+        if (mysqli_num_rows($result) == 0) {
+        echo "No pending applications";
+        exit;
+        }
+    ?>
+    
 
 <!-- Navigation Sidebar -->
     <?php include 'navigationbar.php' ?>
@@ -90,7 +94,51 @@
 
                      <div class="well">
 
-                               dsada
+                               <header>
+
+                                        <h2 class="wellHeader text-center"><b>My Application</b></h2>
+
+                                </header>
+                                   
+
+                                <table class="table table-bordered">
+
+                                    <thead>
+                                      <tr>
+                                        <th>Job Id</th>
+                                        <th>Employeer Id</th>
+                                        <th>Job Title</th>
+                                        <th>Job Description</th>
+                                        <th>Payment</th>
+                                      </tr>
+                                    </thead>
+
+                                    <tbody>
+
+                                        <?php     
+                                                while ($row = mysqli_fetch_assoc($result)) 
+                                                {
+                                                    echo ' <tr> ';
+                                                    echo ' <td> ';
+                                                    echo $row['jobID'];
+                                                    echo ' <td> ';
+                                                    echo $row['employeerID'];
+                                                    echo ' <td> ';
+                                                    echo $row['jobTitle'];
+                                                    echo ' <td> ';
+                                                    echo $row['jobDescription'];
+                                                    echo ' <td> ';
+                                                    echo $row['payment'];
+                                                    
+                                                }    
+                
+                                        ?>
+
+
+                                    </tbody>
+
+  
+                                </table>
                                    
                                 
                             
