@@ -105,10 +105,9 @@
 
                                     <thead>
                                       <tr>
-                                        <th>Job Id</th>
-                                        <th>Employeer Id</th>
                                         <th>Job Title</th>
-                                        <th>Job Description</th>
+                                        <th>Employeer ID</th>
+                                        <th>Description</th>
                                         <th>Payment</th>
                                       </tr>
                                     </thead>
@@ -120,15 +119,13 @@
                                                 {
                                                     echo ' <tr> ';
                                                     echo ' <td> ';
-                                                    echo $row['jobID'];
-                                                    echo ' <td> ';
-                                                    echo $row['employeerID'];
-                                                    echo ' <td> ';
                                                     echo $row['jobTitle'];
                                                     echo ' <td> ';
+                                                    echo $row['employeerID'];
+                                                    echo ' <td> ';                              
                                                     echo $row['jobDescription'];
                                                     echo ' <td> ';
-                                                    echo $row['payment'];
+                                                    echo '$' . $row['payment'];
                                                     
                                                 }    
                 

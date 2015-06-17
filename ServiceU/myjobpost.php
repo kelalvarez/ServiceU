@@ -70,7 +70,7 @@
      <div class="well text-center">
 
 
-            Maybe some kind of link or TITLE here
+           
 
     </div>
 
@@ -92,8 +92,8 @@
 
                                <header>
 
-                                        <h2 class="wellHeader text-center"><b>My Job Post</b></h2>
-
+                                        <h2 class="wellHeader text-center"><b>My Job Post</b></h2>          
+                                                                            
                                 </header>
                                    
 
@@ -101,6 +101,7 @@
 
                                     <thead>
                                       <tr>
+                                        <th>Job ID</th>
                                         <th>Job Title</th>
                                         <th>Payment</th>
                                         <th>Category</th>
@@ -114,7 +115,13 @@
                                                 {
                                                     echo ' <tr> ';
                                                     echo ' <td> ';
+                                                    echo $row['jobID'];
+                                                    echo ' <td> ';
+                                                     echo "<a href=\"postComplete.php?jobID=";
+                                                     echo $jobID;
+                                                     echo "\" target=\"_parent\">";
                                                     echo $row['jobTitle'];
+                                                     echo "</a>";
                                                     echo ' <td> ';
                                                     echo '$' . $row['payment'];
                                                     echo ' <td> ';
@@ -128,31 +135,7 @@
 
   
                                 </table>
-                                <!--<div class="jobpostTable">
-                                  <table>
-                                       <thead>
-                                            <tr>
-
-                                                <td colspan="2">one</td>
-                                                <td>two</td>
-                                                <td>three</td>
-                                                <td>four</td>
-
-
-                                            </tr>
-                                        </thead>
-
-                                        <tbody>
-
-
-
-
-                                        </tbody>
-
-                                  </table>
-
-                                </div>-->
-                            
+                               
 
 
                      </div>
