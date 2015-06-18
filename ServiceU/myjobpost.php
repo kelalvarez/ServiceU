@@ -118,7 +118,7 @@
                                                     echo $row['jobID'];
                                                     echo ' <td> ';
                                                      echo "<a href=\"postComplete.php?jobID=";
-                                                     echo $jobID;
+                                                     echo $row['jobID'];
                                                      echo "\" target=\"_parent\">";
                                                     echo $row['jobTitle'];
                                                      echo "</a>";
