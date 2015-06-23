@@ -137,6 +137,18 @@ function getFullName($userEmail){
     return $row['firstName'] . " " . $row['lastName'];    
 }
 
+function getRate($userEmail){
+    global $con;
+
+    $query = "SELECT rate FROM userTable
+              WHERE email = '$userEmail'";
+
+    $result = mysqli_query($con, $query);
+    $row = mysqli_fetch_assoc($result);
+        
+    return $row['rate'];    
+}
+
 function checkVerification($userEmail){
     global $con;
         
@@ -514,6 +526,17 @@ function isOwner($email, $jobID){
     return $row['total'];
 }
 
+function hasApplied($email, $jobID){
+    global $con;
+    
+    $query = "SELECT COUNT(*) as total FROM appTable"
+            . " WHERE employeeID = '$email' AND jobID = '$jobID'";
+    $result = mysqli_query($con, $query);        
+    $row = mysqli_fetch_assoc($result);
+    
+    return $row['total'];
+}
+
 function jobHasEmployee($jobID){
     global $con;
     
@@ -543,6 +566,14 @@ function closePost($jobID){
     global $con;
     
     $result = mysqli_query($con, "UPDATE jobTable SET closeJob=1 WHERE jobID='$jobID';");
+    
+    return $result;
+}
+
+function openPost($jobID){
+    global $con;
+    
+    $result = mysqli_query($con, "UPDATE jobTable SET closeJob=0 WHERE jobID='$jobID';");
     
     return $result;
 }
@@ -589,6 +620,48 @@ function getUserApps($email)
     $query = "SELECT * FROM jobTable WHERE jobID IN ( SELECT jobID from appTable WHERE employeeID='$email')"
             . " ORDER BY `jobID` DESC";
     $result = mysqli_query($con, $query);        
+    
+    return $result;
+}
+
+
+///////////////////////// REVIEW PAGE
+function nroCommentStars($userEmail, $num){
+    global $con;
+
+    $query = "SELECT COUNT(*) as total FROM commentTable
+              WHERE email = '$userEmail' AND stars='$num'";
+
+    $result = mysqli_query($con, $query);
+    $row = mysqli_fetch_assoc($result);
+        
+    return $row['total'];    
+}
+
+function getNroComments($userEmail){
+    global $con;
+
+    $query = "SELECT COUNT(*) as total FROM commentTable WHERE receiverID='$userEmail'";
+    $result = mysqli_query($con, $query);
+    $row = mysqli_fetch_Assoc($result);
+    
+    return $row['total'];   
+}
+
+function getComments($userEmail){
+    global $con;
+
+    $query = "SELECT * FROM commentTable WHERE receiverID='$userEmail'";
+    $result = mysqli_query($con, $query);
+    
+    return $result;
+}
+
+function getStarComments($userEmail, $numStars){
+    global $con;
+
+    $query = "SELECT * FROM commentTable WHERE receiverID='$userEmail' AND stars='$numStars'";
+    $result = mysqli_query($con, $query);
     
     return $result;
 }

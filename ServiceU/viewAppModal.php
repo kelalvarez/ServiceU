@@ -1,5 +1,5 @@
 
-<div class="modal fade text-center" id="viewApplication" tabindex="-2" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<div class="modal fade text-center" id="viewApplication" data-focus-on="input:first" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div id="viewApp" style="margin-top:50px; width: 100%" class="mainbox col-md-10 col-md-offset-1 col-sm-8 col-sm-offset-2">
@@ -57,18 +57,24 @@
                                                 echo $row['dateApplication'];
                                             ?>
                                             </td>
+                                            <td>
+                                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="userReviews.php?employeeEmail=<?php echo $row['employeeID']; ?>&jobID=<?php echo $jobID; ?>"><span class="glyphicon glyphicon-open-file"></span></a>
+                                            </td>
+                                            <td>
+                                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <span class="glyphicon glyphicon-ok"></span>
+                                            </td>
+                                            
                                             </tr>
                                             <?php 
                                             }
                                             
                                             }
                                             ?>
-                                            
-                                            
-                                            
-                                           
                                                 
                                         </table>
+                                       
+                                        <a data-toggle="modal" href="#reviewShort" class="btn btn-primary">Launch modal</a>
+                                        
                                     </div>
                                     </div>
                                     <br>
@@ -84,3 +90,4 @@
         </div>
     </div>    
 </div>
+

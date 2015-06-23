@@ -20,6 +20,10 @@
     {
         $jobID = $_GET['jobID'];
     }
+    else{
+        header("location: errorAccess.php");
+        exit();
+    }
     
     if (isset($_POST['confirmApp'])) {
         if(existApp($userEmail, $jobID) == 0){
@@ -61,6 +65,15 @@
         echo '</script>';
 
     }
+    
+    if (isset($_POST['confirmOpen'])) {
+        
+        openPost($jobID);
+        echo '<script type="text/javascript">';
+        echo 'alert("This Job post have been opened")';
+        echo '</script>';
+
+    }
 ?>
 
 
@@ -77,6 +90,7 @@
     <title>ServiceU</title>
 
     <!-- Bootstrap Core CSS -->
+
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="css/bootstrap.css" rel="stylesheet">
 
@@ -92,68 +106,89 @@
     
 <body>
 
-<!-- Navigation Sidebar -->
+    <!-- Navigation Sidebar -->
     <?php include 'navigationbar.php' ?>
 
 <div class="container">
-<div class="well">
     
+
+<div class="well text-center">
+
+    <h3><strong>Job Information</strong></h3>
+
+</div>    
     
-            <div class="row">
-                <div class="col-xs-6 col-md-3 text-center">
-                    <strong><span class="text-center input-lg">
-                    <?php
-                        $owner = isOwner($userEmail, $jobID);
-                        $existApplication = existApp($userEmail, $jobID);
-                        if($owner != 0 ){
-                    ?>
-                    Owner
-                    <?php } 
-                        else { ?>
-                    Applicant
-                    <?php } ?>
-                    </span></strong>
+<div class="row">
+<div class="col-md-2">
+<div class="col-sm-12 col-md-12 text-center">
+    <strong><span class="text-center input-lg">
+                <?php
+                    $owner = isOwner($userEmail, $jobID);
+                    $existApplication = existApp($userEmail, $jobID);
+                    if($owner != 0 ){
+                ?>
+                Owner
+                <?php } 
+                    else { ?>
+                Applicant
+                <?php } ?>
+    </span></strong>
                     
-                    <hr class="small">  
-                       
-                        <?php
-                                $jobClose = jobIsClose($jobID);
-                                $numApp = numApplications($jobID);
-                                if ($owner != 0){
-                            ?>
-                        <a href="#viewApplication" data-toggle="modal" data-target="#viewApplication" class="btn btn-warning btn-block">View Applications <span class="badge"><?php echo $numApp ?></span></a>
-                       
-                        <a href="#editPost" data-toggle="modal" data-target="#editPost" class="btn btn-warning btn-block <?php if($numApp != 0 || $jobClose == 1) { echo "disabled"; }?>">
-                            <i class="icon-hand-right"></i>Edit
-                        </a>
-                       
-                        <a href="#closePost" data-toggle="modal" data-target="#closePost" class="btn btn-warning btn-block <?php if($jobClose == 1) { echo "disabled"; }?>">
-                                    <i class="icon-hand-right"></i>Close Job
-                        </a>
-                            <?php  }
-                            else { ?> 
-                                <a href="#confirmApplication" data-toggle="modal" data-target="#confirmApplication" class="btn btn-warning btn-block <?php if($existApplication != 0 || $jobClose == 1) { echo "disabled"; }?>">
-                                    <i class="icon-hand-right"></i> 
-                                <?php 
-                                    if($jobClose == 1){
-                                        echo "This Post have been Close";
-                                    }
-                                    else {
-                                        if ($existApplication != 0) 
-                                            {echo "Applied";}
-                                        else 
-                                            {echo "Apply"; }
-                                    }
-                                ?>
-                                </a>
-                            <?php } ?>
+    <hr class="small">  
+ 
+        <?php
+                $jobClose = jobIsClose($jobID);
+                $numApp = numApplications($jobID);
+                if ($owner != 0){
+        ?>
+        <a href="#viewApplication" data-toggle="modal" data-target="#viewApplication" class="btn btn-sm btn-warning btn-block">
+            View Applications <span class="badge"><?php echo $numApp ?></span></a>
+
+        <a href="#editPost" data-toggle="modal" data-target="#editPost" class="btn btn-sm btn-warning btn-block <?php if($jobClose == 1) { echo "disabled"; }?>">
+            <i class="icon-hand-right"></i>Edit
+        </a>
+
+        <?php if($jobClose != 1) {?>
+        <a href="#closePost" data-toggle="modal" data-target="#closePost" class="btn btn-sm btn-warning btn-block">
+                    <i class="icon-hand-right"></i>Close Job
+        </a>
+        <?php  }
+        else{ ?>
+        <a href="#openPost" data-toggle="modal" data-target="#openPost" class="btn btn-sm btn-warning btn-block">
+                    <i class="icon-hand-right"></i>Open Job
+        </a>
+        <?php
+            }
+        }
+        else { ?> 
+            <a href="#confirmApplication" data-toggle="modal" data-target="#confirmApplication" class="btn btn-sm btn-warning btn-block <?php if($existApplication != 0 || $jobClose == 1) { echo "disabled"; }?>">
+                <i class="icon-hand-right"></i> 
+            <?php 
+                if($jobClose == 1){
+                    echo "Post Closed";
+                }
+                else {
+                    if ($existApplication != 0) 
+                        {echo "Applied";}
+                    else 
+                        {echo "Apply"; }
+                }
+            ?>
+            </a>
+        <?php } ?>
                              
                        
-                    </span>
-                </div>
+        </span>
+</div>
                 
-                
-                <div class="col-xs-12 col-md-8">
+                  
+                  
+
+    </div>
+    <div class="col-md-10">
+
+    <div class="well well-lg">    
+
                 <!---
                 <div class="col-lg-10 col-lg-offset-1">-->
  
@@ -221,15 +256,24 @@
                 <?php include ('confirmApplication.php'); ?>
                 <?php include('editPost.php'); ?>
                 <?php include('closeJobModal.php'); ?>
+                
                 <?php include('viewAppModal.php'); ?>
+                <?php include('reviewLittleModal.php'); ?>
+                <?php include('openJobModal.php'); ?>
                 <!-- /.col-lg-10 -->
+                
             </div>
             <!-- /.row -->
              
                     
         </div>
         <!-- /.container -->
+        
+
 </div>
+
+
+
 
 
 
@@ -244,23 +288,7 @@
     <!-- Bootstrap Core JavaScript -->
     <script src="js/bootstrap.min.js"></script>
 
-    <!-- Custom Theme JavaScript -->
-    <script>
-    // Closes the sidebar menu
-    $("#menu-close").click(function(e) {
-        e.preventDefault();
-        $("#sidebar-wrapper").toggleClass("active");
-    });
 
-    // Opens the sidebar menu
-    $("#menu-toggle").click(function(e) {
-        e.preventDefault();
-        $("#sidebar-wrapper").toggleClass("active");
-    });
-
-   
-    </script>
-    
     <!-- Custom for project -->
     <script src="js/editProfileactions.js"></script>
     
@@ -270,13 +298,39 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
     <!--Customized JSS-->
     <script src="js/myjs.js"></script>
+    
     <!--change active mode in the navbar-->
     <script> 
         $(".nav a").on("click", function(){
            $(".nav").find(".active").removeClass("active");
            $(this).parent().addClass("active");
         });
+        
+        
+        $(document)  
+        .on('show.bs.modal', '.modal', function(event) {
+          $(this).appendTo($('body'));
+        })
+        .on('shown.bs.modal', '.modal.in', function(event) {
+          setModalsAndBackdropsOrder();
+        })
+        .on('hidden.bs.modal', '.modal', function(event) {
+          setModalsAndBackdropsOrder();
+        });
+
+        function setModalsAndBackdropsOrder() {  
+          var modalZIndex = 1040;
+          $('.modal.in').each(function(index) {
+            var $modal = $(this);
+            modalZIndex++;
+            $modal.css('zIndex', modalZIndex);
+            $modal.next('.modal-backdrop.in').addClass('hidden').css('zIndex', modalZIndex - 1);
+        });
+          $('.modal.in:visible:last').focus().next('.modal-backdrop.in').removeClass('hidden');
+        }
+        
     </script>
 
+    
 </body>
 </html>
