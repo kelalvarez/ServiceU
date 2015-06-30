@@ -57,8 +57,11 @@
             }
              
             if (mysqli_num_rows($result) == 0) {
-            echo "You haven't created any post yet.";
-            exit;
+              
+            echo '<script type="text/javascript">';
+            echo 'alert("You have not created any post yet.")';
+            echo '</script>';
+
             }
     ?>
 
