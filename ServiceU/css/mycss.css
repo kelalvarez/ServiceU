@@ -196,3 +196,49 @@ html, body{
 #HomeNav{
 	border-radius: 0px;
 }
+
+#serviceTop{
+
+	background-color: white;
+}
+
+
+.profileStart{
+	font-size: 13px;
+
+}
+
+.profileSet{
+	float: left;
+	margin-left: 8px;
+
+}
+
+.col-md-9{
+	border-left: 2px solid #e3e3e3;
+	border-right: 2px solid #e3e3e3;
+ 	background-color: white;
+
+}
+
+#Profile-List{
+	text-align: left;
+	font-size: 15px;
+	font-weight: normal;
+	cursor: default;
+	display: block;
+	padding-left: 0px;
+
+}
+
+#Profile-List li{
+	text-decoration: none;
+	list-style-type: none;
+	padding-top: 8px;
+	
+}
+
+#Profile-List a{
+	text-decoration: none;
+	
+}

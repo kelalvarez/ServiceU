@@ -114,12 +114,52 @@
     <!-- Services -->
     <!-- The circle icons use Font Awesome's stacked icon classes. For more information, visit http://fontawesome.io/examples/ -->
 <div class="container">
-       
-    <div class="well well-lg">
-        <div class="row text-center">
-           
-            <h2>My Profile</h2>
-            <hr class="small">
+
+
+     <div class="well well-lg">
+
+        <div class="row">
+
+            <div class="col-md-3"> <!--Profile start here-->
+
+                <div class="profileStart">
+                  
+                    <img src="img/user-icon.jpg" alt="User-ImG" height="100" width="100" style="float: left;">
+
+                        <div class="profileSet">
+                            <a href="#"><b><?php echo getFullName($userEmail);?></b></a>
+                            <br>
+                            <a href="#">View My Profile</a>
+                        </div>
+
+                </div>
+
+                <div style="clear: both;" class="text-left">
+                   
+                      <ul id="Profile-List">
+
+                        <li><a href="#"><span class="glyphicon glyphicon-briefcase"> </span> Contact Information</a></li>
+                        <li><a href="#"><span class="glyphicon glyphicon-education"> </span> Education</a></li>
+                        <li><a href="#"><span class="glyphicon glyphicon-user"> </span> Photo</a></li>
+                        <li><a href="#"><span class="glyphicon glyphicon-plus"> </span> Experience</a></li>
+                        <li><a href="#"><span class="glyphicon glyphicon-wrench"> </span> Skills</a></li>
+                                               
+
+                      </ul>
+                   
+
+                </div>
+
+            </div>
+
+
+            <header><h3><span class="glyphicon glyphicon-briefcase"></span> Contact Information</h3></header>
+
+            <div class="col-md-9">
+
+               
+
+    
                 <?php include 'confirmCode.php' ?>  
                 <div class="row">
                 <div class="col-md-4 col-lg-offset-2"><p>Name:</p></div>
@@ -188,13 +228,25 @@
                                         <?php include('editInterestModal.php') ?>
                                     </div>
                         </div>                    
-                    <!-- /.row (nested) -->
-                </div>
-                <!-- /.col-lg-10 -->
-        </div>
-            <!-- /.row -->
-    </div>
+                </div>          
+
+            </div>
+                    
+     </div>    
+</div>
         <!-- /.container -->
+
+    <footer style="text-align: center;">
+
+                <ul class="list-inline">
+                  <li><a href="#">About</a></li>
+                  <li><a href="#">Help</a></li>
+                  <li><a href="#">Directory</a></li>
+                  <li><h5 style="color: #aab8c2">&#169 2015 ServiceU, Inc, All rights reserved.</h5></li>
+                </ul>
+         
+    </footer>
+
     
         
 
@@ -261,6 +313,14 @@
         });
     </script>
 
+    <!--list group script-->
+    <script>
+          $('.list-group-item').on('click',function(e){
+        var previous = $(this).closest(".list-group").children(".active");
+        previous.removeClass('active'); // previous list-item
+        $(e.target).addClass('active'); // activated list-item
+      });
+    </script>
 
     
 </body>

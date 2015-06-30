@@ -80,10 +80,13 @@
     
             <div class="row">
               <div class="col-md-2">
-                <ul>
-                    <li><a href="myjobpost.php" ><b>My Job Post</b></a></li>
-                    <li><a href="myapplications.php" ><b>My Applications</b></a></li>
-                </ul>
+                    <p>
+                        <a class="btn btn-sm btn-warning btn-block" href="myjobpost.php" ><b>My Job Post</b></a>
+                    </p>
+
+                    <p>
+                        <a class="btn btn-sm btn-warning btn-block" href="myapplications.php" ><b>My Applications</b></a>
+                    </p>
 
               </div>
               <div class="col-md-10">
@@ -101,10 +104,10 @@
 
                                     <thead>
                                       <tr>
-                                        <th>Job ID</th>
                                         <th>Job Title</th>
                                         <th>Payment</th>
                                         <th>Category</th>
+                                        <th>Close Job?</th>
                                       </tr>
                                     </thead>
 
@@ -113,12 +116,11 @@
                                         <?php     
                                                 while ($row = mysqli_fetch_assoc($result)) 
                                                 {
+
                                                     echo ' <tr> ';
                                                     echo ' <td> ';
-                                                    echo $row['jobID'];
-                                                    echo ' <td> ';
                                                      echo "<a href=\"postComplete.php?jobID=";
-                                                     echo $row['jobID'];
+                                                     echo $row['jobTitle'];
                                                      echo "\" target=\"_parent\">";
                                                     echo $row['jobTitle'];
                                                      echo "</a>";
@@ -126,6 +128,8 @@
                                                     echo '$' . $row['payment'];
                                                     echo ' <td> ';
                                                     echo $row['category'];
+                                                    echo ' <td> ';
+                                                    echo $row['closeJob'];
                                                 }    
                 
                                         ?>
@@ -136,8 +140,10 @@
   
                                 </table>
                                
-
-
+                               <div style="text-align:center;">
+                                 <?php include('newPost.php'); ?>
+                                 <a class="btn btn-success" href="#newPost" data-toggle="modal" data-target="#newPost" role="button">Create Job Now!</a>
+                               </div>
                      </div>
               </div>
 
