@@ -184,9 +184,9 @@
                                     <div class="col-md-4 col-lg-pull-2">
                                         <?php
                                             if(checkVerification($userEmail) == 1)
-                                                echo '<span class="glyphicon glyphicon-ok"></span>';
+                                                echo '<span class="glyphicon glyphicon-ok" style="color: green; font-size: 25px;"></span>';
                                             else
-                                                echo '<span class="glyphicon glyphicon-remove"></span>';
+                                                echo '<span class="glyphicon glyphicon-remove" style="color: red; font-size: 25px"></span>';
                                         ?>
                                     </div>
                         </div>
