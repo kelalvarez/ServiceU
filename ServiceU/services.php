@@ -54,6 +54,34 @@ session_start();
 
 
 <div class="container">
+
+
+    <div class="well text-center">
+
+
+            <div class="row">
+              <div class="col-md-4">
+
+                <input type="text" class="form-control" id="serviceTop" placeholder="Job title">
+
+
+              </div>
+              <div class="col-md-4">
+
+                <input type="text" class="form-control" id="serviceTop" placeholder="Skills">
+
+              </div>
+              <div class="col-md-4">
+
+                <input type="text" class="form-control" id="serviceTop" placeholder="City, State">
+
+              </div>
+
+            </div>
+
+    </div>
+
+
 <div class="well well-lg">
 <div class="row text-center">
     <div class="col-lg-10 col-lg-offset-1">
