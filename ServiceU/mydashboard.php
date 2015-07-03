@@ -79,11 +79,16 @@
    
     
             <div class="row">
+
               <div class="col-md-2">
-                <ul>
-                    <li><a href="myjobpost.php" ><b>My Job Post</b></a></li>
-                    <li><a href="myapplications.php" ><b>My Applications</b></a></li>
-                </ul>
+                    <p>
+                        <a class="btn btn-sm btn-warning btn-block" href="myjobpost.php" ><b>My Job Post</b></a>
+                    </p>
+
+                    <p>
+                        <a class="btn btn-sm btn-warning btn-block" href="myapplications.php" ><b>My Applications</b></a>
+                    </p>
+                
 
               </div>
               <div class="col-md-10">

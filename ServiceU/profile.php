@@ -126,7 +126,7 @@
                   
                     <img src="img/user-icon.jpg" alt="User-ImG" height="100" width="100" style="float: left;">
 
-                        <div class="profileSet">
+                        <div class="profileSet" id="Profile-List">
                             <a href="#"><b><?php echo getFullName($userEmail);?></b></a>
                             <br>
                             <a href="#">View My Profile</a>
@@ -139,10 +139,12 @@
                       <ul id="Profile-List">
 
                         <li><a href="#"><span class="glyphicon glyphicon-briefcase"> </span> Contact Information</a></li>
-                        <li><a href="#"><span class="glyphicon glyphicon-education"> </span> Education</a></li>
+                        <li><a href="#"><span class="glyphicon glyphicon-education"> </span> Degree</a></li>
                         <li><a href="#"><span class="glyphicon glyphicon-user"> </span> Photo</a></li>
                         <li><a href="#"><span class="glyphicon glyphicon-plus"> </span> Experience</a></li>
                         <li><a href="#"><span class="glyphicon glyphicon-wrench"> </span> Skills</a></li>
+                        <li><a href="#"><span class="glyphicon glyphicon-cog"> </span> Interest</a></li>
+                        <li><a href="#"><span class="glyphicon glyphicon-thumbs-up"> </span> My Reviews</a></li>
                                                
 
                       </ul>

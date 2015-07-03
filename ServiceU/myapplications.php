@@ -111,9 +111,12 @@
                                     <thead>
                                       <tr>
                                         <th>Job Title</th>
-                                        <th>Employeer ID</th>
                                         <th>Description</th>
                                         <th>Payment</th>
+                                        <th>Category</th>
+                                        <th>Number of Applicant</th>
+                                        <th>Status</th>
+
                                       </tr>
                                     </thead>
 
@@ -124,14 +127,26 @@
                                                 {
                                                     echo ' <tr> ';
                                                     echo ' <td> ';
-                                                    echo $row['jobTitle'];
-                                                    echo ' <td> ';
-                                                    echo $row['employeerID'];
-                                                    echo ' <td> ';                              
+                                                    echo "<a href=\"postComplete.php?jobID=";
+                                                     echo $row['jobID'];
+                                                     echo "\" target=\"_parent\">";
+                                                    echo '<b>' . $row['jobTitle'] . '</b>';
+                                                     echo "</a>";
+                                                    echo ' <td> ';                            
                                                     echo $row['jobDescription'];
                                                     echo ' <td> ';
                                                     echo '$' . $row['payment'];
+                                                    echo ' <td> ';
+                                                    echo $row['category'];
+                                                    echo ' <td> ';
+                                                    echo $row['totalApp'];
+
+                                                    echo ' <td> ';              
                                                     
+                                                   if($row['closeJob'] == 1)
+                                                      echo '<span class="label label-success">Open</span>';
+                                                    else
+                                                      echo '<span class="label label-danger">Closed</span>';
                                                 }    
                 
                                         ?>
