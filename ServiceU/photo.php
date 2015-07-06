@@ -140,7 +140,7 @@
 
                         <li>
                                 <a href="#"><span class="glyphicon glyphicon-briefcase"> </span> Contact Information</a>
-                                <a href="#" class="btn btn-light btn-xs" id="editGlyp"><span class="glyphicon glyphicon-pencil"></span></a>
+                                <a href="profile.php" class="btn btn-light btn-xs" id="editGlyp"><span class="glyphicon glyphicon-pencil"></span></a>
                         </li>
                         <li>
                                 <a href="#"><span class="glyphicon glyphicon-education"> </span> Degree</a>
@@ -148,7 +148,7 @@
                         </li>
                         <li>
                                 <a href="#"><span class="glyphicon glyphicon-camera"> </span> Photo</a>
-                                <a href="photo.php" class="btn btn-light btn-xs" id="editGlyp"><span class="glyphicon glyphicon-pencil"></span></a>
+                                <a href="#" class="btn btn-light btn-xs" id="editGlyp"><span class="glyphicon glyphicon-pencil"></span></a>
                         </li>
                         <li>
                                 <a href="#"><span class="glyphicon glyphicon-plus"> </span> Experience</a>
@@ -183,130 +183,41 @@
             
              <?php include 'confirmCode.php' ?>  
 
-            <div class="col-md-9">        
-               
-                <div class="panel panel-default">
-                    <div class="panel-heading"><h3><span class="glyphicon glyphicon-briefcase"></span> Contact Information</h3></div>
-                        <div class="panel-body">
+                <div class="col-md-9">        
+                   
+                    <div class="panel panel-default">
+                        <div class="panel-heading"><h3><span class="glyphicon glyphicon-camera"></span> Photo</h3></div>
+                            <div class="panel-body" >
 
+                                                <div style="float-left">
 
-                                     <form action="" role="form" method="POST" class="form-horizontal">
-                                          
-                                        <div id="showSuccess" class="successHide">
-                                                <p class="bg-success">Your changes have been saved.</p>
-                                        </div>
+                                                    <img src="img/user-iconLG.jpg" alt="User-ImG" height="200" width="200">
 
-                                          <div class="form-group" style="margin-left: -7%;">
-                                            <label for="fName" class="col-sm-2 control-label">First Name:</label>
-                                            <div class="col-sm-5">
-                                              <input type="fName" name="userInfoFname" class="form-control" Value="<?php echo getFirstName($userEmail) ?>" >
-                                            </div>
-                                          </div>
+                                                     <div class="imgInfo">
 
-                                          <div class="form-group" style="margin-left: -7%;">
-                                            <label for="uPassword" class="col-sm-2 control-label">Last Name:</label>
-                                            <div class="col-sm-5">
-                                              <input type="lName" name="userInfoLname" class="form-control" value="<?php echo getLastName($userEmail) ?>">
-                                            </div>
-                                          </div>
+                                                        <form method="POST">
+                                                       
+                                                            <input type="file" name="userfile" id="userfile">
 
-                                          <div>
-                                            <label>Email Address:</label>
-                                             &nbsp&nbsp <?php echo $userEmail; ?>
-                                             <a href="#" class="btn btn-light btn-xs" style="background-color: white;"><span class="glyphicon glyphicon-pencil"></span></a>
-                                          </div>
+                                                            <div style="text-align:left; margin-top: 5%; padding-left: 5%;">
+                                                                                                               
+                                                                    <button type="submit" name="submitPhoto" class="btn btn-info">Upload</button>
 
-                                          <div class="form-group" style="text-align:center; margin-top: 10%;">
+                                                             </div>               
 
-                                                <div>                                                  
-                                                     <button type="submit" name="updateUserInfo" class="btn btn-info" onclick="Show_Div(showSuccess)">Update Change</button>
+                                                            
+                                                        </form>
+                                                     </div>
 
                                                 </div>
 
-                                                <div>
-                                                          <b>button type need to change to 'Submit' pop doesnt work</b>
-                                                          <b>Delete Later</b> 
-                                                </div>
 
-                                          </div>
+                                                
+                            </div>   
+                    </div>  
+               </div>             
 
-                                    </form>
-                         </div>
-                </div>
-
-
-                
-                
-                <!--<div class="row">
-                <div class="col-md-4 col-lg-offset-2"><p>Name:</p></div>
-                <div class="col-md-4 col-lg-pull-2"> 
-                    <?php 
-                        //echo getFullName($userEmail);
-                    ?> 
-                                    </div>
-                        </div>
-                    <br>     
-                        <div class="row">
-                                    <div class="col-md-4 col-lg-offset-2"><p>Email: </p></div>
-                                    <div class="col-md-4 col-lg-pull-2">
-                                        <?php 
-                                            //echo $userEmail;
-                                        ?> 
-                                    </div>
-                        </div>
-                    <br>
-                        <div class="row">
-                                    <div class="col-md-4 col-lg-offset-2"><p>Verify</p></div>
-                                    <div class="col-md-4 col-lg-pull-2">
-                                        <?php
-                                            //if(checkVerification($userEmail) == 1)
-                                                //echo '<span class="glyphicon glyphicon-ok" style="color: green; font-size: 25px;"></span>';
-                                            //else
-                                                //echo '<span class="glyphicon glyphicon-remove" style="color: red; font-size: 25px"></span>';
-                                        ?>
-                                    </div>
-                        </div>
-                    <br>
-                        <div class="row">
-                                    <div class="col-md-4 col-lg-offset-2"><p>Password:</p></div>
-                                    <div class="col-md-2 col-lg-pull-1"> -------------- </div>
-                                        <?php //include 'changepasswordModal.php' ?>                         
-                                    <div class="col-md-3 col-lg-pull-1"><a href="#changePassword"  data-toggle="modal" data-target="#changePassword" class="btn btn-light btn-xs">Edit</a></div>
-                        </div>
-                    <br>
-                        <div class="row">
-                                    <div class="col-md-4 col-lg-offset-2"><p>Degree: </p></div>
-                                    <div class="col-md-2 col-lg-pull-1"> 
-                                        
-                                        <?php 
-                                            //echo strtoupper(getDegree($userEmail));
-                                        ?>   
-                                    </div>
-                                    <div class="col-md-3 col-lg-pull-1">
-                                        <a href="#editDegree" data-toggle="modal" data-target="#editDegree" class="btn btn-light btn-xs">Edit</a>
-                                        <?php //include('editDegreeModal.php') ?>
-                                        
-                                        
-                                        
-
-                                    </div>
-                        </div>
-                    <br>
-                        <div class="row">
-                                    <div class="col-md-4 col-lg-offset-2"><p>Interests:</p></div>
-                                    <div class="col-md-2 col-lg-pull-1"> 
-                                        <?php 
-                                            //echo stripInterest(getInterests($userEmail));
-                                        ?> 
-                                    </div>
-                                    <div class="col-md-3 col-lg-pull-1">
-                                        <a href="#editInterest" data-toggle="modal" data-target="#editInterest" class="btn btn-light btn-xs">Edit</a>
-                                        <?php //include('editInterestModal.php') ?>
-                                    </div>
-                        </div> -->                   
-                </div>         
-
-            </div>
+         </div>
                     
      </div>    
 </div>
@@ -323,7 +234,9 @@
          
     </footer>
 
+        
 
+        
 
     <?php
     if(isset($_POST['updateUserInfo']))  

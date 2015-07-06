@@ -665,3 +665,44 @@ function getStarComments($userEmail, $numStars){
     
     return $result;
 }
+
+///////////Update Profile Information
+function updateUserInformation($userEmail, $newFirstName, $newLastName){
+    global $con;
+    
+    $result = mysqli_query($con, "UPDATE userTable SET firstName='$newFirstName', lastName='$newLastName' WHERE email='$userEmail';");
+         
+         return TRUE;
+
+    
+    
+}
+
+////////Photo Functions
+ function saveimage($name, $image){
+                
+     global $con;
+
+    mysqli_query($con,
+                "INSERT INTO userTable (imgName, photo)"
+                . "values ('$name', '$image');"
+                );
+    
+    return TRUE;
+
+}
+
+function displayimage(){
+                $con=mysql_connect("localhost","root","");
+                mysql_select_db("kstark",$con);
+                $qry="select * from images";
+                $result=mysql_query($qry,$con);
+                while($row = mysql_fetch_array($result))
+                {
+                    echo '<img height="300" width="300" src="data:image;base64,'.$row[2].' "> ';
+                }
+                mysql_close($con);   
+            }
+
+
+?>

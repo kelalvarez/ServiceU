@@ -126,23 +126,8 @@
 
                                                     echo '<td>'. "<a href=\"postComplete.php?jobID=" . $row['jobID'] . "\" target=\"_parent\">" . '<b>' . $row['jobTitle'] . '</b>' . "</a>" . "</td>";
                                                    
-
-                                                    echo '<td>';
-                                                      echo '<div class="comment more">';
-                                                           echo $row['jobDescription'];
-                                                      echo '</div>';
-
-                                                     
-                                                    echo '</td>';
-
-                                                   /* echo '<td>';
-                                                        echo '<button type="button" class="btn">';
-                                                        echo '...';
-                                                        echo '</button>';
-                                                        echo '<div id="collapseme" class="collapse out">';
-                                                        echo $row['jobDescription'];
-                                                        echo '</div>';*/
-                                                        
+                                                    echo '<td>' . '<p class="showHide">' . $row['jobDescription'] . '</p>' . '</td>';
+                                                 
                                                     echo '</td>';
 
                                                     echo '<td>' . '$' . $row['payment'] . '</td>';
@@ -243,44 +228,37 @@
         });
     </script>
 
-    <script>
-   $(document).ready(function() {
-    var showChar = 100;
-    var ellipsestext = "...";
-    var moretext = "more";
-    var lesstext = "less";
 
-    $('.more').each(function() {
-        var content = $(this).html();
- 
-        if(content.length > showChar) {
- 
-            var c = content.substr(0, showChar);
-            var h = content.substr(showChar-1, content.length - showChar);
-  
+<script>
 
-            var html = c + '<span class="moreellipses">' + ellipsestext + '&nbsp;</span><span class="morecontent"><span>' + h + '</span>&nbsp;&nbsp;<a href="" class="morelink">' + moretext + '</a></span>';
- 
-            $(this).html(html);
-        }
- 
+    jQuery(function(){
+
+        var minimized_elements = $('p.showHide');
+        
+        minimized_elements.each(function(){    
+            var t = $(this).text();        
+            if(t.length < 100) return;
+            
+            $(this).html(
+                t.slice(0,100) + '<span> <b>...</b></span><a href="#" class="more" style="color: black;"><b>More</b></a>' + '<span style="display:none;">'+ t.slice(100,t.length)+' <a href="#" class="less" style="color: black;"><b>Less</b></a></span>'
+            );
+            
+        }); 
+        
+        $('a.more', minimized_elements).click(function(event){
+            event.preventDefault();
+            $(this).hide().prev().hide();
+            $(this).next().show();        
+        });
+        
+        $('a.less', minimized_elements).click(function(event){
+            event.preventDefault();
+            $(this).parent().hide().prev().show().prev().show();    
+        });
+
     });
- 
-    $(".morelink").click(function(){
-        if($(this).hasClass("less")) {
-            $(this).removeClass("less");
-            $(this).html(moretext);
-        } else {
-            $(this).addClass("less");
-            $(this).html(lesstext);
-        }
-        $(this).parent().prev().toggle();
-        $(this).prev().toggle();
-        return false;
-    });
-});
+
 </script>
-
 
 </body>
 </html>
