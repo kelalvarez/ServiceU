@@ -152,15 +152,18 @@
                         </li>
                         <li>
                                 <a href="#"><span class="glyphicon glyphicon-plus"> </span> Experience</a>
-                                <a href="#" class="btn btn-light btn-xs" id="editGlyp"><span class="glyphicon glyphicon-pencil"></span></a>
+                                <a href="#editExperience" data-toggle="modal" data-target="#editExperience" class="btn btn-light btn-xs" id="editGlyp"><span class="glyphicon glyphicon-pencil"></span></a>
+                                        <?php include('editExperienceModal.php') ?>
                         </li>
                         <li>
                                 <a href="#"><span class="glyphicon glyphicon-wrench"> </span> Skills</a>
-                                <a href="#" class="btn btn-light btn-xs" id="editGlyp"><span class="glyphicon glyphicon-pencil"></span></a>
+                                <a href="#editSkill" data-toggle="modal" data-target="#editSkill" class="btn btn-light btn-xs" id="editGlyp"><span class="glyphicon glyphicon-pencil"></span></a>
+                                        <?php include('editSkillModal.php') ?>
                         </li>
                         <li>
                                 <a href="#"><span class="glyphicon glyphicon-cog"> </span> Interest</a>
-                                <a href="#" class="btn btn-light btn-xs" id="editGlyp"><span class="glyphicon glyphicon-pencil"></span></a>
+                                <a href="#editInterest" data-toggle="modal" data-target="#editInterest" class="btn btn-light btn-xs" id="editGlyp"><span class="glyphicon glyphicon-pencil"></span></a>
+                                        <?php include('editInterestModal.php') ?>
                         </li>
                         <li>
                                 <a href="#"><span class="glyphicon glyphicon-thumbs-up"> </span> My Reviews</a>

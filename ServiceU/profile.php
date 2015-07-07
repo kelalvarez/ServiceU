@@ -144,7 +144,8 @@
                         </li>
                         <li>
                                 <a href="#"><span class="glyphicon glyphicon-education"> </span> Degree</a>
-                                <a href="#editDegree" data-toggle="modal" data-target="#editDegree"  class="btn btn-light btn-xs" id="editGlyp"><span class="glyphicon glyphicon-pencil"></span></a><?php include('editDegreeModal.php') ?>
+                                <a href="#editDegree" data-toggle="modal" data-target="#editDegree"  class="btn btn-light btn-xs" id="editGlyp"><span class="glyphicon glyphicon-pencil"></span></a>
+                                <?php include('editDegreeModal.php') ?>
                         </li>
                         <li>
                                 <a href="#"><span class="glyphicon glyphicon-camera"> </span> Photo</a>
@@ -152,15 +153,19 @@
                         </li>
                         <li>
                                 <a href="#"><span class="glyphicon glyphicon-plus"> </span> Experience</a>
-                                <a href="#" class="btn btn-light btn-xs" id="editGlyp"><span class="glyphicon glyphicon-pencil"></span></a>
+                                <a href="#editExperience" data-toggle="modal" data-target="#editExperience" class="btn btn-light btn-xs" id="editGlyp"><span class="glyphicon glyphicon-pencil"></span></a>
+                                        <?php include('editExperienceModal.php') ?>
                         </li>
                         <li>
                                 <a href="#"><span class="glyphicon glyphicon-wrench"> </span> Skills</a>
-                                <a href="#" class="btn btn-light btn-xs" id="editGlyp"><span class="glyphicon glyphicon-pencil"></span></a>
+                                <a href="#editSkill" data-toggle="modal" data-target="#editSkill" class="btn btn-light btn-xs" id="editGlyp"><span class="glyphicon glyphicon-pencil"></span></a>
+                                        <?php include('editSkillModal.php') ?>
                         </li>
                         <li>
                                 <a href="#"><span class="glyphicon glyphicon-cog"> </span> Interest</a>
-                                <a href="#" class="btn btn-light btn-xs" id="editGlyp"><span class="glyphicon glyphicon-pencil"></span></a>
+                                <a href="#editInterest" data-toggle="modal" data-target="#editInterest" class="btn btn-light btn-xs" id="editGlyp"><span class="glyphicon glyphicon-pencil"></span></a>
+                                        <?php include('editInterestModal.php') ?>
+                                
                         </li>
                         <li>
                                 <a href="#"><span class="glyphicon glyphicon-thumbs-up"> </span> My Reviews</a>
