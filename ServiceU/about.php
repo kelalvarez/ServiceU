@@ -69,10 +69,22 @@
        
      <div class="well text-center">
 
-
-            My ServiceU Dashboard
+<!--currently i just put the abstract as the motivation in the about page, i guess we can come up with a better about page in the future.-->
+            Motivation
 
     </div>
+	
+		<div class="well text-left">
+
+			<?php
+$str = "Service networks are useful social mediums for individuals who are increasingly preoccupied with tasks.  Social platforms such as Craigslist and Uber aim to provide services to individuals on a business-to-consumer level by allowing businesses to advertise in real-time services they offer and in turn, the consumer can take advantage of the available opportunities.  With the aid of these services individuals or consumers increase efficiency of daily tasks completed through the available opportunities. \n
+There are many individuals that encounter problems throughout their day due to the lack of time, poor time management skills, or just being the fact that they don’t have knowledge of the matter at hand.  Daily chores, such as buying groceries or accomplishing some household task, are now postponed until a later date.  If these tasks continuously get pushed back various undesired consequences can occur.  Individuals can possibly feel stressed and households can perhaps experience increased inefficiencies due to a certain task not being performed. \n
+ServiceU is designed to connect these types of individuals through the means of a web application platform.  A ServiceU account will allow an individual, the consumer, who requires a certain job to be completed, such as buying groceries, to use the service, to contact another individual, the business, who is willing to complete the task. The consumer will post a job description that the business will seek to fulfill or vice versa.  The consumer will benefit because their task has been completed, and the business will benefit because they will be paid for their service.   
+ ";
+echo nl2br($str);
+?>
+		
+		</div>
 
 
 
@@ -80,7 +92,7 @@
     
             <div class="row">
 
-              <div class="col-md-2">
+              <!--<div class="col-md-2">
                     <p>
                         <a class="btn btn-sm btn-warning btn-block" href="myjobpost.php" ><b>My Job Post</b></a>
                     </p>
@@ -90,8 +102,8 @@
                     </p>
                 
 
-              </div>
-              <div class="col-md-10">
+              </div> -->
+              <!--<div class="col-md-10">
 
                      <div class="well well-lg">
 
@@ -116,7 +128,7 @@
 
 
                      </div>
-              </div>
+              </div>-->
 
 
 
@@ -131,7 +143,6 @@
 
                 <ul class="list-inline">
                   <li><a href="about.php">About</a></li>
-				  <!--<a href='about.php'>About Us</a>-->
                   <li><a href="#">Help</a></li>
                   <li><a href="#">Directory</a></li>
                   <li><h5 style="color: #aab8c2">&#169 2015 ServiceU, Inc, All rights reserved.</h5></li>
