@@ -69,22 +69,13 @@
        
      <div class="well text-center">
 
-<!--currently i just put the abstract as the motivation in the about page, i guess we can come up with a better about page in the future.-->
-            Motivation
+
+            ServiceU Help
 
     </div>
 	
-		<div class="well text-left">
-
-			<?php
-$str = "Service networks are useful social mediums for individuals who are increasingly preoccupied with tasks.  Social platforms such as Craigslist and Uber aim to provide services to individuals on a business-to-consumer level by allowing businesses to advertise in real-time services they offer and in turn, the consumer can take advantage of the available opportunities.  With the aid of these services individuals or consumers increase efficiency of daily tasks completed through the available opportunities. \n
-There are many individuals that encounter problems throughout their day due to the lack of time, poor time management skills, or just being the fact that they don’t have knowledge of the matter at hand.  Daily chores, such as buying groceries or accomplishing some household task, are now postponed until a later date.  If these tasks continuously get pushed back various undesired consequences can occur.  Individuals can possibly feel stressed and households can perhaps experience increased inefficiencies due to a certain task not being performed. \n
-ServiceU is designed to connect these types of individuals through the means of a web application platform.  A ServiceU account will allow an individual, the consumer, who requires a certain job to be completed, such as buying groceries, to use the service, to contact another individual, the business, who is willing to complete the task. The consumer will post a job description that the business will seek to fulfill or vice versa.  The consumer will benefit because their task has been completed, and the business will benefit because they will be paid for their service.   
- ";
-echo nl2br($str);
-?>
 		
-		</div>
+		<iframe src="https://docs.google.com/forms/d/1DkhjMx8zTPL__dtOTRx0_HEbS3T_9vxRA7TRAPowekc/viewform?embedded=true" width="760" height="500" frameborder="0" marginheight="0" marginwidth="0">Loading...</iframe>
 
 
 

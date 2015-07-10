@@ -321,7 +321,7 @@
 
                 <ul class="list-inline">
                   <li><a href="about.php">About</a></li>
-                  <li><a href="#">Help</a></li>
+                  <li><a href="help.php">Help</a></li>
                   <li><a href="#">Directory</a></li>
                   <li><h5 style="color: #aab8c2">&#169 2015 ServiceU, Inc, All rights reserved.</h5></li>
                 </ul>
