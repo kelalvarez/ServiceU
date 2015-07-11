@@ -67,16 +67,16 @@
 
 <div class="container">
        
-     <div class="well text-center">
+     <center style="font-size: 18pt;">
 
 
-            ServiceU Help
+            ServiceU Contact Form
 
-    </div>
+    </center>
 	
-		
-		<iframe src="https://docs.google.com/forms/d/1DkhjMx8zTPL__dtOTRx0_HEbS3T_9vxRA7TRAPowekc/viewform?embedded=true" width="760" height="500" frameborder="0" marginheight="0" marginwidth="0">Loading...</iframe>
-
+		<center>
+		<iframe src="https://docs.google.com/forms/d/1DkhjMx8zTPL__dtOTRx0_HEbS3T_9vxRA7TRAPowekc/viewform?embedded=true" width="680" height="1065" frameborder="0" marginheight="0" marginwidth="0">Loading...</iframe>
+		</center>
 
 
    

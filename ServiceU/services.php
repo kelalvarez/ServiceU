@@ -93,7 +93,7 @@ session_start();
                     <div class="left-side">
                         <div id="result">
                             
-                            <iframe src="servicesPosts.php"></iframe>
+                            <iframe src="servicesPosts.php"</iframe>
                         </div>
                                           
                     </div>
@@ -106,6 +106,19 @@ session_start();
             </div>
             <!-- /.row -->
         </div>
+		
+	<!--	<footer style="text-align: center;">
+
+                <ul class="list-inline">
+                  <li><a href="about.php">About</a></li>
+				  <!--<a href='about.php'>About Us</a>-->
+                <!--  <li><a href="help.php">Help</a></li>
+                  <li><a href="#">Directory</a></li>
+                  <li><h5 style="color: #aab8c2">&#169 2015 ServiceU, Inc, All rights reserved.</h5></li>
+                </ul>
+         
+</footer> -->
+		
 </div>
 
 

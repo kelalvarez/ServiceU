@@ -67,20 +67,23 @@
 
 <div class="container">
        
-     <div class="well text-center">
+     <center style="font-size: 18pt;">
 
 
-            My ServiceU Dashboard
+            ServiceU Contact Form
 
-    </div>
-
+    </center>
+	
+		<center>
+		<iframe src="https://docs.google.com/forms/d/1DkhjMx8zTPL__dtOTRx0_HEbS3T_9vxRA7TRAPowekc/viewform?embedded=true" width="680" height="1065" frameborder="0" marginheight="0" marginwidth="0">Loading...</iframe>
+		</center>
 
 
    
     
             <div class="row">
 
-              <div class="col-md-2">
+              <!--<div class="col-md-2">
                     <p>
                         <a class="btn btn-sm btn-warning btn-block" href="myjobpost.php" ><b>My Job Post</b></a>
                     </p>
@@ -90,8 +93,8 @@
                     </p>
                 
 
-              </div>
-              <div class="col-md-10">
+              </div> -->
+              <!--<div class="col-md-10">
 
                      <div class="well well-lg">
 
@@ -116,7 +119,7 @@
 
 
                      </div>
-              </div>
+              </div>-->
 
 
 
@@ -131,7 +134,6 @@
 
                 <ul class="list-inline">
                   <li><a href="about.php">About</a></li>
-				  <!--<a href='about.php'>About Us</a>-->
                   <!--<li><a href="help.php">Help</a></li>-->
 				  <li><a href="contactus.php">Contact Us</a></li>
                   <li><a href="#">Directory</a></li>
