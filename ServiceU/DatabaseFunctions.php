@@ -705,4 +705,19 @@ function displayimage(){
             }
 
 
+
+///////////Update User Experience
+function insertUserExperience($userEmail, $userEmployer, $userJobTitle, $userLocation, $userDescription, $userCountry, 
+                             $userStartMonth, $userStartYear, $userEndMonth, $userEndYear){
+    global $con;
+    
+    $result = mysqli_query($con, "INSERT INTO userexperience (emailID, userEmployer, jobTitle, location, description, country, startDateMonth, startDateYear, endDateMonth, endDateYear) values('$userEmail', '$userEmployer', '$userJobTitle', '$userLocation', '$userDescription', '$userCountry', 
+                             '$userStartMonth', '$userStartYear', '$userEndMonth', '$userEndYear');");
+         
+         return TRUE;
+
+    
+    
+}
+
 ?>

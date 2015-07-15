@@ -127,9 +127,9 @@
                     <img src="img/user-icon.jpg" alt="User-ImG" height="100" width="100" style="float: left;">
 
                         <div class="profileSet" id="Profile-List">
-                            <a href="#"><b><?php echo getFullName($userEmail);?></b></a>
+                            <a href="viewmyprofile.php"><b><?php echo getFullName($userEmail);?></b></a>
                             <br>
-                            <a href="#">View My Profile</a>
+                            <a href="viewmyprofile.php">View My Profile</a>
                             <br>
                             <br>
                              <?php
@@ -154,11 +154,12 @@
                         </li>
                         <li>
                                 <a href="#"><span class="glyphicon glyphicon-education"> </span> Degree</a>
-                                <a href="#editDegree" data-toggle="modal" data-target="#editDegree"  class="btn btn-light btn-xs" id="editGlyp"><span class="glyphicon glyphicon-pencil"></span></a><?php include('editDegreeModal.php') ?>
+                                <a href="#editDegree" data-toggle="modal" data-target="#editDegree"  class="btn btn-light btn-xs" id="editGlyp"><span class="glyphicon glyphicon-pencil"></span></a>
+                                <?php include('editDegreeModal.php') ?>
                         </li>
                         <li>
                                 <a href="#"><span class="glyphicon glyphicon-camera"> </span> Photo</a>
-                                <a href="#" class="btn btn-light btn-xs" id="editGlyp"><span class="glyphicon glyphicon-pencil"></span></a>
+                                <a href="photo.php" class="btn btn-light btn-xs" id="editGlyp"><span class="glyphicon glyphicon-pencil"></span></a>
                         </li>
                         <li>
                                 <a href="#"><span class="glyphicon glyphicon-plus"> </span> Experience</a>
@@ -166,12 +167,13 @@
                         </li>
                         <li>
                                 <a href="#"><span class="glyphicon glyphicon-wrench"> </span> Skills</a>
-                                 <a href="skills.php" class="btn btn-light btn-xs" id="editGlyp"><span class="glyphicon glyphicon-pencil"></span></a>
+                                <a href="skills.php" class="btn btn-light btn-xs" id="editGlyp"><span class="glyphicon glyphicon-pencil"></span></a>
                         </li>
                         <li>
                                 <a href="#"><span class="glyphicon glyphicon-cog"> </span> Interest</a>
                                 <a href="#editInterest" data-toggle="modal" data-target="#editInterest" class="btn btn-light btn-xs" id="editGlyp"><span class="glyphicon glyphicon-pencil"></span></a>
                                         <?php include('editInterestModal.php') ?>
+                                
                         </li>
                         <li>
                                 <a href="#"><span class="glyphicon glyphicon-thumbs-up"> </span> My Reviews</a>
@@ -194,41 +196,45 @@
             
              <?php include 'confirmCode.php' ?>  
 
-                <div class="col-md-9">        
-                   
-                    <div class="panel panel-default">
-                        <div class="panel-heading"><h3><span class="glyphicon glyphicon-camera"></span> Photo</h3></div>
-                            <div class="panel-body" >
+            <div class="col-md-9">        
+               
+                <div class="panel panel-info">
+                    <div class="panel-heading" style="text-align: center"><h3><span class="glyphicon glyphicon-plus"></span> Skills</h3></div>
+                        <div class="panel-body">
 
-                                                <div style="float-left">
 
-                                                    <img src="img/user-iconLG.jpg" alt="User-ImG" height="200" width="200">
+                                     <form action="" role="form" method="POST" class="form-horizontal">
+                                         
+                                          <div class="form-group">
+                                                        <label for="userSkill" class="col-sm-3 control-label">What skill do you have?:</label>
+                                                        <div class="col-sm-4">
+                                                          <input type="userSkill" name="userSkill" class="form-control" placeholder="Type your skill..." >
+                                                        </div>
+                                           </div>
+                                                     
+                                                    
+                                         <div class="form-group" style="text-align:center; margin-top: 5%;">
 
-                                                     <div class="imgInfo">
-
-                                                        <form method="POST">
-                                                       
-                                                            <input type="file" name="userfile" id="userfile">
-
-                                                            <div style="text-align:left; margin-top: 5%; padding-left: 5%;">
-                                                                                                               
-                                                                    <button type="submit" name="submitPhoto" class="btn btn-info">Upload</button>
-
-                                                             </div>               
-
-                                                            
-                                                        </form>
-                                                     </div>
-
+                                                <div>                                                  
+                                                    <a class="btn btn-info" href="#" role="button">Update Change</a>
                                                 </div>
 
+                                         </div>
+                                                            
+                                    </form>
+                            
+                                    
+                                    </div>
+                         </div>
+                    </div>
 
-                                                
-                            </div>   
-                    </div>  
-               </div>             
 
-         </div>
+                
+                
+            
+                </div>         
+
+            </div>
                     
      </div>    
 </div>
@@ -237,96 +243,15 @@
     <footer style="text-align: center;">
 
                 <ul class="list-inline">
-                  <li><a href="#">About</a></li>
-                  <li><a href="#">Help</a></li>
+                  <li><a href="about.php">About</a></li>
+                  <li><a href="help.php">Help</a></li>
                   <li><a href="#">Directory</a></li>
                   <li><h5 style="color: #aab8c2">&#169 2015 ServiceU, Inc, All rights reserved.</h5></li>
                 </ul>
          
     </footer>
 
-        
 
-        
-
-    <?php
-    if(isset($_POST['updateUserInfo']))  
-        {  
-            $user_fName ="";
-            $user_lName ="";
-
-            if(empty($_POST['userInfoFname'])) {
-                //$emailErr = "Email is required";
-                //error here
-                  
-            } else {
-                $user_fName = test_user_input($_POST['userInfoFname']); 
-              
-            }
-            
-            if(empty($_POST['userInfoLname'])) {
-                //$emailErr = "Email is required";
-                //error here
-                  
-            } else {
-                 $user_lName = test_user_input($_POST['userInfoLname']);  
-               
-            }
-         
-          if($user_fName == getFirstName($userEmail) && $user_fName == getLastName($userEmail)){}
-          else
-          {
-            updateUserInformation($userEmail, $user_fName,  $user_lName);
-
-          }
-     
-        }  
-
-
-
-
-    ?>
-
-
-
-    <script>
-      function Show_Div(Div_id) {
-            if (false == $(Div_id).is(':visible')) {
-                $(Div_id).show(0);
-
-            }
-        }
-    </script>
-    
-        
-
-    <!-- Custom Theme JavaScript -->
-    <script>
-    // Closes the sidebar menu
-    $("#menu-close").click(function(e) {
-        e.preventDefault();
-        $("#sidebar-wrapper").toggleClass("active");
-    });
-
-    // Opens the sidebar menu
-    $("#menu-toggle").click(function(e) {
-        e.preventDefault();
-        $("#sidebar-wrapper").toggleClass("active");
-    });
-
-   $('[data-dismiss=modal]').on('click', function (e) {
-        var $t = $(this),
-            target = $t[0].href || $t.data("target") || $t.parents('.modal') || [];
-
-      $(target)
-        .find("input,textarea")
-           .val('')
-           .end();
-   
-      $('select option:first-child').attr("selected", "selected");
-    
-    });
-    </script>
     
     <!-- Custom for project -->
     <script src="js/editProfileactions.js"></script>

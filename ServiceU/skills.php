@@ -154,24 +154,27 @@
                         </li>
                         <li>
                                 <a href="#"><span class="glyphicon glyphicon-education"> </span> Degree</a>
-                                <a href="#editDegree" data-toggle="modal" data-target="#editDegree"  class="btn btn-light btn-xs" id="editGlyp"><span class="glyphicon glyphicon-pencil"></span></a><?php include('editDegreeModal.php') ?>
+                                <a href="#editDegree" data-toggle="modal" data-target="#editDegree"  class="btn btn-light btn-xs" id="editGlyp"><span class="glyphicon glyphicon-pencil"></span></a>
+                                <?php include('editDegreeModal.php') ?>
                         </li>
                         <li>
                                 <a href="#"><span class="glyphicon glyphicon-camera"> </span> Photo</a>
-                                <a href="#" class="btn btn-light btn-xs" id="editGlyp"><span class="glyphicon glyphicon-pencil"></span></a>
+                                <a href="photo.php" class="btn btn-light btn-xs" id="editGlyp"><span class="glyphicon glyphicon-pencil"></span></a>
                         </li>
                         <li>
                                 <a href="#"><span class="glyphicon glyphicon-plus"> </span> Experience</a>
-                                <a href="experience.php" class="btn btn-light btn-xs" id="editGlyp"><span class="glyphicon glyphicon-pencil"></span></a>
+                                 <a href="experience.php" class="btn btn-light btn-xs" id="editGlyp"><span class="glyphicon glyphicon-pencil"></span></a>
                         </li>
                         <li>
                                 <a href="#"><span class="glyphicon glyphicon-wrench"> </span> Skills</a>
-                                 <a href="skills.php" class="btn btn-light btn-xs" id="editGlyp"><span class="glyphicon glyphicon-pencil"></span></a>
+                                <a href="#" class="btn btn-light btn-xs" id="editGlyp"><span class="glyphicon glyphicon-pencil"></span></a>
+                                       
                         </li>
                         <li>
                                 <a href="#"><span class="glyphicon glyphicon-cog"> </span> Interest</a>
                                 <a href="#editInterest" data-toggle="modal" data-target="#editInterest" class="btn btn-light btn-xs" id="editGlyp"><span class="glyphicon glyphicon-pencil"></span></a>
                                         <?php include('editInterestModal.php') ?>
+                                
                         </li>
                         <li>
                                 <a href="#"><span class="glyphicon glyphicon-thumbs-up"> </span> My Reviews</a>
@@ -194,41 +197,35 @@
             
              <?php include 'confirmCode.php' ?>  
 
-                <div class="col-md-9">        
-                   
-                    <div class="panel panel-default">
-                        <div class="panel-heading"><h3><span class="glyphicon glyphicon-camera"></span> Photo</h3></div>
-                            <div class="panel-body" >
+            <div class="col-md-9">        
+               
+                <div class="panel panel-info">
+                    <div class="panel-heading" style="text-align: center"><h3>My Skills</h3></div>
+                        <div class="panel-body">
 
-                                                <div style="float-left">
+                      
 
-                                                    <img src="img/user-iconLG.jpg" alt="User-ImG" height="200" width="200">
+                                          <div class="form-group" style="text-align:center; margin-top: 10%;">
 
-                                                     <div class="imgInfo">
-
-                                                        <form method="POST">
-                                                       
-                                                            <input type="file" name="userfile" id="userfile">
-
-                                                            <div style="text-align:left; margin-top: 5%; padding-left: 5%;">
-                                                                                                               
-                                                                    <button type="submit" name="submitPhoto" class="btn btn-info">Upload</button>
-
-                                                             </div>               
-
-                                                            
-                                                        </form>
-                                                     </div>
+                                                <div>                                                  
+                                                    <a class="btn btn-info" href="editSkills.php" role="button">Add Skills</a>
+                                            
 
                                                 </div>
 
+                                          </div>
 
-                                                
-                            </div>   
-                    </div>  
-               </div>             
+                                    
+                         </div>
+                </div>
 
-         </div>
+
+                
+                
+            
+                </div>         
+
+            </div>
                     
      </div>    
 </div>
@@ -237,55 +234,14 @@
     <footer style="text-align: center;">
 
                 <ul class="list-inline">
-                  <li><a href="#">About</a></li>
-                  <li><a href="#">Help</a></li>
+                  <li><a href="about.php">About</a></li>
+                  <li><a href="help.php">Help</a></li>
                   <li><a href="#">Directory</a></li>
                   <li><h5 style="color: #aab8c2">&#169 2015 ServiceU, Inc, All rights reserved.</h5></li>
                 </ul>
          
     </footer>
 
-        
-
-        
-
-    <?php
-    if(isset($_POST['updateUserInfo']))  
-        {  
-            $user_fName ="";
-            $user_lName ="";
-
-            if(empty($_POST['userInfoFname'])) {
-                //$emailErr = "Email is required";
-                //error here
-                  
-            } else {
-                $user_fName = test_user_input($_POST['userInfoFname']); 
-              
-            }
-            
-            if(empty($_POST['userInfoLname'])) {
-                //$emailErr = "Email is required";
-                //error here
-                  
-            } else {
-                 $user_lName = test_user_input($_POST['userInfoLname']);  
-               
-            }
-         
-          if($user_fName == getFirstName($userEmail) && $user_fName == getLastName($userEmail)){}
-          else
-          {
-            updateUserInformation($userEmail, $user_fName,  $user_lName);
-
-          }
-     
-        }  
-
-
-
-
-    ?>
 
 
 
