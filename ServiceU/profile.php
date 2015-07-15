@@ -129,7 +129,7 @@
                         <div class="profileSet" id="Profile-List">
                             <a href="#"><b><?php echo getFullName($userEmail);?></b></a>
                             <br>
-                            <a href="#">View My Profile</a>
+                            <a href="http://localhost/serviceudocs/index1.php">View My Profile</a>
                         </div>
 
                 </div>
