@@ -224,6 +224,7 @@
                                     <span style="font-weight: bold">
                                         <?php
                                             echo "Payment: ";
+											
                                         ?>
                                     </span>
                                     <?php
