@@ -1,7 +1,7 @@
-<!DOCTYPE html>
-<?php //session starts here
-    session_start();
-    include('DatabaseFunctions.php');//make connection here
+<!DOCTYPE html> 
+<?php //session starts here 
+    session_start(); 
+    include('DatabaseFunctions.php');//make connection here 
     include("functions.php");
 ?>
 
@@ -73,9 +73,9 @@
 
             </div> <!--End of background carousel-->
             <!--End Carousel Here-->
+      
 
-
-              <div class="container" id="loginContainer">
+              <div class="container" id="loginContainer"> 
 
                 <div class="loginSection" id="OuterloginContainer">
                     <div class="innerLoginSection">
@@ -85,19 +85,19 @@
                         <h3 class="innerLogin-Header-text">Already have an account?</h3>
 
                       </div>
-
+                    
                       <div class="col-xs-12 col-sm-12">
 
                           <form role="form" method="POST" class="form-horizontal">
 
                               <div class="form-group">
                                      <label class="sr-only" for="email">Email address</label>
-
+                                            
                                             <div class="input-group" id="LoginCSS">
                                                 <span class="input-group-addon"><span class="glyphicon glyphicon-user"></span></span>
 
                                                 <input type="email" name="loginEmail" class="form-control" placeholder="Enter email">
-
+                                            
                                             </div>
                               </div>
 
@@ -105,7 +105,7 @@
                                   <div class="form-group">
                                         <label class="sr-only" for="password">Password</label>
 
-                                        <div class="input-group" id="LoginCSS">
+                                        <div class="input-group" id="LoginCSS">   
                                              <span class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></span>
                                               <input type="password" name="loginPassword" class="form-control" id="exampleInputPassword3" placeholder="Password">
                                          </div>
@@ -125,7 +125,7 @@
 
                                         <div id="LoginCSS">
                                           <button type="submit" name="login" class="btn btn-primary btn-lg btn-block">Log In</button>
-
+                                                
 
                                         </div>
                                   </div>
@@ -134,7 +134,7 @@
 
                                         <div id="LoginCSS">
                                           <button type="button" class="btn btn-success btn-lg btn-block" role="button" id="btnsignup">Sign Up!</button>
-
+                                            
                                         </div>
                                   </div>
 
@@ -143,37 +143,37 @@
                       </div>
 
 
-
+                
                 </div>
 
               </div>
 
 
        </div> <!--Start of full container-->
- </div>
+ </div> 
 
 
     <!--registration pop  up start here-->
   <div class="blackout"></div>
 
-
+      
   <div class="RegisrationSection" id="RegistrationBox">
 
         <span id="xbox" class="btn btn-default pull-right"><b>Close</b></span>
 
         <div class="RegistrationBox-Header">
-
+              
                 <h3 class="innerLogin-Header-text">Sign Up Now</h3>
-
+              
         </div>
-
+                    
         <div>
 
               <form role="form" method="POST" class="form-horizontal">
 
                     <div class="form-group">
                             <label class="sr-only" for="fname">First Name</label>
-
+                                              
                                <div class="input-group" id="Rform">
                                    <span class="input-group-addon"><span class="glyphicon glyphicon-user"></span></span>
 
@@ -181,33 +181,33 @@
 
 
                                       <input type="lastName" name="lastName" class="form-control" placeholder="Enter Last Name">
-
+                                                  
                                 </div>
                     </div>
 
                     <div class="form-group">
                             <label class="sr-only" for="password">Password</label>
-
+                                              
                                 <div class="input-group" id="Rform">
                                       <span class="input-group-addon"><span class="glyphicon glyphicon-lock"></span></span>
 
                                       <input type="password" name="password" class="form-control" placeholder="Password">
-
+                                              
                                 </div>
                       </div>
 
                        <div class="form-group">
                             <label class="sr-only" for="EmailAddress">Password</label>
-
+                                              
                                 <div class="input-group" id="Rform">
                                       <span class="input-group-addon"><span class="glyphicon glyphicon-envelope"></span></span>
 
                                       <input type="email" name="email" class="form-control" placeholder="Email Address">
-
+                                              
                                 </div>
                       </div>
 
-
+                              
                       <div id="RformMSG">
                           <h5><small>By clicking Register, you are indicating that you have read and agree to the <button type="button" class="btn btn-link" id="btnTP">Terms of Service </button> and <button type="button" class="btn btn-link" id="btnTP">Privacy Policy</button>.</small></h5>
                       </div>
@@ -217,16 +217,16 @@
                       <button type="submit" value="submit" name="submit" class="btn btn-primary">Register</button>
 
                 </div>
-
-
+                        
+                    
 
                   </form>
 
              </div>
-
+             
    </div>
 
-
+        
 
 
 
@@ -234,59 +234,59 @@
 
 
     <!-- LOG in and sign up php code start here -->
-    <?php
-        if(isset($_POST['login']))
-        {
+    <?php 
+        if(isset($_POST['login']))  
+        {  
             $user_email ="";
             $user_pass ="";
 
             if(empty($_POST['loginEmail'])) {
                 //$emailErr = "Email is required";
                 //error here
-
+                  
             } else {
-                $user_email= test_user_input($_POST['loginEmail']);
+                $user_email= test_user_input($_POST['loginEmail']); 
             }
-
+            
              if(empty($_POST['loginPassword'])) {
                 //$emailErr = "Email is required";
                 //error here
-
+                  
             } else {
-                $user_pass= test_user_input($_POST['loginPassword']);
+                $user_pass= test_user_input($_POST['loginPassword']);  
             }
+             
+         
+            if(validateLogin($user_email, $user_pass) == True)  
+            {  
+                echo "<script>window.open('services.php','_self')</script>";  
+          
+                $_SESSION['loginEmail']=$user_email;//here session is used and value of $user_email store in $_SESSION.  
+          
+            }  
+            else  
+            {  
+              echo "<script>alert('Email or password is incorrect!')</script>";  
+            }  
+        }  
 
 
-            if(validateLogin($user_email, $user_pass) == True)
-            {
-                echo "<script>window.open('services.php','_self')</script>";
-
-                $_SESSION['loginEmail']=$user_email;//here session is used and value of $user_email store in $_SESSION.
-
-            }
-            else
-            {
-              echo "<script>alert('Email or password is incorrect!')</script>";
-            }
-        }
-
-
-        if(isset($_POST['submit']))
-    {
+        if(isset($_POST['submit']))  
+    { 
         $firstnameErr = $user_emailErr = $lastnameErr = $passwordnameErr = "";
 
-        $user_fname ="";
-        $user_lname ="";
-        $user_password ="";
-        $user_email ="";
-
+        $user_fname ="";  
+        $user_lname =""; 
+        $user_password ="";   
+        $user_email ="";  
+      
       if(empty($_POST['email'])) {
         //$emailErr = "Email is required";
-
+          
       } else {
         $user_email = test_user_input($_POST['email']);
       }
-
+      
       if(empty($_POST['firstName'])) {
         //$firstnameErr = "First Name is required";
 
@@ -309,14 +309,14 @@
        if(!empty($user_email) && !empty($user_fname) && !empty($user_lname) && !empty($user_password))
         {
             register($user_email, $user_fname, $user_lname, $user_password);
-            echo"<script>window.open('index.php','_self')</script>";
+            echo"<script>window.open('index.php','_self')</script>";  
         }
        else
         {
-          echo "<script>alert('Cant Register, Some fields are missing!')</script>";
+          echo "<script>alert('Cant Register, Some fields are missing!')</script>"; 
         }
-
-    }
+      
+    }  
 
 
 
@@ -341,7 +341,7 @@
         function endBlackout(){
         $(".blackout").css("display", "none");
         $("#RegistrationBox").css("display", "none");
-
+        
         }
 
     //This is the function that starts the pop-up
@@ -369,8 +369,8 @@
 
 <!--
 <div class ="headerBox">
-
-            <h3>Register on ServiceU</h3>
+            
+            <h3>Register on ServiceU</h3> 
             <div class="closeBox">Close</div>
-
+        
         </div> -->
