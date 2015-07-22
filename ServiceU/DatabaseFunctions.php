@@ -1132,6 +1132,175 @@ function getUserEduEndYear($ID)
 
 
 
+///////////////////////// REVIEW PAGE
+function nroCommentStars($userEmail, $num){
+    global $con;
+
+    $query = "SELECT COUNT(*) as total FROM commentTable
+              WHERE email = '$userEmail' AND stars='$num'";
+
+    $result = mysqli_query($con, $query);
+    $row = mysqli_fetch_assoc($result);
+        
+    return $row['total'];    
+}
+
+function getNroComments($userEmail){
+    global $con;
+
+    $query = "SELECT COUNT(*) as total FROM commentTable WHERE receiverID='$userEmail'";
+    $result = mysqli_query($con, $query);
+    $row = mysqli_fetch_Assoc($result);
+    
+    return $row['total'];   
+}
+
+function getComments($userEmail){
+    global $con;
+
+    $query = "SELECT * FROM commentTable WHERE receiverID='$userEmail'";
+    $result = mysqli_query($con, $query);
+    
+    return $result;
+}
+
+function getNroStarsComments($userEmail, $numStars){
+    global $con;
+
+    $query = "SELECT COUNT(*) as total FROM commentTable WHERE receiverID='$userEmail' AND stars='$numStars'";
+    $result = mysqli_query($con, $query);
+    $row = mysqli_fetch_Assoc($result);
+    
+    return $row['total'];   
+}
+
+function getStarComments($userEmail, $numStars){
+    global $con;
+
+    $query = "SELECT * FROM commentTable WHERE receiverID='$userEmail' AND stars='$numStars'";
+    $result = mysqli_query($con, $query);
+    
+    return $result;
+}
+
+
+////// NOTIFICATIONS PAGE
+function newNotification($email, $message){
+    global $con;
+
+    mysqli_query($con,
+                "INSERT INTO alertsTable (email,message) "
+                . "values('$email', '$message');"
+                );
+    
+    return TRUE;
+    
+}
+
+function getNroNewNotifications($userEmail){
+    global $con;
+
+    $query = "SELECT COUNT(*) as total FROM alertsTable WHERE email='$userEmail'";
+    $result = mysqli_query($con, $query);
+    $row = mysqli_fetch_Assoc($result);
+    
+    return $row['total'];   
+}
+
+            
+function getTotalNotifications($userEmail){
+    global $con;
+
+    $query = "SELECT COUNT(*) as total FROM alertsTable WHERE email='$userEmail'";
+    $result = mysqli_query($con, $query);
+    $row = mysqli_fetch_Assoc($result);
+    
+    return $row['total'];   
+}
+            
+function getNotifications($userEmail, $start_from){
+    global $con;
+
+    $query = "SELECT * FROM alertsTable WHERE email='$userEmail' ORDER BY orderNum DESC LIMIT $start_from, 10";
+    $result = mysqli_query($con, $query);
+    
+    return $result;
+}
+
+function getLastNotifications($userEmail){
+    global $con;
+
+    $query = "SELECT orderNum FROM alertsTable WHERE email='$userEmail' ORDER BY orderNum DESC LIMIT 1";
+    $result = mysqli_query($con, $query);
+    
+    return $result;
+}
+
+function getUserLastNotification($userEmail){
+    global $con;
+
+    $query = "SELECT lastNotification FROM userTable WHERE email='$userEmail'";
+    $result = mysqli_query($con, $query);
+    
+    return $result;
+}
+
+function checkNotifications($userEmail, $lastNotification){
+    global $con;
+    
+    $query = "UPDATE userTable SET lastNotification ='$lastNotification' "
+            . " WHERE email = '$userEmail'";
+    mysqli_query($con, $query);
+    
+    return TRUE;
+}
+            
+     
+///// SELECT APPLICANT
+function selectApplicant($userEmail, $jobID){
+    global $con;
+    
+    $query = "UPDATE appTable SET selectedEmployee=1 "
+            . " WHERE employeeID='$userEmail' AND jobID='$jobID'";
+    mysqli_query($con, $query);
+    closePost($jobID);
+    
+    return TRUE;
+}
+
+function isApplicantSelected($userEmail, $jobID){
+    global $con;
+    
+    $query = "SELECT selectedEmployee FROM appTable "
+            . " WHERE jobID='$jobID' AND selectedEmployee=1 AND employeeID='$userEmail'";
+    $result = mysqli_query($con, $query);
+    $row = mysqli_fetch_Assoc($result);
+    
+    return $row['selectedEmployee'];  
+}
+
+function clearApplicant($userEmail, $jobID){
+    global $con;
+    
+    $query = "UPDATE appTable SET selectedEmployee=0 "
+            . " WHERE employeeID='$userEmail' AND jobID='$jobID'";
+    mysqli_query($con, $query);
+    closePost($jobID);
+    
+    return TRUE;    
+}
+
+function isSelected($jobID){
+    global $con;
+    
+    $query = "SELECT selectedEmployee FROM appTable "
+            . " WHERE jobID='$jobID' AND selectedEmployee=1";
+    $result = mysqli_query($con, $query);
+    $row = mysqli_fetch_Assoc($result);
+    
+    return $row['selectedEmployee'];  
+}
+
 
 
 ?>
