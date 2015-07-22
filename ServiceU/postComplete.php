@@ -368,7 +368,7 @@
                 <?php include('closeJobModal.php'); ?>
                 
                 <?php include('viewAppModal.php'); ?>
-                <?php include('selectApplicantConfirmationModal.php'); ?>
+                <?php //include('selectApplicantConfirmationModal.php'); ?>
                 <?php include('openJobModal.php'); ?>
                 <!-- /.col-lg-10 -->
                 
