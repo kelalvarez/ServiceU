@@ -1133,17 +1133,6 @@ function getUserEduEndYear($ID)
 
 
 ///////////////////////// REVIEW PAGE
-function nroCommentStars($userEmail, $num){
-    global $con;
-
-    $query = "SELECT COUNT(*) as total FROM commentTable
-              WHERE email = '$userEmail' AND stars='$num'";
-
-    $result = mysqli_query($con, $query);
-    $row = mysqli_fetch_assoc($result);
-        
-    return $row['total'];    
-}
 
 function getNroComments($userEmail){
     global $con;
@@ -1155,14 +1144,7 @@ function getNroComments($userEmail){
     return $row['total'];   
 }
 
-function getComments($userEmail){
-    global $con;
 
-    $query = "SELECT * FROM commentTable WHERE receiverID='$userEmail'";
-    $result = mysqli_query($con, $query);
-    
-    return $result;
-}
 
 function getNroStarsComments($userEmail, $numStars){
     global $con;
@@ -1174,14 +1156,7 @@ function getNroStarsComments($userEmail, $numStars){
     return $row['total'];   
 }
 
-function getStarComments($userEmail, $numStars){
-    global $con;
 
-    $query = "SELECT * FROM commentTable WHERE receiverID='$userEmail' AND stars='$numStars'";
-    $result = mysqli_query($con, $query);
-    
-    return $result;
-}
 
 
 ////// NOTIFICATIONS PAGE
