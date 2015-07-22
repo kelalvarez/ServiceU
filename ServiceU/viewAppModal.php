@@ -8,8 +8,7 @@
                         <span class="modal-title" id="myModalLabel" style="color: #fff">Applicants</span>
                         <button class="close" data-dismiss="modal"><span style="color: #fff">×</span></button>
                     </div>
-                    <div class="panel-body" >
-                        <form id="viewApplicationform" class="form-horizontal" action="#" name="editDegree" method="POST">
+                    <div class="panel-body" > 
                             <div class="form-group">           
                                 <div class="form-group" style="color: #2e6da4">
                                     <div class="col-sm-10 col-md-offset-1">
@@ -28,18 +27,28 @@
                                                 
                                             }
                                             else {
+                                            
+                                                $hasSelected = isSelected($jobID);
+                                                if($hasSelected == 1){
+                                                    echo "<p style=\"color: red\"> You have already selected an applicant for this job </p>";
+                                                }
                                         ?>
+                                        
+       
                                         <table class="table table-hover table-condensed table-responsive">
                                             <tr>
                                                 <th>#</th>
                                                 <th>Name</th>
                                                 <th>Application Date</th>
                                                 <th> Review </th>
+                                                <?php if($hasSelected != 1) { ?>
                                                 <th> Select </th>
+                                                <?php }?>    
                                             </tr>
                                         <?php     
                                             while ($row = mysqli_fetch_assoc($result)) { 
                                             ?>
+                                            <form id="viewApplicationform" class="form-horizontal" action="#" name="viewApp" method="POST">
                                             <tr>
                                             <td>
                                             <?php
@@ -51,30 +60,56 @@
                                             <?php
                                                 echo getFullName($row['employeeID']);
                                             ?>
+                                                    <input type="hidden" class="form-control" value="<?php echo $row['employeeID'];?>" name="applicantEmail">
                                             </td>
                                             <td>
                                             <?php
                                                 echo $row['dateApplication'];
                                             ?>
                                             </td>
+                                            
+                                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                            <?php if ($hasSelected != 1) { ?>
                                             <td>
-                                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="userReviews.php?employeeEmail=<?php echo $row['employeeID']; ?>&jobID=<?php echo $jobID; ?>"><span class="glyphicon glyphicon-open-file"></span></a>
+                                                <a href="userReviews.php?employeeEmail=<?php echo $row['employeeID']; ?>&jobID=<?php echo $jobID; ?>">
+                                                
+                                                <!--<a data-toggle="modal" href="#reviewShort">-->
+                                                    <span class="glyphicon glyphicon-open-file"></span>
+                                                </a>
                                             </td>
                                             <td>
-                                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <span class="glyphicon glyphicon-ok"></span>
+                                                &nbsp;&nbsp;
+                                                <!-- <a data-toggle="modal" href="#confirmApplicant" data-book-id="asd1">-->
+                                                <button name="submitApplicant" type="submit">    
+                                                    <span class="glyphicon glyphicon-ok"></span></button>
+                                                
                                             </td>
+                                            <?php } 
+                                                if($hasSelected == 1){ ?>
+                                            <td>
+                                                <a href="userReviews.php?employeeEmail=<?php echo $row['employeeID']; ?>&jobID=<?php echo $jobID; ?>">
+                                                
+                                                <!--<a data-toggle="modal" href="#reviewShort">-->
+                                                    <span class="glyphicon glyphicon-open-file"></span>
+                                                </a>
+                                            </td>
+                                            <?php
+                                                }
+                                            ?>
+                                            
                                             
                                             </tr>
+                                            </form> 
                                             <?php 
+                                            
                                             }
                                             
                                             }
                                             ?>
-                                                
                                         </table>
-                                       
+                                       <!--
                                         <a data-toggle="modal" href="#reviewShort" class="btn btn-primary">Launch modal</a>
-                                        
+                                        -->
                                     </div>
                                     </div>
                                     <br>
@@ -82,7 +117,7 @@
                                     
                                 </div>
                             </div>
-                        </form>
+                        
                         
                     </div>        
                 </div>
@@ -90,4 +125,3 @@
         </div>
     </div>    
 </div>
-

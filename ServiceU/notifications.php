@@ -14,48 +14,13 @@
     }
     else{
        $userEmail = $_SESSION["loginEmail"];
-    }   
-
-    $noback = 0;
+    }  
     
-    
-    if(isset($_GET['employeeEmail']) && isset($_GET['jobID']))
-    {
-        $employeeEmail = $_GET['employeeEmail'];
-        $jobID = $_GET['jobID'];
-        
-        
-        $is = isOwner($userEmail, $jobID);
-        if($is == 0 ){
-            header("location: errorAccess.php");
-            exit();
-        }
-        
-        $has = hasApplied($employeeEmail, $jobID);
-        if($has == 0 ){
-            header("location: errorAccess.php");
-            exit();
-        }
+    if (isset($_GET["page"])) { 
+        $page  = $_GET["page"];        
+    } else { 
+        $page=1;  
     }
-    else if (isset($_GET['employeeEmail'])){
-        $employeeEmail = $_GET['employeeEmail'];
-        
-        
-        if($userEmail != $employeeEmail){
-            header("location: errorAccess.php");
-            exit();
-        }
-        else{
-            $noback = 1;
-        }
-    }
-    else{ 
-        header("location: errorAccess.php");
-        exit();
-    }
-            
-
-
 ?>
 
 
@@ -96,63 +61,13 @@
 
 <div class="well text-center">
 
-    <h3><strong>User Review</strong></h3>
-    
-    <?php  if ($noback != 1){ ?>
-    <a href="postComplete.php?jobID=<?php echo $jobID ?>">Go back to Post</a>
-    <?php }?>
+    <h3><strong>Notifications</strong></h3>
+
 </div>    
     
 <div class="row">
-<div class="col-md-2">
-<div class="col-sm-12 col-md-12 text-center">
-    <strong><span class="text-center input-lg">
-             Sort by
-    </span></strong>
-                    
-    <hr class="small">
-    <a href="#panel1" class="flip btn btn-sm btn-warning btn-block">
-        <Strong>ALL</strong>
-    </a>
-    
-    <a href="#panel2" class="flip btn btn-sm btn-warning btn-block">
-        <?php for($i = 0; $i < 5 ; $i++){ ?>
-        <span class="glyphicon glyphicon-star"></span>
-        <?php } ?>
-    </a>
-    
-    <a href="#panel3" class="flip btn btn-sm btn-warning btn-block">
-        <?php for($i = 0; $i < 4 ; $i++){ ?>
-        <span class="glyphicon glyphicon-star"></span>
-        <?php } ?>
-    </a>
-    
-    <a href="#panel4" class="flip btn btn-sm btn-warning btn-block">
-        <?php for($i = 0; $i < 3 ; $i++){ ?>
-        <span class="glyphicon glyphicon-star"></span>
-        <?php } ?>
-    </a>
-    
-    <a href="#panel5" class="flip btn btn-sm btn-warning btn-block">
-        <?php for($i = 0; $i < 2 ; $i++){ ?>
-        <span class="glyphicon glyphicon-star"></span>
-        <?php } ?>
-    </a>
-    
-    <a href="#panel6" class="flip btn btn-sm btn-warning btn-block">
-        <span class="glyphicon glyphicon-star"></span>
-    </a>
 
-
-             
-       
-</div>
-                
-                  
-                  
-
-    </div>
-    <div class="col-md-10">
+    <div class="col-md-12">
 
     <div class="well well-lg">    
 
@@ -160,32 +75,43 @@
                 <div class="col-lg-10 col-lg-offset-1">-->
  
             <div class="row">
-                
-                <div class="col-sm-10 col-lg-push-4">
-                    <h1><span style="font-weight: bold">
+                <table class="table table-striped">
+                    <?php 
+  
+                    $start_from = ($page-1) * 10;
+                    $rs_result = getNotifications($userEmail, $start_from);
 
-                            <?php echo getFullName($employeeEmail); ?>
-                            <br>                                
-                    </span>
-                    </h1>
-                            <?php 
-                                drawStars(getRate($employeeEmail));
-                            ?>
-                            
-                            <a href="#newReview" data-toggle="modal" data-target="#newReview" class="btn btn-sm btn-warning">
-                                <i class="icon-hand-right"></i>Edit
-                            </a>        
-                    
-                </div>
+                    while ($row = mysqli_fetch_assoc($rs_result)) {
+                             echo '<tr>';
+
+                            echo "<td>";
+
+                            $date = date_create( $row['alertTime']);
+                            echo date_format($date, 'm/d/Y  H:i ');
+                            echo " ";
+                            echo $row['message'];
+                            echo "</td></tr>";
+                        }
+                    echo "</table>";
+
+
+                    $nroNotifications = getTotalNotifications($userEmail);
+                    $total_pages = ceil($nroNotifications / 10);
+?>
+                    <div class="col-md-2 col-md-offset-5">
+                    <?php
+                    for ($i=1; $i<=$total_pages; $i++) {
+                        ?>
+                        <div class="btn-group" role="group">
+                        <?php
+                                echo "<a class=\"btn btn-mini\" href='notifications.php?page=".$i."'>".$i."</a> ";
+                    } 
+ ?>
+
+                        </div>
+                    </div>
+          
             </div>
-                
-                <?php include('completeReviews.php'); ?>
-                        
-
-            </div>
-                <?php include('newReviewModal.php'); ?>
-            </div>   
-
         </div>
     
 </div>

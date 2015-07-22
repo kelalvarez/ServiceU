@@ -51,8 +51,17 @@
 	$jobCategory = $_POST['jobCategory'];
 
         updatePost($jobID, $jobTitle, $jobDescription, $jobPayment, $jobCategory);
+        
+        $numAp = numApplications($jobID);
+        if($numAp > 0 ){
+            $r = getJobApplicants($jobID);
+            while ($rw = mysqli_fetch_assoc($r)) { 
+                newNotification( $rw['employeeID'] , "<strong> ". $jobTitle ." </strong> :: The owner of the post, which you applied for, has changed the jobs information. <a href=\"postComplete.php?jobID=" . $jobID . "\" target=\"_parent\">Click here </a> to review the changes" );
+            }
+        }
+        
         echo '<script type="text/javascript">';
-        echo 'alert("Update Done")';
+        echo "alert(\"Update Done \")";
         echo '</script>';
 
     }
@@ -74,6 +83,47 @@
         echo '</script>';
 
     }
+    
+    $appSubmit = 0;
+    if (isset($_POST['submitApplicant'])) {
+        $applicantEmail = $_POST['applicantEmail'];
+        selectApplicant($applicantEmail, $jobID);
+        $appSubmit = 1;
+        $jobT = getJobTitle($jobID);
+         newNotification( $applicantEmail , "<strong> ". $jobT ." </strong> :: You have been selected for the job. <a href=\"postComplete.php?jobID=" . $jobID . "\" target=\"_parent\">Click here </a> to review job" );
+
+    } 
+    
+    $yes = 0;
+    if (isset($_POST['yesApplicant'])) {
+        $applicantEmail = $userEmail;
+        $jobT = getJobTitle($jobID);
+        $jobO = getJobOwner($jobID);
+        newNotification( $jobO , "<strong> ". $jobT ." </strong> :: The applicant that you selected has confirm his/her application. <a href=\"postComplete.php?jobID=" . $jobID . "\" target=\"_parent\">Click here </a> to review job" ); 
+        
+        $yes = 1;
+        $numAp = numApplications($jobID);
+        if($numAp > 0 ){
+            $r = getJobApplicants($jobID);
+            while ($rw = mysqli_fetch_assoc($r)) { 
+                if($rw['employeeID'] != $applicantEmail){
+                    newNotification( $rw['employeeID'] , "<strong> <a href=\"postComplete.php?jobID=" . $jobID . "\" target=\"_parent\">". $jobT ."</a> </strong> :: The job has been closed. Thank you for your application." );
+                }
+            }
+        }
+    }
+    
+    $no = 0;
+    if (isset($_POST['noApplicant'])) {
+        $applicantEmail = $userEmail;
+        $jobT = getJobTitle($jobID);
+        $jobO = getJobOwner($jobID);
+        $no = 1;
+        clearApplicant($userEmail, $jobID);
+        newNotification( $jobO , "<strong> ". $jobT ." </strong> :: The applicant that you selected has deny the job offer. <a href=\"postComplete.php?jobID=" . $jobID . "\" target=\"_parent\">Click here </a> to review the job" ); 
+    }
+    
+ 
 ?>
 
 
@@ -117,14 +167,74 @@
     <h3><strong>Job Information</strong></h3>
 
 </div>    
+<?php 
+    $owner = isOwner($userEmail, $jobID);
+    $existApplication = existApp($userEmail, $jobID);
+
+
+    if ($appSubmit == 1) { ?> 
+            <div class="alert alert-success fade in">
+        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+        <strong>Success!</strong> You have selected applicant <?php echo getFullName($applicantEmail); ?> to complete the Job.
+        
+      </div>
+<?php } ?>
+
+<?php 
+  $select = isSelected($jobID);
+  $currentSelected = isApplicantSelected($userEmail, $jobID);
+  if ($select == 1 && $owner == 1 && $no != 1 & $yes != 1) {
+?>
+    <div class="alert alert-warning">
+        <strong>Confirmation Pending!</strong> You have already selected an applicant for this job
+    </div>
+    
+<?php
+  }
+  else if( $select == 1 && $currentSelected == 1 && $no != 1 && $yes != 1){
+?>  
+    <div class="alert alert-warning">
+        <form id="appConfirm" class="form-horizontal" action="#" name="confirmApp" method="POST">
+        <strong>Confirmation Pending!</strong> You have been selected for the job. Do you want to confirm the transaction? <button name="yesApplicant" type="submit"> Yes</button> or <button name="noApplicant" type="submit"> No</button>
+        </form>
+    </div> 
+    
+<?php
+  }else if( $select == 1 && $currentSelected == 1 && $yes == 1){ ?>
+    <div class="alert alert-success fade in">
+       <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+       <strong>Confirmed!</strong> You have successfully accepted the job.
+     </div>    
+<?php
+  }else if( $select == 1 && $currentSelected == 1 && $no == 1){ ?>
+    <div class="alert alert-success fade in">
+       <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+       <strong>Denied!</strong> You have successfully denied the job.
+     </div>     
+<?php
+  }else if( $select == 1 && $currentSelected == 0){ ?>
+    <div class="alert alert-danger fade in">
+       <strong>Job Closed!</strong>
+     </div>     
+<?php
+  }else if( $select == 1 && $currentSelected == 1){ ?>
+    <div class="alert alert-success fade in">
+       <strong>Job Accepted!</strong>
+     </div>     
+<?php
+  }
+?>
+    
+  
+    
+<!----------------------- DATA --------------->    
+    
     
 <div class="row">
 <div class="col-md-2">
 <div class="col-sm-12 col-md-12 text-center">
     <strong><span class="text-center input-lg">
                 <?php
-                    $owner = isOwner($userEmail, $jobID);
-                    $existApplication = existApp($userEmail, $jobID);
                     if($owner != 0 ){
                 ?>
                 Owner
@@ -154,7 +264,7 @@
         </a>
         <?php  }
         else{ ?>
-        <a href="#openPost" data-toggle="modal" data-target="#openPost" class="btn btn-sm btn-warning btn-block">
+        <a href="#openPost" data-toggle="modal" data-target="#openPost" class="btn btn-sm btn-warning btn-block <?php if($select == 1) { echo "disabled"; }?>">
                     <i class="icon-hand-right"></i>Open Job
         </a>
         <?php
@@ -224,7 +334,6 @@
                                     <span style="font-weight: bold">
                                         <?php
                                             echo "Payment: ";
-											
                                         ?>
                                     </span>
                                     <?php
@@ -259,7 +368,7 @@
                 <?php include('closeJobModal.php'); ?>
                 
                 <?php include('viewAppModal.php'); ?>
-                <?php include('reviewLittleModal.php'); ?>
+                <?php include('selectApplicantConfirmationModal.php'); ?>
                 <?php include('openJobModal.php'); ?>
                 <!-- /.col-lg-10 -->
                 
@@ -329,8 +438,19 @@
         });
           $('.modal.in:visible:last').focus().next('.modal-backdrop.in').removeClass('hidden');
         }
-        
-    </script>
+
+            
+
+    $('#confirmApplicant').on('show.bs.modal', function(e) {
+
+    //get data-id attribute of the clicked element
+    var bookId = $(e.relatedTarget).data('book-id');
+
+    //populate the textbox
+    $(e.currentTarget).find('input[name="bookId"]').val(bookId);
+});
+
+</script>
 
     
 </body>
