@@ -1,12 +1,12 @@
 
 <!DOCTYPE html>
 <?php
-    include("DatabaseFunctions.php");
+    include("DatabaseFunctions.php"); 
     include("functions.php");
 ?>
 
 
-<?php
+<?php 
     session_start();
     if (!isset($_SESSION["loginEmail"]))
     {
@@ -15,10 +15,10 @@
     }
     else{
        $userEmail = $_SESSION["loginEmail"];
-    }
+    }   
 
     if (isset($_POST['createJob'])) {
-
+        
         $jobTitle = $_POST['jobTitle'];
         $jobDescription = $_POST['jobDescription'];
     $jobPayment = $_POST['jobPayment'];
@@ -30,7 +30,7 @@
         echo '</script>';
 
     }
-
+ 
 ?>
 
 
@@ -60,16 +60,16 @@
 
 </head>
 
-
+    
 <body>
 
 <!-- Navigation Sidebar -->
     <?php include 'navigationbar.php' ?>
 
 <div class="container">
-
-
-
+       
+     
+	
 		<div class="well text-left">
 
 			<form action=
@@ -77,7 +77,7 @@
 target="PPDGFrame">
 <input id="type" type="hidden" name="expType" value="light">
 <input id="paykey" type="hidden" name="paykey" value="AP-..."> 		<input id="preapprovalkey" 				type="hidden" name="preapprovalkey" value="PA-..."> 		<input type="submit" id="submitBtn" value="Pay with PayPal"> 	</form>
-
+	
 
 
 	<script src="https://www.paypalobjects.com/js/external/apdg.js">
@@ -88,8 +88,8 @@ target="PPDGFrame">
 
 
 
-
-
+   
+    
             <div class="row">
 
               <!--<div class="col-md-2">
@@ -100,7 +100,7 @@ target="PPDGFrame">
                     <p>
                         <a class="btn btn-sm btn-warning btn-block" href="myapplications.php" ><b>My Applications</b></a>
                     </p>
-
+                
 
               </div> -->
               <!--<div class="col-md-10">
@@ -114,17 +114,17 @@ target="PPDGFrame">
                                 </header>
 
                                 <div class="rowAddjobpost">
-                                        <span class="glyphicon glyphicon-wrench"> </span>
+                                        <span class="glyphicon glyphicon-wrench"> </span> 
                                         <h3>Creating Job on ServiceU is effortless.</h3>
                                         <p>Start now to provide service to your local community!</p>
                                         <?php include('newPost.php'); ?>
                                         <a class="btn btn-success" href="#newPost" data-toggle="modal" data-target="#newPost" role="button">Create Job Now!</a>
-
+                                        
                                 </div>
-
-
-
-
+                            
+                                   
+                                
+                            
 
 
                      </div>
@@ -134,7 +134,7 @@ target="PPDGFrame">
 
             </div>
 
-
+ 
 </div> <!--End of container-->
 
 
@@ -148,13 +148,14 @@ target="PPDGFrame">
                   <li><a href="#">Directory</a></li>
                   <li><h5 style="color: #aab8c2">&#169 2015 ServiceU, Inc, All rights reserved.</h5></li>
                 </ul>
-
+         
 </footer>
 
 </div>
 
     <!-- jQuery -->
     <script src="js/jquery.js"></script>
+    <script src="js/bootbox.js"></script>
     <script src="js/bootbox.min.js"></script>
 <script src="https://www.paypalobjects.com/js/external/dg.js">
 
@@ -177,12 +178,12 @@ var dgFlow = new PAYPAL.apps.DGFlow({ trigger: 'submitBtn' });
         .find("input,textarea")
            .val('')
            .end();
-
+   
       $('select option:first-child').attr("selected", "selected");
-
+    
     });
     </script>
-
+    
     <!-- Custom for project -->
     <script src="js/editProfileactions.js"></script>
     <!--Start online JSS first-->
@@ -192,7 +193,7 @@ var dgFlow = new PAYPAL.apps.DGFlow({ trigger: 'submitBtn' });
     <!--Customized JSS-->
     <script src="js/myjs.js"></script>
     <!--change acive mode in the navbar-->
-    <script>
+    <script> 
         $(".nav a").on("click", function(){
            $(".nav").find(".active").removeClass("active");
            $(this).parent().addClass("active");

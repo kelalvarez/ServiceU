@@ -122,13 +122,13 @@ else{
             <!-- 2nd task box -->
             <div class="col-lg-4">
               <div class="thumbnail">
-                <img src="font-awesome/css/doctor.jpg">
+                <img src="font-awesome/css/overheat-woman.png">
                 <div class="caption">
                   <!-- Title -->
-                  <h3>Doctors</h3>
+                  <h3>Auto Repair</h3>
 
                   <!-- Description -->
-                  <p>Taking care of patients</p>
+                  <p>24 hour service</p>
                 </div>
               </div>
             </div>
@@ -137,13 +137,13 @@ else{
           <!-- 3rd task box -->
           <div class="col-lg-4">
             <div class="thumbnail">
-              <img src="font-awesome/css/lawyer-500x300.jpg">
+              <img src="font-awesome/css/overheat-woman.png">
               <div class="caption">
                 <!-- Title -->
-                <h3>Lawyers</h3>
+                <h3>Auto Repair</h3>
 
                 <!-- Description -->
-                <p>Get legal help</p>
+                <p>24 hour service</p>
               </div>
             </div>
           </div>
@@ -152,13 +152,13 @@ else{
         <!-- 4th task box -->
         <div class="col-lg-4">
           <div class="thumbnail">
-            <img src="font-awesome/css/images_engineer.jpg">
+            <img src="font-awesome/css/overheat-woman.png">
             <div class="caption">
               <!-- Title -->
-              <h3>Engineers</h3>
+              <h3>Auto Repair</h3>
 
               <!-- Description -->
-              <p>Creating new inventions</p>
+              <p>24 hour service</p>
             </div>
           </div>
         </div>
@@ -167,13 +167,13 @@ else{
       <!-- 5th task box -->
       <div class="col-lg-4">
         <div class="thumbnail">
-          <img src="font-awesome/css/images_construction.jpg">
+          <img src="font-awesome/css/overheat-woman.png">
           <div class="caption">
             <!-- Title -->
-            <h3>Construction</h3>
+            <h3>Auto Repair</h3>
 
             <!-- Description -->
-            <p>Building a new future</p>
+            <p>24 hour service</p>
           </div>
         </div>
       </div>
@@ -182,13 +182,13 @@ else{
     <!-- 6th task box -->
     <div class="col-lg-4">
       <div class="thumbnail">
-        <img src="font-awesome/css/images_events.jpg">
+        <img src="font-awesome/css/overheat-woman.png">
         <div class="caption">
           <!-- Title -->
-          <h3>Events</h3>
+          <h3>Auto Repair</h3>
 
           <!-- Description -->
-          <p>Hosting your event</p>
+          <p>24 hour service</p>
         </div>
       </div>
     </div>
