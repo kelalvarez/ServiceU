@@ -48,7 +48,7 @@
 
                 <li role="presentation"><a role="menuitem" tabindex="-1" href="profile.php"><span class="glyphicon glyphicon-cog"></span>My Profile</a></li>         
                 <li role="presentation"><a role="menuitem" tabindex="-1" href="mydashboard.php"><span class="glyphicon glyphicon-bookmark"></span>My Dashboard</a></li>
-                <li role="presentation"><a role="menuitem" tabindex="-1" href="#"><span class="glyphicon glyphicon-bell"></span> Alerts</a></li>
+                <li role="presentation"><a role="menuitem" tabindex="-1" href="notifications.php"><span class="glyphicon glyphicon-bell"></span> Notifications</a></li>
                 <li role="presentation"><a role="menuitem" tabindex="-1" href="logout.php"><span class="glyphicon glyphicon-remove"></span> Log Out</a></li>
    
             </ul>
