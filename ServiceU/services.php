@@ -94,7 +94,7 @@ else{
             <div class="row">
 
               <div class="col-lg-12">
-                <a href="#" class="btn btn-primary btn-lg" style="width: 100%">
+                <a href="mydashboard.php" class="btn btn-primary btn-lg" style="width: 100%">
                   <span class="h2">Start servicing now</span>
                 </a>
                 <div class="row">
