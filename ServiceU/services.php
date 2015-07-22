@@ -122,13 +122,13 @@ else{
             <!-- 2nd task box -->
             <div class="col-lg-4">
               <div class="thumbnail">
-                <img src="font-awesome/css/overheat-woman.png">
+                <img src="font-awesome/css/doctor.jpg">
                 <div class="caption">
                   <!-- Title -->
-                  <h3>Auto Repair</h3>
+                  <h3>Doctors</h3>
 
                   <!-- Description -->
-                  <p>24 hour service</p>
+                  <p>Taking care of patients</p>
                 </div>
               </div>
             </div>
@@ -137,13 +137,13 @@ else{
           <!-- 3rd task box -->
           <div class="col-lg-4">
             <div class="thumbnail">
-              <img src="font-awesome/css/overheat-woman.png">
+              <img src="font-awesome/css/lawyer-500x300.jpg">
               <div class="caption">
                 <!-- Title -->
-                <h3>Auto Repair</h3>
+                <h3>Lawyers</h3>
 
                 <!-- Description -->
-                <p>24 hour service</p>
+                <p>Get legal help</p>
               </div>
             </div>
           </div>
@@ -152,13 +152,13 @@ else{
         <!-- 4th task box -->
         <div class="col-lg-4">
           <div class="thumbnail">
-            <img src="font-awesome/css/overheat-woman.png">
+            <img src="font-awesome/css/images_engineer.jpg">
             <div class="caption">
               <!-- Title -->
-              <h3>Auto Repair</h3>
+              <h3>Engineers</h3>
 
               <!-- Description -->
-              <p>24 hour service</p>
+              <p>Creating new inventions</p>
             </div>
           </div>
         </div>
@@ -167,13 +167,13 @@ else{
       <!-- 5th task box -->
       <div class="col-lg-4">
         <div class="thumbnail">
-          <img src="font-awesome/css/overheat-woman.png">
+          <img src="font-awesome/css/images_construction.jpg">
           <div class="caption">
             <!-- Title -->
-            <h3>Auto Repair</h3>
+            <h3>Construction</h3>
 
             <!-- Description -->
-            <p>24 hour service</p>
+            <p>Building a new future</p>
           </div>
         </div>
       </div>
@@ -182,19 +182,30 @@ else{
     <!-- 6th task box -->
     <div class="col-lg-4">
       <div class="thumbnail">
-        <img src="font-awesome/css/overheat-woman.png">
+        <img src="font-awesome/css/images_events.jpg">
         <div class="caption">
           <!-- Title -->
-          <h3>Auto Repair</h3>
+          <h3>Events</h3>
 
           <!-- Description -->
-          <p>24 hour service</p>
+          <p>Hosting your event</p>
         </div>
       </div>
     </div>
     <!-- End task -->
 
             </div>
+			<footer style="text-align: center;">
+
+      <ul class="list-inline">
+      <li><a href="about.php">About</a></li>
+      <!--<a href='about.php'>About Us</a>-->
+       <li><a href="help.php">Help</a></li>
+      <li><a href="#">Directory</a></li>
+      <li><h5 style="color: #aab8c2">&#169 2015 ServiceU, Inc, All rights reserved.</h5></li>
+      </ul>
+
+      </footer>
           </div>
           <div class="col-lg-4">
             <div class="left-side">
@@ -212,19 +223,10 @@ else{
           <!-- /.col-lg-10 -->
         </div>
         <!-- /.row -->
+		
       </div>
 
-      <!--	<footer style="text-align: center;">
-
-      <ul class="list-inline">
-      <li><a href="about.php">About</a></li>
-      <!--<a href='about.php'>About Us</a>-->
-      <!--  <li><a href="help.php">Help</a></li>
-      <li><a href="#">Directory</a></li>
-      <li><h5 style="color: #aab8c2">&#169 2015 ServiceU, Inc, All rights reserved.</h5></li>
-      </ul>
-
-      </footer> -->
+      
 
     </div>
 
