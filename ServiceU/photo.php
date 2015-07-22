@@ -124,12 +124,36 @@
 
                 <div class="profileStart">
                   
-                    <img src="img/user-icon.jpg" alt="User-ImG" height="100" width="100" style="float: left;">
+                     <?php
+                                  if(isset($_POST['uploadImage'])){
+                                      //Check if the file is acutally an image here LATER && make sure file get contents is not empty
+                                        if(!filesize($_FILES['userfile']['tmp_name']) == 0){
+                                               $imgData = file_get_contents($_FILES['userfile']['tmp_name']);           
+                                              echo '<img id="userImageStyle" src="data:image/jpeg;base64,'.base64_encode($imgData).'"alt="User-ImG">';
+                                            }else{
+
+                                                 if(empty(displayMyImage($userEmail)))
+                                                   echo '<img id="userImageStyle" src="img/user-icon.jpg" alt="User-ImG">';
+                                                 else
+                                                    echo '<img id="userImageStyle" src="data:image/jpeg;base64,'.base64_encode(displayMyImage($userEmail)).'"alt="User-ImG">';
+
+                                            }
+
+
+
+                                    }else{
+                                        if(empty(displayMyImage($userEmail)))
+                                           echo '<img id="userImageStyle" src="img/user-icon.jpg" alt="User-ImG">';
+                                         else
+                                            echo '<img id="userImageStyle" src="data:image/jpeg;base64,'.base64_encode(displayMyImage($userEmail)).'"alt="User-ImG">';
+
+                                        }
+                            ?>
 
                         <div class="profileSet" id="Profile-List">
-                            <a href="#"><b><?php echo getFullName($userEmail);?></b></a>
+                            <a href="viewmyprofile.php"><b><?php echo getFullName($userEmail);?></b></a>
                             <br>
-                            <a href="#">View My Profile</a>
+                            <a href="viewmyprofile.php">View My Profile</a>
                             <br>
                             <br>
                              <?php
@@ -153,15 +177,15 @@
                                 <a href="profile.php" class="btn btn-light btn-xs" id="editGlyp"><span class="glyphicon glyphicon-pencil"></span></a>
                         </li>
                         <li>
-                                <a href="#"><span class="glyphicon glyphicon-education"> </span> Degree</a>
-                                <a href="#editDegree" data-toggle="modal" data-target="#editDegree"  class="btn btn-light btn-xs" id="editGlyp"><span class="glyphicon glyphicon-pencil"></span></a><?php include('editDegreeModal.php') ?>
+                                <a href="#"><span class="glyphicon glyphicon-education"> </span> Education</a>
+                                <a href="degree.php" class="btn btn-light btn-xs" id="editGlyp"><span class="glyphicon glyphicon-pencil"></span></a>
                         </li>
                         <li>
                                 <a href="#"><span class="glyphicon glyphicon-camera"> </span> Photo</a>
-                                <a href="#" class="btn btn-light btn-xs" id="editGlyp"><span class="glyphicon glyphicon-pencil"></span></a>
+                                <a href="photo.php" class="btn btn-light btn-xs" id="editGlyp"><span class="glyphicon glyphicon-pencil"></span></a>
                         </li>
                         <li>
-                                <a href="#"><span class="glyphicon glyphicon-plus"> </span> Experience</a>
+                                <a href="#"><span class="glyphicon glyphicon-star-empty"> </span> Experience</a>
                                 <a href="experience.php" class="btn btn-light btn-xs" id="editGlyp"><span class="glyphicon glyphicon-pencil"></span></a>
                         </li>
                         <li>
@@ -170,8 +194,7 @@
                         </li>
                         <li>
                                 <a href="#"><span class="glyphicon glyphicon-cog"> </span> Interest</a>
-                                <a href="#editInterest" data-toggle="modal" data-target="#editInterest" class="btn btn-light btn-xs" id="editGlyp"><span class="glyphicon glyphicon-pencil"></span></a>
-                                        <?php include('editInterestModal.php') ?>
+                                <a href="interest.php" class="btn btn-light btn-xs" id="editGlyp"><span class="glyphicon glyphicon-pencil"></span></a>
                         </li>
                         <li>
                                 <a href="#"><span class="glyphicon glyphicon-thumbs-up"> </span> My Reviews</a>
@@ -179,7 +202,7 @@
                         </li>
                         <li>
                                 <a href="#"><span class="glyphicon glyphicon-certificate"> </span> Account Settings</a>
-                                <a href="#" class="btn btn-light btn-xs" id="editGlyp"><span class="glyphicon glyphicon-pencil"></span></a>
+                                <a href="editsettings.php" class="btn btn-light btn-xs" id="editGlyp"><span class="glyphicon glyphicon-pencil"></span></a>
                         </li>
                                                
 
@@ -196,33 +219,78 @@
 
                 <div class="col-md-9">        
                    
-                    <div class="panel panel-default">
-                        <div class="panel-heading"><h3><span class="glyphicon glyphicon-camera"></span> Photo</h3></div>
+                    <div class="panel panel-info">
+                        <div class="panel-heading" style="text-align: center"><h3><b><span class="glyphicon glyphicon-camera"></span> Photo</b></h3></div>
                             <div class="panel-body" >
+                                
+                                
+                                    
+                                  
+                                   
 
-                                                <div style="float-left">
+                                                <div>
+                                                    <div style="text-align:center">
+                                                         <?php
+                                                              
+                                                              
+                                                               if(isset($_POST['uploadImage'])){
+                                                                               //Check if the file is acutally an image here LATER
+                                                                            if(!filesize($_FILES['userfile']['tmp_name']) == 0){
+                                                                                 $imgData = file_get_contents($_FILES['userfile']['tmp_name']);
+                                                                                  echo '<img height="100" width="100" style="border: 5px solid #ccc;" src="data:image/jpeg;base64,'.base64_encode($imgData).'"alt="User-ImG">';
+                                                                              }else{
 
-                                                    <img src="img/user-iconLG.jpg" alt="User-ImG" height="200" width="200">
+                                                                                   if(empty(displayMyImage($userEmail)))
+                                                                                     echo '<img style="border: 5px solid #ccc;" height="100" width="100" src="img/user-icon.jpg" alt="User-ImG">';
+                                                                                   else
+                                                                                      echo '<img style="border: 5px solid #ccc;" height="100" width="100" src="data:image/jpeg;base64,'.base64_encode(displayMyImage($userEmail)).'"alt="User-ImG">';
 
-                                                     <div class="imgInfo">
+                                                                              }
+                                                                              
 
-                                                        <form method="POST">
-                                                       
-                                                            <input type="file" name="userfile" id="userfile">
 
-                                                            <div style="text-align:left; margin-top: 5%; padding-left: 5%;">
-                                                                                                               
-                                                                    <button type="submit" name="submitPhoto" class="btn btn-info">Upload</button>
+                                                            }else
+                                                                 if(empty(displayMyImage($userEmail)))
+                                                                       echo '<img style="border: 5px solid #ccc;" height="100" width="100" src="img/user-icon.jpg" alt="User-ImG">';
+                                                                     else
+                                                                        echo '<img style="border: 5px solid #ccc;" height="100" width="100"                              src="data:image/jpeg;base64,'.base64_encode(displayMyImage($userEmail)).'"alt="User-ImG">';
+                                                                
+                                                               
+                                                              
+                                                        ?>    
+   
+                                                    </div>
+                                                    
+                                                     <div>
 
-                                                             </div>               
+                                                            <form id="uploadMyPic" action="" enctype="multipart/form-data" method="POST">
 
-                                                            
-                                                        </form>
+                                                                <div class="form-group" style="text-align:center; padding-left: 44%; margin-top: 10px">
+                                                                        <div>
+                                                                          <input name="MAX_FILE_SIZE" value="10000000" type="hidden"></input>
+                                                                          <input name="userfile" type="file">
+                                                                        </div>
+                                                                 </div>
+                                                                
+                                                                 <div class="form-group" style="text-align:center; margin-top: 5%;">
+                                                                     
+                                                                        <div style="border-top-style: solid; border-width: 1px; border-top-color: #bce8f1; padding-top: 10px;">
+
+                                                                          <button type="submit" name="uploadImage" class="btn btn-info">Update Changes</button>
+                                                                        </div>
+                                                                 </div>
+                                                                        
+
+                                                            </form>
+
+                                                         
                                                      </div>
 
                                                 </div>
 
 
+                                
+                                
                                                 
                             </div>   
                     </div>  
@@ -233,63 +301,99 @@
      </div>    
 </div>
         <!-- /.container -->
-
+ 
     <footer style="text-align: center;">
 
                 <ul class="list-inline">
-                  <li><a href="about.php">About</a></li>
-				  <!--<a href='about.php'>About Us</a>-->
-                  <!--<li><a href="help.php">Help</a></li>-->
-				  <li><a href="contactus.php">Contact Us</a></li>
+                  <li><a href="#">About</a></li>
+                  <li><a href="#">Help</a></li>
                   <li><a href="#">Directory</a></li>
                   <li><h5 style="color: #aab8c2">&#169 2015 ServiceU, Inc, All rights reserved.</h5></li>
                 </ul>
          
-</footer>
+    </footer>
+    
+    
+     <script>
+            $(function(){
 
-        
+                    $('input[type=uploadImage]').click(function(){
 
-        
+                        $.ajax({
+                            type: "POST",
+                            url: "photo.php",
+                            data: $("#uploadMyPic").serialized(),
+                            success: function(data){
+                                $('#result').html(data);
+                            }
 
-    <?php
-    if(isset($_POST['updateUserInfo']))  
-        {  
-            $user_fName ="";
-            $user_lName ="";
 
-            if(empty($_POST['userInfoFname'])) {
-                //$emailErr = "Email is required";
-                //error here
+                        });
+
+
+
+                    });
+
+
+                });
+    </script>
+    
+    
+    <?php 
+                          
+
+           if(isset($_POST['uploadImage']))  
+            { 
+                          
+                   
+                // check if a file was submitted
+                if(!isset($_FILES['userfile'])){
+                 
+                    echo 'Please select a valid image file to upload!';
                   
-            } else {
-                $user_fName = test_user_input($_POST['userInfoFname']); 
-              
-            }
-            
-            if(empty($_POST['userInfoLname'])) {
-                //$emailErr = "Email is required";
-                //error here
-                  
-            } else {
-                 $user_lName = test_user_input($_POST['userInfoLname']);  
+                }else{
+                    
+                    $maxsize = 10000000; //set to approx 10 MB
+                    
+                    if($_FILES['userfile']['error']==UPLOAD_ERR_OK){
+                        
+                         if(is_uploaded_file($_FILES['userfile']['tmp_name'])) {
+                             
+                              if( $_FILES['userfile']['size'] < $maxsize){ 
+                                  
+
+                                      //checks whether uploaded file is of image type
+                                        $finfo = finfo_open(FILEINFO_MIME_TYPE);
+                                        if(strpos(finfo_file($finfo, $_FILES['userfile']['tmp_name']),"image")===0) {    
+
+                                        
+                                            // prepare the image for insertion
+                                            $imgData = addslashes(file_get_contents($_FILES['userfile']['tmp_name']));
+                                            
+                                            //get image name
+                                            $imageName = $_FILES['userfile']['tmp_name'];
+                                            
+                                            //upload image
+                                            uploadImage($userEmail, $imageName, $imgData);
+             
+                                             
+                                        }
+                                  
+                              }
+                             
+                             finfo_close($finfo);
+                         }
+                        
+
+                    }
+                       
+                }
                
+             mysqli_close($con);
+                
             }
-         
-          if($user_fName == getFirstName($userEmail) && $user_fName == getLastName($userEmail)){}
-          else
-          {
-            updateUserInformation($userEmail, $user_fName,  $user_lName);
 
-          }
-     
-        }  
-
-
-
-
-    ?>
-
-
+   ?>
 
     <script>
       function Show_Div(Div_id) {

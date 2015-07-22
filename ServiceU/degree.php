@@ -105,6 +105,19 @@
 
     
 <body>
+    
+    
+    <?php 
+    
+            $result = getAllUserEducation($userEmail);
+
+            if (!$result) {
+            echo "The fucntion getUserEducation is not working properly";
+            }
+             
+            
+    ?>
+    
 
 <!-- Navigation Sidebar -->
     <?php include 'navigationbar.php' ?>
@@ -160,8 +173,7 @@
                         </li>
                         <li>
                                 <a href="#"><span class="glyphicon glyphicon-education"> </span> Education</a>
-                                <a href="#editDegree" data-toggle="modal" data-target="#editDegree"  class="btn btn-light btn-xs" id="editGlyp"><span class="glyphicon glyphicon-pencil"></span></a>
-                                <?php include('editDegreeModal.php') ?>
+                                <a href="degree.php" class="btn btn-light btn-xs" id="editGlyp"><span class="glyphicon glyphicon-pencil"></span></a>
                         </li>
                         <li>
                                 <a href="#"><span class="glyphicon glyphicon-camera"> </span> Photo</a>
@@ -174,10 +186,12 @@
                         <li>
                                 <a href="#"><span class="glyphicon glyphicon-wrench"> </span> Skills</a>
                                 <a href="skills.php" class="btn btn-light btn-xs" id="editGlyp"><span class="glyphicon glyphicon-pencil"></span></a>
+                                
                         </li>
                         <li>
                                 <a href="#"><span class="glyphicon glyphicon-cog"> </span> Interest</a>
                                 <a href="interest.php" class="btn btn-light btn-xs" id="editGlyp"><span class="glyphicon glyphicon-pencil"></span></a>
+                                       
                                 
                         </li>
                         <li>
@@ -204,42 +218,91 @@
             <div class="col-md-9">        
                
                 <div class="panel panel-info">
-                    <div class="panel-heading" style="text-align: center"><h3><b><span class="glyphicon glyphicon-wrench"></span> My Skills</b></h3></div>
+                    <div class="panel-heading" style="text-align: center"><h3><b><span class="glyphicon glyphicon-education"></span> My Education</b></h3></div>
                         <div class="panel-body">
 
+                                        
+                                     <?php
+                                 
+                                             if (mysqli_num_rows($result) == 0) {
+                                                        echo '<div style="text-align:center;">';
+                                                        echo '<b><p class="bg-danger"> You have not added your education </p></b>';
+                                                        echo '</div>';
 
-                                     <form action="" role="form" method="POST" class="form-horizontal">
-                                         
-                                          <div class="form-group">
-                                                        <label for="userSkill" class="col-sm-5 control-label">What skill do you have?:</label>
-                                                        <div class="col-sm-4">
-                                                          <input type="userSkill" name="userSkill" class="form-control" placeholder="Type your skill..." >
-                                                        </div>
-                                           </div>
-                                                     
+                                                }else{
+
+                                                while ($row = mysqli_fetch_assoc($result)) 
+                                                            {
+
                                                     
-                                         <div class="form-group" style="text-align:center; margin-top: 5%;">
+
+                                                                echo '<div style="font-size:16px">';
+
+                                                                      echo '<div style="border-top-style: solid; border-width: 1px; border-top-color: #bce8f1;">' . '<b>' . $row['eduSchoolName'] . '</b>' . 
+            '<a style="float:right; background-color: white; font-size:15px;" class="btn btn-light btn-s" href="deleteEducation.php?eduID='.$row['eduID'].'" role="button"><span class="glyphicon glyphicon-remove"></span></a>' . 
+            '<a href="editDegree.php?eduID='.$row['eduID'].'" style="float:right; background-color: white; font-size:15px;" class="btn btn-light btn-s" id="editGlyp">Edit</span></a>' . '</div>';
+
+
+
+                                                                      echo '<div>' . $row['eduDegreeLevel'] . '</div>';
+
+                                                                      echo '<div>' . $row['eduDegreeName'] . '</div>';
+
+                                                                        
+                                                                      //Need to validate more about month and year
+                                                                      if(!empty($row['eduStartMonth']) && !empty($row['eduEndMonth'])){
+                                                                          
+                                                                         echo '<div>' . $row['eduStartMonth'] . ' ' .  $row['eduStartYear'] . ' - ' . $row['eduEndMonth'] . ' ' . $row['eduEndYear'] . ' - ' . $row['eduLocation'] . '</div>';  
+                                                                         
+                                                                          
+                                                                       }else
+                                                                      {
+                                                                           echo '<div>' . $row['eduLocation'] . '</div>';
+                                                                          
+                                                                          
+                                                                      }
+                                                                
+                                           
+                                                    
+                                                                    echo '<div style="padding-bottom: 20px;">' . '</div>';
+
+                                                                 echo '</div>';
+                                                            }    
+
+
+                                                      }
+
+
+                                                    mysqli_close($con);
+                                 ?>
+                            
+                                  
+                                          
+                            
+                                         
+                                          <div class="form-group" style="text-align:center; margin-top: 5%;">
 
                                                 <div style="border-top-style: solid; border-width: 1px; border-top-color: #bce8f1; padding-top: 10px;">                                                  
-                                                    <a class="btn btn-info" href="#" role="button">Update Change</a>
+                                                    
+                                                      <a class="btn btn-info" href="editDegree.php" role="button">Add Education</a>
+                                                    
                                                 </div>
 
-                                         </div>
-                                                            
-                                    </form>
-                            
+                                               
+
+                                          </div>
+
                                     
-                                    </div>
                          </div>
-                    </div>
-
+                </div>
 
                 
                 
-            
+
+                              
                 </div>         
 
-            </div>
+            </div>-
                     
      </div>    
 </div>
@@ -257,6 +320,45 @@
     </footer>
 
 
+
+    <script>
+      function Show_Div(Div_id) {
+            if (false == $(Div_id).is(':visible')) {
+                $(Div_id).show(0);
+
+            }
+        }
+    </script>
+    
+        
+
+    <!-- Custom Theme JavaScript -->
+    <script>
+    // Closes the sidebar menu
+    $("#menu-close").click(function(e) {
+        e.preventDefault();
+        $("#sidebar-wrapper").toggleClass("active");
+    });
+
+    // Opens the sidebar menu
+    $("#menu-toggle").click(function(e) {
+        e.preventDefault();
+        $("#sidebar-wrapper").toggleClass("active");
+    });
+
+   $('[data-dismiss=modal]').on('click', function (e) {
+        var $t = $(this),
+            target = $t[0].href || $t.data("target") || $t.parents('.modal') || [];
+
+      $(target)
+        .find("input,textarea")
+           .val('')
+           .end();
+   
+      $('select option:first-child').attr("selected", "selected");
+    
+    });
+    </script>
     
     <!-- Custom for project -->
     <script src="js/editProfileactions.js"></script>

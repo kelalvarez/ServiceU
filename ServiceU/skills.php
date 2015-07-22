@@ -26,11 +26,11 @@
         editDegree1($userEmail, $degree1);
     }
     
-    if (isset($_POST['submitInterest'])) {
+   /* if (isset($_POST['submitInterest'])) {
         $newInterest = $_POST['interest1'];
         
         insertInterest($userEmail, $newInterest);
-    }
+    }*/
     
     if (isset($_POST['changePassword'])) {
 	$oldPassword = $_POST['oldpassword'];
@@ -124,12 +124,18 @@
 
                 <div class="profileStart">
                   
-                    <img src="img/user-icon.jpg" alt="User-ImG" height="100" width="100" style="float: left;">
+                     <?php
+                                    if(empty(displayMyImage($userEmail)))
+                                       echo '<img id="userImageStyle" src="img/user-icon.jpg" alt="User-ImG">';
+                                     else
+                                        echo '<img id="userImageStyle" src="data:image/jpeg;base64,'.base64_encode(displayMyImage($userEmail)).'"alt="User-ImG">';
+
+                            ?>
 
                         <div class="profileSet" id="Profile-List">
-                            <a href="#"><b><?php echo getFullName($userEmail);?></b></a>
+                            <a href="viewmyprofile.php"><b><?php echo getFullName($userEmail);?></b></a>
                             <br>
-                            <a href="#">View My Profile</a>
+                            <a href="viewmyprofile.php">View My Profile</a>
                             <br>
                             <br>
                              <?php
@@ -153,27 +159,25 @@
                                 <a href="profile.php" class="btn btn-light btn-xs" id="editGlyp"><span class="glyphicon glyphicon-pencil"></span></a>
                         </li>
                         <li>
-                                <a href="#"><span class="glyphicon glyphicon-education"> </span> Degree</a>
-                                <a href="#editDegree" data-toggle="modal" data-target="#editDegree"  class="btn btn-light btn-xs" id="editGlyp"><span class="glyphicon glyphicon-pencil"></span></a>
-                                <?php include('editDegreeModal.php') ?>
+                                <a href="#"><span class="glyphicon glyphicon-education"> </span> Education</a>
+                               <a href="degree.php" class="btn btn-light btn-xs" id="editGlyp"><span class="glyphicon glyphicon-pencil"></span></a>
                         </li>
                         <li>
                                 <a href="#"><span class="glyphicon glyphicon-camera"> </span> Photo</a>
                                 <a href="photo.php" class="btn btn-light btn-xs" id="editGlyp"><span class="glyphicon glyphicon-pencil"></span></a>
                         </li>
                         <li>
-                                <a href="#"><span class="glyphicon glyphicon-plus"> </span> Experience</a>
+                                <a href="#"><span class="glyphicon glyphicon-star-empty"> </span> Experience</a>
                                  <a href="experience.php" class="btn btn-light btn-xs" id="editGlyp"><span class="glyphicon glyphicon-pencil"></span></a>
                         </li>
                         <li>
                                 <a href="#"><span class="glyphicon glyphicon-wrench"> </span> Skills</a>
-                                <a href="#" class="btn btn-light btn-xs" id="editGlyp"><span class="glyphicon glyphicon-pencil"></span></a>
+                                <a href="skills.php" class="btn btn-light btn-xs" id="editGlyp"><span class="glyphicon glyphicon-pencil"></span></a>
                                        
                         </li>
                         <li>
                                 <a href="#"><span class="glyphicon glyphicon-cog"> </span> Interest</a>
-                                <a href="#editInterest" data-toggle="modal" data-target="#editInterest" class="btn btn-light btn-xs" id="editGlyp"><span class="glyphicon glyphicon-pencil"></span></a>
-                                        <?php include('editInterestModal.php') ?>
+                                <a href="interest.php" class="btn btn-light btn-xs" id="editGlyp"><span class="glyphicon glyphicon-pencil"></span></a>
                                 
                         </li>
                         <li>
@@ -182,7 +186,7 @@
                         </li>
                         <li>
                                 <a href="#"><span class="glyphicon glyphicon-certificate"> </span> Account Settings</a>
-                                <a href="#" class="btn btn-light btn-xs" id="editGlyp"><span class="glyphicon glyphicon-pencil"></span></a>
+                                <a href="editsettings.php" class="btn btn-light btn-xs" id="editGlyp"><span class="glyphicon glyphicon-pencil"></span></a>
                         </li>
                                                
 
@@ -200,22 +204,75 @@
             <div class="col-md-9">        
                
                 <div class="panel panel-info">
-                    <div class="panel-heading" style="text-align: center"><h3>My Skills</h3></div>
+                    <div class="panel-heading" style="text-align: center"><h3><b><span class="glyphicon glyphicon-wrench"></span> My Skills</b></h3></div>
                         <div class="panel-body">
 
-                      
-
-                                          <div class="form-group" style="text-align:center; margin-top: 10%;">
-
-                                                <div>                                                  
-                                                    <a class="btn btn-info" href="editSkills.php" role="button">Add Skills</a>
+                                        
+                                           <!--#B66C6C-->
+                                            <form method="POST" class="form-horizontal" role="form">
                                             
+                                                <?php
+                                                    
+                                                         if(getSkills($userEmail) != "na"){
+                                                                            $userSkill = getSkills($userEmail);
 
-                                                </div>
+                                                                            $string = str_replace(',', '', $userSkill);  //remove all commas
+                                                                            $myArraySkill = explode(' ', $string);       //get all words and insert them into an array
+                                                                            //$arraySize = count($myArraySkill);           //get array size
+                                                                            
+                                 
+                                 
+                                                                    foreach($myArraySkill as $value){
+                                                                
+                                                                            if($value == '')
+                                                                                continue;
+                                                                        
+                                                                            echo '<div class="text-box form-group">';
+                                                                        
+                                                                            echo '<div class="col-sm-4 col-sm-offset-4"><input type="text" name="skillText[]" id="inputTextColor" class="form-control" placeholder="What are your areas of expertise?" value="' . $value . '"></div>';      
+                                                                        
+                                                                            echo '</div>';
+                                                            
+                                                                            
+                                                                  
+                                                                    }  
+                                                             }else{
 
-                                          </div>
 
-                                    
+                                                                 echo '<div class="text-box form-group">';
+                                                     
+                                                                 echo '<div class="col-sm-4 col-sm-offset-4"><input type="text" name="skillText[]" id="inputTextColor" class="form-control" placeholder="What are your areas of expertise?" value=""></div>';
+                                                                 echo '</div>';
+                                                                     
+                                                             }
+                                 
+                                
+                                            
+                                                ?>
+
+                                                    <div class="col-sm-4 col-sm-offset-5">
+                                                        <a href="#" class="add-box">Add another skill</a>
+                                                        <!--<a href="#" class="add-box btn btn-info">Add More Fields</a>-->
+                                                    
+                                                    </div>
+
+                                                                     
+
+                                                  <div class="form-group" style="text-align:center; margin-top: 10%;">
+
+
+                                                        <div style="border-top-style: solid; border-width: 1px; border-top-color: #bce8f1; padding-top: 10px; margin-left: 20px">                                                  
+                                                             <button type="submit" value="submit" name="submitSkills" class="btn btn-info">Update Changes</button>
+
+
+                                                        </div>
+
+                                                  </div>
+                                                
+                                                
+
+                                            </form>
+                            
                          </div>
                 </div>
 
@@ -242,7 +299,71 @@
          
     </footer>
 
+    
+    <?php
+            if(isset($_POST['submitSkills']))  
+            { 
 
+                      $aSize = count($_POST['skillText']);  //get array size
+                      $checkNum = 0;
+                
+                            if(isset($_POST['skillText'])){
+                              
+                                
+                                 foreach($_POST['skillText'] as $key => $text_field){//check if all fields are empty
+                                    if(empty($text_field)){
+                                            $checkNum++;
+                                    }
+                                 }
+                                
+                                if($aSize == $checkNum){
+                                    $string = 'na';
+                                    insertSkill($userEmail, $string);
+                                    
+                                }else{//if not empty means there is a field that is filled
+                                     $newSkill = implode(", ", $_POST['skillText']);  //implode turns array into a string //explode string to an array
+                                     $string = str_replace(',', '', $newSkill);
+                                     insertSkill($userEmail, $string);
+                                }
+                            
+    
+                            }
+            }
+    ?>
+
+    
+     <script>
+        
+            //when the Add Field button is clicked
+            $("#add").click(function (e) {
+             //Append a new row of code to the "#items" div
+             $("#items").append('<div><input type="text" name="input[]"><button class="delete">Delete</button></div>');
+            });
+            
+    </script>
+    
+    
+    <script>
+    
+    $(document).ready(function(){
+     $('.add-box').click(function(){
+        var n = $('.text-box').length + 1;
+         
+        var box_html = $('<div class="text-box form-group"><div class="col-sm-4 col-sm-offset-4"><input type="text" name="skillText[]" id="inputTextColor" class="form-control" placeholder="What are your areas of expertise?" value=""></div><div class="col-sm-2"><a href="#" id="delInterestIcon" class="btn btn-light btn-xs" id="editGlyp"><span class="remove-box glyphicon glyphicon-remove"></span></a></div></div>');
+        $('.text-box:last').after(box_html);
+        box_html.fadeIn('slow');
+    });
+
+    $('.form-horizontal').on('click', '.remove-box', function(){
+            $(this).closest(".form-group").remove();
+        return false;
+    });
+
+});
+        
+    </script>
+    
+    
 
 
     <script>

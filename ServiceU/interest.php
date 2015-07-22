@@ -26,11 +26,11 @@
         editDegree1($userEmail, $degree1);
     }
     
-    if (isset($_POST['submitInterest'])) {
+    /*if (isset($_POST['submitInterest'])) {
         $newInterest = $_POST['interest1'];
         
         insertInterest($userEmail, $newInterest);
-    }
+    }*/
     
     if (isset($_POST['changePassword'])) {
 	$oldPassword = $_POST['oldpassword'];
@@ -160,8 +160,7 @@
                         </li>
                         <li>
                                 <a href="#"><span class="glyphicon glyphicon-education"> </span> Education</a>
-                                <a href="#editDegree" data-toggle="modal" data-target="#editDegree"  class="btn btn-light btn-xs" id="editGlyp"><span class="glyphicon glyphicon-pencil"></span></a>
-                                <?php include('editDegreeModal.php') ?>
+                               <a href="degree.php" class="btn btn-light btn-xs" id="editGlyp"><span class="glyphicon glyphicon-pencil"></span></a>
                         </li>
                         <li>
                                 <a href="#"><span class="glyphicon glyphicon-camera"> </span> Photo</a>
@@ -169,11 +168,12 @@
                         </li>
                         <li>
                                 <a href="#"><span class="glyphicon glyphicon-star-empty"> </span> Experience</a>
-                                <a href="experience.php" class="btn btn-light btn-xs" id="editGlyp"><span class="glyphicon glyphicon-pencil"></span></a>
+                                 <a href="experience.php" class="btn btn-light btn-xs" id="editGlyp"><span class="glyphicon glyphicon-pencil"></span></a>
                         </li>
                         <li>
                                 <a href="#"><span class="glyphicon glyphicon-wrench"> </span> Skills</a>
                                 <a href="skills.php" class="btn btn-light btn-xs" id="editGlyp"><span class="glyphicon glyphicon-pencil"></span></a>
+                                       
                         </li>
                         <li>
                                 <a href="#"><span class="glyphicon glyphicon-cog"> </span> Interest</a>
@@ -201,37 +201,83 @@
             
              <?php include 'confirmCode.php' ?>  
 
+            
+            <!--style="max-width:500px" will reduce the width of the container-->
             <div class="col-md-9">        
                
                 <div class="panel panel-info">
-                    <div class="panel-heading" style="text-align: center"><h3><b><span class="glyphicon glyphicon-wrench"></span> My Skills</b></h3></div>
+                    <div class="panel-heading" style="text-align: center"><h3><b><span class="glyphicon glyphicon-cog"></span> My Interest</b></h3></div>
                         <div class="panel-body">
-
-
-                                     <form action="" role="form" method="POST" class="form-horizontal">
-                                         
-                                          <div class="form-group">
-                                                        <label for="userSkill" class="col-sm-5 control-label">What skill do you have?:</label>
-                                                        <div class="col-sm-4">
-                                                          <input type="userSkill" name="userSkill" class="form-control" placeholder="Type your skill..." >
-                                                        </div>
-                                           </div>
-                                                     
-                                                    
-                                         <div class="form-group" style="text-align:center; margin-top: 5%;">
-
-                                                <div style="border-top-style: solid; border-width: 1px; border-top-color: #bce8f1; padding-top: 10px;">                                                  
-                                                    <a class="btn btn-info" href="#" role="button">Update Change</a>
-                                                </div>
-
-                                         </div>
-                                                            
-                                    </form>
                             
-                                    
-                                    </div>
+           
+                                            <!--#B66C6C-->
+                                            <form method="POST" class="form-horizontal" role="form">
+                                            
+                                                <?php
+                                                    
+                                                         if(getInterests($userEmail) != "na"){
+                                                                            $userInterest = getInterests($userEmail);
+
+                                                                            $string = str_replace(',', '', $userInterest);  //remove all commas
+                                                                            $myArrayInterest = explode(' ', $string);       //get all words and insert them into an array
+                                                                            //$arraySize = count($myArrayInterest);           //get array size
+                                                                            
+                                                           
+                                 
+                                                                    foreach($myArrayInterest as $value){
+                                                                
+                                                                            if($value == '')
+                                                                                continue;
+                                                                        
+                                                                            echo '<div class="text-box form-group">';
+                                                                        
+                                                                            echo '<div class="col-sm-4 col-sm-offset-4"><input type="text" name="interestText[]" id="inputTextColor" class="form-control" placeholder="Lists your interest" value="' . $value . '"></div>';      
+                                                                        
+                                                                            echo '</div>';
+                                                            
+                                                                            
+                                                                  
+                                                                    }  
+                                                             }else{
+
+
+                                                                 echo '<div class="text-box form-group">';
+                                                     
+                                                                 echo '<div class="col-sm-4 col-sm-offset-4"><input type="text" name="interestText[]" id="inputTextColor" class="form-control" placeholder="Lists your interest"></div>';
+                                                                 echo '</div>';
+                                                                     
+                                                             }
+                                 
+                                
+                                            
+                                                ?>
+
+                                                    <div class="col-sm-4 col-sm-offset-5">
+                                                        <a href="#" class="add-box">Add another interest</a>
+                                                        <!--<a href="#" class="add-box btn btn-info">Add More Fields</a>-->
+                                                    
+                                                    </div>
+
+                                                                     
+
+                                                  <div class="form-group" style="text-align:center; margin-top: 10%;">
+
+
+                                                        <div style="border-top-style: solid; border-width: 1px; border-top-color: #bce8f1; padding-top: 10px; margin-left: 20px">                                                  
+                                                             <button type="submit" value="submit" name="submitInterest" class="btn btn-info">Update Changes</button>
+
+
+                                                        </div>
+
+                                                  </div>
+                                                
+                                                
+
+                                            </form>
+                            
+                                
                          </div>
-                    </div>
+                </div>
 
 
                 
@@ -255,8 +301,126 @@
                 </ul>
          
     </footer>
+    
+    
+    
+    <?php
+            if(isset($_POST['submitInterest']))  
+            { 
+                
+                
+                      $aSize = count($_POST['interestText']);
+                      $checkNum = 0;
+                
+                            if(isset($_POST['interestText'])){
+                              
+                                
+                                 foreach($_POST['interestText'] as $key => $text_field){ //check if all fields are empty
+                                    if(empty($text_field)){
+                                            $checkNum++;
+                                    }
+                                 }
+                                
+                                if($aSize == $checkNum){  //if all fields are empty send 'na' to the database
+                                    $string = 'na';
+                                    insertInterest($userEmail, $string);
+                                    
+                                }else{//if not empty means there is a field that is filled
+                                     $newSkill = implode(", ", $_POST['interestText']);    //implode turns array into a string //explode string to an array
+                                     $string = str_replace(',', '', $newSkill);
+                                     insertInterest($userEmail, $string);
+                                }
+                            
+                            }
+                            
+                                
+            }
+    ?>
+    
+
+    
+    <script>
+        
+            //when the Add Field button is clicked
+            $("#add").click(function (e) {
+             //Append a new row of code to the "#items" div
+             $("#items").append('<div><input type="text" name="input[]"><button class="delete">Delete</button></div>');
+            });
+            
+    </script>
+    
+    
+    <script>
+    
+            $(document).ready(function(){
+     $('.add-box').click(function(){
+        var n = $('.text-box').length + 1;
+         
+        var box_html = $('<div class="text-box form-group"><div class="col-sm-4 col-sm-offset-4"><input type="text" name="interestText[]" id="inputTextColor" class="form-control" placeholder="Lists your interest" value=""></div><div class="col-sm-2"><a href="#" id="delInterestIcon" class="btn btn-light btn-xs" id="editGlyp"><span class="remove-box glyphicon glyphicon-remove"></span></a></div></div>');
+        $('.text-box:last').after(box_html);
+        box_html.fadeIn('slow');
+    });
+
+    $('.form-horizontal').on('click', '.remove-box', function(){
+            $(this).closest(".form-group").remove();
+        return false;
+    });
+
+});
+        
+    </script>
+    
+    
+<script>
+
+        $("body").on("click", ".delete", function (e) {
+     $(this).parent("div").remove();
+    });
+
+    
+    
+    </script>
 
 
+
+    <script>
+      function Show_Div(Div_id) {
+            if (false == $(Div_id).is(':visible')) {
+                $(Div_id).show(0);
+
+            }
+        }
+    </script>
+    
+        
+
+    <!-- Custom Theme JavaScript -->
+    <script>
+    // Closes the sidebar menu
+    $("#menu-close").click(function(e) {
+        e.preventDefault();
+        $("#sidebar-wrapper").toggleClass("active");
+    });
+
+    // Opens the sidebar menu
+    $("#menu-toggle").click(function(e) {
+        e.preventDefault();
+        $("#sidebar-wrapper").toggleClass("active");
+    });
+
+   $('[data-dismiss=modal]').on('click', function (e) {
+        var $t = $(this),
+            target = $t[0].href || $t.data("target") || $t.parents('.modal') || [];
+
+      $(target)
+        .find("input,textarea")
+           .val('')
+           .end();
+   
+      $('select option:first-child').attr("selected", "selected");
+    
+    });
+    </script>
     
     <!-- Custom for project -->
     <script src="js/editProfileactions.js"></script>

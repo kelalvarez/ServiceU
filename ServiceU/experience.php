@@ -105,6 +105,20 @@
 
     
 <body>
+    
+    
+    <?php 
+    
+            $result = getAllUserOldExperience($userEmail);
+
+            $result2 = getAllUserCurrentJob($userEmail);
+
+            if (!$result) {
+            echo "The fucntion getUserExperience is not working properly";
+            }
+             
+            
+    ?>
 
 <!-- Navigation Sidebar -->
     <?php include 'navigationbar.php' ?>
@@ -124,12 +138,18 @@
 
                 <div class="profileStart">
                   
-                    <img src="img/user-icon.jpg" alt="User-ImG" height="100" width="100" style="float: left;">
+                    <?php
+                                    if(empty(displayMyImage($userEmail)))
+                                       echo '<img id="userImageStyle" src="img/user-icon.jpg" alt="User-ImG">';
+                                     else
+                                        echo '<img id="userImageStyle" src="data:image/jpeg;base64,'.base64_encode(displayMyImage($userEmail)).'"alt="User-ImG">';
+
+                            ?>
 
                         <div class="profileSet" id="Profile-List">
-                            <a href="#"><b><?php echo getFullName($userEmail);?></b></a>
+                            <a href="viewmyprofile.php"><b><?php echo getFullName($userEmail);?></b></a>
                             <br>
-                            <a href="#">View My Profile</a>
+                            <a href="viewmyprofile.php">View My Profile</a>
                             <br>
                             <br>
                              <?php
@@ -153,16 +173,15 @@
                                 <a href="profile.php" class="btn btn-light btn-xs" id="editGlyp"><span class="glyphicon glyphicon-pencil"></span></a>
                         </li>
                         <li>
-                                <a href="#"><span class="glyphicon glyphicon-education"> </span> Degree</a>
-                                <a href="#editDegree" data-toggle="modal" data-target="#editDegree"  class="btn btn-light btn-xs" id="editGlyp"><span class="glyphicon glyphicon-pencil"></span></a>
-                                <?php include('editDegreeModal.php') ?>
+                                <a href="#"><span class="glyphicon glyphicon-education"> </span> Education</a>
+                                <a href="degree.php" class="btn btn-light btn-xs" id="editGlyp"><span class="glyphicon glyphicon-pencil"></span></a>
                         </li>
                         <li>
                                 <a href="#"><span class="glyphicon glyphicon-camera"> </span> Photo</a>
                                 <a href="photo.php" class="btn btn-light btn-xs" id="editGlyp"><span class="glyphicon glyphicon-pencil"></span></a>
                         </li>
                         <li>
-                                <a href="#"><span class="glyphicon glyphicon-plus"> </span> Experience</a>
+                                <a href="#"><span class="glyphicon glyphicon-star-empty"> </span> Experience</a>
                                 <a href="#" class="btn btn-light btn-xs" id="editGlyp"><span class="glyphicon glyphicon-pencil"></span></a>
                         </li>
                         <li>
@@ -171,8 +190,7 @@
                         </li>
                         <li>
                                 <a href="#"><span class="glyphicon glyphicon-cog"> </span> Interest</a>
-                                <a href="#editInterest" data-toggle="modal" data-target="#editInterest" class="btn btn-light btn-xs" id="editGlyp"><span class="glyphicon glyphicon-pencil"></span></a>
-                                        <?php include('editInterestModal.php') ?>
+                                <a href="interest.php" class="btn btn-light btn-xs" id="editGlyp"><span class="glyphicon glyphicon-pencil"></span></a>
                                 
                         </li>
                         <li>
@@ -181,7 +199,7 @@
                         </li>
                         <li>
                                 <a href="#"><span class="glyphicon glyphicon-certificate"> </span> Account Settings</a>
-                                <a href="#" class="btn btn-light btn-xs" id="editGlyp"><span class="glyphicon glyphicon-pencil"></span></a>
+                                <a href="editsettings.php" class="btn btn-light btn-xs" id="editGlyp"><span class="glyphicon glyphicon-pencil"></span></a>
                         </li>
                                                
 
@@ -199,18 +217,94 @@
             <div class="col-md-9">        
                
                 <div class="panel panel-info">
-                    <div class="panel-heading" style="text-align: center"><h3>My Experience</h3></div>
+                    <div class="panel-heading" style="text-align: center"><h3><b><span class="glyphicon glyphicon-star-empty"></span> My Experience</b></h3></div>
                         <div class="panel-body">
 
 
-                            
+                                <?php
+                                 
+                                 if (mysqli_num_rows($result) == 0 && mysqli_num_rows($result2) == 0) {
+                                            echo '<div style="text-align:center;">';
+                                            echo '<b><p class="bg-danger"> You have not submited any of your work experience </p></b>';
+                                            echo '</div>';
+                                       
+                                    }else{
+                                 
+                                                                    //Output User Current Experience First
+                                                                    if(mysqli_num_rows($result2) != 0)
+                                                                        {
+                                                                            while ($row = mysqli_fetch_assoc($result2)) 
+                                                                                {    
+                                                                                          echo '<div style="font-size:16px">';
+                                                                                
+                                                                                         echo '<div style="border-top-style: solid; border-width: 1px; border-top-color: #bce8f1;">' . '<b>' . $row['jobTitle'] . '</b>' . 
+'<a style="float:right; background-color: white; font-size:15px;" class="btn btn-light btn-s" href="deleteExperience.php?expID='.$row['expID'].'" role="button"><span class="glyphicon glyphicon-remove"></span></a>' . 
+'<a href="editExperience.php?expID='.$row['expID'].'" style="float:right; background-color: white; font-size:15px;" class="btn btn-light btn-s" id="editGlyp">Edit</span></a>' . '</div>';
+                                                                                              
+                                                                                          echo '<div>' . $row['userEmployer'] . '</div>';
+                                                                                          echo '<div>' . $row['startDateMonth'] . ' ' . $row['startDateYear'] . ' - ' . '<b>' . $row['stillWorkHere'] . '</b>' . ' - ' . $row['location'] .  '</div>'; 
+                                                                                
+                                                                                        
+                                                                                
+                                                                                          echo '<div style="padding-bottom: 20px;">' . $row['description'] . '</div>';       
+                                                                                          echo '</div>';
+                                                                                }
+
+                                                                        }
+                                    
+                                    //Output Old User Experience
+                                 if(mysqli_num_rows($result) != 0){
+                                    while ($row = mysqli_fetch_assoc($result)) 
+                                                {
+                                                       
+                                                    
+                                            
+                                                    echo '<div style="font-size:16px">';
+                                        
+                                                          echo '<div style="border-top-style: solid; border-width: 1px; border-top-color: #bce8f1;">' . '<b>' . $row['jobTitle'] . '</b>' . 
+'<a style="float:right; background-color: white; font-size:15px;" class="btn btn-light btn-s" href="deleteExperience.php?expID='.$row['expID'].'" role="button"><span class="glyphicon glyphicon-remove"></span></a>' . 
+'<a href="editExperience.php?expID='.$row['expID'].'" style="float:right; background-color: white; font-size:15px;" class="btn btn-light btn-s" id="editGlyp">Edit</span></a>' . '</div>';
+                                        
+                                        
+                                        
+                                                          echo '<div>' . $row['userEmployer'] . '</div>';
+                                        
+                                        
+                                         
+                                        
+                                                          //Need to fix when Current is checked disable EndDateMonth and EndDateYear in editExperience.php
+                                                          if($row['stillWorkHere'] == 'Current')
+                                                              {
+                                                                        echo '<div>' . $row['startDateMonth'] . ' ' . $row['startDateYear'] .  ' - ' . '<b>' .'Current' . '</b>' . '</div>';
+                                                              }
+                                                          else
+                                                              {
+
+                                                                        echo '<div>' . $row['startDateMonth'] . ' ' . $row['startDateYear'] .  ' - ' . $row['endDateMonth'] . ' ' .                                                                                     $row['endDateYear'] . '</div>';   
+                                                              }
+                                        
+                                                          echo '<div>' . $row['location'] . ' - ' .  $row['country'] . '</div>';
+                                                            
+                                                          echo '<div style="padding-bottom: 20px;">' . $row['description'] . '</div>';
+                                                        
+                                        
+                                                    echo '</div>';
+                                                }    
+                                 
+                                 }
+                                          }
+    
+
+                                        mysqli_close($con);
+                                 ?>
                             
                                                  
+                            
                                    
 
-                                          <div class="form-group" style="text-align:center; margin-top: 10%;">
+                                          <div class="form-group" style="text-align:center; margin-top: 5%;">
 
-                                                <div>                                                  
+                                                <div style="border-top-style: solid; border-width: 1px; border-top-color: #bce8f1; padding-top: 10px;">                                                  
                                                     <a class="btn btn-info" href="editExperience.php" role="button">Add Experience</a>
                                             
 
@@ -246,46 +340,8 @@
     </footer>
 
 
-
-    <?php
-    if(isset($_POST['updateUserInfo']))  
-        {  
-            $user_fName ="";
-            $user_lName ="";
-
-            if(empty($_POST['userInfoFname'])) {
-                //$emailErr = "Email is required";
-                //error here
-                  
-            } else {
-                $user_fName = test_user_input($_POST['userInfoFname']); 
-              
-            }
-            
-            if(empty($_POST['userInfoLname'])) {
-                //$emailErr = "Email is required";
-                //error here
-                  
-            } else {
-                 $user_lName = test_user_input($_POST['userInfoLname']);  
-               
-            }
-         
-          if($user_fName == getFirstName($userEmail) && $user_fName == getLastName($userEmail)){}
-          else
-          {
-            updateUserInformation($userEmail, $user_fName,  $user_lName);
-
-          }
-     
-        }  
-
-
-
-
-    ?>
-
-
+    
+    
 
     <script>
       function Show_Div(Div_id) {

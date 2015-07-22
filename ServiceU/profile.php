@@ -106,236 +106,15 @@
     
 <body>
 
-<!-- Navigation Sidebar -->
-    <?php include 'navigationbar.php' ?>
-    
-<!-- About -->
-
-    <!-- Services -->
-    <!-- The circle icons use Font Awesome's stacked icon classes. For more information, visit http://fontawesome.io/examples/ -->
-<div class="container">
-
-
-     <div class="well well-lg">
-
-        <div class="row">
-
-            <div class="col-md-3"> <!--Profile start here-->
-
-                <div class="profileStart">
-                  
-                    <img src="img/user-icon.jpg" alt="User-ImG" height="100" width="100" style="float: left;">
-
-                        <div class="profileSet" id="Profile-List">
-                            <a href="#"><b><?php echo getFullName($userEmail);?></b></a>
-                            <br>
-                            <a href="#">View My Profile</a>
-                        </div>
-
-                </div>
-
-                <div style="clear: both;" class="text-left">
-                   
-                      <ul id="Profile-List">
-
-                        <li>
-                                <a href="#"><span class="glyphicon glyphicon-briefcase"> </span> Contact Information</a>
-                                <a href="#" class="btn btn-light btn-xs" id="editGlyp"><span class="glyphicon glyphicon-pencil"></span></a>
-                        </li>
-                        <li>
-                                <a href="#"><span class="glyphicon glyphicon-education"> </span> Degree</a>
-                                <a href="#editDegree" data-toggle="modal" data-target="#editDegree"  class="btn btn-light btn-xs" id="editGlyp"><span class="glyphicon glyphicon-pencil"></span></a>
-                                <?php include('editDegreeModal.php') ?>
-                        </li>
-                        <li>
-                                <a href="#"><span class="glyphicon glyphicon-camera"> </span> Photo</a>
-                                <a href="photo.php" class="btn btn-light btn-xs" id="editGlyp"><span class="glyphicon glyphicon-pencil"></span></a>
-                        </li>
-                        <li>
-                                <a href="#"><span class="glyphicon glyphicon-plus"> </span> Experience</a>
-                                <a href="#editExperience" data-toggle="modal" data-target="#editExperience" class="btn btn-light btn-xs" id="editGlyp"><span class="glyphicon glyphicon-pencil"></span></a>
-                                        <?php include('editExperienceModal.php') ?>
-                        </li>
-                        <li>
-                                <a href="#"><span class="glyphicon glyphicon-wrench"> </span> Skills</a>
-                                <a href="#editSkill" data-toggle="modal" data-target="#editSkill" class="btn btn-light btn-xs" id="editGlyp"><span class="glyphicon glyphicon-pencil"></span></a>
-                                        <?php include('editSkillModal.php') ?>
-                        </li>
-                        <li>
-                                <a href="#"><span class="glyphicon glyphicon-cog"> </span> Interest</a>
-                                <a href="#editInterest" data-toggle="modal" data-target="#editInterest" class="btn btn-light btn-xs" id="editGlyp"><span class="glyphicon glyphicon-pencil"></span></a>
-                                        <?php include('editInterestModal.php') ?>
-                                
-                        </li>
-                        <li>
-                                <a href="#"><span class="glyphicon glyphicon-thumbs-up"> </span> My Reviews</a>
-                                <a href="#" class="btn btn-light btn-xs" id="editGlyp"><span class="glyphicon glyphicon-pencil"></span></a>
-                        </li>
-                        <li>
-                                <a href="#"><span class="glyphicon glyphicon-certificate"> </span> Account Settings</a>
-                                <a href="#" class="btn btn-light btn-xs" id="editGlyp"><span class="glyphicon glyphicon-pencil"></span></a>
-                        </li>
-                                               
-
-                      </ul>
-                   
-
-                </div>
-
-            </div>
-
-
-            
-             <?php include 'confirmCode.php' ?>  
-
-            <div class="col-md-9">        
-               
-                <div class="panel panel-default">
-                    <div class="panel-heading"><h3><span class="glyphicon glyphicon-briefcase"></span> Contact Information</h3></div>
-                        <div class="panel-body">
-
-
-                                     <form action="" role="form" method="POST" class="form-horizontal">
-                                          
-                                        <div id="showSuccess" class="successHide">
-                                                <p class="bg-success">Your changes have been saved.</p>
-                                        </div>
-
-                                          <div class="form-group" style="margin-left: -7%;">
-                                            <label for="fName" class="col-sm-2 control-label">First Name:</label>
-                                            <div class="col-sm-5">
-                                              <input type="fName" name="userInfoFname" class="form-control" Value="<?php echo getFirstName($userEmail) ?>" >
-                                            </div>
-                                          </div>
-
-                                          <div class="form-group" style="margin-left: -7%;">
-                                            <label for="uPassword" class="col-sm-2 control-label">Last Name:</label>
-                                            <div class="col-sm-5">
-                                              <input type="lName" name="userInfoLname" class="form-control" value="<?php echo getLastName($userEmail) ?>">
-                                            </div>
-                                          </div>
-
-                                          <div>
-                                            <label>Email Address:</label>
-                                             &nbsp&nbsp <?php echo $userEmail; ?>
-                                             <a href="#" class="btn btn-light btn-xs" style="background-color: white;"><span class="glyphicon glyphicon-pencil"></span></a>
-                                          </div>
-
-                                          <div class="form-group" style="text-align:center; margin-top: 10%;">
-
-                                                <div>                                                  
-                                                     <button type="submit" name="updateUserInfo" class="btn btn-info" onclick="Show_Div(showSuccess)">Update Change</button>
-
-                                                </div>
-
-                                                <div>
-                                                          <b>button type need to change to 'Submit' pop doesnt work</b>
-                                                          <b>Delete Later</b> 
-                                                </div>
-
-                                          </div>
-
-                                    </form>
-                         </div>
-                </div>
-
-
-                
-                
-                <!--<div class="row">
-                <div class="col-md-4 col-lg-offset-2"><p>Name:</p></div>
-                <div class="col-md-4 col-lg-pull-2"> 
-                    <?php 
-                        //echo getFullName($userEmail);
-                    ?> 
-                                    </div>
-                        </div>
-                    <br>     
-                        <div class="row">
-                                    <div class="col-md-4 col-lg-offset-2"><p>Email: </p></div>
-                                    <div class="col-md-4 col-lg-pull-2">
-                                        <?php 
-                                            //echo $userEmail;
-                                        ?> 
-                                    </div>
-                        </div>
-                    <br>
-                        <div class="row">
-                                    <div class="col-md-4 col-lg-offset-2"><p>Verify</p></div>
-                                    <div class="col-md-4 col-lg-pull-2">
-                                        <?php
-                                            //if(checkVerification($userEmail) == 1)
-                                                //echo '<span class="glyphicon glyphicon-ok" style="color: green; font-size: 25px;"></span>';
-                                            //else
-                                                //echo '<span class="glyphicon glyphicon-remove" style="color: red; font-size: 25px"></span>';
-                                        ?>
-                                    </div>
-                        </div>
-                    <br>
-                        <div class="row">
-                                    <div class="col-md-4 col-lg-offset-2"><p>Password:</p></div>
-                                    <div class="col-md-2 col-lg-pull-1"> -------------- </div>
-                                        <?php //include 'changepasswordModal.php' ?>                         
-                                    <div class="col-md-3 col-lg-pull-1"><a href="#changePassword"  data-toggle="modal" data-target="#changePassword" class="btn btn-light btn-xs">Edit</a></div>
-                        </div>
-                    <br>
-                        <div class="row">
-                                    <div class="col-md-4 col-lg-offset-2"><p>Degree: </p></div>
-                                    <div class="col-md-2 col-lg-pull-1"> 
-                                        
-                                        <?php 
-                                            //echo strtoupper(getDegree($userEmail));
-                                        ?>   
-                                    </div>
-                                    <div class="col-md-3 col-lg-pull-1">
-                                        <a href="#editDegree" data-toggle="modal" data-target="#editDegree" class="btn btn-light btn-xs">Edit</a>
-                                        <?php //include('editDegreeModal.php') ?>
-                                        
-                                        
-                                        
-
-                                    </div>
-                        </div>
-                    <br>
-                        <div class="row">
-                                    <div class="col-md-4 col-lg-offset-2"><p>Interests:</p></div>
-                                    <div class="col-md-2 col-lg-pull-1"> 
-                                        <?php 
-                                            //echo stripInterest(getInterests($userEmail));
-                                        ?> 
-                                    </div>
-                                    <div class="col-md-3 col-lg-pull-1">
-                                        <a href="#editInterest" data-toggle="modal" data-target="#editInterest" class="btn btn-light btn-xs">Edit</a>
-                                        <?php //include('editInterestModal.php') ?>
-                                    </div>
-                        </div> -->                   
-                </div>         
-
-            </div>
-                    
-     </div>    
-</div>
-        <!-- /.container -->
-
-    <footer style="text-align: center;">
-
-                <ul class="list-inline">
-                  <li><a href="about.php">About</a></li>
-                  <!--<li><a href="help.php">Help</a></li>-->
-				  <li><a href="contactus.php">Contact Us</a></li>
-                  <li><a href="#">Directory</a></li>
-                  <li><h5 style="color: #aab8c2">&#169 2015 ServiceU, Inc, All rights reserved.</h5></li>
-                </ul>
-         
-    </footer>
-
-
 
     <?php
     if(isset($_POST['updateUserInfo']))  
         {  
             $user_fName ="";
             $user_lName ="";
+            $user_phoneNumber="";
+
+            $showSuccessEdit="";
 
             if(empty($_POST['userInfoFname'])) {
                 //$emailErr = "Email is required";
@@ -354,20 +133,245 @@
                  $user_lName = test_user_input($_POST['userInfoLname']);  
                
             }
+                                 
+             if(empty($_POST['userPhoneNumber'])) {
+                //$emailErr = "Email is required";
+                //error here
+                  
+            } else {
+                 $user_phoneNumber = test_user_input($_POST['userPhoneNumber']);  
+               
+            }
+                                 
+                                 
          
-          if($user_fName == getFirstName($userEmail) && $user_fName == getLastName($userEmail)){}
-          else
-          {
-            updateUserInformation($userEmail, $user_fName,  $user_lName);
-
-          }
+             
+             
+        if(!empty($user_fName) || !empty($user_lName) || !empty($user_phoneNumber)){
+             updateUserInformation($userEmail, $user_fName,  $user_lName, $user_phoneNumber);
+              $showSuccessEdit = TRUE; 
+          
+        }else
+             $showSuccessEdit = FALSE; 
+          
      
-        }  
+           
+           
+           }
 
 
 
 
     ?>
+
+
+<!-- Navigation Sidebar -->
+    <?php include 'navigationbar.php' ?>
+    
+<!-- About -->
+
+    <!-- Services -->
+    <!-- The circle icons use Font Awesome's stacked icon classes. For more information, visit http://fontawesome.io/examples/ -->
+<div class="container">
+
+
+     <div class="well well-lg">
+
+        <div class="row">
+
+            <div class="col-md-3"> <!--Profile start here-->
+
+                <div class="profileStart">
+                  
+
+                        <?php
+                                    if(empty(displayMyImage($userEmail)))
+                                       echo '<img id="userImageStyle" src="img/user-icon.jpg" alt="User-ImG">';
+                                     else
+                                        echo '<img id="userImageStyle" src="data:image/jpeg;base64,'.base64_encode(displayMyImage($userEmail)).'"alt="User-ImG">';
+
+                            ?>
+
+
+                        <div class="profileSet" id="Profile-List">
+                            <a href="viewmyprofile.php"><b> <?php echo getFullName($userEmail);?> </b></a>
+                            <br>
+                            <a href="viewmyprofile.php">View My Profile</a>
+                            <br>
+                            <br>
+                             <?php
+                           
+                            
+                                            if(checkVerification($userEmail) == 1)
+                                                echo '<p>Verified: <span class="glyphicon glyphicon-ok" style="color: green; font-size: 15px;">  </span></p>';
+                                            else
+                                                echo '<p>Verified: <span class="glyphicon glyphicon-remove" style="color: red; font-size: 15px">  </span></p>';
+                             ?>
+                        </div>
+
+                </div>
+
+                <div style="clear: both;" class="text-left">
+                   
+                      <ul id="Profile-List">
+
+                        <li>
+                                <a href="#"><span class="glyphicon glyphicon-briefcase"> </span> Contact Information</a>
+                                <a href="#" class="btn btn-light btn-xs" id="editGlyp"><span class="glyphicon glyphicon-pencil"></span></a>
+                        </li>
+                        <li>
+                                <a href="#"><span class="glyphicon glyphicon-education"> </span> Education</a>
+                                <a href="degree.php" class="btn btn-light btn-xs" id="editGlyp"><span class="glyphicon glyphicon-pencil"></span></a>
+                              
+                        </li>
+                        <li>
+                                <a href="#"><span class="glyphicon glyphicon-camera"> </span> Photo</a>
+                                <a href="photo.php" class="btn btn-light btn-xs" id="editGlyp"><span class="glyphicon glyphicon-pencil"></span></a>
+                        </li>
+                        <li>
+                                <a href="#"><span class="glyphicon glyphicon-star-empty"> </span> Experience</a>
+                                <a href="experience.php" class="btn btn-light btn-xs" id="editGlyp"><span class="glyphicon glyphicon-pencil"></span></a>
+                        </li>
+                        <li>
+                                <a href="#"><span class="glyphicon glyphicon-wrench"> </span> Skills</a>
+                                <a href="skills.php" class="btn btn-light btn-xs" id="editGlyp"><span class="glyphicon glyphicon-pencil"></span></a>
+                                
+                        </li>
+                        <li>
+                                <a href="#"><span class="glyphicon glyphicon-cog"> </span> Interest</a>
+                                <a href="interest.php" class="btn btn-light btn-xs" id="editGlyp"><span class="glyphicon glyphicon-pencil"></span></a>
+                                       
+                                
+                        </li>
+                        <li>
+                                <a href="#"><span class="glyphicon glyphicon-thumbs-up"> </span> My Reviews</a>
+                                <a href="#" class="btn btn-light btn-xs" id="editGlyp"><span class="glyphicon glyphicon-pencil"></span></a>
+                        </li>
+                        <li>
+                                <a href="#"><span class="glyphicon glyphicon-certificate"> </span> Account Settings</a>
+                                <a href="editsettings.php" class="btn btn-light btn-xs" id="editGlyp"><span class="glyphicon glyphicon-pencil"></span></a>
+                        </li>
+                                               
+
+                      </ul>
+                   
+
+                </div>
+
+            </div>
+
+
+            
+             <?php include 'confirmCode.php' ?>  
+
+            <div class="col-md-9">        
+               
+                <div class="panel panel-info">
+                    <div class="panel-heading" style="text-align: center"><h3><b><span class="glyphicon glyphicon-briefcase"></span> Contact Information</b></h3></div>
+                        <div class="panel-body">
+
+
+                                     <form action="" role="form" method="POST" class="form-horizontal" id="contactInformationForm">
+                                          
+                                        <div style="text-align:center;">
+                                          <?php
+                                                 if(isset($_POST['updateUserInfo'])){
+                                 
+                                                    if($showSuccessEdit == TRUE)
+                                                         echo '<p class="bg-success">Your changes have been saved.</p>';
+                                                    else
+                                                         echo '<p class="bg-danger">No changes have been made!</p>';
+                                        
+                                                 }
+                                                       
+                                          ?>
+
+                                        </div>
+
+                                          <div class="form-group">
+                                            <label for="fName" class="col-sm-5 control-label">First Name:</label>
+                                            <div class="col-sm-5">
+                                              <input type="fName" name="userInfoFname" class="form-control" Value="<?php echo getFirstName($userEmail) ?>" >
+                                            </div>
+                                          </div>
+
+                                          <div class="form-group">
+                                            <label for="uPassword" class="col-sm-5 control-label">Last Name:</label>
+                                            <div class="col-sm-5">
+                                              <input type="lName" name="userInfoLname" class="form-control" value="<?php echo getLastName($userEmail)?>">
+                                            </div>
+                                          </div>
+                                         
+                                          <div class="form-group">
+                                            <label for="uPhone" class="col-sm-5 control-label">Phone Number (optional):</label>
+                                            <div class="col-sm-5">
+                                              <input type="uPhoneNumber" name="userPhoneNumber" class="form-control" value="<?php echo getUserPhoneNumber($userEmail)?>">
+                                            </div>
+                                          </div>   
+
+                                         
+                                         
+                                          <div class="form-group" style="text-align:center; margin-top: 5%;">
+
+                                                <div style="border-top-style: solid; border-width: 1px; border-top-color: #bce8f1; padding-top: 10px;">                                                  
+                                                     <button type="submit" name="updateUserInfo" class="btn btn-info" onclick="Show_Div(showSuccess)">Update Changes</button>
+                                            
+
+                                                </div>
+
+                                          </div>
+
+                                    </form>
+                         </div>
+                    </div>
+
+
+                               
+                </div>         
+
+            </div>
+                    
+     </div>    
+</div>
+        <!-- /.container -->
+
+    <footer style="text-align: center;">
+
+                <ul class="list-inline">
+                  <li><a href="about.php">About</a></li>
+                  <li><a href="help.php">Help</a></li>
+                  <li><a href="#">Directory</a></li>
+                  <li><h5 style="color: #aab8c2">&#169 2015 ServiceU, Inc, All rights reserved.</h5></li>
+                </ul>
+         
+    </footer>
+
+
+    <script>
+            $(function(){
+
+                    $('input[type=updateUserInfo]').click(function(){
+
+                        $.ajax({
+                            type: "POST",
+                            url: "profile.php",
+                            data: $("#contactInformationForm").serialized(),
+                            success: function(data){
+                                $('#result').html(data);
+                            }
+
+
+                        });
+
+
+
+                    });
+
+
+                });
+    </script>
+    
+
 
 
 
@@ -454,7 +458,15 @@
         $(e.target).addClass('active'); // activated list-item
       });
     </script>
-
+    
+    
+    <!--This will prevent resfesh page but not submit-->
+    <script>
+             $('#contactForm').submit(function () 
+                {
+                     return false;
+                });
+    </script>
 
     
 </body>

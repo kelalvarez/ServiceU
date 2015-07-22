@@ -105,6 +105,34 @@
 
     
 <body>
+    
+     
+    <?php 
+    
+            $result = getAllUserOldExperience($userEmail);
+
+            $result2 = getAllUserCurrentJob($userEmail);
+
+            $resultEdu = getAllUserEducation($userEmail);
+
+            $userInterest = getInterests($userEmail);
+
+            $userSkill = getSkills($userEmail);
+
+            if (!$resultEdu) {
+            echo "The fucntion getAllUserEducation is not working properly";
+            }
+
+            if (!$result) {
+            echo "The fucntion getUserNoCurrentExperience is not working properly";
+            }
+
+            if (!$result2) {
+            echo "The fucntion getUserCurrentExperience is not working properly";
+            }
+             
+            
+    ?>
 
 <!-- Navigation Sidebar -->
     <?php include 'navigationbar.php' ?>
@@ -120,207 +148,348 @@
 
         <div class="row">
 
-            <div class="col-md-3"> <!--Profile start here-->
-
-                <div class="profileStart">
-                  
-                    <img src="img/user-icon.jpg" alt="User-ImG" height="100" width="100" style="float: left;">
-
-                        <div class="profileSet" id="Profile-List">
-                            <a href="#"><b><?php echo getFullName($userEmail);?></b></a>
-                            <br>
-                            <a href="#">View My Profile</a>
-                            <br>
-                            <br>
-                             <?php
-                           
-                            
-                                            if(checkVerification($userEmail) == 1)
-                                                echo '<p>Verified: <span class="glyphicon glyphicon-ok" style="color: green; font-size: 15px;">  </span></p>';
-                                            else
-                                                echo '<p>Verified: <span class="glyphicon glyphicon-remove" style="color: red; font-size: 15px">  </span></p>';
-                             ?>
-                        </div>
-
-                </div>
-
-                <div style="clear: both;" class="text-left">
-                   
-                      <ul id="Profile-List">
-
-                        <li>
-                                <a href="#"><span class="glyphicon glyphicon-briefcase"> </span> Contact Information</a>
-                                <a href="#" class="btn btn-light btn-xs" id="editGlyp"><span class="glyphicon glyphicon-pencil"></span></a>
-                        </li>
-                        <li>
-                                <a href="#"><span class="glyphicon glyphicon-education"> </span> Degree</a>
-                                <a href="#editDegree" data-toggle="modal" data-target="#editDegree"  class="btn btn-light btn-xs" id="editGlyp"><span class="glyphicon glyphicon-pencil"></span></a>
-                                <?php include('editDegreeModal.php') ?>
-                        </li>
-                        <li>
-                                <a href="#"><span class="glyphicon glyphicon-camera"> </span> Photo</a>
-                                <a href="photo.php" class="btn btn-light btn-xs" id="editGlyp"><span class="glyphicon glyphicon-pencil"></span></a>
-                        </li>
-                        <li>
-                                <a href="#"><span class="glyphicon glyphicon-plus"> </span> Experience</a>
-                                <a href="experience.php" class="btn btn-light btn-xs" id="userExperience"><span class="glyphicon glyphicon-pencil"></span></a>
-                        </li>
-                        <li>
-                                <a href="#"><span class="glyphicon glyphicon-wrench"> </span> Skills</a>
-                                <a href="skills.php" class="btn btn-light btn-xs" id="userskill"><span class="glyphicon glyphicon-pencil"></span></a>
-                        </li>
-                        <li>
-                                <a href="#"><span class="glyphicon glyphicon-cog"> </span> Interest</a>
-                                <a href="experience.php" class="btn btn-light btn-xs" id="editGlyp"><span class="glyphicon glyphicon-pencil"></span></a>
-                                       
-                                
-                        </li>
-                        <li>
-                                <a href="#"><span class="glyphicon glyphicon-thumbs-up"> </span> My Reviews</a>
-                                <a href="#" class="btn btn-light btn-xs" id="editGlyp"><span class="glyphicon glyphicon-pencil"></span></a>
-                        </li>
-                        <li>
-                                <a href="#"><span class="glyphicon glyphicon-certificate"> </span> Account Settings</a>
-                                <a href="#" class="btn btn-light btn-xs" id="editGlyp"><span class="glyphicon glyphicon-pencil"></span></a>
-                        </li>
-                                               
-
-                      </ul>
-                   
-
-                </div>
-
-            </div>
-
+            
 
             
              <?php include 'confirmCode.php' ?>  
 
-            <div class="col-md-9">        
+            <div class="col-md-12">        
                
                 <div class="panel panel-info">
-                    <div class="panel-heading" style="text-align: center"><h3><span class="glyphicon glyphicon-user"></span> My Profile</h3></div>
+                    <!--<div class="panel-heading" style="text-align: center"><h3><span class="glyphicon glyphicon-user"></span> My Profile</h3></div>-->
+                        
                         <div class="panel-body">
 
 
-                                     <form action="" role="form" method="POST" class="form-horizontal">
-                                          
-                                        <div id="showSuccess" class="successHide">
-                                                <p class="bg-success">Your changes have been saved.</p>
-                                        </div>
 
-                                          <div class="form-group" style="margin-left: -7%;">
-                                            <label for="fName" class="col-sm-2 control-label">First Name:</label>
-                                            <div class="col-sm-5">
-                                              <input type="fName" name="userInfoFname" class="form-control" Value="<?php echo getFirstName($userEmail) ?>" >
-                                            </div>
-                                          </div>
+                                    <div class="row">
 
-                                          <div class="form-group" style="margin-left: -7%;">
-                                            <label for="uPassword" class="col-sm-2 control-label">Last Name:</label>
-                                            <div class="col-sm-5">
-                                              <input type="lName" name="userInfoLname" class="form-control" value="<?php echo getLastName($userEmail)?>">
-                                            </div>
-                                          </div>
-
-                                          <div>
-                                            <label>Email Address:</label>
-                                             &nbsp&nbsp <?php echo $userEmail; ?>
-                                             <a href="#" class="btn btn-light btn-xs" style="background-color: white;"><span class="glyphicon glyphicon-pencil"></span></a>
-                                          </div>
-
-                                          <div class="form-group" style="text-align:center; margin-top: 10%;">
-
-                                                <div>                                                  
-                                                     <button type="submit" name="updateUserInfo" class="btn btn-info" onclick="Show_Div(showSuccess)">Update Change</button>
+                                        
+                                        
+                                        <div class="col-md-2">
+                                        
                                             
+                                            <div style="padding-left: 5%;">
+                                                
+                                                      <?php
+                                                        if(empty(displayMyImage($userEmail)))
+                                                             echo '<img id="userViewProfileImageStyle" src="img/user-icon.jpg" alt="User-ImG">';
+                                                        else
+                                                             echo '<img id="userViewProfileImageStyle" src="data:image/jpeg;base64,'.base64_encode(displayMyImage($userEmail)).'"alt="User-ImG">';
+                                                        ?>
+                                            
+                                            </div>
+                                    
+                                            
+                                            
+                                            
+                                            
+                                        
+                                        </div>
+                                        
+                                        
+                                        
+                                        
+                                         <!--style="background-color: gray; padding, margin <a id="myProfileEdit" class="btn btn-default  btn-xs" href="#" role="button">Edit</a>-->
+                                        
+                                        <div class="col-md-8">
+                                        
+                                                        <div class="panel panel-info">
+                                                              <div>
+                                                                <h3 id="myprofileName"><b><?php echo getFullName($userEmail);?></b></h3>
+                                                              </div>
+                                                            
+                                                              <div>
+                                                                    <?php
+                                                                       //Output User Current Experience First
+                                                                    if(mysqli_num_rows($result2) != 0)
+                                                                        {
+                                                                            while ($row = mysqli_fetch_assoc($result2)) 
+                                                                                {    
+                                                                                          echo '<div style="font-size:14px; margin-left: 15px;">';
 
+                                                                                              echo '<div>' . $row['jobTitle'] . ' at ' . $row['userEmployer'] . '</div>';
+                                                                                              echo '<div style="margin-bottom: 10px; margin-top:-5px;">' . '<b>' . $row['stillWorkHere'] . '</b>' . ' - ' . $row['location'] .  '</div>'; 
+
+     
+                                                                                          echo '</div>';
+                                                                                }
+
+                                                                        }
+
+                                                                    ?>
+                                                                  
+                                                              </div>
+                                                        </div>
+                                        
+                                                        
+                                            
+                                            
+                                            
+                              <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true"> <!--Start of Accodion-->
+    
+                                              <div class="panel panel-info">
+                                                    <div class="panel-heading" role="tab" id="headingOne">
+                                                              <h4 class="panel-title">
+                                                                            <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-                                                                                          expanded="true" aria-controls="collapseOne">
+                                                                  <b>Education</b>
+                                                                  <a style="float: right"  id="myProfileEdit" class="btn btn-default  btn-xs" href="degree.php" role="button">Edit</a>              
+                                                                </a>
+                                                              </h4>
+                                                    </div>
+                                                    <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
+
+
+                                                              <div class="panel-body">
+                                                                        
+                                                                  
+                                                            <?php
+                                                                
+                                                                if(mysqli_num_rows($resultEdu) == 0)
+                                                                    {
+                                                                            echo '<div style="text-align:center;">';
+                                                                            echo '<b><p class="bg-danger"> You have not added your education </p></b>';
+                                                                            echo '</div>';
+                                                                    }else{
+                                                                    
+                                                                    
+                                                                    
+                                                                     while ($row = mysqli_fetch_assoc($resultEdu)) 
+                                                                                {    
+                                                                                          echo '<div style="font-size:16px">';
+                                                                                
+                                                                                          echo '<div>' . '<b>' . $row['eduSchoolName'] . '</b>' . '</div>';
+                                                                                          echo '<div>' . $row['eduDegreeLevel'] . '</div>';
+                                                                                          echo '<div>' . $row['eduDegreeName'] . '</div>';
+                                                                                          echo '<div>' . $row['eduStartYear'] . ' - '  .  $row['eduEndYear'] . '</div>';  
+                                                                                    
+                                                                                          echo '<div id="myprofileDividerLine"> </div>';   
+                                                                         
+                                                                                          echo '</div>';
+                                                                                }
+
+                                                                        }
+                                                                    
+                                                                    
+                                                                  
+                                                                  
+                                                                  ?>
+                                                                  
+                                                              </div>
+
+
+                                                    </div>
+                                              </div>
+    
+    
+    
+    
+                                              <div class="panel panel-info">
+                                                <div class="panel-heading" role="tab" id="headingTwo">
+                                                  <h4 class="panel-title">
+                                                    <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                                      <b>Experience</b>
+                                                      <a style="float: right"  id="myProfileEdit" class="btn btn-default  btn-xs" href="experience.php" role="button">Edit</a>  
+                                                    </a>
+                                                  </h4>
                                                 </div>
+                                                <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
+                                                  <div class="panel-body">
+                                                    
+                                                      
+                                                       <?php
+                                                                
+                                                                if(mysqli_num_rows($result2) == 0 && mysqli_num_rows($result) == 0)
+                                                                    {
+                                                                            echo '<div style="text-align:center;">';
+                                                                            echo '<b><p class="bg-danger"> You have not added work experience </p></b>';
+                                                                            echo '</div>';
+                                                                    }else{
+                                                                    
+                                                                    //Output User Current Experience First
+                                                                    if(mysqli_num_rows($result2) != 0)
+                                                                        {
+                                                                            while ($row = mysqli_fetch_assoc($result2)) 
+                                                                                {    
+                                                                                          echo '<div style="font-size:16px">';
+                                                                                
+                                                                                          echo '<div>' . '<b>' . $row['jobTitle'] . '</b>' . '</div>';
+                                                                                          echo '<div>' . $row['userEmployer'] . '</div>';
+                                                                                          echo '<div>' . $row['startDateMonth'] . ' ' . $row['startDateYear'] . ' - ' . '<b>' . $row['stillWorkHere'] . '</b>' . ' - ' . $row['location'] .  '</div>'; 
+                                                                                
+                                                                                          echo '<div id="myprofileDividerLine"></div>';       
+                                                                                          echo '</div>';
+                                                                                }
 
-                                                <div>
-                                                          <b>button type need to change to 'Submit' pop doesnt work</b>
-                                                          <b>Delete Later</b> 
+                                                                        }
+                                                                        
+                                                                    
+
+                                                                    //Output Old User Experience
+                                                                    if(mysqli_num_rows($result) != 0){
+                                                                    
+                                                                            while ($row = mysqli_fetch_assoc($result)) 
+                                                                                        {
+                                                                                                 echo '<div style="font-size:16px">';
+
+                                                                                                 echo '<div>' . '<b>' . $row['jobTitle'] . '</b>' . '</div>';
+                                                                                                 echo '<div>' . $row['userEmployer'] . '</div>';
+                                                                                                 echo '<div>' . $row['startDateMonth'] . ' ' . $row['startDateYear'] . ' - ' . $row['endDateMonth'] . ' ' .  $row['endDateYear'] . ' - ' . $row['location'] . '</div>';
+
+
+                                                                                                 echo '<div id="myprofileDividerLine""></div>';       
+                                                                                                  echo '</div>';
+                                                                                        }
+                                                                            }
+
+                                                                          }
+                                                                    
+                                                                         
+
+                                                             mysqli_close($con);
+
+                                                        ?>
+                                                      
+                                                  </div>
                                                 </div>
+                                              </div>
+                                  
+                                  
+                                  
+                                              <div class="panel panel-info">
+                                                <div class="panel-heading" role="tab" id="headingThree">
+                                                  <h4 class="panel-title">
+                                                    <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                                                      <b>Skills</b>
+                                                      <a style="float: right"  id="myProfileEdit" class="btn btn-default  btn-xs" href="skills.php" role="button">Edit</a>  
+                                                    </a>
+                                                  </h4>
+                                                </div>
+                                                <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
+                                                  <div class="panel-body">
+                                                   
+                                                      <?php
 
-                                          </div>
+                                                        if($userSkill == "na")
+                                                        {
+                                                            
+                                                             echo '<div style="text-align:center;">';
+                                                             echo '<b><p class="bg-danger"> You have not added your skills </p></b>';
+                                                             echo '</div>';
+                                                            
+                                                        }else{
+                                                      
+                                                              $string = str_replace(',', '', $userSkill);
+                                                              $myArraySkill = explode(" ", $string);
 
-                                    </form>
+                                                                 echo '<ul style="line-height: 1.5em; padding-left: 15px; margin-bottom: 0px;">';
+                                                            foreach ($myArraySkill as $value){
+                                                                        
+                                                                        if($value == '')
+                                                                                continue;
+                                                       
+                                                                        echo '<li>' . "$value" . '</li>';
+
+                                                               }         
+
+
+                                                                 echo '</ul>';
+                                                        }  ?> 
+                                                      
+                                                      
+                                                  </div>
+                                                </div>
+                                              </div>
+                                  
+                   
+                                               <div class="panel panel-info">
+                                                <div class="panel-heading" role="tab" id="headingFour">
+                                                  <h4 class="panel-title">
+                                                    <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseFour" aria-expanded="false" aria-controls="collapseThree">
+                                                      <b>Interest</b>
+                                                      <a style="float: right"  id="myProfileEdit" class="btn btn-default  btn-xs" href="interest.php" role="button">Edit</a>  
+                                                    </a>
+                                                  </h4>
+                                                </div>
+                                                <div id="collapseFour" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingFour">
+                                                  <div class="panel-body">
+                                                   
+                                                     <?php
+
+                                                        if($userInterest == "na")
+                                                        {
+                                                            
+                                                             echo '<div style="text-align:center;">';
+                                                             echo '<b><p class="bg-danger"> You have not added your interests </p></b>';
+                                                             echo '</div>';
+                                                            
+                                                        }else{
+                                                      
+                                                              $string = str_replace(',', '', $userInterest);
+                                                              $myArrayInterest = explode(" ", $string);
+
+                                                                 echo '<ul style="line-height: 1.5em; padding-left: 15px; margin-bottom: 0px;">';
+                                                            foreach ($myArrayInterest as $value){
+                                                                        
+                                                                        if($value == '')
+                                                                                continue;
+                                                       
+                                                                        echo '<li>' . "$value" . '</li>';
+
+                                                               }         
+
+
+                                                                 echo '</ul>';
+                                                        }  ?> 
+                                                        
+                                                      
+                                                  </div>
+                                                </div>
+                                              </div>
+                                            
+                                  
+                                              <div class="panel panel-info">
+                                                <div class="panel-heading" role="tab" id="headingFive">
+                                                  <h4 class="panel-title">
+                                                    <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseFive" aria-expanded="false" aria-controls="collapseThree">
+                                                      <b>Reviews</b>
+                                                      <a style="float: right"  id="myProfileEdit" class="btn btn-default  btn-xs" href="#" role="button">Edit</a>  
+                                                    </a>
+                                                  </h4>
+                                                </div>
+                                                <div id="collapseFive" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingFive">
+                                                  <div class="panel-body">
+                                                    Test 
+                                                  </div>
+                                                </div>
+                                              </div>
+                                            
+                         </div> <!--end of Accodion-->
+                                            
+                                            
+                                            
+                                        </div>
+                                        
+                                        
+                                        
+                                        <div style="background-color: gray;" class="col-md-2">.col-md-8</div>
+                                       
+
+
+
+                                    </div>
+
+                            
+      
                          </div>
                 </div>
 
 
                 
-                
-                <div class="row">
-                <div class="col-md-4 col-lg-offset-2"><p>Name:</p></div>
-                <div class="col-md-4 col-lg-pull-2"> 
-                    <?php 
-                        //echo getFullName($userEmail);
-                    ?> 
-                                    </div>
-                        </div>
-                    <br>     
-                        <div class="row">
-                                    <div class="col-md-4 col-lg-offset-2"><p>Email: </p></div>
-                                    <div class="col-md-4 col-lg-pull-2">
-                                        <?php 
-                                            echo $userEmail;
-                                        ?> 
-                                    </div>
-                        </div>
-                    <br>
-                        <div class="row">
-                                    <div class="col-md-4 col-lg-offset-2"><p>Verify</p></div>
-                                    <div class="col-md-4 col-lg-pull-2">
-                                        <?php
-                                            if(checkVerification($userEmail) == 1)
-                                                echo '<span class="glyphicon glyphicon-ok" style="color: green; font-size: 25px;"></span>';
-                                            else
-                                                echo '<span class="glyphicon glyphicon-remove" style="color: red; font-size: 25px"></span>';
-                                        ?>
-                                    </div>
-                        </div>
-                    <br>
-                        <div class="row">
-                                    <div class="col-md-4 col-lg-offset-2"><p>Password:</p></div>
-                                    <div class="col-md-2 col-lg-pull-1"> -------------- </div>
-                                        <?php include 'changepasswordModal.php' ?>                         
-                                    <div class="col-md-3 col-lg-pull-1"><a href="#changePassword"  data-toggle="modal" data-target="#changePassword" class="btn btn-light btn-xs">Edit</a></div>
-                        </div>
-                    <br>
-                        <div class="row">
-                                    <div class="col-md-4 col-lg-offset-2"><p>Degree: </p></div>
-                                    <div class="col-md-2 col-lg-pull-1"> 
-                                        
-                                        <?php 
-                                            echo strtoupper(getDegree($userEmail));
-                                        ?>   
-                                    </div>
-                                    <div class="col-md-3 col-lg-pull-1">
-                                        <a href="#editDegree" data-toggle="modal" data-target="#editDegree" class="btn btn-light btn-xs">Edit</a>
-                                        <?php include('editDegreeModal.php') ?>
-                                        
-                                        
-                                        
-
-                                    </div>
-                        </div>
-                    <br>
-                        <div class="row">
-                                    <div class="col-md-4 col-lg-offset-2"><p>Interests:</p></div>
-                                    <div class="col-md-2 col-lg-pull-1"> 
-                                        <?php 
-                                            echo stripInterest(getInterests($userEmail));
-                                        ?> 
-                                    </div>
-                                    <div class="col-md-3 col-lg-pull-1">
-                                        <a href="#editInterest" data-toggle="modal" data-target="#editInterest" class="btn btn-light btn-xs">Edit</a>
-                                        <?php include('editInterestModal.php') ?>
-                                    </div>
-                        </div> <!--div end here-->                   
+                                
                 </div>         
 
-            </div>-
+            </div>
                     
      </div>    
 </div>
