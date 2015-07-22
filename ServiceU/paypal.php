@@ -82,7 +82,20 @@ target="PPDGFrame">
 
 	<script src="https://www.paypalobjects.com/js/external/apdg.js">
 </script>
+<!--<img src="https://www.paypal.com/en_US/i/btn/btn_xpressCheckout.gif" align="left" style="margin-right:7px;">-->
 
+
+
+<!--USE THE CODE BELOW TO PUT THE BUY NOW BUTTON UPDATE 7/22/15 4:11PM-->
+<!--ALL YOU NEED TO DO IS COPY AND PASTE THE SCRIPT BELOW-->
+<script 
+    data-env="sandbox" 
+    data-currency="USD" 
+    data-amount="0" 
+    data-quantity="1" 
+    data-name="Service" 
+    data-button="buynow" src="https://www.paypalobjects.com/js/external/paypal-button.min.js?merchant=serviceu@gmail.com" async="async"
+></script>
 
 		</div>
 
