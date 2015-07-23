@@ -681,16 +681,6 @@ function nroCommentStars($userEmail, $num){
     return $row['total'];    
 }
 
-function getNroComments($userEmail){
-    global $con;
-
-    $query = "SELECT COUNT(*) as total FROM commentTable WHERE receiverID='$userEmail'";
-    $result = mysqli_query($con, $query);
-    $row = mysqli_fetch_Assoc($result);
-    
-    return $row['total'];   
-}
-
 function getComments($userEmail){
     global $con;
 
