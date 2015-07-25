@@ -1,7 +1,7 @@
 <?php
 
 // Change it if necessary for your localhost
-$con=mysqli_connect("us-cdbr-azure-central-a.cloudapp.net","b1d6ea18aa71c7","d41e125d","serviceuDB");
+$con=mysqli_connect("localhost","root","","serviceu");
 
 function register($email, $firstName, $lastName, $password)
 {
@@ -100,11 +100,45 @@ function getEmail($userEmail){
     return $row['email'];
 }
 
+function getEmailByID($userID){
+    global $con;
+
+    $query = "SELECT email FROM usertable WHERE userId = '$userID'";
+
+    $result = mysqli_query($con, $query);
+    $row = mysqli_fetch_assoc($result);
+        
+    return $row['email'];
+}
+
+function getID($userEmail){
+    global $con;
+
+    $query = "SELECT userID FROM usertable WHERE email = '$userEmail'";
+
+    $result = mysqli_query($con, $query);
+    $row = mysqli_fetch_assoc($result);
+        
+    return $row['userID'];
+}
+
 function getFirstName($userEmail){
     global $con;
 
-    $query = "SELECT firstName FROM userTable
+    $query = "SELECT firstName FROM usertable
               WHERE email = '$userEmail'";
+
+    $result = mysqli_query($con, $query);        
+    $row = mysqli_fetch_assoc($result);
+        
+    return $row['firstName'];        
+}
+
+function getFirstNameByID($userID){
+    global $con;
+
+    $query = "SELECT firstName FROM usertable
+              WHERE userID = '$userID'";
 
     $result = mysqli_query($con, $query);        
     $row = mysqli_fetch_assoc($result);
@@ -681,6 +715,16 @@ function nroCommentStars($userEmail, $num){
     return $row['total'];    
 }
 
+function getNroComments($userEmail){
+    global $con;
+
+    $query = "SELECT COUNT(*) as total FROM commentTable WHERE receiverID='$userEmail'";
+    $result = mysqli_query($con, $query);
+    $row = mysqli_fetch_Assoc($result);
+    
+    return $row['total'];   
+}
+
 function getComments($userEmail){
     global $con;
 
@@ -1124,18 +1168,6 @@ function getUserEduEndYear($ID)
 
 ///////////////////////// REVIEW PAGE
 
-function getNroComments($userEmail){
-    global $con;
-
-    $query = "SELECT COUNT(*) as total FROM commentTable WHERE receiverID='$userEmail'";
-    $result = mysqli_query($con, $query);
-    $row = mysqli_fetch_Assoc($result);
-    
-    return $row['total'];   
-}
-
-
-
 function getNroStarsComments($userEmail, $numStars){
     global $con;
 
@@ -1265,6 +1297,114 @@ function isSelected($jobID){
     
     return $row['selectedEmployee'];  
 }
+
+
+
+////////////sender and reciever table
+function sendMyMessage($senderEmail, $myMessage, $receiverEmail, $isNewMessage){
+    global $con;
+    
+    
+  $query = "INSERT INTO sendertable(senderEmail, senderMessage, recipientEmail, newMessage) values('$senderEmail', '$myMessage', '$receiverEmail', '$isNewMessage')";
+  mysqli_query($con, $query);
+    
+   return TRUE;  
+    
+    
+}
+    
+function getMyMessage($userEmail){
+    
+   global $con;
+
+    $query = "SELECT MAX(senderID) as senderID, senderEmail, senderMessage, newMessage, datesend FROM sendertable WHERE recipientEmail='$userEmail' GROUP BY senderEmail DESC";
+    $result = mysqli_query($con, $query);
+    
+    return $result;
+    
+}
+
+
+function getRecepientMessage($ID)
+{
+    global $con;
+
+    $query = "SELECT senderMessage FROM sendertable WHERE senderID='$ID' ";
+    $result = mysqli_query($con, $query);        
+    $row = mysqli_fetch_assoc($result);
+    
+    return $row['senderMessage'];
+}
+
+function getRecepientLatestDate($ID)
+{
+    global $con;
+
+    $query = "SELECT datesend FROM sendertable WHERE senderID='$ID' ";
+    $result = mysqli_query($con, $query);        
+    $row = mysqli_fetch_assoc($result);
+    
+    return $row['datesend'];
+}
+
+function checkIfThereisHistory($userEmail, $recipient){
+    
+    global $con;
+
+    $query = "SELECT COUNT(*) as total FROM sendertable WHERE senderEmail='$recipient' AND recipientEmail='$userEmail' LIMIT 1";
+    $result = mysqli_query($con, $query);
+    $row = mysqli_fetch_assoc($result);
+    
+    return $row['total'];
+
+}
+
+function loadHistory($userEmail, $recipient){
+    
+   global $con;
+
+    $query = "SELECT * FROM sendertable WHERE (recipientEmail='$userEmail' AND senderEmail='$recipient') || (recipientEmail='$recipient' AND senderEmail='$userEmail') ";
+    $result = mysqli_query($con, $query);
+    
+    return $result;
+    
+}
+
+function countMyNewMesssages($userEmail)
+{
+    
+    global $con;
+
+    $query = "SELECT COUNT(*) as total FROM sendertable WHERE recipientEmail='$userEmail' AND newMessage='Yes'";
+    $result = mysqli_query($con, $query);
+    $row = mysqli_fetch_assoc($result);
+    
+    return $row['total'];
+    
+}
+
+function updateMyNumberofMessages($userEmail, $sender){
+     global $con;
+    
+     $query = "UPDATE sendertable SET newMessage='Read' WHERE senderEmail='$sender' AND recipientEmail='$userEmail'";
+     $result = mysqli_query($con,$query );
+    
+      return TRUE;
+    
+}
+
+
+function getIfNewMessage($ID)
+{
+    global $con;
+
+    $query = "SELECT newMessage FROM sendertable WHERE senderID='$ID' ";
+    $result = mysqli_query($con, $query);        
+    $row = mysqli_fetch_assoc($result);
+    
+    return $row['newMessage'];
+}
+
 
 
 

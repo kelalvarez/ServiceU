@@ -317,6 +317,18 @@
                                 </span>
                                 </h1>
 
+                                <div>
+                                    <?php
+                                       $temp = $_GET['jobID'];
+                                       $jobowerEmail = getJobOwner($temp);
+                                     
+                                       $owerJobID = getID($jobowerEmail);
+                                     
+                                     echo '<a class="btn btn-light btn-s" href="conversation.php?userID='.$owerJobID.'" role="button"><span class="glyphicon glyphicon-envelope"></span></a>';
+                                        ?>
+                                </div>
+                                
+                                
                             </div>
                         </div>
                     <br>

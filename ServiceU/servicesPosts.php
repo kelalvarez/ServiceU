@@ -53,21 +53,21 @@ include('functions.php');
     while ($row = mysqli_fetch_assoc($result)) {
         
         
-        echo "<div class=\"panel panel-default\">";
-        echo "<div class=\"panel-heading bg-primary \" style=\"font-weight: bold\">";
+        echo '<div class="panel panel-info" style="text-align: center">';
+        echo '<div class="panel-heading bg-primary" style="font-weight: bold">';
             //echo "<a href=\"#postInformation\" data-toggle=\"modal\" data-target=\"#postInformation\" data-job-id=\"";
             //echo "<a href=\"services.php?jobID=\"";
             //echo "<button id=\"btnPopModal\">";
             $jobID = $row['jobID'];
             //echo $postID;
             //echo "\">";
-            echo "<a href=\"postComplete.php?jobID=";
+            echo '<a href="postComplete.php?jobID=';
             echo $jobID;
             echo "\" target=\"_parent\">";
             echo $row["jobTitle"];
             echo "</a>";
             //echo "</button>";
-            echo "&nbsp;&nbsp;&nbsp;<span class=\"badge\">";
+            echo "&nbsp&nbsp&nbsp<span class=\"badge\">";
             echo numApplications($row["jobID"]);
             echo "</span>";
         echo "</div>";

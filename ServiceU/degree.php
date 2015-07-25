@@ -146,9 +146,9 @@
                             ?>
 
                         <div class="profileSet" id="Profile-List">
-                            <a href="viewmyprofile.php"><b><?php echo getFullName($userEmail);?></b></a>
+                            <a href="viewmyprofile.php?userID=<?php echo getID($userEmail) ?>"><b><?php echo getFullName($userEmail);?></b></a>
                             <br>
-                            <a href="viewmyprofile.php">View My Profile</a>
+                            <a href="viewmyprofile.php?userID=<?php echo getID($userEmail) ?>">View My Profile</a>
                             <br>
                             <br>
                              <?php
@@ -239,7 +239,7 @@
                                                                 echo '<div style="font-size:16px">';
 
                                                                       echo '<div style="border-top-style: solid; border-width: 1px; border-top-color: #bce8f1;">' . '<b>' . $row['eduSchoolName'] . '</b>' . 
-            '<a style="float:right; background-color: white; font-size:15px;" class="btn btn-light btn-s" href="deleteEducation.php?eduID='.$row['eduID'].'" role="button"><span class="glyphicon glyphicon-remove"></span></a>' . 
+            '<a style="float:right; background-color: white; font-size:15px;" class="btn btn-light btn-s" onclick="deleteEdu()" href="deleteEducation.php?eduID='.$row['eduID'].'" role="button"><span class="glyphicon glyphicon-remove"></span></a>' . 
             '<a href="editDegree.php?eduID='.$row['eduID'].'" style="float:right; background-color: white; font-size:15px;" class="btn btn-light btn-s" id="editGlyp">Edit</span></a>' . '</div>';
 
 
@@ -318,6 +318,20 @@
                 </ul>
          
     </footer>
+    
+    
+        
+    <script>
+            function deleteEdu() {
+                var ask = window.confirm("Are you sure you want to delete this post?");
+                if (ask) {
+                    window.alert("This post was successfully deleted.");
+
+                    document.location.href = "window-location.html";
+                        var dsd = $_GET[''];
+                }
+            }
+    </script>
 
 
 
@@ -373,6 +387,7 @@
         }
     ?>
     </script>
+
 
     
       <!-- jQuery -->

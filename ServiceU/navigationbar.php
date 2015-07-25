@@ -15,8 +15,9 @@
             <ul class="nav navbar-nav">
                 
                 <!--Home-->
-                <li class="active"><a href="#"><span class="glyphicon glyphicon-home"></span> Home</a></li>
-                <li><a href="services.php"><span class="glyphicon glyphicon-briefcase"></span>Services</a></li>
+                <li class="active"><a href="services.php"><span class="glyphicon glyphicon-home"></span> Home</a></li>
+                <li><a href="#"><span class="glyphicon glyphicon-briefcase"></span>Services</a></li>
+                
                 <!--<li><a href="#">Profile</a></li>-->
 
 
@@ -38,18 +39,33 @@
                 </div>
             </form>-->
             </ul>
+             
             <ul class="nav navbar-nav pull-right"> <!--user  nav bar-->
-
+                
+            <li><a href="inbox.php"> <span style="font-size: 17px; margin-right: 5px;" class="glyphicon glyphicon-envelope"></span><span class="badge">
+                <?php
+    
+        
+                   if(empty(countMyNewMesssages($userEmail)))
+                      echo 0;
+                    else
+                      echo '<span style="color: #37FF00;">' . countMyNewMesssages($userEmail) . '</span>';
+                ?>
+                
+                </span></a></li>
+                
             <li class="dropdown">
-                <a href="#" data-toggle="dropdown"> <span class="glyphicon glyphicon-user"></span> <?php echo getFullName($userEmail); ?>
+              
+              
+                <a href="#" data-toggle="dropdown"> <span class="glyphicon glyphicon-user"></span>&nbsp <?php echo getFullName($userEmail); ?>
                 <span class="caret"</span></a>
 
-                <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+                <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu">
 
-                <li role="presentation"><a role="menuitem" tabindex="-1" href="profile.php"><span class="glyphicon glyphicon-cog"></span>My Profile</a></li>         
-                <li role="presentation"><a role="menuitem" tabindex="-1" href="mydashboard.php"><span class="glyphicon glyphicon-bookmark"></span>My Dashboard</a></li>
-                <li role="presentation"><a role="menuitem" tabindex="-1" href="notifications.php"><span class="glyphicon glyphicon-bell"></span> Notifications</a></li>
-                <li role="presentation"><a role="menuitem" tabindex="-1" href="logout.php"><span class="glyphicon glyphicon-remove"></span> Log Out</a></li>
+                <li role="presentation"><a role="menuitem" tabindex="-1" href="profile.php"><span class="glyphicon glyphicon-cog"></span>&nbsp My Profile</a></li>         
+                <li role="presentation"><a role="menuitem" tabindex="-1" href="mydashboard.php"><span class="glyphicon glyphicon-bookmark"></span>&nbsp My Dashboard</a></li>
+                <li role="presentation"><a role="menuitem" tabindex="-1" href="notifications.php"><span class="glyphicon glyphicon-bell"></span>&nbsp Notifications</a></li>
+                <li role="presentation"><a role="menuitem" tabindex="-1" href="logout.php"><span class="glyphicon glyphicon-remove"></span>&nbsp Log Out</a></li>
    
             </ul>
 
@@ -74,6 +90,7 @@
         $(".nav a").on("click", function(){
            $(".nav").find(".active").removeClass("active");
            $(this).parent().addClass("active");
+            
         });
     </script>
 

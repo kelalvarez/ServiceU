@@ -133,9 +133,9 @@
                             ?>
 
                         <div class="profileSet" id="Profile-List">
-                            <a href="viewmyprofile.php"><b><?php echo getFullName($userEmail);?></b></a>
+                            <a href="viewmyprofile.php?userID=<?php echo getID($userEmail) ?>"><b><?php echo getFullName($userEmail);?></b></a>
                             <br>
-                            <a href="viewmyprofile.php">View My Profile</a>
+                            <a href="viewmyprofile.php?userID=<?php echo getID($userEmail) ?>">View My Profile</a>
                             <br>
                             <br>
                              <?php
@@ -316,10 +316,10 @@
                               
                                 
                                  foreach($_POST['interestText'] as $key => $text_field){ //check if all fields are empty
-                                    if(empty($text_field)){
-                                            $checkNum++;
-                                    }
-                                 }
+                                        if(empty($text_field)){
+                                                $checkNum++;
+                                        }
+                                     }
                                 
                                 if($aSize == $checkNum){  //if all fields are empty send 'na' to the database
                                     $string = 'na';

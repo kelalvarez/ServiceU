@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.3.11
+-- version 4.1.14
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 22, 2015 at 10:38 PM
--- Server version: 5.6.24
--- PHP Version: 5.6.8
+-- Generation Time: Jul 25, 2015 at 11:00 AM
+-- Server version: 5.6.17
+-- PHP Version: 5.5.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -19,6 +19,61 @@ SET time_zone = "+00:00";
 --
 -- Database: `serviceu`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `alertstable`
+--
+
+CREATE TABLE IF NOT EXISTS `alertstable` (
+  `email` varchar(35) NOT NULL,
+  `alertTime` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `orderNum` int(3) NOT NULL AUTO_INCREMENT,
+  `message` varchar(600) NOT NULL,
+  PRIMARY KEY (`orderNum`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=36 ;
+
+--
+-- Dumping data for table `alertstable`
+--
+
+INSERT INTO `alertstable` (`email`, `alertTime`, `orderNum`, `message`) VALUES
+('testemail1@gmail.com', '2015-07-21 21:10:28', 1, 'New Test Notification'),
+('testemail1@gmail.com', '2015-07-21 21:10:54', 2, 'New Notification 2'),
+('testemail1@gmail.com', '2015-07-21 21:10:54', 3, 'New Notification 3'),
+('', '2015-07-21 22:38:06', 4, ''),
+('', '2015-07-21 22:38:06', 5, ''),
+('testemail1@gmail.com', '2015-07-21 22:38:43', 6, 'The owner of the post, which you applied for, has changed. <a href="postComplete.php?jobID=testemail4@gmail.com" target="_parent">Click here </a> to review the changes'),
+('testemail1@gmail.com', '2015-07-21 22:38:43', 7, 'The owner of the post, which you applied for, has changed. <a href="postComplete.php?jobID=testemail3@gmail.com" target="_parent">Click here </a> to review the changes'),
+('testemail1@gmail.com', '2015-07-21 22:38:52', 8, 'The owner of the post, which you applied for, has changed. <a href="postComplete.php?jobID=testemail4@gmail.com" target="_parent">Click here </a> to review the changes'),
+('testemail1@gmail.com', '2015-07-21 22:38:52', 9, 'The owner of the post, which you applied for, has changed. <a href="postComplete.php?jobID=testemail3@gmail.com" target="_parent">Click here </a> to review the changes'),
+('testemail1@gmail.com', '2015-07-21 22:39:51', 10, 'The owner of the post, which you applied for, has changed. <a href="postComplete.php?jobID=9" target="_parent">Click here </a> to review the changes'),
+('testemail1@gmail.com', '2015-07-21 22:39:51', 11, 'The owner of the post, which you applied for, has changed. <a href="postComplete.php?jobID=9" target="_parent">Click here </a> to review the changes'),
+('testemail1@gmail.com', '2015-07-21 22:40:15', 12, 'The owner of the post, which you applied for, has changed. <a href="postComplete.php?jobID=9" target="_parent">Click here </a> to review the changes'),
+('testemail1@gmail.com', '2015-07-21 22:40:16', 13, 'The owner of the post, which you applied for, has changed. <a href="postComplete.php?jobID=9" target="_parent">Click here </a> to review the changes'),
+('testemail1@gmail.com', '2015-07-21 23:11:17', 14, 'sdas'),
+('testemail1@gmail.com', '2015-07-21 23:11:17', 15, 'sdas'),
+('testemail1@gmail.com', '2015-07-21 23:13:03', 16, 'akdjlaksjda The owner of the post'),
+('testemail1@gmail.com', '2015-07-21 23:13:03', 17, 'akdjlaksjda The owner of the post'),
+('testemail1@gmail.com', '2015-07-21 23:13:33', 18, ' Sample Job Title 1 The owner of the post'),
+('testemail1@gmail.com', '2015-07-21 23:13:33', 19, ' Sample Job Title 1 The owner of the post'),
+('testemail1@gmail.com', '2015-07-21 23:13:52', 20, '<strong> Sample Job Title 1 </strong> The owner of the post'),
+('testemail1@gmail.com', '2015-07-21 23:13:52', 21, '<strong> Sample Job Title 1 </strong> The owner of the post'),
+('testemail1@gmail.com', '2015-07-21 23:14:44', 22, '<strong> Sample Job Title 1 </strong> :: The owner of the post, which you applied for, has changed the jobs information.'),
+('testemail1@gmail.com', '2015-07-21 23:14:44', 23, '<strong> Sample Job Title 1 </strong> :: The owner of the post, which you applied for, has changed the jobs information.'),
+('testemail1@gmail.com', '2015-07-21 23:15:07', 24, '<strong> Sample Job Title 1 </strong> :: The owner of the post, which you applied for, has changed the jobs information. <a href="postComplete.php?jobID=9" target="_parent">Click here </a> to review the changes'),
+('testemail1@gmail.com', '2015-07-21 23:15:07', 25, '<strong> Sample Job Title 1 </strong> :: The owner of the post, which you applied for, has changed the jobs information. <a href="postComplete.php?jobID=9" target="_parent">Click here </a> to review the changes'),
+('testemail4@gmail.com', '2015-07-21 23:17:21', 26, '<strong> Sample Job Title 1 </strong> :: The owner of the post, which you applied for, has changed the jobs information. <a href="postComplete.php?jobID=9" target="_parent">Click here </a> to review the changes'),
+('testemail3@gmail.com', '2015-07-21 23:17:21', 27, '<strong> Sample Job Title 1 </strong> :: The owner of the post, which you applied for, has changed the jobs information. <a href="postComplete.php?jobID=9" target="_parent">Click here </a> to review the changes'),
+('testemail4@gmail.com', '2015-07-21 23:19:42', 28, '<strong> Sample Job Title 1 </strong> :: The owner of the post, which you applied for, has changed the jobs information. <a href="postComplete.php?jobID=9" target="_parent">Click here </a> to review the changes'),
+('testemail3@gmail.com', '2015-07-21 23:19:42', 29, '<strong> Sample Job Title 1 </strong> :: The owner of the post, which you applied for, has changed the jobs information. <a href="postComplete.php?jobID=9" target="_parent">Click here </a> to review the changes'),
+('testemail4@gmail.com', '2015-07-22 13:27:23', 30, '<strong>  </strong> :: You have been selected for the job. <a href="postComplete.php?jobID=9" target="_parent">Click here </a> to review job'),
+('testemail3@gmail.com', '2015-07-22 13:28:49', 31, '<strong> Sample Job Title 1 </strong> :: You have been selected for the job. <a href="postComplete.php?jobID=9" target="_parent">Click here </a> to review job'),
+('testemail1@gmail.com', '2015-07-22 14:06:46', 32, '<strong> Sample Job Title 1 </strong> :: The applicant that you selected has confirm his/her application. <a href="postComplete.php?jobID=9" target="_parent">Click here </a> to review job'),
+('testemail4@gmail.com', '2015-07-22 14:06:46', 33, '<strong> <a href="postComplete.php?jobID=9" target="_parent"></a> </strong> :: The job has been closed. Thank you for your application.'),
+('testemail4@gmail.com', '2015-07-22 14:08:51', 34, '<strong> Sample Job Title 1 </strong> :: You have been selected for the job. <a href="postComplete.php?jobID=9" target="_parent">Click here </a> to review job'),
+('testemail1@gmail.com', '2015-07-22 14:09:48', 35, '<strong> Sample Job Title 1 </strong> :: The applicant that you selected has deny the job offer. <a href="postComplete.php?jobID=9" target="_parent">Click here </a> to review the job');
 
 -- --------------------------------------------------------
 
@@ -90,21 +145,22 @@ INSERT INTO `commenttable` (`receiverID`, `senderID`, `comment`, `stars`, `entry
 --
 
 CREATE TABLE IF NOT EXISTS `jobtable` (
-  `jobID` int(8) NOT NULL,
-  `employerID` varchar(40) NOT NULL,
+  `jobID` int(8) NOT NULL AUTO_INCREMENT,
+  `employeerID` varchar(40) NOT NULL,
   `jobTitle` varchar(200) NOT NULL,
   `jobDescription` varchar(400) NOT NULL,
   `payment` int(3) NOT NULL,
   `category` varchar(20) NOT NULL,
   `totalApp` int(2) NOT NULL DEFAULT '0',
-  `closeJob` int(1) NOT NULL DEFAULT '0'
-) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=latin1;
+  `closeJob` int(1) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`jobID`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=22 ;
 
 --
 -- Dumping data for table `jobtable`
 --
 
-INSERT INTO `jobtable` (`jobID`, `employerID`, `jobTitle`, `jobDescription`, `payment`, `category`, `totalApp`, `closeJob`) VALUES
+INSERT INTO `jobtable` (`jobID`, `employeerID`, `jobTitle`, `jobDescription`, `payment`, `category`, `totalApp`, `closeJob`) VALUES
 (1, 'testemail1@gmail.com', 'Software Engineer', 'Utilize business user stories to determine business and technology requirements to ultimately deliver exceptional programs, features, modules, and small projects in a timely and cost effective manner.', 100, 'Software', 1, 0),
 (2, 'testemail1@gmail.com', 'Accountant Analyst', 'We are looking for a Hands-On individual located in our Littleton corporate office responsible for assisting in all areas of the agent onboarding process and risk analysis. Reporting to the Operations Manager, the New Accounts Specialist is responsible for auditing all new agent files, ensuring compliance of state regulations, conducting financial risk analysis and adhering to company policies.', 150, 'Accountant', 1, 0),
 (3, 'testemail1@gmail.com', 'Gardener', 'We currently have fulltime positions for a Gardener who will maintain grounds of industrial, commercial, or public property by performing the following duties:\r\nCutting lawns using various sized power mowers\r\nTrimming and edging using a gas powered edger/trimmer\r\n', 200, 'Gardener', 1, 0),
@@ -122,11 +178,38 @@ INSERT INTO `jobtable` (`jobID`, `employerID`, `jobTitle`, `jobDescription`, `pa
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `sendertable`
+--
+
+CREATE TABLE IF NOT EXISTS `sendertable` (
+  `senderID` int(11) NOT NULL AUTO_INCREMENT,
+  `senderMessage` varchar(1200) COLLATE utf8_unicode_ci NOT NULL,
+  `recipientEmail` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
+  `senderEmail` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
+  `newMessage` varchar(10) COLLATE utf8_unicode_ci NOT NULL,
+  `datesend` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`senderID`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=30 ;
+
+--
+-- Dumping data for table `sendertable`
+--
+
+INSERT INTO `sendertable` (`senderID`, `senderMessage`, `recipientEmail`, `senderEmail`, `newMessage`, `datesend`) VALUES
+(25, 'MY First Message', 'testemail1@gmail.com', 'SADAM@GMAIL.COM', 'Read', '2015-07-25 07:45:50'),
+(26, 'Another Message', 'testemail1@gmail.com', 'mark@gmail.com', 'Read', '2015-07-25 07:47:02'),
+(27, 'Second Message', 'testemail1@gmail.com', 'mark@gmail.com', 'Read', '2015-07-25 07:56:15'),
+(28, 'Hey Michael', 'testemail1@gmail.com', 'mark@gmail.com', 'Read', '2015-07-25 08:15:20'),
+(29, 'Hey im interested', 'testemail1@gmail.com', 'testmail4@gmail.com', 'Read', '2015-07-25 08:21:09');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `useredutable`
 --
 
 CREATE TABLE IF NOT EXISTS `useredutable` (
-  `eduID` int(8) NOT NULL,
+  `eduID` int(8) NOT NULL AUTO_INCREMENT,
   `eduEmail` varchar(30) COLLATE utf8_unicode_ci NOT NULL,
   `eduSchoolName` varchar(30) COLLATE utf8_unicode_ci NOT NULL,
   `eduDegreeLevel` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
@@ -136,16 +219,17 @@ CREATE TABLE IF NOT EXISTS `useredutable` (
   `eduStartMonth` varchar(10) COLLATE utf8_unicode_ci NOT NULL,
   `eduStartYear` varchar(10) COLLATE utf8_unicode_ci NOT NULL,
   `eduEndMonth` varchar(10) COLLATE utf8_unicode_ci NOT NULL,
-  `eduEndYear` varchar(10) COLLATE utf8_unicode_ci NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+  `eduEndYear` varchar(10) COLLATE utf8_unicode_ci NOT NULL,
+  PRIMARY KEY (`eduID`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=14 ;
 
 --
 -- Dumping data for table `useredutable`
 --
 
 INSERT INTO `useredutable` (`eduID`, `eduEmail`, `eduSchoolName`, `eduDegreeLevel`, `eduDegreeName`, `eduCountry`, `eduLocation`, `eduStartMonth`, `eduStartYear`, `eduEndMonth`, `eduEndYear`) VALUES
-(6, 'mark@gmail.com', 'Los Medanos College', 'Bachelor Degree', 'Sofware Engineering', 'Algeria', 'San Francisco', 'April', '1999', 'March', '2008'),
-(12, 'mark@gmail.com', 'San Jose State University', 'Bachelor Degree', 'Sofware Engineering', 'United States', 'San Jose, California', 'August', '2011', 'August', '2015');
+(12, 'mark@gmail.com', 'San Jose State University', 'Bachelor Degree', 'Sofware Engineering', 'United States', 'San Jose, California', 'August', '2011', 'August', '2015'),
+(13, 'mark@gmail.com', 'Yale', 'Professional', 'Sofware Engineering', 'United States', 'San Francisco', 'January', '1999', 'January', '2005');
 
 -- --------------------------------------------------------
 
@@ -154,7 +238,7 @@ INSERT INTO `useredutable` (`eduID`, `eduEmail`, `eduSchoolName`, `eduDegreeLeve
 --
 
 CREATE TABLE IF NOT EXISTS `userexperiencetable` (
-  `expID` int(8) NOT NULL,
+  `expID` int(8) NOT NULL AUTO_INCREMENT,
   `emailID` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
   `userEmployer` varchar(75) COLLATE utf8_unicode_ci NOT NULL,
   `jobTitle` varchar(75) COLLATE utf8_unicode_ci NOT NULL,
@@ -165,8 +249,9 @@ CREATE TABLE IF NOT EXISTS `userexperiencetable` (
   `startDateMonth` varchar(20) COLLATE utf8_unicode_ci NOT NULL,
   `startDateYear` varchar(20) COLLATE utf8_unicode_ci NOT NULL,
   `endDateMonth` varchar(20) COLLATE utf8_unicode_ci NOT NULL,
-  `endDateYear` varchar(20) COLLATE utf8_unicode_ci NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=29 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+  `endDateYear` varchar(20) COLLATE utf8_unicode_ci NOT NULL,
+  PRIMARY KEY (`expID`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=29 ;
 
 --
 -- Dumping data for table `userexperiencetable`
@@ -183,11 +268,12 @@ INSERT INTO `userexperiencetable` (`expID`, `emailID`, `userEmployer`, `jobTitle
 --
 
 CREATE TABLE IF NOT EXISTS `userimage` (
-  `imgID` int(10) NOT NULL,
+  `imgID` int(10) NOT NULL AUTO_INCREMENT,
   `imgUserEmail` varchar(25) COLLATE utf8_unicode_ci NOT NULL,
   `imgName` varchar(25) COLLATE utf8_unicode_ci NOT NULL,
-  `image` longblob NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+  `image` longblob NOT NULL,
+  PRIMARY KEY (`imgID`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=27 ;
 
 --
 -- Dumping data for table `userimage`
@@ -201,11 +287,28 @@ INSERT INTO `userimage` (`imgID`, `imgUserEmail`, `imgName`, `image`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `userinboxtable`
+--
+
+CREATE TABLE IF NOT EXISTS `userinboxtable` (
+  `inboxID` int(10) NOT NULL AUTO_INCREMENT,
+  `receiverEmail` varchar(20) COLLATE utf8_unicode_ci NOT NULL,
+  `senderEmail` varchar(20) COLLATE utf8_unicode_ci NOT NULL,
+  `senderMessage` varchar(1200) COLLATE utf8_unicode_ci NOT NULL,
+  `isNewMessage` varchar(4) COLLATE utf8_unicode_ci NOT NULL,
+  `isNewMessageRead` varchar(10) COLLATE utf8_unicode_ci NOT NULL,
+  `senderSendDate` datetime DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`inboxID`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=84 ;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `usertable`
 --
 
 CREATE TABLE IF NOT EXISTS `usertable` (
-  `userID` int(8) NOT NULL,
+  `userID` int(8) NOT NULL AUTO_INCREMENT,
   `email` varchar(35) NOT NULL DEFAULT '',
   `firstName` varchar(20) NOT NULL,
   `lastName` varchar(20) NOT NULL,
@@ -216,8 +319,10 @@ CREATE TABLE IF NOT EXISTS `usertable` (
   `skill` varchar(300) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL DEFAULT 'na',
   `interest` varchar(300) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL DEFAULT 'na',
   `rate` int(1) NOT NULL DEFAULT '0',
-  `verificationCode` varchar(10) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=49 DEFAULT CHARSET=latin1;
+  `verificationCode` varchar(10) NOT NULL,
+  PRIMARY KEY (`email`),
+  UNIQUE KEY `userID` (`userID`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=49 ;
 
 --
 -- Dumping data for table `usertable`
@@ -232,74 +337,11 @@ INSERT INTO `usertable` (`userID`, `email`, `firstName`, `lastName`, `userPhone`
 (36, 'marv@gmail.com', 'k', 'm', '0', 'volcom12', 0, 0, 'na', 'na', 0, 'jyKFcwO1VV'),
 (47, 'SADAM@GMAIL.COM', 'Lo', 'Desenberg', '0', '123', 0, 0, 'na', 'na', 0, 'LOmiMStOXB'),
 (48, 'sadamn2@yahoo.com', 'sadamn2', 'mike', '0', '123', 0, 0, 'na', 'na', 0, 'EliG7XGKh0'),
-(1, 'testemail1@gmail.com', 'Michael', 'Johnson', '', 'password1', 1, 0, 'na', 'computers software css php groceries', 0, ''),
+(1, 'testemail1@gmail.com', 'Michael', 'Johnson', '', 'volcom12', 1, 0, 'na', 'computers software css php groceries', 0, ''),
 (2, 'testemail2@gmail.com', 'Luke', 'Walker', '0', 'password2', 0, 0, 'na', 'na', 0, ''),
 (3, 'testemail3@gmail.com', 'Test Name3', 'Last Name3', '0', 'password3', 1, 0, 'na', 'BS Software Engineering', 0, ''),
 (4, 'testmail4@gmail.com', 'Test Name4', 'Last Name4', '0', 'password4', 1, 1, 'na', 'groceries, computers', 0, '');
 
---
--- Indexes for dumped tables
---
-
---
--- Indexes for table `jobtable`
---
-ALTER TABLE `jobtable`
-  ADD PRIMARY KEY (`jobID`);
-
---
--- Indexes for table `useredutable`
---
-ALTER TABLE `useredutable`
-  ADD PRIMARY KEY (`eduID`);
-
---
--- Indexes for table `userexperiencetable`
---
-ALTER TABLE `userexperiencetable`
-  ADD PRIMARY KEY (`expID`);
-
---
--- Indexes for table `userimage`
---
-ALTER TABLE `userimage`
-  ADD PRIMARY KEY (`imgID`);
-
---
--- Indexes for table `usertable`
---
-ALTER TABLE `usertable`
-  ADD PRIMARY KEY (`email`), ADD UNIQUE KEY `userID` (`userID`);
-
---
--- AUTO_INCREMENT for dumped tables
---
-
---
--- AUTO_INCREMENT for table `jobtable`
---
-ALTER TABLE `jobtable`
-  MODIFY `jobID` int(8) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=22;
---
--- AUTO_INCREMENT for table `useredutable`
---
-ALTER TABLE `useredutable`
-  MODIFY `eduID` int(8) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=13;
---
--- AUTO_INCREMENT for table `userexperiencetable`
---
-ALTER TABLE `userexperiencetable`
-  MODIFY `expID` int(8) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=29;
---
--- AUTO_INCREMENT for table `userimage`
---
-ALTER TABLE `userimage`
-  MODIFY `imgID` int(10) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=27;
---
--- AUTO_INCREMENT for table `usertable`
---
-ALTER TABLE `usertable`
-  MODIFY `userID` int(8) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=49;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

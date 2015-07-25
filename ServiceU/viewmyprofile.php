@@ -108,16 +108,22 @@
     
      
     <?php 
-    
-            $result = getAllUserOldExperience($userEmail);
+      
+                if(isset($_GET['userID'])){
+                            $userToBeVIew = $_GET['userID'];
 
-            $result2 = getAllUserCurrentJob($userEmail);
+                            $user = getEmailByID($userToBeVIew);
+                                //////
+                            $result = getAllUserOldExperience($user);
 
-            $resultEdu = getAllUserEducation($userEmail);
+                            $result2 = getAllUserCurrentJob($user);
 
-            $userInterest = getInterests($userEmail);
+                            $resultEdu = getAllUserEducation($user);
 
-            $userSkill = getSkills($userEmail);
+                            $userInterest = getInterests($user);
+
+                            $userSkill = getSkills($user);
+                }
 
             if (!$resultEdu) {
             echo "The fucntion getAllUserEducation is not working properly";
@@ -172,18 +178,16 @@
                                             <div style="padding-left: 5%;">
                                                 
                                                       <?php
-                                                        if(empty(displayMyImage($userEmail)))
+                                                        if(empty(displayMyImage($user)))
                                                              echo '<img id="userViewProfileImageStyle" src="img/user-icon.jpg" alt="User-ImG">';
                                                         else
-                                                             echo '<img id="userViewProfileImageStyle" src="data:image/jpeg;base64,'.base64_encode(displayMyImage($userEmail)).'"alt="User-ImG">';
+                                                             echo '<img id="userViewProfileImageStyle" src="data:image/jpeg;base64,'.base64_encode(displayMyImage($user)).'"alt="User-ImG">';
                                                         ?>
                                             
                                             </div>
                                     
                                             
-                                            
-                                            
-                                            
+                                    
                                         
                                         </div>
                                         
@@ -196,7 +200,7 @@
                                         
                                                         <div class="panel panel-info">
                                                               <div>
-                                                                <h3 id="myprofileName"><b><?php echo getFullName($userEmail);?></b></h3>
+                                                                <h3 id="myprofileName"><b><?php echo getFullName($user);?></b></h3>
                                                               </div>
                                                             
                                                               <div>
@@ -207,9 +211,9 @@
                                                                             while ($row = mysqli_fetch_assoc($result2)) 
                                                                                 {    
                                                                                           echo '<div style="font-size:14px; margin-left: 15px;">';
-
+                                                                                  
                                                                                               echo '<div>' . $row['jobTitle'] . ' at ' . $row['userEmployer'] . '</div>';
-                                                                                              echo '<div style="margin-bottom: 10px; margin-top:-5px;">' . '<b>' . $row['stillWorkHere'] . '</b>' . ' - ' . $row['location'] .  '</div>'; 
+                                                                                              echo '<div style="margin-bottom: 10px; margin-top:-5px;">' . $row['startDateMonth'] . ' - ' . $row['startDateYear']  . ' - ' . '<b>' . $row['stillWorkHere'] . '</b>' . ' - ' . $row['location'] .  '</div>'; 
 
      
                                                                                           echo '</div>';
@@ -222,7 +226,6 @@
                                                               </div>
                                                         </div>
                                         
-                                                        
                                             
                                             
                                             
@@ -233,8 +236,11 @@
                                                               <h4 class="panel-title">
                                                                             <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-                                                                                          expanded="true" aria-controls="collapseOne">
                                                                   <b>Education</b>
-                                                                  <a style="float: right"  id="myProfileEdit" class="btn btn-default  btn-xs" href="degree.php" role="button">Edit</a>              
+                                                                   <?php             
+                                                                    if($userEmail == $user)            
+                                                                        echo '<a style="float: right"  id="myProfileEdit" class="btn btn-default  btn-xs" href="degree.php" role="button">Edit</a>';          ?>    
                                                                 </a>
+                                                                        
                                                               </h4>
                                                     </div>
                                                     <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
@@ -275,6 +281,8 @@
                                                                   
                                                                   ?>
                                                                   
+                                                                  
+                                                                  
                                                               </div>
 
 
@@ -289,14 +297,18 @@
                                                   <h4 class="panel-title">
                                                     <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
                                                       <b>Experience</b>
-                                                      <a style="float: right"  id="myProfileEdit" class="btn btn-default  btn-xs" href="experience.php" role="button">Edit</a>  
+                                                         <?php             
+                                                                    if($userEmail == $user) 
+                                                      echo '<a style="float: right"  id="myProfileEdit" class="btn btn-default  btn-xs" href="experience.php" role="button">Edit</a>';
+                                                                        ?>
                                                     </a>
                                                   </h4>
                                                 </div>
                                                 <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
                                                   <div class="panel-body">
-                                                    
                                                       
+                                                      
+                                                                          
                                                        <?php
                                                                 
                                                                 if(mysqli_num_rows($result2) == 0 && mysqli_num_rows($result) == 0)
@@ -309,10 +321,13 @@
                                                                     //Output User Current Experience First
                                                                     if(mysqli_num_rows($result2) != 0)
                                                                         {
+                                                                              
                                                                             while ($row = mysqli_fetch_assoc($result2)) 
-                                                                                {    
-                                                                                          echo '<div style="font-size:16px">';
+                                                                                {      
                                                                                 
+                                                                                       
+                                                                                          echo '<div style="font-size:16px">';
+                                                                                        
                                                                                           echo '<div>' . '<b>' . $row['jobTitle'] . '</b>' . '</div>';
                                                                                           echo '<div>' . $row['userEmployer'] . '</div>';
                                                                                           echo '<div>' . $row['startDateMonth'] . ' ' . $row['startDateYear'] . ' - ' . '<b>' . $row['stillWorkHere'] . '</b>' . ' - ' . $row['location'] .  '</div>'; 
@@ -327,7 +342,7 @@
 
                                                                     //Output Old User Experience
                                                                     if(mysqli_num_rows($result) != 0){
-                                                                    
+                                                                     
                                                                             while ($row = mysqli_fetch_assoc($result)) 
                                                                                         {
                                                                                                  echo '<div style="font-size:16px">';
@@ -361,7 +376,10 @@
                                                   <h4 class="panel-title">
                                                     <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
                                                       <b>Skills</b>
-                                                      <a style="float: right"  id="myProfileEdit" class="btn btn-default  btn-xs" href="skills.php" role="button">Edit</a>  
+                                                         <?php             
+                                                                    if($userEmail == $user) 
+                                                     echo '<a style="float: right"  id="myProfileEdit" class="btn btn-default  btn-xs" href="skills.php" role="button">Edit</a>';
+                                                    ?>
                                                     </a>
                                                   </h4>
                                                 </div>
@@ -407,7 +425,9 @@
                                                   <h4 class="panel-title">
                                                     <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseFour" aria-expanded="false" aria-controls="collapseThree">
                                                       <b>Interest</b>
-                                                      <a style="float: right"  id="myProfileEdit" class="btn btn-default  btn-xs" href="interest.php" role="button">Edit</a>  
+                                                         <?php             
+                                                                    if($userEmail == $user) 
+                                                      echo '<a style="float: right"  id="myProfileEdit" class="btn btn-default  btn-xs" href="interest.php" role="button">Edit</a>';   ?>  
                                                     </a>
                                                   </h4>
                                                 </div>
@@ -451,9 +471,13 @@
                                               <div class="panel panel-info">
                                                 <div class="panel-heading" role="tab" id="headingFive">
                                                   <h4 class="panel-title">
+                                                      
                                                     <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseFive" aria-expanded="false" aria-controls="collapseThree">
                                                       <b>Reviews</b>
-                                                      <a style="float: right"  id="myProfileEdit" class="btn btn-default  btn-xs" href="#" role="button">Edit</a>  
+                                                       <?php             
+                                                                    if($userEmail == $user) 
+                                                      echo '<a style="float: right"  id="myProfileEdit" class="btn btn-default  btn-xs" href="#" role="button">Edit</a>';
+                                                ?>
                                                     </a>
                                                   </h4>
                                                 </div>
