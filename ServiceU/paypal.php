@@ -71,23 +71,20 @@
 
 
 		<div class="well text-left">
-
+<!--
 			<form action=
 "https://www.paypal.com/webapps/adaptivepayment/flow/pay"
 target="PPDGFrame">
 <input id="type" type="hidden" name="expType" value="light">
 <input id="paykey" type="hidden" name="paykey" value="AP-..."> 		<input id="preapprovalkey" 				type="hidden" name="preapprovalkey" value="PA-..."> 		<input type="submit" id="submitBtn" value="Pay with PayPal"> 	</form>
+-->
 
-
-
+<!--
 	<script src="https://www.paypalobjects.com/js/external/apdg.js">
 </script>
-<!--<img src="https://www.paypal.com/en_US/i/btn/btn_xpressCheckout.gif" align="left" style="margin-right:7px;">-->
 
 
-
-<!--USE THE CODE BELOW TO PUT THE BUY NOW BUTTON UPDATE 7/22/15 4:11PM-->
-<!--ALL YOU NEED TO DO IS COPY AND PASTE THE SCRIPT BELOW-->
+		</div>
 <script 
     data-env="sandbox" 
     data-currency="USD" 
@@ -96,8 +93,15 @@ target="PPDGFrame">
     data-name="Service" 
     data-button="buynow" src="https://www.paypalobjects.com/js/external/paypal-button.min.js?merchant=serviceu@gmail.com" async="async"
 ></script>
+-->
 
-		</div>
+<!--use the paypal code below.  this is the most recent update 7/24/15 5:00pm -->
+<form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
+<input type="hidden" name="cmd" value="_s-xclick">
+<input type="hidden" name="hosted_button_id" value="AKKK98HQR4UVU">
+<input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_buynowCC_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
+<img alt="" border="0" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1">
+</form>
 
 
 
