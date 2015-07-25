@@ -149,11 +149,11 @@
                           
                         </li>
                         <li>
-                                <a href="#"><span class="glyphicon glyphicon-share-alt"> </span> Sent</a>
+                                <a href="sent.php"><span class="glyphicon glyphicon-share-alt"> </span> Sent</a>
                         
                         </li>
                         <li>
-                                <a href="#"><span class="glyphicon glyphicon-trash"> </span> Trash</a>
+                                <a href="trash.php"><span class="glyphicon glyphicon-trash"> </span> Trash</a>
                         </li>
                         
                                                
@@ -320,7 +320,8 @@
                         //send message if description is not empty
                         if(!empty($recipient_message)){
                             $newMessage = 'Yes';
-                            sendMyMessage($userEmail, $recipient_message, $idToSenderAndReciever, $newMessage);
+                            $sentMessage = 'Sent';
+                            sendMyMessage($userEmail, $recipient_message, $idToSenderAndReciever, $newMessage, $sentMessage);
                             
                         }
                             

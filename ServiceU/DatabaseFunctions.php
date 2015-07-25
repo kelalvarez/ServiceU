@@ -1301,11 +1301,11 @@ function isSelected($jobID){
 
 
 ////////////sender and reciever table
-function sendMyMessage($senderEmail, $myMessage, $receiverEmail, $isNewMessage){
+function sendMyMessage($senderEmail, $myMessage, $receiverEmail, $isNewMessage, $sentMessage){
     global $con;
     
     
-  $query = "INSERT INTO sendertable(senderEmail, senderMessage, recipientEmail, newMessage) values('$senderEmail', '$myMessage', '$receiverEmail', '$isNewMessage')";
+  $query = "INSERT INTO sendertable(senderEmail, senderMessage, recipientEmail, newMessage, deleteMessage) values('$senderEmail', '$myMessage', '$receiverEmail', '$isNewMessage', '$sentMessage')";
   mysqli_query($con, $query);
     
    return TRUE;  
@@ -1317,7 +1317,7 @@ function getMyMessage($userEmail){
     
    global $con;
 
-    $query = "SELECT MAX(senderID) as senderID, senderEmail, senderMessage, newMessage, datesend FROM sendertable WHERE recipientEmail='$userEmail' GROUP BY senderEmail DESC";
+    $query = "SELECT MAX(senderID) as senderID, senderEmail, senderMessage, newMessage, deleteMessage , datesend FROM sendertable WHERE recipientEmail='$userEmail' GROUP BY senderEmail DESC";
     $result = mysqli_query($con, $query);
     
     return $result;
@@ -1375,7 +1375,7 @@ function countMyNewMesssages($userEmail)
     
     global $con;
 
-    $query = "SELECT COUNT(*) as total FROM sendertable WHERE recipientEmail='$userEmail' AND newMessage='Yes'";
+    $query = "SELECT COUNT(*) as total FROM sendertable WHERE recipientEmail='$userEmail' AND newMessage='Yes' AND deleteMessage!='Trash'";
     $result = mysqli_query($con, $query);
     $row = mysqli_fetch_assoc($result);
     
@@ -1405,6 +1405,74 @@ function getIfNewMessage($ID)
     return $row['newMessage'];
 }
 
+function getIfTrash($ID)
+{
+    global $con;
+
+    $query = "SELECT deleteMessage FROM sendertable WHERE senderID='$ID' ";
+    $result = mysqli_query($con, $query);        
+    $row = mysqli_fetch_assoc($result);
+    
+    return $row['deleteMessage'];
+}
+
+function moveMessageToTrash($userEmail){
+     global $con;
+    
+     $query = "UPDATE sendertable SET deleteMessage='Trash' WHERE recipientEmail='$userEmail'";
+     $result = mysqli_query($con,$query );
+    
+      return TRUE;
+    
+
+}
+
+
+function moveMessageToInbox($userEmail){
+     global $con;
+    
+     $query = "UPDATE sendertable SET deleteMessage='' WHERE recipientEmail='$userEmail'";
+     $result = mysqli_query($con,$query );
+    
+      return TRUE;
+    
+
+}
+
+function deleteAllTrashMessage($userEmail){
+     global $con;
+    
+     $query = "DELETE FROM sendertable WHERE recipientEmail='$userEmail'";
+     $result = mysqli_query($con,$query );
+    
+      return TRUE;
+    
+
+}
+
+function updateToSent($userEmail, $status){
+     global $con;
+    
+     $query = "UPDATE sendertable SET deleteMessage='$status' WHERE deleteMessage='Sent' AND senderEmail='$userEmail'";
+     $result = mysqli_query($con,$query );
+    
+      return TRUE;
+
+}
+
+
+function getAllSentMessage($userEmail){
+    
+     global $con;
+    
+      $query = "SELECT MAX(senderID) as senderID, recipientEmail, senderMessage, datesend FROM sendertable WHERE senderEmail='$userEmail' AND deleteMessage='Sent' GROUP BY recipientEmail DESC";
+    
+    $result = mysqli_query($con,$query );
+    
+
+     return $result;
+
+}
 
 
 

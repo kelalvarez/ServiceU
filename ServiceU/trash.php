@@ -169,7 +169,7 @@
             <div class="col-md-11">        
                
                 <div class="panel panel-info">
-                    <div class="panel-heading" style="text-align: center"><h3><span class="glyphicon glyphicon-envelope"></span>&nbsp <b>My Inbox</b></h3></div>
+                    <div class="panel-heading" style="text-align: center"><h3><span class="glyphicon glyphicon-trash"></span>&nbsp <b>Archived Conversations</b></h3></div>
                         <div class="panel-body">
                             
            
@@ -192,8 +192,8 @@
                               <div class="panel-body">
 
                                   <?php
-        
-                                if(!empty($result)){
+                                
+                                    if(!empty($result))
                                              while ($row = mysqli_fetch_assoc($result)){
         
                                                 $userMessage = getRecepientMessage($row['senderID']);
@@ -203,7 +203,7 @@
                                                      
                                                 $replySenderID = getID($row['senderEmail']);
                                                 
-                                    if($isTrash != 'Trash'){
+                                    if($isTrash == 'Trash'){
                                                     
                                                    if($isnewMessage == 'Yes')
                                                      echo '<div class="row myBodyInbox" style="background-color: #fff; padding-top: 10px;">';
@@ -225,8 +225,6 @@
                                         
                                         }
                                     
-                                        }//end of if(!empty($result))
-
 
                 
                                  ?>
@@ -242,8 +240,14 @@
                                  <form role="form" id="checkTrashForm" method="POST" class="form-horizontal" name="submitDeleteMessage">
                                     
                                   <div class="col-xs-6 col-md-2" style="padding: 0px">
-                                      <input type="checkbox" name="checkUncheck"><a href=""><button type="submit" style="width: 25px; border: none; background-color: #fff" name="submitMyTrash"><span class="glyphicon glyphicon-trash"> </span></a></button>
-                                    <small style="color:#777786">Delete all Trash</small>
+                                      <input type="checkbox" name="deleteAll"><a href=""><button type="submit" style="width: 25px; border: none; background-color: #F5F5F5" name="submitMyTrash"><span class="glyphicon glyphicon-trash"> </span></a></button>
+                                    <small style="color:#777786">Delete all message</small>
+                                  </div>
+                                     
+                                     
+                                     <div class="col-xs-6 col-md-2" style="padding: 0px">
+                                      <input type="checkbox" name="moveToInbox"><a href=""><button type="submit" style="width: 25px; border: none; background-color: #F5F5F5" name="submitToInbox"><span class="glyphicon glyphicon-envelope"> </span></a></button>
+                                    <small style="color:#777786">Move all to Inbox</small>
                                   </div>
                                      
                                 </form>
@@ -288,19 +292,39 @@
     if(isset($_POST['submitMyTrash']))  
             { 
 
-                if(isset($_POST['checkUncheck'])){ 
+                if(isset($_POST['deleteAll'])){ 
                     
         
-                            moveMessageToTrash($userEmail);
+                            deleteAllTrashMessage($userEmail);
                     
                                     
                         }
 
                 }
 
+
+
+
+        if(isset($_POST['submitToInbox']))  
+                { 
+
+                    if(isset($_POST['moveToInbox'])){ 
+
+
+                                moveMessageToInbox($userEmail);
+
+
+                            }
+
+                    }
+
+
+
         
 
     ?>
+    
+    
     
 
     <script>
