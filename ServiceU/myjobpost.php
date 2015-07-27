@@ -1,25 +1,80 @@
 <!DOCTYPE html>
-<?php
+<html lang="en">
+<?php 
     include("DatabaseFunctions.php"); 
     include("functions.php");
 ?>
-
-
-<?php
-
+<?php 
     session_start();
     if (!isset($_SESSION["loginEmail"]))
-   {
-      header("location: index.php");
-      exit();
-   }
-   else{
+     {
+        header("location: index.php");
+        exit();
+    }
+    else{
        $userEmail = $_SESSION["loginEmail"];
     }
-   
+   ?>
+   <?php
+    if (isset($_POST['submitDegree'])) {
+        $D1P1 = $_POST['degree1Part1'];
+        $D1P2 = $_POST['degree1Part2'];
+
+        $degree1 = $D1P1 . " " . $D1P2;
+        
+        
+        editDegree1($userEmail, $degree1);
+    }
+    
+    /*if (isset($_POST['submitInterest'])) {
+        $newInterest = $_POST['interest1'];
+        
+        insertInterest($userEmail, $newInterest);
+    }*/
+    
+    if (isset($_POST['changePassword'])) {
+	$oldPassword = $_POST['oldpassword'];
+	$newPassword = $_POST['newpassword'];
+	$confirmedPassword = $_POST['passverify'];
+	if (verifyPassword($userEmail, $oldPassword)) {
+            if ($newPassword == $confirmedPassword) {
+		editPassword($userEmail, $newPassword);
+		echo '<script type="text/javascript">';
+		echo 'alert("Password Updated")';
+		echo '</script>';
+            } else {
+		echo '<script type="text/javascript">';
+		echo 'alert("Passwords do not match, please try again")';
+		echo '</script>';
+			}
+            } else {
+		echo '<script type="text/javascript">';
+		echo 'alert("Old Password is invalid")';
+		echo '</script>';
+            }
+
+    }
+    
+    if (isset($_POST['verifyCode'])) {
+        $code = $_POST['verificationCode'];
+        
+        if (verifyCode($userEmail, $code)) {
+            verifyAccount($userEmail);
+            echo '<script type="text/javascript">';
+            echo 'alert("Account has been verify")';
+            echo '</script>';
+        } else {
+            echo '<script type="text/javascript">';
+            echo 'alert("Invalid Verification Code")';
+            echo '</script>';
+	}
+    }
+    
+       
 ?>
 
-<html lang="en">
+
+
 
 <head>
 
@@ -33,8 +88,7 @@
 
     <!-- Bootstrap Core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
-    <link href="css/dashboardcss.css" rel="stylesheet">
-    <link href="css/myjobpostcss.css" rel="stylesheet">
+    <link href="css/bootstrap.css" rel="stylesheet">
 
     <!-- Custom CSS -->
     <link href="css/stylish-portfolio.css" rel="stylesheet">
@@ -42,12 +96,17 @@
     <!-- Custom Fonts -->
     <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
     <link href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css">
-
+    
+    <!--Customized CSS-->
+    <link rel="stylesheet" href="css/mycss.css">
+    
+    
 </head>
 
     
 <body>
-
+    
+    
     <?php 
     
             $result = getUserJobs($userEmail);
@@ -64,50 +123,83 @@
 
             }
     ?>
+    
 
 <!-- Navigation Sidebar -->
     <?php include 'navigationbar.php' ?>
+    
+<!-- About -->
 
+    <!-- Services -->
+    <!-- The circle icons use Font Awesome's stacked icon classes. For more information, visit http://fontawesome.io/examples/ -->
 <div class="container">
-       
-     <div class="well text-center">
 
-    
+    <div class="row" style="">
+        <div class="col-xs-6 col-md-5 navLink" style="padding-left: 30px;">
+            
+            <a href="myjobpost.php"> My Job Post</a>
+            <a href="myapplications.php"> My Applications</a>
+            <a href="inbox.php"> Inbox</a>
+            <a href="profile.php"> My Profile</a>
+            
+            
 
- 
-
+        </div>
+        
+                                                                                                                                    
     </div>
-
-
-
-   
     
-            <div class="row">
-              <div class="col-md-2">
-                    <p>
-                        <a class="btn btn-sm btn-warning btn-block" href="myjobpost.php" ><b>My Job Post</b></a>
-                    </p>
+     <div class="well well-lg" style="margin-top: 10px">
 
-                    <p>
-                        <a class="btn btn-sm btn-warning btn-block" href="myapplications.php" ><b>My Applications</b></a>
-                    </p>
+        <div class="row">
 
-              </div>
-              <div class="col-md-10">
+            <div class="col-md-2"> <!--Profile start here-->
 
-                     <div class="well">
 
-                               <header>
+                <div style="clear: both;" class="">
+                   
+                      <ul id="Profile-List">
 
-                                        <h2 class="wellHeader text-center"><b>My Job Post</b></h2>          
-                                                                            
-                                </header>
-                                   
+                        <li>
+                                <a href="myjobpost.php"><span class="glyphicon glyphicon-folder-open"></span>&nbsp My Job Post</a>
+                          
+                        </li>
+                        <li>
+                                <a href="myapplications.php"><span class="glyphicon glyphicon-usd"> </span>&nbsp My Applications</a>
+                        
+                        </li>
 
+                        
+                                               
+
+                      </ul>
+                   
+
+                </div>
+
+            </div>
+
+
+            
+             <?php include 'confirmCode.php' ?>  
+            
+           
+            
+            <!--style="max-width:500px" will reduce the width of the container-->
+            <div class="col-md-10">        
+                
+               
+                
+                <div class="panel panel-info">
+                    <div class="panel-heading" style="text-align: center"><h3><span class="glyphicon glyphicon-folder-open"></span>&nbsp <b>My Job Post</b></h3></div>
+                        <div class="panel-body">
+                            
+      
+                                  
                                 <table class="table table-bordered">
 
                                     <thead>
-                                      <tr>
+                                      <tr class="myHeaderInbox">
                                         <th>Job Title</th>
                                         <th>Description</th>
                                         <th>Payment</th>
@@ -126,7 +218,7 @@
 
                                                     echo '<td>'. "<a href=\"postComplete.php?jobID=" . $row['jobID'] . "\" target=\"_parent\">" . '<b>' . $row['jobTitle'] . '</b>' . "</a>" . "</td>";
                                                    
-                                                    echo '<td>' . '<p class="showHide">' . $row['jobDescription'] . '</p>' . '</td>';
+                                                    echo '<td style="width: 70%">' . '<p class="showHide">' . $row['jobDescription'] . '</p>' . '</td>';
                                                  
                                                     echo '</td>';
 
@@ -136,7 +228,7 @@
 
                                                     echo '<td>';
 
-                                                      if($row['closeJob'] == 1)
+                                                      if($row['closeJob'] == 0)
                                                         echo '<span class="label label-success">Open</span>';
                                                       else
                                                         echo '<span class="label label-danger">Closed</span>';
@@ -159,41 +251,80 @@
                                  <?php include('newPost.php'); ?>
                                  <a class="btn btn-success" href="#newPost" data-toggle="modal" data-target="#newPost" role="button">Create Job Now!</a>
                                </div>
-                     </div>
-              </div>
+
+                             
+                        
+                          
+                                
+                            </div>
+ 
+                                
+                         </div>
+                    
+                                         
+                               
+                                    
+                    
+                    
+                </div>
 
 
+                
+                
+            
+                </div>         
 
             </div>
+                    
+     </div>    
+</div>
+        <!-- /.container -->
 
- 
-</div> <!--End of container-->
-
-
-
-<footer style="text-align: center;">
+    <footer style="text-align: center;">
 
                 <ul class="list-inline">
-                  <li><a href="#">About</a></li>
-                  <li><a href="#">Help</a></li>
+                  <li><a href="about.php">About</a></li>
+                  <li><a href="help.php">Help</a></li>
                   <li><a href="#">Directory</a></li>
                   <li><h5 style="color: #aab8c2">&#169 2015 ServiceU, Inc, All rights reserved.</h5></li>
                 </ul>
          
-</footer>
+    </footer>
+    
 
-</div>
 
-    <!-- jQuery -->
+    
+    
+    <!-- Custom for project -->
+    <script src="js/editProfileactions.js"></script>
+
+    <script type="text/javascript">
+    <?php 
+        if(!checkVerification($userEmail))
+        {
+    ?>
+            $('#confirmCode').modal('show');
+    <?php 
+        }
+    ?>
+    </script>
+
+    
+      <!-- jQuery -->
     <script src="js/jquery.js"></script>
     <script src="js/bootbox.js"></script>
     <script src="js/bootbox.min.js"></script>
-
     <!-- Bootstrap Core JavaScript -->
-    <script src="js/bootstrap.min.js"></script>
-
-    <!-- Custom Theme JavaScript -->
-    <script>
+    <script src="js/bootstrap.min.js"></script> 
+    
+    <!--Start online JSS first-->
+    <script src="https://code.jquery.com/jquery-1.11.2.min.js"></script>
+    <!--Bootstrap JSS-->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+    <!--Customized JSS-->
+    <script src="js/myjs.js"></script>
+    
+     <script>
 
    $('[data-dismiss=modal]').on('click', function (e) {
         var $t = $(this),
@@ -210,16 +341,6 @@
     </script>
 
 
-    
-    <!-- Custom for project -->
-    <script src="js/editProfileactions.js"></script>
-    <!--Start online JSS first-->
-    <script src="https://code.jquery.com/jquery-1.11.2.min.js"></script>
-    <!--Bootstrap JSS-->
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
-    <!--Customized JSS-->
-    <script src="js/myjs.js"></script>
-    
     <!--change acive mode in the navbar-->
     <script> 
         $(".nav a").on("click", function(){
@@ -227,9 +348,9 @@
            $(this).parent().addClass("active");
         });
     </script>
+    
 
-
-<script>
+    <script>
 
     jQuery(function(){
 
@@ -259,6 +380,9 @@
     });
 
 </script>
+    
+    
 
+    
 </body>
 </html>

@@ -125,9 +125,9 @@
                   
                     <?php
                                     if(empty(displayMyImage($userEmail)))
-                                       echo '<img id="userImageStyle" src="img/user-icon.jpg" alt="User-ImG">';
+                                       echo '<img id="userImageStyle" alt="msgProfilePic" class="img-circle" src="img/user-icon.jpg">';
                                      else
-                                        echo '<img id="userImageStyle" src="data:image/jpeg;base64,'.base64_encode(displayMyImage($userEmail)).'"alt="User-ImG">';
+                                        echo '<img id="userImageStyle" alt="msgProfilePic" class="img-circle" src="data:image/jpeg;base64,'.base64_encode(displayMyImage($userEmail)).'"alt="msgProfilePic">';
 
                             ?>
 
@@ -549,7 +549,7 @@
                                                            
                                                       <div class="form-group" style="text-align: center; padding-left: 10%">
                                                               <label>
-                                                                <input type="checkbox" value="Yes" name="userCurrentlyWorkHere" <?php
+                                                                <input type="checkbox" value="Yes" onclick="disableMonthYear()" name="userCurrentlyWorkHere" class="chehckIfCheck" <?php
                                                                                                                               
                                                                                       
                                                                               if(isset($_GET['expID']))
@@ -593,7 +593,7 @@
 	<option value="November">November</option>
 	<option value="December">December</option>
  </select>
-                                                                <select style="margin-left: 30px; margin-top: 2px;" aria-labelledby="StartYearLabel" id="StartYear" name="startYear">
+                                                                <select style="margin-left: 30px; margin-top: 2px;" aria-labelledby="StartYearLabel" id="disableIfCurrent" name="startYear">
                                                                      <?php
                                                                                  if(isset($_GET['expID']))
                                                                                   {
@@ -699,7 +699,7 @@
                                                                   &nbsp&nbsp to
                                                                 <br>
 
-                                                                <select style="margin-left: 15px; margin-top: 10px;" aria-labelledby="StartMonthLabel" id="StartMonth" name="endMonth">
+                                                                <select style="margin-left: 15px; margin-top: 10px;" aria-labelledby="StartMonthLabel" class="endDateDisable" name="endMonth">
                                                                      <?php
                                                                                  if(isset($_GET['expID']))
                                                                                   {
@@ -723,7 +723,7 @@
 	<option value="November">November</option>
 	<option value="December">December</option>
 </select>
-                                                                <select style="margin-left: 30px; margin-top: 2px;"aria-labelledby="StartYearLabel" id="StartYear" name="endYear">
+                                                                <select style="margin-left: 30px; margin-top: 2px;"aria-labelledby="StartYearLabel" class="endDateDisable" name="endYear">
                                                                     
                                                                      <?php
                                                                                  if(isset($_GET['expID']))
@@ -871,6 +871,8 @@
                 </ul>
          
     </footer>
+    
+ 
     
     
     <?php

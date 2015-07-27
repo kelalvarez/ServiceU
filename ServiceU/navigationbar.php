@@ -57,7 +57,7 @@
             <li class="dropdown">
               
               
-                <a href="#" data-toggle="dropdown"> <span class="glyphicon glyphicon-user"></span>&nbsp <?php echo getFullName($userEmail); ?>
+                <a href="#" data-toggle="dropdown" style="font-size: 16px;"> <span class="glyphicon glyphicon-user" ></span>&nbsp <b><?php echo getFullName($userEmail); ?></b>
                 <span class="caret"</span></a>
 
                 <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu">

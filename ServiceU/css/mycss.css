@@ -387,3 +387,33 @@ body{
     padding-top: 5px;
     
 }
+
+.navLink a{
+    padding: 10px;
+    font-weight: bold;
+    text-transform: uppercase;
+    text-decoration: none;
+    letter-spacing: -1px;
+    
+}
+
+/* unvisited link */
+.navLink a:link {
+    color: gray;
+}
+
+/* visited link */
+.navLink a:visited {
+    color: #999999;
+}
+
+/* mouse over link */
+.navLink a:hover {
+    color: #0e0e0f;
+    font-size:103%;
+}
+
+/* selected link */
+.navLink a:active {
+    color: #0e0e0f;
+}

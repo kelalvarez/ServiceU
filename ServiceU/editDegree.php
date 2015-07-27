@@ -126,9 +126,9 @@
                   
                      <?php
                                     if(empty(displayMyImage($userEmail)))
-                                       echo '<img id="userImageStyle" src="img/user-icon.jpg" alt="User-ImG">';
+                                        echo '<img id="userImageStyle" alt="msgProfilePic" class="img-circle" src="img/user-icon.jpg">';
                                      else
-                                        echo '<img id="userImageStyle" src="data:image/jpeg;base64,'.base64_encode(displayMyImage($userEmail)).'"alt="User-ImG">';
+                                         echo '<img id="userImageStyle" alt="msgProfilePic" class="img-circle" src="data:image/jpeg;base64,'.base64_encode(displayMyImage($userEmail)).'"alt="msgProfilePic">';
 
                             ?>
 

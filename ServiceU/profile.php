@@ -174,8 +174,30 @@
     <!-- The circle icons use Font Awesome's stacked icon classes. For more information, visit http://fontawesome.io/examples/ -->
 <div class="container">
 
+    
+      <div class="row" style="">
+        <div class="col-xs-6 col-md-5 navLink" style="padding-left: 30px;">
+            
+            <a href="myjobpost.php"> My Job Post</a>
+            <a href="myapplications.php"> My Applications</a>
+            <a href="inbox.php"> Inbox</a>
+            <a href="profile.php"> My Profile</a>
+            
+            
 
-     <div class="well well-lg">
+        </div>
+        
+        <div class="col-xs-6 col-md-7" style="padding-left: 90px">
+            <?php include('newPost.php'); ?>
+                 <a class="btn btn-success btn-xs"  href="#newPost" data-toggle="modal" data-target="#newPost" role="button"><b>Create Job Now!</b></a>
+        
+        </div>
+                                                                                                                                    
+    </div>
+    
+    
+
+     <div class="well well-lg" style="margin-top: 10px">
 
         <div class="row">
 
@@ -186,9 +208,9 @@
 
                         <?php
                                     if(empty(displayMyImage($userEmail)))
-                                       echo '<img id="userImageStyle" src="img/user-icon.jpg" alt="User-ImG">';
+                                       echo '<img id="userImageStyle" alt="msgProfilePic" class="img-circle" src="img/user-icon.jpg">';
                                      else
-                                        echo '<img id="userImageStyle" src="data:image/jpeg;base64,'.base64_encode(displayMyImage($userEmail)).'"alt="User-ImG">';
+                                        echo '<img id="userImageStyle" alt="msgProfilePic" class="img-circle" src="data:image/jpeg;base64,'.base64_encode(displayMyImage($userEmail)).'"alt="msgProfilePic">';
 
                             ?>
 

@@ -129,13 +129,13 @@
                                       //Check if the file is acutally an image here LATER && make sure file get contents is not empty
                                         if(!filesize($_FILES['userfile']['tmp_name']) == 0){
                                                $imgData = file_get_contents($_FILES['userfile']['tmp_name']);           
-                                              echo '<img id="userImageStyle" src="data:image/jpeg;base64,'.base64_encode($imgData).'"alt="User-ImG">';
+                                             echo '<img id="userImageStyle" alt="msgProfilePic" class="img-circle" src="data:image/jpeg;base64,'.base64_encode($imgData).'"alt="msgProfilePic">';
                                             }else{
 
                                                  if(empty(displayMyImage($userEmail)))
-                                                   echo '<img id="userImageStyle" src="img/user-icon.jpg" alt="User-ImG">';
+                                                    echo '<img id="userImageStyle" alt="msgProfilePic" class="img-circle" src="img/user-icon.jpg">';
                                                  else
-                                                    echo '<img id="userImageStyle" src="data:image/jpeg;base64,'.base64_encode(displayMyImage($userEmail)).'"alt="User-ImG">';
+                                                     echo '<img id="userImageStyle" alt="msgProfilePic" class="img-circle" src="data:image/jpeg;base64,'.base64_encode(displayMyImage($userEmail)).'"alt="msgProfilePic">';
 
                                             }
 
@@ -143,9 +143,9 @@
 
                                     }else{
                                         if(empty(displayMyImage($userEmail)))
-                                           echo '<img id="userImageStyle" src="img/user-icon.jpg" alt="User-ImG">';
+                                          echo '<img id="userImageStyle" alt="msgProfilePic" class="img-circle" src="img/user-icon.jpg">';
                                          else
-                                            echo '<img id="userImageStyle" src="data:image/jpeg;base64,'.base64_encode(displayMyImage($userEmail)).'"alt="User-ImG">';
+                                            echo '<img id="userImageStyle" alt="msgProfilePic" class="img-circle" src="data:image/jpeg;base64,'.base64_encode(displayMyImage($userEmail)).'"alt="msgProfilePic">';
 
                                         }
                             ?>
@@ -226,7 +226,7 @@
                                 
                                     
                                   
-                                   
+                                  
 
                                                 <div>
                                                     <div style="text-align:center">
@@ -237,13 +237,16 @@
                                                                                //Check if the file is acutally an image here LATER
                                                                             if(!filesize($_FILES['userfile']['tmp_name']) == 0){
                                                                                  $imgData = file_get_contents($_FILES['userfile']['tmp_name']);
-                                                                                  echo '<img height="100" width="100" style="border: 5px solid #ccc;" src="data:image/jpeg;base64,'.base64_encode($imgData).'"alt="User-ImG">';
+                                                                                echo '<img  class="img-circle" height="75" width="75" src="data:image/jpeg;base64,'.base64_encode($imgData).'"alt="User-ImG">' . '</div>';
+                                                                                
+                                                                                
+                                                                                 
                                                                               }else{
 
                                                                                    if(empty(displayMyImage($userEmail)))
-                                                                                     echo '<img style="border: 5px solid #ccc;" height="100" width="100" src="img/user-icon.jpg" alt="User-ImG">';
+                                                                                      echo '<img id="userImageStyle" alt="msgProfilePic" class="img-circle" src="img/user-icon.jpg">';
                                                                                    else
-                                                                                      echo '<img style="border: 5px solid #ccc;" height="100" width="100" src="data:image/jpeg;base64,'.base64_encode(displayMyImage($userEmail)).'"alt="User-ImG">';
+                                                                                      echo '<img id="userImageStyle" alt="msgProfilePic" class="img-circle" src="data:image/jpeg;base64,'.base64_encode(displayMyImage($userEmail)).'"alt="msgProfilePic">';
 
                                                                               }
                                                                               
@@ -251,11 +254,13 @@
 
                                                             }else
                                                                  if(empty(displayMyImage($userEmail)))
-                                                                       echo '<img style="border: 5px solid #ccc;" height="100" width="100" src="img/user-icon.jpg" alt="User-ImG">';
+                                
+                                                                      echo '<img id="userImageStyle" alt="msgProfilePic" class="img-circle" src="img/user-icon.jpg">';
                                                                      else
-                                                                        echo '<img style="border: 5px solid #ccc;" height="100" width="100"                              src="data:image/jpeg;base64,'.base64_encode(displayMyImage($userEmail)).'"alt="User-ImG">';
+                                                                        echo '<img  class="img-circle" height="75" width="75" src="data:image/jpeg;base64,'.base64_encode(displayMyImage($userEmail)).'"alt="User-ImG">' . '</div>';
                                                                 
                                                                
+                                
                                                               
                                                         ?>    
    
