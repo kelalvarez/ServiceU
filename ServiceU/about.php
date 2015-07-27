@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <?php
-    include("DatabaseFunctions.php"); 
+    include("DatabaseFunctions.php");
     include("functions.php");
 ?>
 
 
-<?php 
+<?php
     session_start();
     if (!isset($_SESSION["loginEmail"]))
     {
@@ -14,10 +14,10 @@
     }
     else{
        $userEmail = $_SESSION["loginEmail"];
-    }   
+    }
 
     if (isset($_POST['createJob'])) {
-        
+
         $jobTitle = $_POST['jobTitle'];
         $jobDescription = $_POST['jobDescription'];
     $jobPayment = $_POST['jobPayment'];
@@ -29,7 +29,7 @@
         echo '</script>';
 
     }
- 
+
 ?>
 
 
@@ -59,37 +59,48 @@
 
 </head>
 
-    
+
 <body>
 
 <!-- Navigation Sidebar -->
     <?php include 'navigationbar.php' ?>
 
 <div class="container">
-       
-     <div class="well text-center">
+
+     <!-- <div class="well text-center"> -->
 
 <!--currently i just put the abstract as the motivation in the about page, i guess we can come up with a better about page in the future.-->
-            Motivation
+            <h1 class"blog-header">
+              <h1 style="text-align: center">
+              About Us
+            </h1>
 
-    </div>
-	
-		<div class="well text-left">
+<p class="lead block-description" style="text-align: center">
+  The motivation behind ServiceU.
+    <!-- </div> -->
 
-			<?php
+<hr />
+<p style="font-size: 18px;">
+  &emsp;&emsp;&emsp;Service networks are useful social mediums for individuals who are increasingly preoccupied with tasks.  Social platforms such as Craigslist and Uber aim to provide services to individuals on a business-to-consumer level by allowing businesses to advertise in real-time services they offer and in turn, the consumer can take advantage of the available opportunities.  With the aid of these services individuals or consumers increase efficiency of daily tasks completed through the available opportunities. </br></br>
+  &emsp;&emsp;&emsp;There are many individuals that encounter problems throughout their day due to the lack of time, poor time management skills, or just being the fact that they don’t have knowledge of the matter at hand.  Daily chores, such as buying groceries or accomplishing some household task, are now postponed until a later date.  If these tasks continuously get pushed back various undesired consequences can occur.  Individuals can possibly feel stressed and households can perhaps experience increased inefficiencies due to a certain task not being performed. </br></br>
+  &emsp;&emsp;&emsp;ServiceU is designed to connect these types of individuals through the means of a web application platform.  A ServiceU account will allow an individual, the consumer, who requires a certain job to be completed, such as buying groceries, to use the service, to contact another individual, the business, who is willing to complete the task. The consumer will post a job description that the business will seek to fulfill or vice versa.  The consumer will benefit because their task has been completed, and the business will benefit because they will be paid for their service.
+</p>
+
+<hr />
+    	<!-- <?php
 $str = "Service networks are useful social mediums for individuals who are increasingly preoccupied with tasks.  Social platforms such as Craigslist and Uber aim to provide services to individuals on a business-to-consumer level by allowing businesses to advertise in real-time services they offer and in turn, the consumer can take advantage of the available opportunities.  With the aid of these services individuals or consumers increase efficiency of daily tasks completed through the available opportunities. \n
 There are many individuals that encounter problems throughout their day due to the lack of time, poor time management skills, or just being the fact that they don’t have knowledge of the matter at hand.  Daily chores, such as buying groceries or accomplishing some household task, are now postponed until a later date.  If these tasks continuously get pushed back various undesired consequences can occur.  Individuals can possibly feel stressed and households can perhaps experience increased inefficiencies due to a certain task not being performed. \n
-ServiceU is designed to connect these types of individuals through the means of a web application platform.  A ServiceU account will allow an individual, the consumer, who requires a certain job to be completed, such as buying groceries, to use the service, to contact another individual, the business, who is willing to complete the task. The consumer will post a job description that the business will seek to fulfill or vice versa.  The consumer will benefit because their task has been completed, and the business will benefit because they will be paid for their service.   
+ServiceU is designed to connect these types of individuals through the means of a web application platform.  A ServiceU account will allow an individual, the consumer, who requires a certain job to be completed, such as buying groceries, to use the service, to contact another individual, the business, who is willing to complete the task. The consumer will post a job description that the business will seek to fulfill or vice versa.  The consumer will benefit because their task has been completed, and the business will benefit because they will be paid for their service.
  ";
 echo nl2br($str);
-?>
-		
+?> -->
+
 		</div>
 
 
 
-   
-    
+
+
             <div class="row">
 
               <!--<div class="col-md-2">
@@ -100,7 +111,7 @@ echo nl2br($str);
                     <p>
                         <a class="btn btn-sm btn-warning btn-block" href="myapplications.php" ><b>My Applications</b></a>
                     </p>
-                
+
 
               </div> -->
               <!--<div class="col-md-10">
@@ -114,17 +125,17 @@ echo nl2br($str);
                                 </header>
 
                                 <div class="rowAddjobpost">
-                                        <span class="glyphicon glyphicon-wrench"> </span> 
+                                        <span class="glyphicon glyphicon-wrench"> </span>
                                         <h3>Creating Job on ServiceU is effortless.</h3>
                                         <p>Start now to provide service to your local community!</p>
                                         <?php include('newPost.php'); ?>
                                         <a class="btn btn-success" href="#newPost" data-toggle="modal" data-target="#newPost" role="button">Create Job Now!</a>
-                                        
+
                                 </div>
-                            
-                                   
-                                
-                            
+
+
+
+
 
 
                      </div>
@@ -134,7 +145,7 @@ echo nl2br($str);
 
             </div>
 
- 
+
 </div> <!--End of container-->
 
 
@@ -148,7 +159,7 @@ echo nl2br($str);
                   <li><a href="#">Directory</a></li>
                   <li><h5 style="color: #aab8c2">&#169 2015 ServiceU, Inc, All rights reserved.</h5></li>
                 </ul>
-         
+
 </footer>
 
 </div>
@@ -172,12 +183,12 @@ echo nl2br($str);
         .find("input,textarea")
            .val('')
            .end();
-   
+
       $('select option:first-child').attr("selected", "selected");
-    
+
     });
     </script>
-    
+
     <!-- Custom for project -->
     <script src="js/editProfileactions.js"></script>
     <!--Start online JSS first-->
@@ -187,7 +198,7 @@ echo nl2br($str);
     <!--Customized JSS-->
     <script src="js/myjs.js"></script>
     <!--change acive mode in the navbar-->
-    <script> 
+    <script>
         $(".nav a").on("click", function(){
            $(".nav").find(".active").removeClass("active");
            $(this).parent().addClass("active");

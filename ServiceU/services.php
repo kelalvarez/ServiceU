@@ -59,22 +59,38 @@ else{
 
 
       <div class="row">
-        <div class="col-md-4">
+        <!-- <div class="col-md-4"> -->
 
-          <input type="text" class="form-control" id="serviceTop" placeholder="Job title">
+          <!-- <input type="text" class="form-control" id="serviceTop" placeholder="Job title"> -->
+<!-- <h3>Search for Job</h3> -->
+<!-- <form method="post" action="searchresults.php" id="searchform">
+	<input type="text" name="job">
+	<input type="submit" name="submit" value="Search">
+	</form> -->
 
+	<!-- <h3>New Search</h3> -->
+<span class="h1">ServiceU</span>
+  <form class="row" name ="form1" method="post" action="searchresults.php">
+    <div class="col-lg-11">
+      <input class="form-control" name="search" required pattern="[a-zA-Z0-9\s]+" type="search" placeholder="What service are you looking for?" size="50"/>
+    </div>
+    <div class="col-lg-1">
+      <input type="submit" class="btn btn-primary" name="Submit" value="Search"/>
+    </div>
 
-        </div>
-        <div class="col-md-4">
+	</form>
+
+        <!-- </div> -->
+        <!-- <div class="col-md-4">
 
           <input type="text" class="form-control" id="serviceTop" placeholder="Skills">
 
-        </div>
-        <div class="col-md-4">
+        </div> -->
+        <!-- <div class="col-md-4">
 
           <input type="text" class="form-control" id="serviceTop" placeholder="City, State">
 
-        </div>
+        </div> -->
 
       </div>
 
@@ -84,7 +100,7 @@ else{
     <div class="well well-lg">
       <div class="row text-center">
         <!-- <div class="col-lg-10 col-lg-offset-1"> -->
-        <span class="h1">ServiceU</span>
+        <!-- <span class="h1">ServiceU</span> -->
         <br />
         <br />
 
@@ -115,6 +131,7 @@ else{
                     <!-- Description -->
                     <p>24 hour service</p>
                   </div>
+
                 </div>
               </div>
               <!-- End task -->
@@ -223,10 +240,10 @@ else{
           <!-- /.col-lg-10 -->
         </div>
         <!-- /.row -->
-		
+
       </div>
 
-      
+
 
     </div>
 

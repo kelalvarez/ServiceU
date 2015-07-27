@@ -203,10 +203,10 @@
                                <div class="input-group" id="Rform">
                                    <span class="input-group-addon"><span class="glyphicon glyphicon-user"></span></span>
 
-                                    <input type="firstName" name="firstName" class="form-control" placeholder="Enter First Name">
+                                    <input type="firstName" name="firstName" maxlength="45" class="form-control" placeholder="Enter First Name">
 
 
-                                      <input type="lastName" name="lastName" class="form-control" placeholder="Enter Last Name">
+                                      <input type="lastName" name="lastName" maxlength="45" class="form-control" placeholder="Enter Last Name">
                                                   
                                 </div>
                     </div>

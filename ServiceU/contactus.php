@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <?php
-    include("DatabaseFunctions.php"); 
+    include("DatabaseFunctions.php");
     include("functions.php");
 ?>
 
 
-<?php 
+<?php
     session_start();
     if (!isset($_SESSION["loginEmail"]))
     {
@@ -14,10 +14,10 @@
     }
     else{
        $userEmail = $_SESSION["loginEmail"];
-    }   
+    }
 
     if (isset($_POST['createJob'])) {
-        
+
         $jobTitle = $_POST['jobTitle'];
         $jobDescription = $_POST['jobDescription'];
     $jobPayment = $_POST['jobPayment'];
@@ -29,7 +29,7 @@
         echo '</script>';
 
     }
- 
+
 ?>
 
 
@@ -59,28 +59,29 @@
 
 </head>
 
-    
+
 <body>
 
 <!-- Navigation Sidebar -->
     <?php include 'navigationbar.php' ?>
 
 <div class="container">
-       
-     <center style="font-size: 18pt;">
 
+  <h1 class"blog-header">
+    <h1 style="text-align: center">
+    Contact Us
+  </h1>
+  <p class="lead block-description" style="text-align: center">
+    Use the form below to send us a message.
+  </p>
 
-            ServiceU Contact Form
-
-    </center>
-	
 		<center>
 		<iframe src="https://docs.google.com/forms/d/1DkhjMx8zTPL__dtOTRx0_HEbS3T_9vxRA7TRAPowekc/viewform?embedded=true" width="680" height="1065" frameborder="0" marginheight="0" marginwidth="0">Loading...</iframe>
 		</center>
 
 
-   
-    
+
+
             <div class="row">
 
               <!--<div class="col-md-2">
@@ -91,7 +92,7 @@
                     <p>
                         <a class="btn btn-sm btn-warning btn-block" href="myapplications.php" ><b>My Applications</b></a>
                     </p>
-                
+
 
               </div> -->
               <!--<div class="col-md-10">
@@ -105,17 +106,17 @@
                                 </header>
 
                                 <div class="rowAddjobpost">
-                                        <span class="glyphicon glyphicon-wrench"> </span> 
+                                        <span class="glyphicon glyphicon-wrench"> </span>
                                         <h3>Creating Job on ServiceU is effortless.</h3>
                                         <p>Start now to provide service to your local community!</p>
                                         <?php include('newPost.php'); ?>
                                         <a class="btn btn-success" href="#newPost" data-toggle="modal" data-target="#newPost" role="button">Create Job Now!</a>
-                                        
+
                                 </div>
-                            
-                                   
-                                
-                            
+
+
+
+
 
 
                      </div>
@@ -125,7 +126,7 @@
 
             </div>
 
- 
+
 </div> <!--End of container-->
 
 
@@ -139,7 +140,7 @@
                   <li><a href="#">Directory</a></li>
                   <li><h5 style="color: #aab8c2">&#169 2015 ServiceU, Inc, All rights reserved.</h5></li>
                 </ul>
-         
+
 </footer>
 
 </div>
@@ -163,12 +164,12 @@
         .find("input,textarea")
            .val('')
            .end();
-   
+
       $('select option:first-child').attr("selected", "selected");
-    
+
     });
     </script>
-    
+
     <!-- Custom for project -->
     <script src="js/editProfileactions.js"></script>
     <!--Start online JSS first-->
@@ -178,7 +179,7 @@
     <!--Customized JSS-->
     <script src="js/myjs.js"></script>
     <!--change acive mode in the navbar-->
-    <script> 
+    <script>
         $(".nav a").on("click", function(){
            $(".nav").find(".active").removeClass("active");
            $(this).parent().addClass("active");
