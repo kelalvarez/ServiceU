@@ -130,7 +130,6 @@ else{
 
                     <!-- Description -->
                     <p>24 hour service</p>
-					<p><a href="autorepair_search.php" class="btn btn-primary" role="button">More Info</a></p>
                   </div>
 
                 </div>
@@ -147,7 +146,6 @@ else{
 
                   <!-- Description -->
                   <p>Taking care of patients</p>
-				  <p><a href="doctors_search.php" class="btn btn-primary" role="button">More Info</a></p>
                 </div>
               </div>
             </div>
@@ -163,7 +161,6 @@ else{
 
                 <!-- Description -->
                 <p>Get legal help</p>
-				<p><a href="lawyers_search.php" class="btn btn-primary" role="button">More Info</a></p>
               </div>
             </div>
           </div>
@@ -179,7 +176,6 @@ else{
 
               <!-- Description -->
               <p>Creating new inventions</p>
-			  <p><a href="engineers_search.php" class="btn btn-primary" role="button">More Info</a></p>
             </div>
           </div>
         </div>
@@ -195,7 +191,6 @@ else{
 
             <!-- Description -->
             <p>Building a new future</p>
-			<p><a href="construction_search.php" class="btn btn-primary" role="button">More Info</a></p>
           </div>
         </div>
       </div>
@@ -211,7 +206,6 @@ else{
 
           <!-- Description -->
           <p>Hosting your event</p>
-		  <p><a href="events_search.php" class="btn btn-primary" role="button">More Info</a></p>
         </div>
       </div>
     </div>

@@ -8,11 +8,11 @@ mysql_select_db("serviceuDB", $db);
 
 // $result = mysql_query("SELECT * FROM jobtable", $link);
 
-$_POST['search']=mysql_real_escape_string($_POST['search']);
-if(!isset($_POST['search'])){
-  header("Location:services.php");
-}
-$result = mysql_query("SELECT * FROM jobtable WHERE jobTitle LIKE '%".$_POST['search']."%' OR jobDescription LIKE '%".$_POST['search']."%' OR category LIKE '%".$_POST['search']."%'" , $db);
+//$_POST['search']=mysql_real_escape_string($_POST['search']);
+//if(!isset($_POST['search'])){
+  //header("Location:services.php");
+
+$result = mysql_query("SELECT * FROM jobtable WHERE jobTitle LIKE '%doctor%' OR jobDescription LIKE '%doctor%' OR category LIKE '%doctor%'" , $db);
 
 // echo 'Results'.$result;
 if(mysql_num_rows($result) != 0){
