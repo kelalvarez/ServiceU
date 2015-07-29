@@ -1681,6 +1681,190 @@ function deleteMSG($userEmail){
 }
 
 
+/////////////////////////////////
+
+
+function isAdmin($userEmail)
+{
+    global $con;
+
+    $query = "SELECT admin FROM usertable WHERE email='$userEmail' ";
+    $result = mysqli_query($con, $query);        
+    $row = mysqli_fetch_assoc($result);
+    
+    return $row['admin'];
+}
+
+function selectedApplicant($jobID){
+    global $con;
+
+    $query = "SELECT applicantSelected FROM jobtable WHERE jobID='$jobID' ";
+    $result = mysqli_query($con, $query);        
+    $row = mysqli_fetch_assoc($result);
+    
+    return $row['applicantSelected'];
+}
+
+function applicantSelected($applicantEmail, $jobID){
+    global $con;
+    
+    $query = "UPDATE appTable SET selectedEmployee='1' WHERE employeeID='$applicantEmail' AND jobID='$jobID'";
+    $result = mysqli_query($con,$query );
+    
+      return TRUE;
+}
+
+function applicantConfirmed($applicantEmail, $jobID){
+    global $con;
+    
+    $query = "UPDATE jobtable SET applicantSelected='$applicantEmail' WHERE jobID='$jobID'";
+    $result = mysqli_query($con,$query );
+    
+      return TRUE;
+}
+
+
+function createPayment($jobID, $employeerEmail, $employeeEmail, $amount)
+{
+    global $con;
+    $code = generateRandomString();
+    
+    mysqli_query($con,
+                "INSERT INTO paymenttable (jobID, employeerEmail, employeeEmail, amount) "
+                . "values('$jobID', '$employeerEmail', '$employeeEmail', '$amount');"
+                );
+    
+    $payment = retrievePayment($jobID);
+
+    mysqli_query($con,
+                "UPDATE jobtable SET paymentID='$payment' WHERE jobID='$jobID'"
+                );
+    
+    mysqli_query($con,
+                "INSERT INTO historytable (userEmail, jobID) "
+                . "values('$employeeEmail', '$jobID');"
+                );
+    
+    
+    
+    return TRUE;    
+}
+
+function retrievePayment($jobID){
+    global $con;
+
+    $query = "SELECT paymentID FROM paymenttable WHERE jobID='$jobID' ORDER BY paymentID DESC LIMIT 1";
+    $result = mysqli_query($con, $query);
+    $row = mysqli_fetch_Assoc($result);
+    
+    return $row['paymentID'];   
+}
+
+function isPayment($jobID){
+    global $con;
+
+    $query = "SELECT COUNT(*) as total FROM paymenttable WHERE jobID='$jobID'";
+    $result = mysqli_query($con, $query);
+    $row = mysqli_fetch_Assoc($result);
+    
+    return $row['total'];   
+}
+
+function isPaymentDone($jobID){
+    global $con;
+
+    $query = "SELECT initialstatus FROM paymenttable WHERE jobID='$jobID'";
+    $result = mysqli_query($con, $query);
+    $row = mysqli_fetch_Assoc($result);
+    return $row['initialstatus'];   
+}
+
+function isPaymentRejected($jobID){
+    global $con;
+    $query = "SELECT clearstatus FROM paymenttable WHERE jobID='$jobID' ORDER BY paymentID DESC LIMIT 1";
+    $result = mysqli_query($con, $query);
+    $row = mysqli_fetch_Assoc($result);
+    return $row['clearstatus'];  
+}
+
+
+
+function submitPayment($jobID){
+    global $con;
+    
+    $query = "UPDATE paymentTable SET initialStatus='1' WHERE jobID='$jobID' ORDER BY paymentID DESC LIMIT 1";
+    $result = mysqli_query($con,$query );
+    
+      return TRUE;
+}
+
+function getPayments(){
+    global $con;
+    
+    $query = "SELECT * FROM paymentTable WHERE initialstatus='1' ORDER BY submitTime DESC";
+    $result = mysqli_query($con,$query);
+    
+    return $result;
+}
+
+function clearPayment($jobID, $paymentID){
+    global $con;
+    
+    $query = "UPDATE paymentTable SET clearstatus='1' WHERE jobID='$jobID' AND paymentID='$paymentID'";
+    $result = mysqli_query($con,$query );
+    
+    $applicant = selectedApplicant($jobID);
+    
+    mysqli_query($con,
+                "UPDATE historyTable SET completestat='1' WHERE jobID='$jobID' AND userEmail='$applicant' AND completestat='0'"
+                );    
+    
+    return TRUE;
+}
+
+function denyPayment($jobID, $paymentID){
+    global $con;
+    
+    $query = "UPDATE paymentTable SET clearstatus='2' WHERE jobID='$jobID' AND paymentID='$paymentID'";
+    $result = mysqli_query($con,$query );
+    
+    //$applicant = selectedApplicant($jobID);
+    
+    //mysqli_query($con,
+      //          "UPDATE historyTable SET completestat='2' WHERE jobID='$jobID' AND userEmail='$applicant' AND completestat='0'"
+        //        );
+    
+    //mysqli_query($con,
+      //          "UPDATE jobTable SET applicantSelected='na' AND paymentID = '0' "
+        //    . "WHERE jobID='$jobID'"
+          //      );
+    
+    
+    
+    
+    return TRUE;
+}
+
+function isPaymentClear($jobID, $paymentID){
+    global $con;
+
+    $query = "SELECT clearstatus FROM paymenttable WHERE jobID='$jobID' AND paymentID='$paymentID'";
+    $result = mysqli_query($con, $query);
+    $row = mysqli_fetch_Assoc($result);
+    return $row['clearstatus'];   
+}
+
+function getReceiverPayment($jobID, $paymentID){
+    global $con;
+
+    $query = "SELECT employeeEmail FROM paymenttable WHERE jobID='$jobID' AND paymentID='$paymentID' ";
+    $result = mysqli_query($con, $query);
+    $row = mysqli_fetch_Assoc($result);
+    return $row['employeeEmail'];   
+}
+
+
+
 
 
 
