@@ -17,7 +17,10 @@
                 <!--Home-->
                 <li class="active"><a href="services.php"><span class="glyphicon glyphicon-home"></span> Home</a></li>
                 <li><a href="#"><span class="glyphicon glyphicon-briefcase"></span>Services</a></li>
-                
+                <?php $isadmin =  isAdmin($userEmail);
+                if($isadmin == 1){ ?>
+                <li><a href="payment.php"><span class="glyphicon glyphicon-briefcase"></span>Payment Management</a></li>
+                <?php } ?>
                 <!--<li><a href="#">Profile</a></li>-->
 
 

@@ -2,10 +2,7 @@
 <?php
     include("DatabaseFunctions.php"); 
     include("functions.php");
-?>
 
-
-<?php 
     session_start();
     if (!isset($_SESSION["loginEmail"]))
     {
@@ -87,7 +84,7 @@
     $appSubmit = 0;
     if (isset($_POST['submitApplicant'])) {
         $applicantEmail = $_POST['applicantEmail'];
-        selectApplicant($applicantEmail, $jobID);
+        applicantSelected($applicantEmail, $jobID);
         $appSubmit = 1;
         $jobT = getJobTitle($jobID);
          newNotification( $applicantEmail , "<strong> ". $jobT ." </strong> :: You have been selected for the job. <a href=\"postComplete.php?jobID=" . $jobID . "\" target=\"_parent\">Click here </a> to review job" );
@@ -97,6 +94,7 @@
     $yes = 0;
     if (isset($_POST['yesApplicant'])) {
         $applicantEmail = $userEmail;
+        applicantConfirmed($applicantEmail, $jobID);
         $jobT = getJobTitle($jobID);
         $jobO = getJobOwner($jobID);
         newNotification( $jobO , "<strong> ". $jobT ." </strong> :: The applicant that you selected has confirm his/her application. <a href=\"postComplete.php?jobID=" . $jobID . "\" target=\"_parent\">Click here </a> to review job" ); 
@@ -123,7 +121,21 @@
         newNotification( $jobO , "<strong> ". $jobT ." </strong> :: The applicant that you selected has deny the job offer. <a href=\"postComplete.php?jobID=" . $jobID . "\" target=\"_parent\">Click here </a> to review the job" ); 
     }
     
- 
+    if (isset($_POST['confirmPayment'])) {
+        
+        $employeerEmail = getJobOwner($jobID);
+        $employeeEmail = selectedApplicant($jobID);
+        $amount = getJobPayment($jobID);
+        createPayment($jobID, $employeerEmail, $employeeEmail, $amount);
+        
+        
+        
+        submitPayment($jobID);
+        echo '<script type="text/javascript">';
+        echo 'alert("Payment Agreement accepted")';
+        echo '</script>';
+
+    }    
 ?>
 
 
@@ -168,7 +180,13 @@
 <?php 
     $owner = isOwner($userEmail, $jobID);
     $existApplication = existApp($userEmail, $jobID);
-
+    $paymentDone = isPayment($jobID);
+    $select = isSelected($jobID);
+    $currentSelected = isApplicantSelected($userEmail, $jobID);
+    $selectedApplicant = selectedApplicant($jobID);   
+    $paymentStatus = isPaymentDone($jobID);
+    $paymentClear = isPaymentRejected($jobID);
+    
 
     if ($appSubmit == 1) { ?> 
             <div class="alert alert-success fade in">
@@ -179,17 +197,59 @@
 <?php } ?>
 
 <?php 
-  $select = isSelected($jobID);
-  $currentSelected = isApplicantSelected($userEmail, $jobID);
-  if ($select == 1 && $owner == 1 && $no != 1 & $yes != 1) {
-?>
+  
+   if ($select == 1 && $owner == 1 && $selectedApplicant != 'na' && $paymentDone == 1 && $paymentStatus == 1 && $paymentClear == 0 ) { ?>
+     <div class="alert alert-warning">
+         <strong>Payment ready to be Processed !</strong> Submit your payment through the PayPal button. A notification will be sent to you when ServiceU clear it. <br>
+    </div>
+<?php 
+
+   } elseif ($select == 1 && $owner == 1 && $selectedApplicant != 'na' && $paymentDone == 1 && $paymentStatus == 1 && $paymentClear == 1 ) { ?>
+     <div class="alert alert-success">
+         <strong>Payment Cleared and Completed!</strong> Your employee may now be able to complete the requested service. <br>
+    </div>
+<?php 
+
+   } elseif ($select == 1 && $owner == 1 && $selectedApplicant != 'na' && $paymentDone == 1 && $paymentStatus == 1 && $paymentClear == 2 ) { ?>
+     <div class="alert alert-danger">
+        <strong>Payment Rejected!</strong> Choose one of the following options. <br>
+        <?php ///////////////////////////DO SOMETHING /////////////////////////////// 
+         
+         
+        // CANCEL MODAL
+        
+         
+         
+         
+         
+         
+
+
+
+        // RESUBMIT MODAL
+         
+         
+         
+         
+         
+         
+         ?>
+    </div>    
+<?php
+   } elseif ($select == 1 && $owner == 1 && $selectedApplicant != 'na' && $paymentDone == 0) { ?>
+    
+ <div class="alert alert-warning">
+        <strong>Payment Pending !</strong> Confirm the terms and conditions to continue to checkout.
+    </div>
+<?php 
+   } elseif ($select == 1 && $owner == 1 ) { ?>
+
     <div class="alert alert-warning">
         <strong>Confirmation Pending!</strong> You have already selected an applicant for this job
-    </div>
-    
+    </div> 
 <?php
   }
-  else if( $select == 1 && $currentSelected == 1 && $no != 1 && $yes != 1){
+  else if( $select == 1 && $currentSelected == 1 && $selectedApplicant == 'na'){
 ?>  
     <div class="alert alert-warning">
         <form id="appConfirm" class="form-horizontal" action="#" name="confirmApp" method="POST">
@@ -203,6 +263,9 @@
        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
        <strong>Confirmed!</strong> You have successfully accepted the job.
      </div>    
+    <div class="alert alert-warning fade in">
+        <strong>Payment Confirmation Pending !</strong> Waiting for ServiceU to clear the payment.
+    </div> 
 <?php
   }else if( $select == 1 && $currentSelected == 1 && $no == 1){ ?>
     <div class="alert alert-success fade in">
@@ -210,18 +273,33 @@
        <strong>Denied!</strong> You have successfully denied the job.
      </div>     
 <?php
-  }else if( $select == 1 && $currentSelected == 0){ ?>
-    <div class="alert alert-danger fade in">
-       <strong>Job Closed!</strong>
-     </div>     
+  }else if( $select == 1 && $currentSelected == 0 && $selectedApplicant == 'na'){ ?>
+    <div class="alert alert-warning fade in">
+       <strong>Job about to Close</strong> 
+     </div>
 <?php
-  }else if( $select == 1 && $currentSelected == 1){ ?>
+  }else if( $select == 1 && $currentSelected == 0 && $userEmail != $selectedApplicant){ ?>
+    <div class="alert alert-danger fade in">
+       <strong>Job Closed! </strong> This post will no longer receive applications. 
+     </div>  
+<?php
+  }else if( $select == 1 && $userEmail == $selectedApplicant && $paymentClear == 0){ ?>
+    <div class="alert alert-warning fade in">
+        <strong>Payment Confirmation Pending !</strong> Waiting for ServiceU to clear the payment.
+    </div>
+<?php
+  } else if( $select == 1 && $userEmail == $selectedApplicant && $paymentClear == 1){ ?>
     <div class="alert alert-success fade in">
-       <strong>Job Accepted!</strong>
-     </div>     
+               <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+        <strong>Payment Confirmed!</strong> You may now work on the requested service.
+    </div>
+    <div class="alert alert-warning fade in">
+       <strong>Job on Progress! </strong> Click the complete button when finished  
+     </div>
 <?php
   }
 ?>
+    
     
   
     
@@ -355,7 +433,7 @@
                     <!-- /.row (nested) -->
                 </div>
                 
-              
+                <?php include ('confirmPaymentModal.php'); ?>
                 <?php include ('confirmApplication.php'); ?>
                 <?php include('editPost.php'); ?>
                 <?php include('closeJobModal.php'); ?>
