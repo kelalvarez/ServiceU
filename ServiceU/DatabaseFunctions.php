@@ -1,8 +1,8 @@
 <?php
 
 // Change it if necessary for your localhost
-//$con=mysqli_connect("localhost","root","","serviceu");
-$con=mysqli_connect("us-cdbr-azure-central-a.cloudapp.net","b1d6ea18aa71c7","d41e125d","serviceuDB");
+//$con=mysqli_connect("us-cdbr-azure-central-a.cloudapp.net","b1d6ea18aa71c7","d41e125d","serviceuDB");
+$con=mysqli_connect("localhost","root","","serviceu");
 
 function register($email, $firstName, $lastName, $password)
 {
@@ -1300,59 +1300,127 @@ function isSelected($jobID){
 }
 
 
+/////////////new messsaging system
+function insertMessage($jobID, $userEmail, $userReceiver){
 
-////////////sender and reciever table
-function sendMyMessage($senderEmail, $myMessage, $receiverEmail, $isNewMessage, $sentMessage){
-    global $con;
-    
-    
-  $query = "INSERT INTO sendertable(senderEmail, senderMessage, recipientEmail, newMessage, deleteMessage) values('$senderEmail', '$myMessage', '$receiverEmail', '$isNewMessage', '$sentMessage')";
+
+  global $con;
+     
+  $query = "INSERT INTO userinboxtable(jobID, senderEmail, receiverEmail) values('$jobID','$userEmail','$userReceiver')";
   mysqli_query($con, $query);
     
-   return TRUE;  
-    
-    
-}
-    
-function getMyMessage($userEmail){
-    
-   global $con;
+  return TRUE;  
 
-    $query = "SELECT MAX(senderID) as senderID, senderEmail, senderMessage, newMessage, deleteMessage , datesend FROM sendertable WHERE recipientEmail='$userEmail' GROUP BY senderEmail DESC";
-    $result = mysqli_query($con, $query);
-    
-    return $result;
-    
+
 }
 
 
-function getRecepientMessage($ID)
-{
+function getInboxID(){
+    
     global $con;
-
-    $query = "SELECT senderMessage FROM sendertable WHERE senderID='$ID' ";
-    $result = mysqli_query($con, $query);        
+    
+    $query = "SELECT MAX(inboxID) as inboxID FROM userinboxtable"; 
+    
+    $result = mysqli_query($con, $query);
     $row = mysqli_fetch_assoc($result);
     
-    return $row['senderMessage'];
+    return $row['inboxID'];   
+    
 }
 
-function getRecepientLatestDate($ID)
-{
-    global $con;
 
-    $query = "SELECT datesend FROM sendertable WHERE senderID='$ID' ";
-    $result = mysqli_query($con, $query);        
+
+
+
+function insertDataInboxSender($iD, $jobID, $recipient_message, $userEmail, $idToSenderAndReciever, $sentMessage){
+
+ global $con;
+     
+  $query = "INSERT INTO datainboxtable(inboxID, jobID, message, senderEmail, receiverEmail ,msgStatus) values('$iD','$jobID', '$recipient_message', '$userEmail', '$idToSenderAndReciever', '$sentMessage')";
+  mysqli_query($con, $query);
+    
+  return TRUE; 
+    
+}
+
+
+
+function insertDataInboxReceiver($iD, $jobID, $recipient_message, $idToSenderAndReciever ,$userEmail, $sentMessage){
+
+ global $con;
+     
+  $query = "INSERT INTO datainboxtable(inboxID, jobID, message, receiverEmail, senderEmail ,msgStatus) values('$iD','$jobID', '$recipient_message', '$idToSenderAndReciever' ,'$userEmail', '$sentMessage')";
+  mysqli_query($con, $query);
+    
+  return TRUE;
+    
+}
+
+
+
+
+function getMyInbox($userEmail){
+    
+    
+     global $con;
+    
+     $query = "SELECT  MAX(dataID) as dataID, inboxID, jobID, message, senderEmail, receiverEmail,  msgStatus, datesend FROM datainboxtable WHERE receiverEmail='$userEmail' AND (msgStatus='Unread' OR msgStatus='Read') GROUP BY jobID"; 
+    
+     $result = mysqli_query($con, $query);
+    
+
+     return $result;
+    
+    
+}
+
+
+function getMyMessageByID($ID){
+    
+    global $con;
+    
+    $query = "SELECT message FROM datainboxtable WHERE dataID='$ID'"; 
+    
+    $result = mysqli_query($con, $query);
+    $row = mysqli_fetch_assoc($result);
+    
+    return $row['message'];
+
+}
+
+
+
+function getDateSendByID($ID){
+    
+    global $con;
+    
+    $query = "SELECT datesend FROM datainboxtable WHERE dataID='$ID'"; 
+    
+    $result = mysqli_query($con, $query);
     $row = mysqli_fetch_assoc($result);
     
     return $row['datesend'];
+
 }
 
-function checkIfThereisHistory($userEmail, $recipient){
+
+function updateMyNumberofMessages($jobID, $userEmail){
+     global $con;
+    
+     $query = "UPDATE datainboxtable SET msgStatus='Read' WHERE receiverEmail='$userEmail' AND jobID='$jobID' AND msgStatus='Unread'";
+     $result = mysqli_query($con,$query );
+    
+      return TRUE;
+    
+}
+
+
+
+function checkIfThereisHistory($jobID, $userEmail, $recipient){
     
     global $con;
 
-    $query = "SELECT COUNT(*) as total FROM sendertable WHERE senderEmail='$recipient' AND recipientEmail='$userEmail' LIMIT 1";
+    $query = "SELECT COUNT(*) as total FROM userinboxtable WHERE jobID='$jobID' AND (senderEmail='$userEmail' AND receiverEmail='$recipient') OR (senderEmail='$recipient' AND receiverEmail='$userEmail')";
     $result = mysqli_query($con, $query);
     $row = mysqli_fetch_assoc($result);
     
@@ -1360,15 +1428,29 @@ function checkIfThereisHistory($userEmail, $recipient){
 
 }
 
-function loadHistory($userEmail, $recipient){
+
+function loadHistory($jobID){
     
    global $con;
 
-    $query = "SELECT * FROM sendertable WHERE (recipientEmail='$userEmail' AND senderEmail='$recipient') || (recipientEmail='$recipient' AND senderEmail='$userEmail') ";
+    $query = "SELECT * FROM datainboxtable WHERE jobID='$jobID' GROUP BY inboxID";
     $result = mysqli_query($con, $query);
     
     return $result;
     
+}
+
+function getMessageStatusByID($ID){
+    
+    global $con;
+    
+    $query = "SELECT msgStatus FROM datainboxtable WHERE dataID='$ID'"; 
+    
+    $result = mysqli_query($con, $query);
+    $row = mysqli_fetch_assoc($result);
+    
+    return $row['msgStatus'];
+
 }
 
 function countMyNewMesssages($userEmail)
@@ -1376,7 +1458,7 @@ function countMyNewMesssages($userEmail)
     
     global $con;
 
-    $query = "SELECT COUNT(*) as total FROM sendertable WHERE recipientEmail='$userEmail' AND newMessage='Yes' AND deleteMessage!='Trash'";
+    $query = "SELECT COUNT(*) as total FROM datainboxtable WHERE receiverEmail='$userEmail' AND msgStatus='Unread'";
     $result = mysqli_query($con, $query);
     $row = mysqli_fetch_assoc($result);
     
@@ -1384,89 +1466,24 @@ function countMyNewMesssages($userEmail)
     
 }
 
-function updateMyNumberofMessages($userEmail, $sender){
-     global $con;
-    
-     $query = "UPDATE sendertable SET newMessage='Read' WHERE senderEmail='$sender' AND recipientEmail='$userEmail'";
-     $result = mysqli_query($con,$query );
-    
-      return TRUE;
-    
-}
-
-
-function getIfNewMessage($ID)
+function countMyNewMesssagesByID($userEmail, $jobID)
 {
+    
     global $con;
 
-    $query = "SELECT newMessage FROM sendertable WHERE senderID='$ID' ";
-    $result = mysqli_query($con, $query);        
+    $query = "SELECT COUNT(*) as total FROM datainboxtable WHERE receiverEmail='$userEmail' AND msgStatus='Unread' AND jobID='$jobID'";
+    $result = mysqli_query($con, $query);
     $row = mysqli_fetch_assoc($result);
     
-    return $row['newMessage'];
+    return $row['total'];
+    
 }
-
-function getIfTrash($ID)
-{
-    global $con;
-
-    $query = "SELECT deleteMessage FROM sendertable WHERE senderID='$ID' ";
-    $result = mysqli_query($con, $query);        
-    $row = mysqli_fetch_assoc($result);
-    
-    return $row['deleteMessage'];
-}
-
-function moveMessageToTrash($userEmail){
-     global $con;
-    
-     $query = "UPDATE sendertable SET deleteMessage='Trash' WHERE recipientEmail='$userEmail'";
-     $result = mysqli_query($con,$query );
-    
-      return TRUE;
-    
-
-}
-
-
-function moveMessageToInbox($userEmail){
-     global $con;
-    
-     $query = "UPDATE sendertable SET deleteMessage='' WHERE recipientEmail='$userEmail'";
-     $result = mysqli_query($con,$query );
-    
-      return TRUE;
-    
-
-}
-
-function deleteAllTrashMessage($userEmail){
-     global $con;
-    
-     $query = "DELETE FROM sendertable WHERE recipientEmail='$userEmail'";
-     $result = mysqli_query($con,$query );
-    
-      return TRUE;
-    
-
-}
-
-function updateToSent($userEmail, $status){
-     global $con;
-    
-     $query = "UPDATE sendertable SET deleteMessage='$status' WHERE deleteMessage='Sent' AND senderEmail='$userEmail'";
-     $result = mysqli_query($con,$query );
-    
-      return TRUE;
-
-}
-
 
 function getAllSentMessage($userEmail){
     
      global $con;
     
-      $query = "SELECT MAX(senderID) as senderID, recipientEmail, senderMessage, datesend FROM sendertable WHERE senderEmail='$userEmail' AND deleteMessage='Sent' GROUP BY recipientEmail DESC";
+       $query = "SELECT  MAX(dataID) as dataID, inboxID, jobID, message, senderEmail, receiverEmail,  msgStatus, datesend FROM datainboxtable WHERE senderEmail='$userEmail' AND msgStatus='Sent' GROUP BY jobID"; 
     
     $result = mysqli_query($con,$query );
     
@@ -1474,6 +1491,197 @@ function getAllSentMessage($userEmail){
      return $result;
 
 }
+
+function moveMessageToTrash($userEmail, $status){
+     global $con;
+    
+     $query = "UPDATE datainboxtable SET msgStatus='$status' WHERE receiverEmail='$userEmail' AND (msgStatus='Unread' || msgStatus='Read')";
+     $result = mysqli_query($con,$query );
+    
+      return TRUE;
+    
+
+}
+
+function moveMessageToTrashByDataID($dataID, $jobID){
+     global $con;
+    
+     $query = "UPDATE datainboxtable SET msgStatus='Trash' WHERE dataID='$dataID' AND jobID='$jobID' AND (msgStatus='Unread' || msgStatus='Read')";
+     $result = mysqli_query($con,$query);
+    
+      return TRUE;   
+
+}
+
+function moveMessageToDeleteByID($dataID, $jobID){
+     global $con;
+    
+     $query = "UPDATE datainboxtable SET msgStatus='Deleted' WHERE dataID='$dataID' AND jobID='$jobID' AND (msgStatus='Trash' || msgStatus='Sent')";
+     $result = mysqli_query($con,$query);
+    
+      return TRUE;   
+
+}
+
+
+function moveMessageToDelete($userEmail, $status){
+     global $con;
+    
+     $query = "UPDATE datainboxtable SET msgStatus='$status' WHERE senderEmail='$userEmail' AND msgStatus='Sent'";
+     $result = mysqli_query($con,$query );
+    
+      return TRUE;
+
+}
+
+
+function getAllDeleteMessages($userEmail){
+    
+     global $con;
+    
+       $query = "SELECT  MAX(dataID) as dataID, inboxID, jobID, message, senderEmail, receiverEmail,  msgStatus, datesend FROM datainboxtable WHERE receiverEmail='$userEmail' AND msgStatus='Trash' GROUP BY jobID"; 
+    
+    $result = mysqli_query($con,$query );
+    
+
+     return $result;
+
+}
+
+
+function deleteAllTrashMessage($userEmail, $status){
+     global $con;
+    
+     $query = "UPDATE datainboxtable SET msgStatus='$status' WHERE receiverEmail='$userEmail' AND msgStatus='Trash'";
+     $result = mysqli_query($con,$query );
+    
+      return TRUE;
+
+}
+
+
+
+function deleteMessagePermanent($userEmail){
+     global $con;
+  
+     $query = "SELECT inboxID FROM userinboxtable WHERE senderEmail='$userEmail'";
+     $result = mysqli_query($con,$query );
+    
+      return $result;
+
+}
+
+
+function countInBoxID($dataID)
+{
+    
+    global $con;
+
+    $query = "SELECT COUNT(*) as total FROM datainboxtable WHERE inboxId='$dataID'";
+    $result = mysqli_query($con, $query);
+    $row = mysqli_fetch_assoc($result);
+    
+    return $row['total'];
+    
+}
+
+function thenGetResultFromInboxID($userEmail, $inboxID){
+    
+    global $con;
+
+    $query = "SELECT * FROM datainboxtable WHERE senderEmail='$userEmail' AND inboxID='$inboxID'";
+    $result = mysqli_query($con, $query);
+    
+    return $result;
+    
+}
+
+
+function deleteTheInboxIdInTheTable($userEmail, $dataID){
+     
+  global $con;
+
+  $query = "DELETE FROM datainboxtable WHERE senderEmail='$userEmail' AND dataID='$dataID'";
+            
+  $result = mysqli_query($con, $query) or die("Failed to execute delete user datainboxtable".mysql_error());        
+    
+   return true;
+}
+
+function deleteTheInboxIdInUserTable($inboxID){
+     
+  global $con;
+
+  $query = "DELETE FROM userinboxtable WHERE inboxID='$inboxID'";
+  $result = mysqli_query($con, $query) or die("Failed to execute delete user in the userinboxTable".mysql_error());        
+    
+   return true;
+}
+
+
+
+function deleteMSG($userEmail){
+
+                    //Slow DELETE NEED TO CHANGE THIS!!!!!!!!!!!!!!!!!!!!!!!!!!
+                    $result = deleteMessagePermanent($userEmail);
+                    
+                    if(!empty($result)){
+                       
+                        $statusmsg_one="";
+                        $statusmsg_two="";
+                        $theInboxID="";
+                        $myCount = 1;
+                        
+                        //get all userEmail inboxID
+                        while($row = mysqli_fetch_assoc($result)){
+                            
+                            //check if inbox ID is = 2
+                            if(countInBoxID($row['inboxID']) == 2){
+                                        //get and compare if both are Deleted
+                                        $resultFromInboxID = thenGetResultFromInboxID($userEmail, $row['inboxID']);                                
+                                                                        
+                                                                     //loop through this two inboxID
+                                                                      while($myinboxID = mysqli_fetch_assoc($resultFromInboxID)){
+                                                                          
+                                                                                            
+                                                                          if($myCount == 1){
+                                                                                $statusmsg_one = $myinboxID['dataID'];
+                                                                                $theInboxID = $myinboxID['inboxID'];
+                                                                                $myCount = 2;
+                                                                               
+                                                                              
+                                                                          }else{
+                                                                              $statusmsg_two = $myinboxID['dataID'];
+                                                                              $myCount = 1;
+                                                                              
+                                                                          }
+                                                    
+                                                            }
+                                                //check if both inboxID is set to Deleted if it is delete
+                                                if(getMessageStatusByID($statusmsg_one) ==  getMessageStatusByID($statusmsg_two)){
+                                                             
+                                                             //Delete THe messages corresponding tho the dataID in the datainboxtable
+                                                             deleteTheInboxIdInTheTable($userEmail, $statusmsg_one);
+                                                             deleteTheInboxIdInTheTable($userEmail, $statusmsg_two);
+                                                    
+                                                             //Then delete the InboxId in the userinboxTable
+                                                             deleteTheInboxIdInUserTable($theInboxID);
+                                                    
+                                                        }
+                                                                                                                
+                                
+                                                }//end of  if(countInBoxID($row['inboxID']) == 2)
+     
+                            
+                            
+                                        }
+                                                
+                                }
+   
+}
+
+
+
 
 
 

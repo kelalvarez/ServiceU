@@ -138,7 +138,7 @@
         <div class="col-xs-6 col-md-5 navLink" style="padding-left: 30px;">
             
             <a href="myjobpost.php"> My Job Post</a>
-            <a href="myapplications.php"> My Applications</a>
+            <a href="myapplications.php" style="color:#0e0e0f; text-decoration: underline;"> My Applications</a>
             <a href="inbox.php"> Inbox</a>
             <a href="profile.php"> My Profile</a>
             
@@ -240,8 +240,10 @@
                                                     
                                                    if($row['closeJob'] == 1)
                                                       echo '<span class="label label-success">Open</span>';
-                                                    else
-                                                      echo '<span class="label label-danger">Closed</span>';
+                                                   else if($row['closeJob'] == 2)
+                                                      echo '<span class="label label-warming">Pending</span>';
+                                                   else 
+                                                     echo '<span class="label label-danger">Closed</span>';
                                                 }    
                 
                                         ?>

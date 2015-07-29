@@ -137,7 +137,7 @@
     <div class="row" style="">
         <div class="col-xs-6 col-md-5 navLink" style="padding-left: 30px;">
             
-            <a href="myjobpost.php"> My Job Post</a>
+            <a href="myjobpost.php" style="color:#0e0e0f; text-decoration: underline;"> My Job Post</a>
             <a href="myapplications.php"> My Applications</a>
             <a href="inbox.php"> Inbox</a>
             <a href="profile.php"> My Profile</a>

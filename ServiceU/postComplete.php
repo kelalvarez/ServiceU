@@ -150,6 +150,9 @@
     <!-- Custom Fonts -->
     <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
     <link href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css">
+    
+     <!--Customized CSS-->
+    <link rel="stylesheet" href="css/mycss.css">
 
 </head>
 
@@ -162,11 +165,6 @@
 <div class="container">
     
 
-<div class="well text-center">
-
-    <h3><strong>Job Information</strong></h3>
-
-</div>    
 <?php 
     $owner = isOwner($userEmail, $jobID);
     $existApplication = existApp($userEmail, $jobID);
@@ -229,120 +227,97 @@
     
 <!----------------------- DATA --------------->    
     
+<div class="well well-lg" style="margin-top: 10px">   
+     <div class="row">
     
-<div class="row">
-<div class="col-md-2">
-<div class="col-sm-12 col-md-12 text-center">
-    <strong><span class="text-center input-lg">
-                <?php
-                    if($owner != 0 ){
-                ?>
-                Owner
-                <?php } 
-                    else { ?>
-                Applicant
-                <?php } ?>
-    </span></strong>
-                    
-    <hr class="small">  
- 
-        <?php
-                $jobClose = jobIsClose($jobID);
-                $numApp = numApplications($jobID);
-                if ($owner != 0){
-        ?>
-        <a href="#viewApplication" data-toggle="modal" data-target="#viewApplication" class="btn btn-sm btn-warning btn-block">
-            View Applications <span class="badge"><?php echo $numApp ?></span></a>
+    
+            <div class="col-md-2">
+                                <div class="col-sm-12 col-md-12 text-center">
+                                    <strong><span class="text-center input-lg">
+                                                <?php
+                                                    if($owner != 0 ){
+                                                ?>
+                                                Owner
+                                                <?php } 
+                                                    else { ?>
+                                                Applicant
+                                                <?php } ?>
+                                    </span></strong>
 
-        <a href="#editPost" data-toggle="modal" data-target="#editPost" class="btn btn-sm btn-warning btn-block <?php if($jobClose == 1) { echo "disabled"; }?>">
-            <i class="icon-hand-right"></i>Edit
-        </a>
+                                    <hr class="small">  
 
-        <?php if($jobClose != 1) {?>
-        <a href="#closePost" data-toggle="modal" data-target="#closePost" class="btn btn-sm btn-warning btn-block">
-                    <i class="icon-hand-right"></i>Close Job
-        </a>
-        <?php  }
-        else{ ?>
-        <a href="#openPost" data-toggle="modal" data-target="#openPost" class="btn btn-sm btn-warning btn-block <?php if($select == 1) { echo "disabled"; }?>">
-                    <i class="icon-hand-right"></i>Open Job
-        </a>
-        <?php
-            }
-        }
-        else { ?> 
-            <a href="#confirmApplication" data-toggle="modal" data-target="#confirmApplication" class="btn btn-sm btn-warning btn-block <?php if($existApplication != 0 || $jobClose == 1) { echo "disabled"; }?>">
-                <i class="icon-hand-right"></i> 
-            <?php 
-                if($jobClose == 1){
-                    echo "Post Closed";
-                }
-                else {
-                    if ($existApplication != 0) 
-                        {echo "Applied";}
-                    else 
-                        {echo "Apply"; }
-                }
-            ?>
-            </a>
-        <?php } ?>
-                             
-                       
-        </span>
-</div>
-                
-                  
-                  
-
-    </div>
-    <div class="col-md-10">
-
-    <div class="well well-lg">    
-
-                <!---
-                <div class="col-lg-10 col-lg-offset-1">-->
- 
-                        <div class="row">
-                            <div class="col-sm-10 col-lg-push-4">
-                                <h1><span style="font-weight: bold">
-                                    <?php 
-                                        echo $title = getJobTitle($jobID);
-                                    ?>
-                                </span>
-
-                                <span class="badge">
-                                    <?php
-                                        echo $numApp;
-                                    ?>
-                                </span>
-                                </h1>
-
-                                <div>
-                                    <?php
-                                       $temp = $_GET['jobID'];
-                                       $jobowerEmail = getJobOwner($temp);
-                                     
-                                       $owerJobID = getID($jobowerEmail);
-                                     
-                                     echo '<a class="btn btn-light btn-s" href="conversation.php?userID='.$owerJobID.'" role="button"><span class="glyphicon glyphicon-envelope"></span></a>';
+                                        <?php
+                                                $jobClose = jobIsClose($jobID);
+                                                $numApp = numApplications($jobID);
+                                                if ($owner != 0){
                                         ?>
+                                        <a href="#viewApplication" data-toggle="modal" data-target="#viewApplication" class="btn btn-sm btn-warning btn-block">
+                                            View Applications <span class="badge"><?php echo $numApp ?></span></a>
+
+                                        <a href="#editPost" data-toggle="modal" data-target="#editPost" class="btn btn-sm btn-warning btn-block <?php if($jobClose == 1) { echo "disabled"; }?>">
+                                            <i class="icon-hand-right"></i>Edit
+                                        </a>
+
+                                        <?php if($jobClose != 1) {?>
+                                        <a href="#closePost" data-toggle="modal" data-target="#closePost" class="btn btn-sm btn-warning btn-block">
+                                                    <i class="icon-hand-right"></i>Close Job
+                                        </a>
+                                        <?php  }
+                                        else{ ?>
+                                        <a href="#openPost" data-toggle="modal" data-target="#openPost" class="btn btn-sm btn-warning btn-block <?php if($select == 1) { echo "disabled"; }?>">
+                                                    <i class="icon-hand-right"></i>Open Job
+                                        </a>
+                                        <?php
+                                            }
+                                        }
+                                        else { ?> 
+                                            <a href="#confirmApplication" data-toggle="modal" data-target="#confirmApplication" class="btn btn-sm btn-warning btn-block <?php if($existApplication != 0 || $jobClose == 1) { echo "disabled"; }?>">
+                                                <i class="icon-hand-right"></i> 
+                                            <?php 
+                                                if($jobClose == 1){
+                                                    echo "Post Closed";
+                                                }
+                                                else {
+                                                    if ($existApplication != 0) 
+                                                        {echo "Applied";}
+                                                    else 
+                                                        {echo "Apply"; }
+                                                }
+                                            ?>
+                                            </a>
+                                        <?php } ?>
+
+
+                                        </span>
                                 </div>
-                                
-                                
-                            </div>
+
+
+
+
+            </div>
+    
+    
+    <div class="col-md-8">
+
+    <div class="panel panel-info">    
+
+        <div class="panel-heading" style="text-align: center"><h2></span>&nbsp <b> <?php echo $title = getJobTitle($jobID);?> <span class="badge"><?php echo $numApp;?></span> </b></h2></div>
+                    <div class="row">
+                        
+                        <div class="col-xs-6 col-md-12 myHeaderInbox" style="text-align:center; margin-top: 15px">
+                            About this job
+                              
                         </div>
-                    <br>
-                        <div class="row">
-                            <span class="input-sm"><strong>Description</strong></span>
-                            <br>
-                                <?php
+                        <div class="col-xs-6 col-md-12" style="padding-right: 25px; padding-left: 25px; padding-top: 10px;">
+                        
+                             <?php
                                     echo $description = getJobDescription($jobID);
                                 ?>
                         </div>
-                    <br>
-                        <div class="row">
-                            <div class="col-md-4 col-lg-push-7">
-                                <span style=" font-size: 15px;">    
+                        
+                        
+                            <div class="col-xs-6 col-md-12">
+                                <span style="font-size: 15px;  margin-right: 25px; float: right; margin-top: 15px;">    
                                     <span style="font-weight: bold">
                                         <?php
                                             echo "Payment: ";
@@ -354,10 +329,10 @@
                                     ?>
                                 </span>        
                             </div>
-                        </div>
-                        <div class="row">
-                                    <div class="col-md-4 col-lg-push-7">
-                                    <span style="font-size: 11px; font-style: italic ;">    
+                    
+                  
+                            <div class="col-xs-6 col-md-12">
+                                    <span style="font-size: 11px; font-style: italic;  margin-right: 25px; float: right; margin-bottom: 10px;">    
                                         <span style="font-weight: bold">
                                         <?php
                                             echo "Category: ";
@@ -367,10 +342,16 @@
                                             echo $category = getJobCategory($jobID);                                            
                                         ?>
                                     </span>
-                                    </div>
-                        </div>
-                    
+                             </div>
                         
+                        
+                        
+                    
+                    </div>
+        
+        
+
+                 
                     <!-- /.row (nested) -->
                 </div>
                 
@@ -385,17 +366,86 @@
                 <!-- /.col-lg-10 -->
                 
             </div>
-            <!-- /.row -->
+    
+         <div class="col-md-2">
+             <div class="panel panel-default">
+                 
+                  <div class="panel-body">
+                      
+                                   
+                      
+                        <?php
+
+                        
+                             If(!empty(displayMyImage(getJobOwner($jobID))))
+                                                echo '<div style="display: block; margin-left: 24px">' . '<img  class="img-circle" height="75" width="75" src="data:image/jpeg;base64,'.base64_encode(displayMyImage(getJobOwner($jobID))).'"alt="User-ImG">' . '&nbsp&nbsp' . '</div>';
+                                        
+                              else
+                                echo '<div style="display: block; margin-left: 24px">' . '<img  class="img-circle" height="75" width="75" class="img-circle" src="img/user-icon.jpg" alt="User-ImG">' . '</div>';
+
+
+
+
+
+                       ?>
+                      
+                     <div style="text-align: center;">
+                         <?php
+
+        echo '<a href="viewmyprofile.php?userID='.getID(getJobOwner($jobID)).'" style="text-align: left; font-weight: 700; font-size: 17px;">' . getFirstName(getJobOwner($jobID)) . '</a>';  
+
+
+                        ?>
+                    </div>
+                      
+                  </div>
+                 
+                 <div class="panel-footer">
+    
+                      <?php
+
+
+                                $jobowerEmail = getJobOwner($jobID);
+
+                                 $owerJobID = getID($jobowerEmail);
+                                if($owner == 0)               
+                                echo '<a class="btn btn-default" href="conversation.php?userID='.$owerJobID.'&'.'j='.$jobID.'" role="button"><span class="glyphicon glyphicon-envelope"></span>&nbsp&nbsp Contact Me</a>'
+                                    
+                                //echo '<a class="btn btn-light btn-s" href="conversation.php?userID='.$owerJobID.'&'.'j='.$temp.'" role="button"><span class="glyphicon glyphicon-envelope"></span></a>';
+                                    
+                               
+                       ?>
+                     
+                 
+                 
+                 </div>
+                 
+             </div>
+             
+             
+
+        </div>
+            
              
                     
-        </div>
+        </div><!-- /.row -->
         <!-- /.container -->
-        
+    </div>  <!-- /.WEll -->
 
 </div>
 
 
+    <footer style="text-align: center;">
 
+                <ul class="list-inline">
+                  <li><a href="about.php">About</a></li>
+                  <li><a href="help.php">Help</a></li>
+                  <li><a href="#">Directory</a></li>
+                  <li><h5 style="color: #aab8c2">&#169 2015 ServiceU, Inc, All rights reserved.</h5></li>
+                </ul>
+         
+    </footer>
+    
 
 
 

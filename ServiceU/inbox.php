@@ -106,17 +106,7 @@
     
 <body>
     
-    
-    <?php   
-          //read Email
-          
-          
-          $result = getMyMessage($userEmail);
-            
-            //$result = getUserMessage($userEmail);
-        
-    ?>
-    
+
 
 <!-- Navigation Sidebar -->
     <?php include 'navigationbar.php' ?>
@@ -132,7 +122,7 @@
             
             <a href="myjobpost.php"> My Job Post</a>
             <a href="myapplications.php"> My Applications</a>
-            <a href="inbox.php"> Inbox</a>
+            <a href="inbox.php" style="color:#0e0e0f; text-decoration: underline;"> Inbox</a>
             <a href="profile.php"> My Profile</a>
             
             
@@ -192,7 +182,8 @@
                 
                 <div class="panel panel-info">
                     <div class="panel-heading" style="text-align: center"><h3><span class="glyphicon glyphicon-envelope"></span>&nbsp <b>My Inbox</b></h3></div>
-                        <div class="panel-body">
+                       
+                            <div class="panel-body">
                             
            
                             
@@ -202,9 +193,9 @@
                                   
                                 <div class="row">
                                     
- 
-                                  <div class="col-xs-6 col-md-3 myHeaderInbox">Sender</div>
-                                  <div class="col-xs-6 col-md-6 myHeaderInbox">Last Message</div>
+                                  <div class="col-xs-6 col-md-2 myHeaderInbox">Subject</div>
+                                  <div class="col-xs-6 col-md-2 myHeaderInbox">Sender</div>
+                                  <div class="col-xs-6 col-md-5 myHeaderInbox">Last Message</div>
                                   <div class="col-xs-6 col-md-3 myHeaderInbox">Date</div>
                                     
                                 </div>
@@ -214,45 +205,75 @@
                               <div class="panel-body">
 
                                   <?php
-        
-                                if(!empty($result)){
+                                                                        
+
+                                                                        
+                                    $result = getMyInbox($userEmail);
+
+                                      
+
+                                        if(!empty($result)){
                                              while ($row = mysqli_fetch_assoc($result)){
-        
-                                                $userMessage = getRecepientMessage($row['senderID']);
-                                                $userDate = getRecepientLatestDate($row['senderID']);
-                                                $isnewMessage = getIfNewMessage($row['senderID']);
-                                                $isTrash = getIfTrash($row['senderID']);
-                                                     
-                                                $replySenderID = getID($row['senderEmail']);
-                                                
-                                    if($isTrash != 'Trash'){
-                                                    
-                                                   if($isnewMessage == 'Yes')
+                                                 
+                                               /*print_r($row);
+                                               echo '<br>';
+                                               echo '<br>';*/
+                                   
+                                                 
+                                              //if(countInBoxID($row['inboxID']) == 1)
+                                                    //continue;
+                                                 
+                                              $myMSG = getMyMessageByID($row['dataID']);
+                                              $dateSend = getDateSendByID($row['dataID']);
+                                            
+                                              //sender info
+                                              $senderEmail = $row['senderEmail'];
+                                              $senderID = getID($senderEmail);
+                                        
+                                              //msgStatus
+                                               $msgStatus = getMessageStatusByID($row['dataID']);
+                                              
+                                            if(($userEmail == $row['receiverEmail']) && $msgStatus != 'Trash' && $msgStatus != 'Deleted'){  
+                                                 
+                                            
+                                                 if($msgStatus == 'Unread')
                                                      echo '<div class="row myBodyInbox" style="background-color: #fff; padding-top: 10px;">';
                                                    else
                                                      echo '<div class="row myBodyInbox" style="background-color: #F5F5F5; padding-top: 10px;">';
-        
-                                                     
-                                                    If(!empty(displayMyImage($row['senderEmail'])))
-                                                       echo '<a href="conversation.php?userID='.$replySenderID.'"> ' . '<div class="col-xs-6 col-md-3 ">' . '<img  class="img-circle" height="25" width="25" src="data:image/jpeg;base64,'.base64_encode(displayMyImage($row['senderEmail'])).'"alt="User-ImG">' . '&nbsp&nbsp' . getFirstName($row['senderEmail']) . '</div>';
+                                                  
+                                                    echo '<a href="conversation.php?userID='.$senderID.'&'.'j='.$row['jobID'].'">' .  '<div class="col-xs-6 col-md-2">' . getJobTitle($row['jobID'])  . '</div>';
+                                                  
+                                                    If(!empty(displayMyImage($senderEmail)))
+                                                       echo '<div class="col-xs-6 col-md-2 ">' . '<img  class="img-circle" height="25" width="25" src="data:image/jpeg;base64,'.base64_encode(displayMyImage($senderEmail)).'"alt="User-ImG">' . '&nbsp&nbsp' . getFirstName($senderEmail) . '</div>';
+                                        
                                                     else
-                                                        echo '<a href="conversation.php?userID='.$replySenderID.'"> ' . '<div class="col-xs-6 col-md-3 ">' . '<img  class="img-circle" height="25" width="25" class="img-circle" src="img/user-icon.jpg" alt="User-ImG">' . '&nbsp&nbsp' . getFirstName($row['senderEmail']) . '</div>';
+                                                        echo '<div class="col-xs-6 col-md-2 ">' . '<img  class="img-circle" height="25" width="25" class="img-circle" src="img/user-icon.jpg" alt="User-ImG">' . '&nbsp&nbsp' . getFirstName($myEmail) . '</div>';
         
-                                                       echo '<div class="col-xs-6 col-md-6 ">' . $userMessage . '</div>';
-                                                       echo '<div class="col-xs-6 col-md-3 ">' .$userDate. '<a style="float: right" class="btn btn-info  btn-xs" href="conversation.php?userID='.$replySenderID.'" role="button" data-toggle="tooltip" data-placement="left" title="Read Message"><span class="glyphicon glyphicon-arrow-left"></span></a>' . '</div>';
+                                         
+                                                        
+                                                       echo '<div class="col-xs-6 col-md-5 ">' . $myMSG . '</div>';
+                                        
+                                           // if($isnewMessage == 'Yes')
+                                                       echo '<div class="col-xs-6 col-md-3 ">' .$dateSend. '<a style="float: right" onClick="onClickDelete()" class="btn btn-danger  btn-xs" href="movetotrash.php?dID='.$row['dataID'].'&'.'jID='.$row['jobID'].'" role="button" data-toggle="tooltip" data-placement="left" title="Move to trash!"> Trash!</a> </div>';
+                                             //else
+                                                    // echo '<div class="col-xs-6 col-md-3 ">' .$userDate. '</div>';
+                                        
                                                     echo '</div><a>';
-
+                                                     
+                                                     
+                                                     
+                                                     
+                                               }
+                                                 
+                                                          
+                                                    
+                                                 
                                             }
-                                        
-                                        
+                                
                                         }
-                                    
-                                        }//end of if(!empty($result))
-
-
+                                        
                 
                                  ?>
-                                 
                                   
                              
                                   
@@ -265,7 +286,7 @@
                                     
                                   <div class="col-xs-6 col-md-2" style="padding: 0px">
                                       <input type="checkbox" name="checkUncheck"><a href=""><button type="submit" style="width: 25px; border: none; background-color: #fff" name="submitMyTrash"><span class="glyphicon glyphicon-trash"> </span></a></button>
-                                    <small style="color:#777786">Delete all Trash</small>
+                                    <small style="color:#777786">Move all Trash</small>
                                   </div>
                                      
                                 </form>
@@ -314,12 +335,19 @@
                 if(isset($_POST['checkUncheck'])){ 
                     
         
-                            moveMessageToTrash($userEmail);
+                            $status = "Trash";
+                            moveMessageToTrash($userEmail, $status);
                     
                                     
                         }
 
                 }
+
+    function onClickDelete(){
+
+        echo 'Hi';
+    
+}
 
         
 

@@ -111,14 +111,17 @@
     <?php
            
 
-            if(!empty($_GET['userID']))
+            if(!empty($_GET['userID']) && !empty($_GET['j']))
+            {
                $sendMessageTo =  $_GET['userID']; //userID is retrieve from jobtable
-            
+                
+                    $jobID = $_GET['j'];
                 //sender
                $idToSenderAndReciever = getEmailByID($sendMessageTo);
 
                 //update number of message
-               updateMyNumberofMessages($userEmail, $idToSenderAndReciever);
+               updateMyNumberofMessages($jobID, $userEmail);
+            }
                
     ?>  
     
@@ -131,9 +134,29 @@
     <!-- Services -->
     <!-- The circle icons use Font Awesome's stacked icon classes. For more information, visit http://fontawesome.io/examples/ -->
 <div class="container">
+    
+    <div class="row" style="">
+        <div class="col-xs-6 col-md-5 navLink" style="padding-left: 30px;">
+            
+            <a href="myjobpost.php"> My Job Post</a>
+            <a href="myapplications.php"> My Applications</a>
+            <a href="inbox.php" style="color:#0e0e0f; text-decoration: underline;"> Inbox</a>
+            <a href="profile.php"> My Profile</a>
+            
+            
+
+        </div>
+        
+        <div class="col-xs-6 col-md-7" style="padding-left: 90px">
+            <?php include('newPost.php'); ?>
+                 <a class="btn btn-success btn-xs"  href="#newPost" data-toggle="modal" data-target="#newPost" role="button"><b>Create Job Now!</b></a>
+        
+        </div>
+                                                                                                                                    
+    </div>
 
 
-     <div class="well well-lg">
+     <div class="well well-lg" style="margin-top: 10px">
 
         <div class="row">
 
@@ -200,7 +223,22 @@
                         ?>
                     
                     </div>
+                    
+                    <div>
                         
+                         
+                        <h3>Subject: <b style="font-weight: 700;"><?php 
+        
+                                echo getJobTitle($jobID) 
+                            
+                            ?></b></h3>
+                        
+                        
+
+                                
+                    
+                    </div>
+                       
                     
                         <div class="panel-body">
                             
@@ -211,24 +249,42 @@
                                 
                                             <!--count be stripped table-->
                                             <table class="table">
-                         
-                                                <?php
-                                                            //load History       
-                                                    if(!empty(checkIfThereisHistory($userEmail, $idToSenderAndReciever))){
-                                                                    $history = loadHistory($userEmail, $idToSenderAndReciever);
+                                                
+                                            
 
-                                                            while($row = mysqli_fetch_assoc($history)){
-                                                                      
+                                                <?php 
+        
+                                                     if(!empty(checkIfThereisHistory($jobID, $userEmail, $idToSenderAndReciever))){
+                                                             
+                                                                       $history = loadHistory($jobID);
+        
+                                                              while($row = mysqli_fetch_assoc($history)){
                                                                 
-                                                                    echo '<tr>';
+                                                                    //print_r($row);
+                                                                   // echo '<br>';
+                                                                   //echo '<br>';
+                                                          
+                                                                  echo '<tr>';
                         
-                                                                            echo '<td>' . '<div style="font-weight: 600; text-align: center; color: #31708f">' . getFirstName($row['senderEmail']) . '</div>' . '<div>' . $row['senderMessage'] . '</div>' . '</td>'; 
+                                                                        if(getFirstName($userEmail) == getFirstName($row['senderEmail']))
+                                                                            echo '<td>' . '<div style="font-weight: 600; text-align: center; color: #31708f">'. 'Me' . '</div>';
+                                                                         else
+                                                                            echo '<td>' . '<div style="font-weight: 600; text-align: center; color: #00CC66">'. getFirstName($row['senderEmail']) . '</div>';
+                                                                  
+                                                                            echo '<div>' . $row['message'] . '</div>';
+                                                                
+                                                                            echo  '<div style="float: right">' . '<h6>' .$row['datesend']  . '</h6>' . '</div>'. '</td>';
+                                                                            
                                                                      
-                                                                    echo '</tr>';
-                                                            }
-                                                      }//no history
-                                                  
-                                                ?>
+                                                                 echo '</tr>';
+                                                                  
+                                                                  
+                                                                  
+                                                              }
+                                                                        
+    
+                                                        }
+                                                  ?>
                                             </table>
                                             
 
@@ -319,11 +375,25 @@
 
                         //send message if description is not empty
                         if(!empty($recipient_message)){
-                            $newMessage = 'Yes';
+                           // $newMessage = 'Yes';
+                           // sendMyMessage($userEmail ,$jobID ,$recipient_message, $idToSenderAndReciever, $newMessage, $sentMessage);
+                            
+                            insertMessage($jobID, $userEmail, $idToSenderAndReciever);
+                        
+                            
+                            //sender
                             $sentMessage = 'Sent';
-                            sendMyMessage($userEmail, $recipient_message, $idToSenderAndReciever, $newMessage, $sentMessage);
+                            insertDataInboxSender(getInboxID(), $jobID, $recipient_message, $userEmail, $idToSenderAndReciever, $sentMessage);
+                            
+                            //receiver
+                            $sentMessage = 'Unread';
+                            insertDataInboxReceiver(getInboxID(), $jobID, $recipient_message, $idToSenderAndReciever, $userEmail, $sentMessage);
                             
                         }
+                
+                
+                        
+                
                             
             }
     ?>

@@ -181,7 +181,7 @@
             <a href="myjobpost.php"> My Job Post</a>
             <a href="myapplications.php"> My Applications</a>
             <a href="inbox.php"> Inbox</a>
-            <a href="profile.php"> My Profile</a>
+            <a href="profile.php" style="color:#0e0e0f; text-decoration: underline;"> My Profile</a>
             
             
 

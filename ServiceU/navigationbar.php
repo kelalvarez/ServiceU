@@ -41,8 +41,19 @@
             </ul>
              
             <ul class="nav navbar-nav pull-right"> <!--user  nav bar-->
+                 <li><a href="notifications.php"> <span style="font-size: 17px; margin-right: 5px;" class="glyphicon glyphicon-flash" data-toggle="tooltip" data-placement="bottom" title="Notification"></span><span class="badge">
+                <?php
+    
+        
+                   if(empty(getNroNewNotifications($userEmail)))
+                      echo 0;
+                    else
+                      echo '<span style="color: #37FF00;">' . getNroNewNotifications($userEmail) . '</span>';
+                ?>
                 
-            <li><a href="inbox.php"> <span style="font-size: 17px; margin-right: 5px;" class="glyphicon glyphicon-envelope"></span><span class="badge">
+                </span></a></li>
+                
+            <li><a href="inbox.php"> <span style="font-size: 17px; margin-right: 5px;" class="glyphicon glyphicon-envelope" data-toggle="tooltip" data-placement="bottom" title="Inbox"></span><span class="badge">
                 <?php
     
         
@@ -57,7 +68,15 @@
             <li class="dropdown">
               
               
-                <a href="#" data-toggle="dropdown" style="font-size: 16px;"> <span class="glyphicon glyphicon-user" ></span>&nbsp <b><?php echo getFullName($userEmail); ?></b>
+                <a href="#" data-toggle="dropdown" style="font-size: 13px;"><?php 
+                    
+                     if(!empty(displayMyImage($userEmail)))
+                     echo '<img  class="img-circle" height="25" width="25" src="data:image/jpeg;base64,'.base64_encode(displayMyImage($userEmail)).'"alt="User-ImG">' . '&nbsp&nbsp';
+                    
+                    else
+                     echo '<span class="glyphicon glyphicon-user" ></span>' ;
+                        
+                        ?><b><?php echo getFullName($userEmail); ?></b>
                 <span class="caret"</span></a>
 
                 <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu">
@@ -78,7 +97,6 @@
 </div> <!--End of container-->
 
 
-
     <!--Start online JSS first-->
     <script src="https://code.jquery.com/jquery-1.11.2.min.js"></script>
     <!--Bootstrap JSS-->
@@ -93,6 +111,8 @@
             
         });
     </script>
+
+
 
 
 
