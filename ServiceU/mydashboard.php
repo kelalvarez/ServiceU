@@ -70,6 +70,20 @@
 	}
     }
     
+        if (isset($_POST['createJob'])) {
+        
+        $jobTitle = $_POST['jobTitle'];
+        $jobDescription = $_POST['jobDescription'];
+    $jobPayment = $_POST['jobPayment'];
+    $jobCategory = $_POST['jobCategory'];
+
+        createPost($userEmail, $jobTitle, $jobDescription, $jobPayment, $jobCategory);
+        echo '<script type="text/javascript">';
+        echo 'alert("Your post has been created")';
+        echo '</script>';
+
+    }
+ 
        
 ?>
 
