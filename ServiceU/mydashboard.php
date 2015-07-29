@@ -199,7 +199,7 @@
                                         <span class="glyphicon glyphicon-wrench"> </span> 
                                         <h3>Creating Job on ServiceU is effortless.</h3>
                                         <p>Start now to provide service to your local community!</p>
-                                        <?php include('newPost.php'); ?>
+                                        
                                         <a class="btn btn-success" href="#newPost" data-toggle="modal" data-target="#newPost" role="button">Create Job Now!</a>
                                         
                                 </div>
@@ -231,6 +231,7 @@
                     
      </div>    
 </div>
+    <?php include('newPost.php'); ?>
         <!-- /.container -->
 
     <footer style="text-align: center;">
