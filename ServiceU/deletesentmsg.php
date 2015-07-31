@@ -22,7 +22,7 @@
            $jobID = $_GET['jID'];
         
            moveMessageToDeleteByID($inboxID, $jobID);
-           echo "<meta http-equiv='refresh' content='0;url=trash.php'>";
+           echo "<meta http-equiv='refresh' content='0;url=sent.php'>";
         
          
         }

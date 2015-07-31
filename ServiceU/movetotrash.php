@@ -18,8 +18,8 @@
             
             </script>";*/
         
-            //echo $inboxID = $_GET["dID"];
-          // echo  $jobID = $_GET['jID'];
+          $inboxID = $_GET["dID"];
+          $jobID = $_GET['jID'];
         
            moveMessageToTrashByDataID($inboxID, $jobID);
            echo "<meta http-equiv='refresh' content='0;url=inbox.php'>";

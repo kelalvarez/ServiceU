@@ -47,6 +47,10 @@
     <!-- Custom Fonts -->
     <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
     <link href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css">
+    
+    
+    <!--Customized CSS-->
+    <link rel="stylesheet" href="css/mycss.css">
 
 </head>
 
@@ -58,8 +62,29 @@
 
 <div class="container">
     
+    
+    <div class="row" style="">
+        <div class="col-xs-6 col-md-5 navLink" style="padding-left: 30px;">
+            
+            <a href="myjobpost.php"> My Job Post</a>
+            <a href="myapplications.php"> My Applications</a>
+            <a href="inbox.php"> Inbox</a>
+            <a href="profile.php"> My Profile</a>
+            
+            
 
-<div class="well text-center">
+        </div>
+        
+        <div class="col-xs-6 col-md-7" style="padding-left: 90px">
+            <?php include('newPost.php'); ?>
+                 <a class="btn btn-success btn-xs"  href="#newPost" data-toggle="modal" data-target="#newPost" role="button"><b>Create Job Now!</b></a>
+        
+        </div>
+                                                                                                                                    
+    </div>
+    
+
+<div class="well text-center" style="margin-top: 10px">
 
     <h3><strong>Notifications</strong></h3>
 

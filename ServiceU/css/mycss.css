@@ -418,3 +418,17 @@ body{
 .navLink a:active {
     color: #0e0e0f;
 }
+
+.serviceSearch{
+    position: relative;
+}
+
+.serviceSearch .searchButton{
+    position: absolute;
+    top: 11px;
+    right: 15px;
+    background-color: #EEEEEE;
+    border-bottom-style: none;
+    border: none;
+    outline: 0 !important;
+}

@@ -1564,7 +1564,7 @@ function deleteAllTrashMessage($userEmail, $status){
 function deleteMessagePermanent($userEmail){
      global $con;
   
-     $query = "SELECT inboxID FROM userinboxtable WHERE senderEmail='$userEmail'";
+     $query = "SELECT jobID FROM userinboxtable WHERE senderEmail='$userEmail' GROUP BY jobID";
      $result = mysqli_query($con,$query );
     
       return $result;
@@ -1572,12 +1572,14 @@ function deleteMessagePermanent($userEmail){
 }
 
 
-function countInBoxID($dataID)
-{
+
+
+
+function countMessageStatusDeleted($jobID){
     
     global $con;
 
-    $query = "SELECT COUNT(*) as total FROM datainboxtable WHERE inboxId='$dataID'";
+    $query = "SELECT COUNT(*) as total FROM datainboxtable WHERE jobID = '$jobID' AND msgStatus='Deleted'";
     $result = mysqli_query($con, $query);
     $row = mysqli_fetch_assoc($result);
     
@@ -1585,38 +1587,40 @@ function countInBoxID($dataID)
     
 }
 
-function thenGetResultFromInboxID($userEmail, $inboxID){
+function countJobIDinTheDataInbox($jobID){
     
     global $con;
 
-    $query = "SELECT * FROM datainboxtable WHERE senderEmail='$userEmail' AND inboxID='$inboxID'";
+    $query = "SELECT COUNT(*) as total FROM datainboxtable WHERE jobID = '$jobID'";
     $result = mysqli_query($con, $query);
+    $row = mysqli_fetch_assoc($result);
     
-    return $result;
+    return $row['total'];
     
 }
 
+function deleteDataInboxByJobID($jobID){
+  
+  global $con;
 
-function deleteTheInboxIdInTheTable($userEmail, $dataID){
+  $query = "DELETE FROM datainboxtable WHERE jobID='$jobID'";
+  $result = mysqli_query($con, $query) or die("Failed to delete msg in the datainbox".mysql_error());        
+    
+   return true;
+    
+}
+
+function deleteTheInboxIdInUserTable($jobID){
      
   global $con;
 
-  $query = "DELETE FROM datainboxtable WHERE senderEmail='$userEmail' AND dataID='$dataID'";
-            
-  $result = mysqli_query($con, $query) or die("Failed to execute delete user datainboxtable".mysql_error());        
+  $query = "DELETE FROM userinboxtable WHERE jobID='$jobID'";
+  $result = mysqli_query($con, $query) or die("Failed to  delete user jobID in the userinboxTable".mysql_error());        
     
    return true;
 }
 
-function deleteTheInboxIdInUserTable($inboxID){
-     
-  global $con;
 
-  $query = "DELETE FROM userinboxtable WHERE inboxID='$inboxID'";
-  $result = mysqli_query($con, $query) or die("Failed to execute delete user in the userinboxTable".mysql_error());        
-    
-   return true;
-}
 
 
 
@@ -1627,52 +1631,26 @@ function deleteMSG($userEmail){
                     
                     if(!empty($result)){
                        
-                        $statusmsg_one="";
-                        $statusmsg_two="";
-                        $theInboxID="";
-                        $myCount = 1;
+                        $countDeletedMSG=0;
+                        $countJobID=0;
                         
                         //get all userEmail inboxID
                         while($row = mysqli_fetch_assoc($result)){
                             
-                            //check if inbox ID is = 2
-                            if(countInBoxID($row['inboxID']) == 2){
-                                        //get and compare if both are Deleted
-                                        $resultFromInboxID = thenGetResultFromInboxID($userEmail, $row['inboxID']);                                
-                                                                        
-                                                                     //loop through this two inboxID
-                                                                      while($myinboxID = mysqli_fetch_assoc($resultFromInboxID)){
-                                                                          
-                                                                                            
-                                                                          if($myCount == 1){
-                                                                                $statusmsg_one = $myinboxID['dataID'];
-                                                                                $theInboxID = $myinboxID['inboxID'];
-                                                                                $myCount = 2;
-                                                                               
-                                                                              
-                                                                          }else{
-                                                                              $statusmsg_two = $myinboxID['dataID'];
-                                                                              $myCount = 1;
-                                                                              
-                                                                          }
-                                                    
-                                                            }
-                                                //check if both inboxID is set to Deleted if it is delete
-                                                if(getMessageStatusByID($statusmsg_one) ==  getMessageStatusByID($statusmsg_two)){
-                                                             
-                                                             //Delete THe messages corresponding tho the dataID in the datainboxtable
-                                                             deleteTheInboxIdInTheTable($userEmail, $statusmsg_one);
-                                                             deleteTheInboxIdInTheTable($userEmail, $statusmsg_two);
-                                                    
-                                                             //Then delete the InboxId in the userinboxTable
-                                                             deleteTheInboxIdInUserTable($theInboxID);
-                                                    
-                                                        }
-                                                                                                                
-                                
-                                                }//end of  if(countInBoxID($row['inboxID']) == 2)
-     
                             
+                            $countJobID = countJobIDinTheDataInbox($row['jobID']);
+                            $countDeletedMSG = countMessageStatusDeleted($row['jobID']);
+                            
+                             //if True then all the all messages
+                             if($countJobID == $countDeletedMSG){
+                                   
+                                   //Delete all message by ID in the datainboxtable
+                                   deleteDataInboxByJobID($row['jobID']);
+                                 
+                                    //Then delete the InboxId in the userinboxTable
+                                    deleteTheInboxIdInUserTable($row['jobID']);
+                                                                       
+                                            }               
                             
                                         }
                                                 

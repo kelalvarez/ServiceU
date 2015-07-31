@@ -326,8 +326,8 @@
 
 
     if(isset($_POST['submitMyTrash']))  
-            { 
-
+             { 
+                 
                 if(isset($_POST['deleteAll'])){ 
                     
                       deleteTheInboxIdInUserTable(74);
@@ -335,13 +335,13 @@
                          $status ="Deleted";
                          deleteAllTrashMessage($userEmail, $status);
                     
-                    
-                        
-                        
+    
+                          //check if there is message to be deleted
+                          deleteMSG($userEmail);
+                      
                        }
         
-                        //check if there is message to be deleted
-                         deleteMSG($userEmail);
+                      
                 }
 
 

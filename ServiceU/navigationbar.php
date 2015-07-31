@@ -16,7 +16,17 @@
                 
                 <!--Home-->
                 <li class="active"><a href="services.php"><span class="glyphicon glyphicon-home"></span> Home</a></li>
-                <li><a href="#"><span class="glyphicon glyphicon-briefcase"></span>Services</a></li>
+                
+                
+               <form class="navbar-form navbar-left serviceSearch" role="search" style="margin-top: 2px;" method="post" action="searchresults.php">
+                 
+                        <input type="text" class="form-control" name="search" placeholder="What service are you looking for?" size=45 style="color: #787878; background-color: #EEEEEE;">
+                        <button class="btn btn-default btn-sm searchButton" type="submit" name="Submit"><span class="glyphicon glyphicon-search"></button>
+                
+              </form>
+
+                
+                
                 <?php $isadmin =  isAdmin($userEmail);
                 if($isadmin == 1){ ?>
                 <li><a href="payment.php"><span class="glyphicon glyphicon-briefcase"></span>Payment Management</a></li>
@@ -77,7 +87,7 @@
                      echo '<img  class="img-circle" height="25" width="25" src="data:image/jpeg;base64,'.base64_encode(displayMyImage($userEmail)).'"alt="User-ImG">' . '&nbsp&nbsp';
                     
                     else
-                     echo '<span class="glyphicon glyphicon-user" ></span>' ;
+                     echo '<span class="glyphicon glyphicon-user" >&nbsp</span>' ;
                         
                         ?><b><?php echo getFullName($userEmail); ?></b>
                 <span class="caret"</span></a>
@@ -114,10 +124,3 @@
             
         });
     </script>
-
-
-
-
-
-
-

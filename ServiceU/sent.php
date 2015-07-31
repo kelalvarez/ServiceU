@@ -252,7 +252,7 @@
                                                        echo '<div class="col-xs-6 col-md-5 ">' . $myMSG . '</div>';
                                         
                                            // if($isnewMessage == 'Yes')
-                                                       echo '<div class="col-xs-6 col-md-3 ">' .$dateSend. '<a style="float: right" class="btn btn-danger  btn-xs" href="deletemsg.php?dID='.$row['dataID'].'&'.'jID='.$row['jobID'].'" role="button" data-toggle="tooltip" data-placement="left" title="Delete Message!"> Delete!</a> </div>';
+                                                       echo '<div class="col-xs-6 col-md-3 ">' .$dateSend. '<a style="float: right" class="btn btn-danger  btn-xs" href="deletesentmsg.php?dID='.$row['dataID'].'&'.'jID='.$row['jobID'].'" role="button" data-toggle="tooltip" data-placement="left" title="Delete Message!"> Delete!</a> </div>';
                                              //else
                                                     // echo '<div class="col-xs-6 col-md-3 ">' .$userDate. '</div>';
                                         
