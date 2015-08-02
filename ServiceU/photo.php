@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
-<?php 
-    include("DatabaseFunctions.php"); 
+<?php
+    include("DatabaseFunctions.php");
     include("functions.php");
 ?>
-<?php 
+<?php
     session_start();
     if (!isset($_SESSION["loginEmail"]))
      {
@@ -21,17 +21,17 @@
         $D1P2 = $_POST['degree1Part2'];
 
         $degree1 = $D1P1 . " " . $D1P2;
-        
-        
+
+
         editDegree1($userEmail, $degree1);
     }
-    
+
     if (isset($_POST['submitInterest'])) {
         $newInterest = $_POST['interest1'];
-        
+
         insertInterest($userEmail, $newInterest);
     }
-    
+
     if (isset($_POST['changePassword'])) {
 	$oldPassword = $_POST['oldpassword'];
 	$newPassword = $_POST['newpassword'];
@@ -54,10 +54,10 @@
             }
 
     }
-    
+
     if (isset($_POST['verifyCode'])) {
         $code = $_POST['verificationCode'];
-        
+
         if (verifyCode($userEmail, $code)) {
             verifyAccount($userEmail);
             echo '<script type="text/javascript">';
@@ -69,8 +69,8 @@
             echo '</script>';
 	}
     }
-    
-       
+
+
 ?>
 
 
@@ -96,19 +96,19 @@
     <!-- Custom Fonts -->
     <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
     <link href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css">
-    
+
     <!--Customized CSS-->
     <link rel="stylesheet" href="css/mycss.css">
-    
-    
+
+
 </head>
 
-    
+
 <body>
 
 <!-- Navigation Sidebar -->
     <?php include 'navigationbar.php' ?>
-    
+
 <!-- About -->
 
     <!-- Services -->
@@ -123,12 +123,12 @@
             <div class="col-md-3"> <!--Profile start here-->
 
                 <div class="profileStart">
-                  
+
                      <?php
                                   if(isset($_POST['uploadImage'])){
                                       //Check if the file is acutally an image here LATER && make sure file get contents is not empty
                                         if(!filesize($_FILES['userfile']['tmp_name']) == 0){
-                                               $imgData = file_get_contents($_FILES['userfile']['tmp_name']);           
+                                               $imgData = file_get_contents($_FILES['userfile']['tmp_name']);
                                              echo '<img id="userImageStyle" alt="msgProfilePic" class="img-circle" src="data:image/jpeg;base64,'.base64_encode($imgData).'"alt="msgProfilePic">';
                                             }else{
 
@@ -157,8 +157,8 @@
                             <br>
                             <br>
                              <?php
-                           
-                            
+
+
                                             if(checkVerification($userEmail) == 1)
                                                 echo '<p>Verified: <span class="glyphicon glyphicon-ok" style="color: green; font-size: 15px;">  </span></p>';
                                             else
@@ -169,7 +169,7 @@
                 </div>
 
                 <div style="clear: both;" class="text-left">
-                   
+
                       <ul id="Profile-List">
 
                         <li>
@@ -204,45 +204,45 @@
                                 <a href="#"><span class="glyphicon glyphicon-certificate"> </span> Account Settings</a>
                                 <a href="editsettings.php" class="btn btn-light btn-xs" id="editGlyp"><span class="glyphicon glyphicon-pencil"></span></a>
                         </li>
-                                               
+
 
                       </ul>
-                   
+
 
                 </div>
 
             </div>
 
 
-            
-             <?php include 'confirmCode.php' ?>  
 
-                <div class="col-md-9">        
-                   
+             <?php include 'confirmCode.php' ?>
+
+                <div class="col-md-9">
+
                     <div class="panel panel-info">
                         <div class="panel-heading" style="text-align: center"><h3><b><span class="glyphicon glyphicon-camera"></span> Photo</b></h3></div>
                             <div class="panel-body" >
-                                
-                                
-                                    
-                                  
-                                  
+
+
+
+
+
 
                                                 <div>
                                                     <div style="text-align:center">
                                                          <?php
-                                                              
-                                                              
+
+
                                                                if(isset($_POST['uploadImage'])){
                                                                                //Check if the file is acutally an image here LATER
                                                                             if(!filesize($_FILES['userfile']['tmp_name']) == 0){
                                                                                  $imgData = file_get_contents($_FILES['userfile']['tmp_name']);
                                                                                 echo '<img  class="img-circle" height="75" width="75" src="data:image/jpeg;base64,'.base64_encode($imgData).'"alt="User-ImG">' . '</div>';
-                                                                                
+
                                                                                 echo '<div style="text-align:center;">';
                                                                                 echo '<b><p class="bg-success"> Success uploading photo!</p></b>';
                                                                                 echo '</div>';
-                                                                                 
+
                                                                               }else{
 
                                                                                    if(empty(displayMyImage($userEmail)))
@@ -251,22 +251,22 @@
                                                                                      echo '<img  class="img-circle" height="75" width="75" src="data:image/jpeg;base64,'.base64_encode(displayMyImage($userEmail)).'" alt="User-ImG">';
 
                                                                               }
-                                                                              
+
 
 
                                                             }else
                                                                  if(empty(displayMyImage($userEmail)))
                                                                         echo '<img  class="img-circle" height="75" width="75" src="img/user-icon.jpg" alt="User-ImG">';
                                                                      else
-                                                                         echo '<img  class="img-circle" height="75" width="75" src="data:image/jpeg;base64,'.base64_encode(displayMyImage($userEmail)).'" alt="User-ImG">';  
-                                                                
-                                                              
-                                
-                                                              
-                                                        ?>    
-   
+                                                                         echo '<img  class="img-circle" height="75" width="75" src="data:image/jpeg;base64,'.base64_encode(displayMyImage($userEmail)).'" alt="User-ImG">';
+
+
+
+
+                                                        ?>
+
                                                     </div>
-                                                    
+
                                                      <div>
 
                                                             <form id="uploadMyPic" action="" enctype="multipart/form-data" method="POST">
@@ -277,49 +277,49 @@
                                                                           <input name="userfile" type="file">
                                                                         </div>
                                                                  </div>
-                                                                
+
                                                                  <div class="form-group" style="text-align:center; margin-top: 5%;">
-                                                                     
+
                                                                         <div style="border-top-style: solid; border-width: 1px; border-top-color: #bce8f1; padding-top: 10px;">
 
                                                                           <button type="submit" name="uploadImage" class="btn btn-info">Update Changes</button>
                                                                         </div>
                                                                  </div>
-                                                                        
+
 
                                                             </form>
 
-                                                         
+
                                                      </div>
 
                                                 </div>
 
 
-                                
-                                
-                                                
-                            </div>   
-                    </div>  
-               </div>             
+
+
+
+                            </div>
+                    </div>
+               </div>
 
          </div>
-                    
-     </div>    
+
+     </div>
 </div>
         <!-- /.container -->
- 
-    <footer style="text-align: center;">
 
-                <ul class="list-inline">
-                  <li><a href="#">About</a></li>
-                  <li><a href="#">Help</a></li>
-                  <li><a href="#">Directory</a></li>
-                  <li><h5 style="color: #aab8c2">&#169 2015 ServiceU, Inc, All rights reserved.</h5></li>
-                </ul>
-         
-    </footer>
-    
-    
+        <footer style="text-align: center;">
+
+        <ul class="list-inline">
+        <li><a href="about.php">About</a></li>
+         <li><a href="contactus.php">Contact Us</a></li>
+        <li><a href="services.php">Home</a></li>
+        <li><h5 style="color: #aab8c2">&#169 2015 ServiceU, Inc, All rights reserved.</h5></li>
+        </ul>
+
+        </footer>
+
+
      <script>
             $(function(){
 
@@ -343,60 +343,60 @@
 
                 });
     </script>
-    
-    
-    <?php 
-                          
 
-           if(isset($_POST['uploadImage']))  
-            { 
-                          
-                   
+
+    <?php
+
+
+           if(isset($_POST['uploadImage']))
+            {
+
+
                 // check if a file was submitted
                 if(!isset($_FILES['userfile'])){
-                 
+
                     echo 'Please select a valid image file to upload!';
-                  
+
                 }else{
-                    
+
                     $maxsize = 10000000; //set to approx 10 MB
-                    
+
                     if($_FILES['userfile']['error']==UPLOAD_ERR_OK){
-                        
+
                          if(is_uploaded_file($_FILES['userfile']['tmp_name'])) {
-                             
-                              if( $_FILES['userfile']['size'] < $maxsize){ 
-                                  
+
+                              if( $_FILES['userfile']['size'] < $maxsize){
+
 
                                       //checks whether uploaded file is of image type
                                         $finfo = finfo_open(FILEINFO_MIME_TYPE);
-                                        if(strpos(finfo_file($finfo, $_FILES['userfile']['tmp_name']),"image")===0) {    
+                                        if(strpos(finfo_file($finfo, $_FILES['userfile']['tmp_name']),"image")===0) {
 
-                                        
+
                                             // prepare the image for insertion
                                             $imgData = addslashes(file_get_contents($_FILES['userfile']['tmp_name']));
-                                            
+
                                             //get image name
                                             $imageName = $_FILES['userfile']['tmp_name'];
-                                            
+
                                             //upload image
                                             uploadImage($userEmail, $imageName, $imgData);
-             
-                                             
+
+
                                         }
-                                  
+
                               }
-                             
+
                              finfo_close($finfo);
                          }
-                        
+
 
                     }
-                       
+
                 }
-               
+
              mysqli_close($con);
-                
+
             }
 
    ?>
@@ -409,8 +409,8 @@
             }
         }
     </script>
-    
-        
+
+
 
     <!-- Custom Theme JavaScript -->
     <script>
@@ -434,34 +434,34 @@
         .find("input,textarea")
            .val('')
            .end();
-   
+
       $('select option:first-child').attr("selected", "selected");
-    
+
     });
     </script>
-    
+
     <!-- Custom for project -->
     <script src="js/editProfileactions.js"></script>
 
     <script type="text/javascript">
-    <?php 
+    <?php
         if(!checkVerification($userEmail))
         {
     ?>
             $('#confirmCode').modal('show');
-    <?php 
+    <?php
         }
     ?>
     </script>
 
-    
+
       <!-- jQuery -->
     <script src="js/jquery.js"></script>
     <script src="js/bootbox.js"></script>
     <script src="js/bootbox.min.js"></script>
     <!-- Bootstrap Core JavaScript -->
-    <script src="js/bootstrap.min.js"></script> 
-    
+    <script src="js/bootstrap.min.js"></script>
+
     <!--Start online JSS first-->
     <script src="https://code.jquery.com/jquery-1.11.2.min.js"></script>
     <!--Bootstrap JSS-->
@@ -469,7 +469,7 @@
     <!--Customized JSS-->
     <script src="js/myjs.js"></script>
     <!--change active mode in the navbar-->
-    <script> 
+    <script>
         $(".nav a").on("click", function(){
            $(".nav").find(".active").removeClass("active");
            $(this).parent().addClass("active");
@@ -486,6 +486,6 @@
     </script>
 
 
-    
+
 </body>
 </html>

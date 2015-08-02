@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
-<?php 
-    include("DatabaseFunctions.php"); 
+<?php
+    include("DatabaseFunctions.php");
     include("functions.php");
 ?>
-<?php 
+<?php
     session_start();
     if (!isset($_SESSION["loginEmail"]))
      {
@@ -21,17 +21,17 @@
         $D1P2 = $_POST['degree1Part2'];
 
         $degree1 = $D1P1 . " " . $D1P2;
-        
-        
+
+
         editDegree1($userEmail, $degree1);
     }
-    
+
     if (isset($_POST['submitInterest'])) {
         $newInterest = $_POST['interest1'];
-        
+
         insertInterest($userEmail, $newInterest);
     }
-    
+
     if (isset($_POST['changePassword'])) {
 	$oldPassword = $_POST['oldpassword'];
 	$newPassword = $_POST['newpassword'];
@@ -54,10 +54,10 @@
             }
 
     }
-    
+
     if (isset($_POST['verifyCode'])) {
         $code = $_POST['verificationCode'];
-        
+
         if (verifyCode($userEmail, $code)) {
             verifyAccount($userEmail);
             echo '<script type="text/javascript">';
@@ -69,8 +69,8 @@
             echo '</script>';
 	}
     }
-    
-       
+
+
 ?>
 
 
@@ -96,19 +96,19 @@
     <!-- Custom Fonts -->
     <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
     <link href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css">
-    
+
     <!--Customized CSS-->
     <link rel="stylesheet" href="css/mycss.css">
-    
-    
+
+
 </head>
 
-    
+
 <body>
-    
-    
-    <?php 
-    
+
+
+    <?php
+
             $result = getAllUserOldExperience($userEmail);
 
             $result2 = getAllUserCurrentJob($userEmail);
@@ -116,13 +116,13 @@
             if (!$result) {
             echo "The fucntion getUserExperience is not working properly";
             }
-             
-            
+
+
     ?>
 
 <!-- Navigation Sidebar -->
     <?php include 'navigationbar.php' ?>
-    
+
 <!-- About -->
 
     <!-- Services -->
@@ -137,7 +137,7 @@
             <div class="col-md-3"> <!--Profile start here-->
 
                 <div class="profileStart">
-                  
+
                     <?php
                                     if(empty(displayMyImage($userEmail)))
                                         echo '<img id="userImageStyle" alt="msgProfilePic" class="img-circle" src="img/user-icon.jpg">';
@@ -153,8 +153,8 @@
                             <br>
                             <br>
                              <?php
-                           
-                            
+
+
                                             if(checkVerification($userEmail) == 1)
                                                 echo '<p>Verified: <span class="glyphicon glyphicon-ok" style="color: green; font-size: 15px;">  </span></p>';
                                             else
@@ -165,7 +165,7 @@
                 </div>
 
                 <div style="clear: both;" class="text-left">
-                   
+
                       <ul id="Profile-List">
 
                         <li>
@@ -191,7 +191,7 @@
                         <li>
                                 <a href="#"><span class="glyphicon glyphicon-cog"> </span> Interest</a>
                                 <a href="interest.php" class="btn btn-light btn-xs" id="editGlyp"><span class="glyphicon glyphicon-pencil"></span></a>
-                                
+
                         </li>
                         <li>
                                 <a href="#"><span class="glyphicon glyphicon-thumbs-up"> </span> My Reviews</a>
@@ -201,77 +201,77 @@
                                 <a href="#"><span class="glyphicon glyphicon-certificate"> </span> Account Settings</a>
                                 <a href="editsettings.php" class="btn btn-light btn-xs" id="editGlyp"><span class="glyphicon glyphicon-pencil"></span></a>
                         </li>
-                                               
+
 
                       </ul>
-                   
+
 
                 </div>
 
             </div>
 
 
-            
-             <?php include 'confirmCode.php' ?>  
 
-            <div class="col-md-9">        
-               
+             <?php include 'confirmCode.php' ?>
+
+            <div class="col-md-9">
+
                 <div class="panel panel-info">
                     <div class="panel-heading" style="text-align: center"><h3><b><span class="glyphicon glyphicon-star-empty"></span> My Experience</b></h3></div>
                         <div class="panel-body">
 
 
                                 <?php
-                                 
+
                                  if (mysqli_num_rows($result) == 0 && mysqli_num_rows($result2) == 0) {
                                             echo '<div style="text-align:center;">';
                                             echo '<b><p class="bg-danger"> You have not submited any of your work experience </p></b>';
                                             echo '</div>';
-                                       
+
                                     }else{
-                                 
+
                                                                     //Output User Current Experience First
                                                                     if(mysqli_num_rows($result2) != 0)
                                                                         {
-                                                                            while ($row = mysqli_fetch_assoc($result2)) 
-                                                                                {    
+                                                                            while ($row = mysqli_fetch_assoc($result2))
+                                                                                {
                                                                                           echo '<div style="font-size:16px">';
-                                                                                
-                                                                                         echo '<div style="border-top-style: solid; border-width: 1px; border-top-color: #bce8f1;">' . '<b>' . $row['jobTitle'] . '</b>' . 
-'<a style="float:right; background-color: white; font-size:15px;" class="btn btn-light btn-s" href="deleteExperience.php?expID='.$row['expID'].'" role="button"><span class="glyphicon glyphicon-remove"></span></a>' . 
+
+                                                                                         echo '<div style="border-top-style: solid; border-width: 1px; border-top-color: #bce8f1;">' . '<b>' . $row['jobTitle'] . '</b>' .
+'<a style="float:right; background-color: white; font-size:15px;" class="btn btn-light btn-s" href="deleteExperience.php?expID='.$row['expID'].'" role="button"><span class="glyphicon glyphicon-remove"></span></a>' .
 '<a href="editExperience.php?expID='.$row['expID'].'" style="float:right; background-color: white; font-size:15px;" class="btn btn-light btn-s" id="editGlyp">Edit</span></a>' . '</div>';
-                                                                                              
+
                                                                                           echo '<div>' . $row['userEmployer'] . '</div>';
-                                                                                          echo '<div>' . $row['startDateMonth'] . ' ' . $row['startDateYear'] . ' - ' . '<b>' . $row['stillWorkHere'] . '</b>' . ' - ' . $row['location'] .  '</div>'; 
-                                                                                
-                                                                                        
-                                                                                
-                                                                                          echo '<div style="padding-bottom: 20px;">' . $row['description'] . '</div>';       
+                                                                                          echo '<div>' . $row['startDateMonth'] . ' ' . $row['startDateYear'] . ' - ' . '<b>' . $row['stillWorkHere'] . '</b>' . ' - ' . $row['location'] .  '</div>';
+
+
+
+                                                                                          echo '<div style="padding-bottom: 20px;">' . $row['description'] . '</div>';
                                                                                           echo '</div>';
                                                                                 }
 
                                                                         }
-                                    
+
                                     //Output Old User Experience
                                  if(mysqli_num_rows($result) != 0){
-                                    while ($row = mysqli_fetch_assoc($result)) 
+                                    while ($row = mysqli_fetch_assoc($result))
                                                 {
-                                                       
-                                                    
-                                            
+
+
+
                                                     echo '<div style="font-size:16px">';
-                                        
-                                                          echo '<div style="border-top-style: solid; border-width: 1px; border-top-color: #bce8f1;">' . '<b>' . $row['jobTitle'] . '</b>' . 
-'<a style="float:right; background-color: white; font-size:15px;" class="btn btn-light btn-s" href="deleteExperience.php?expID='.$row['expID'].'" role="button"><span class="glyphicon glyphicon-remove"></span></a>' . 
+
+                                                          echo '<div style="border-top-style: solid; border-width: 1px; border-top-color: #bce8f1;">' . '<b>' . $row['jobTitle'] . '</b>' .
+'<a style="float:right; background-color: white; font-size:15px;" class="btn btn-light btn-s" href="deleteExperience.php?expID='.$row['expID'].'" role="button"><span class="glyphicon glyphicon-remove"></span></a>' .
 '<a href="editExperience.php?expID='.$row['expID'].'" style="float:right; background-color: white; font-size:15px;" class="btn btn-light btn-s" id="editGlyp">Edit</span></a>' . '</div>';
-                                        
-                                        
-                                        
+
+
+
                                                           echo '<div>' . $row['userEmployer'] . '</div>';
-                                        
-                                        
-                                         
-                                        
+
+
+
+
                                                           //Need to fix when Current is checked disable EndDateMonth and EndDateYear in editExperience.php
                                                           if($row['stillWorkHere'] == 'Current')
                                                               {
@@ -280,68 +280,68 @@
                                                           else
                                                               {
 
-                                                                        echo '<div>' . $row['startDateMonth'] . ' ' . $row['startDateYear'] .  ' - ' . $row['endDateMonth'] . ' ' .                                                                                     $row['endDateYear'] . '</div>';   
+                                                                        echo '<div>' . $row['startDateMonth'] . ' ' . $row['startDateYear'] .  ' - ' . $row['endDateMonth'] . ' ' .                                                                                     $row['endDateYear'] . '</div>';
                                                               }
-                                        
+
                                                           echo '<div>' . $row['location'] . ' - ' .  $row['country'] . '</div>';
-                                                            
+
                                                           echo '<div style="padding-bottom: 20px;">' . $row['description'] . '</div>';
-                                                        
-                                        
+
+
                                                     echo '</div>';
-                                                }    
-                                 
+                                                }
+
                                  }
                                           }
-    
+
 
                                         mysqli_close($con);
                                  ?>
-                            
-                                                 
-                            
-                                   
+
+
+
+
 
                                           <div class="form-group" style="text-align:center; margin-top: 5%;">
 
-                                                <div style="border-top-style: solid; border-width: 1px; border-top-color: #bce8f1; padding-top: 10px;">                                                  
+                                                <div style="border-top-style: solid; border-width: 1px; border-top-color: #bce8f1; padding-top: 10px;">
                                                     <a class="btn btn-info" href="editExperience.php" role="button">Add Experience</a>
-                                            
+
 
                                                 </div>
 
                                           </div>
 
-                                    
+
                          </div>
                 </div>
 
 
-                
-                
-            
-                </div>         
+
+
+
+                </div>
 
             </div>
-                    
-     </div>    
+
+     </div>
 </div>
         <!-- /.container -->
 
-    <footer style="text-align: center;">
+        <footer style="text-align: center;">
 
-                <ul class="list-inline">
-                  <li><a href="about.php">About</a></li>
-                  <li><a href="help.php">Help</a></li>
-                  <li><a href="#">Directory</a></li>
-                  <li><h5 style="color: #aab8c2">&#169 2015 ServiceU, Inc, All rights reserved.</h5></li>
-                </ul>
-         
-    </footer>
+        <ul class="list-inline">
+        <li><a href="about.php">About</a></li>
+         <li><a href="contactus.php">Contact Us</a></li>
+        <li><a href="services.php">Home</a></li>
+        <li><h5 style="color: #aab8c2">&#169 2015 ServiceU, Inc, All rights reserved.</h5></li>
+        </ul>
+
+        </footer>
 
 
-    
-    
+
+
 
     <script>
       function Show_Div(Div_id) {
@@ -351,8 +351,8 @@
             }
         }
     </script>
-    
-        
+
+
 
     <!-- Custom Theme JavaScript -->
     <script>
@@ -376,34 +376,34 @@
         .find("input,textarea")
            .val('')
            .end();
-   
+
       $('select option:first-child').attr("selected", "selected");
-    
+
     });
     </script>
-    
+
     <!-- Custom for project -->
     <script src="js/editProfileactions.js"></script>
 
     <script type="text/javascript">
-    <?php 
+    <?php
         if(!checkVerification($userEmail))
         {
     ?>
             $('#confirmCode').modal('show');
-    <?php 
+    <?php
         }
     ?>
     </script>
 
-    
+
       <!-- jQuery -->
     <script src="js/jquery.js"></script>
     <script src="js/bootbox.js"></script>
     <script src="js/bootbox.min.js"></script>
     <!-- Bootstrap Core JavaScript -->
-    <script src="js/bootstrap.min.js"></script> 
-    
+    <script src="js/bootstrap.min.js"></script>
+
     <!--Start online JSS first-->
     <script src="https://code.jquery.com/jquery-1.11.2.min.js"></script>
     <!--Bootstrap JSS-->
@@ -411,7 +411,7 @@
     <!--Customized JSS-->
     <script src="js/myjs.js"></script>
     <!--change active mode in the navbar-->
-    <script> 
+    <script>
         $(".nav a").on("click", function(){
            $(".nav").find(".active").removeClass("active");
            $(this).parent().addClass("active");
@@ -428,6 +428,6 @@
     </script>
 
 
-    
+
 </body>
 </html>

@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
-<?php 
-    include("DatabaseFunctions.php"); 
+<?php
+    include("DatabaseFunctions.php");
     include("functions.php");
 ?>
-<?php 
+<?php
     session_start();
     if (!isset($_SESSION["loginEmail"]))
      {
@@ -21,17 +21,17 @@
         $D1P2 = $_POST['degree1Part2'];
 
         $degree1 = $D1P1 . " " . $D1P2;
-        
-        
+
+
         editDegree1($userEmail, $degree1);
     }
-    
+
     if (isset($_POST['submitInterest'])) {
         $newInterest = $_POST['interest1'];
-        
+
         insertInterest($userEmail, $newInterest);
     }
-    
+
     if (isset($_POST['changePassword'])) {
 	$oldPassword = $_POST['oldpassword'];
 	$newPassword = $_POST['newpassword'];
@@ -54,10 +54,10 @@
             }
 
     }
-    
+
     if (isset($_POST['verifyCode'])) {
         $code = $_POST['verificationCode'];
-        
+
         if (verifyCode($userEmail, $code)) {
             verifyAccount($userEmail);
             echo '<script type="text/javascript">';
@@ -69,8 +69,8 @@
             echo '</script>';
 	}
     }
-    
-       
+
+
 ?>
 
 
@@ -96,40 +96,40 @@
     <!-- Custom Fonts -->
     <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
     <link href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css">
-    
+
     <!--Customized CSS-->
     <link rel="stylesheet" href="css/mycss.css">
-    
-    
+
+
 </head>
 
-    
+
 <body>
-    
+
      <?php
 
             //$firstnameErr = $user_emailErr = $lastnameErr = $passwordnameErr = "";
-                $user_newEmailERR ="";  
-                $user_userNewPasswordERR =""; 
-                $user_userNewRetypePasswordERR ="";   
+                $user_newEmailERR ="";
+                $user_userNewPasswordERR ="";
+                $user_userNewRetypePasswordERR ="";
                 $user_userPasswordERR ="";
-                $user_userPasswordPassERR ="";                  
-                                 
+                $user_userPasswordPassERR ="";
 
-                $user_newEmail ="";  
-                $user_userNewPassword =""; 
-                $user_userNewRetypePassword ="";   
+
+                $user_newEmail ="";
+                $user_userNewPassword ="";
+                $user_userNewRetypePassword ="";
                 $user_userPassword ="";
-                $user_userPasswordPass ="";  
+                $user_userPasswordPass ="";
 
                 //success code here
                 $successChangePass="";
                 $successChangeEmail="Email have been changed!";
 
 
-            if(isset($_POST['updateUserAccount']))  
-            { 
-                
+            if(isset($_POST['updateUserAccount']))
+            {
+
               if(empty($_POST['userAccountEmail'])) {
                   $user_newEmailERR = "Email is required!";
 
@@ -146,46 +146,46 @@
 
               if(empty($_POST['userNewPassword'])) {
                 $user_userNewPasswordERR = "New password is required!";
-                  
+
               } else {
                 $user_userNewPassword = test_user_input($_POST['userNewPassword']);
               }
 
               if(empty($_POST['userConfirmPassword'])) {
                 $user_userNewRetypePasswordERR = "Re-type password!";
-                  
+
               } else {
                 $user_userNewRetypePassword = test_user_input($_POST['userConfirmPassword']);
               }
-                                 
+
               if(empty($_POST['userAccountPasswordPass'])) {
                 $user_userPasswordPassERR = "Password is required";
-                  
+
               } else {
                 $user_userPasswordPass = test_user_input($_POST['userAccountPasswordPass']);
               }
-                 
+
               if(!empty($user_userNewPassword) && !empty($user_userNewRetypePassword) && !empty($user_userPasswordPass))
                   {
                         if(($user_userNewPassword == $user_userNewRetypePassword) && verifyPassword($userEmail, $user_userPasswordPass) == TRUE){
-                                   
+
                             if(changePassword($userEmail, $user_userNewPassword) == TRUE)
                                     $successChangePass = TRUE;
                         }
-                           
+
                   }else
                     $successChangePass = FALSE;
-                
-                
-                
-              
-            }  
+
+
+
+
+            }
 
     ?>
 
 <!-- Navigation Sidebar -->
     <?php include 'navigationbar.php' ?>
-    
+
 <!-- About -->
 
     <!-- Services -->
@@ -200,7 +200,7 @@
             <div class="col-md-3"> <!--Profile start here-->
 
                 <div class="profileStart">
-                  
+
                      <?php
                                     if(empty(displayMyImage($userEmail)))
                                        echo '<img id="userImageStyle" src="img/user-icon.jpg" alt="User-ImG">';
@@ -216,8 +216,8 @@
                             <br>
                             <br>
                              <?php
-                           
-                            
+
+
                                             if(checkVerification($userEmail) == 1)
                                                 echo '<p>Verified: <span class="glyphicon glyphicon-ok" style="color: green; font-size: 15px;">  </span></p>';
                                             else
@@ -228,7 +228,7 @@
                 </div>
 
                 <div style="clear: both;" class="text-left">
-                   
+
                       <ul id="Profile-List">
 
                         <li>
@@ -263,140 +263,140 @@
                                 <a href="#"><span class="glyphicon glyphicon-certificate"> </span> Account Settings</a>
                                 <a href="#" class="btn btn-light btn-xs" id="editGlyp"><span class="glyphicon glyphicon-pencil"></span></a>
                         </li>
-                                               
+
 
                       </ul>
-                   
+
 
                 </div>
 
             </div>
 
 
-            
-             <?php include 'confirmCode.php' ?>  
 
-                <div class="col-md-9">        
-                   
+             <?php include 'confirmCode.php' ?>
+
+                <div class="col-md-9">
+
                     <div class="panel panel-info">
                         <div class="panel-heading" style="text-align: center"><h3><b><span class="glyphicon glyphicon-certificate"></span> Account Settings</b></h3></div>
                             <div class="panel-body" >
-                                    
+
                                            <!--action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>-->
                                      <form id="editAccountForm" role="form" method="POST" class="form-horizontal" action="">
-                                          
-                                         
+
+
                                          <div style="text-align: center; margin-bottom: 30px;">
-                                            
+
                                             <header><h3>Change Email Address</h3></header>
-                                         
+
                                          </div>
-                            
+
                                           <div class="form-group">
-                                              
+
                                             <span style="color: red; font-size: 8px" class="glyphicon glyphicon-asterisk"></span>
                                             <label for="email" class="col-sm-4 control-label">Email Address:</label>
-                                              
+
                                             <div class="col-sm-5">
                                               <input type="email" name="userAccountEmail" class="form-control" Value="<?php echo getEmail($userEmail) ?>" >
-                                               
+
                                             </div>
                                                <span class="errorAccountSettings"><?php echo $user_newEmailERR;?></span>
-                                              
+
                                           </div>
-                                         
+
                                            <div class="form-group">
-                                               
+
                                               <span style="color: red; font-size: 8px" class="glyphicon glyphicon-asterisk"></span>
                                               <label for="email" class="col-sm-4 control-label">Enter Curent Password:</label>
-                                               
+
                                             <div class="col-sm-5">
                                               <input type="password" name="userCurrentPasswordEmail" class="form-control" Value="" >
                                             </div>
-                                               
-                 
+
+
                                                 <span class="errorAccountSettings"><?php echo $user_userPasswordERR;?></span>
                                           </div>
-                                         
+
                                         <div style="text-align: center; border-bottom-style: solid; border-width: 1px; border-bottom-color: #bce8f1; padding-bottom: 10px;">
                                              <h6><span style="color: red;" class="glyphicon glyphicon-warning-sign"></span> Warming: In order to verify that you're the owner of this account, you must enter your password.</h6>
-                                            
+
                                          </div>
-                                            
-                                          
+
+
                                          <div style="text-align: center; margin-bottom: 30px;">
-                                            
+
                                             <header><h3>Change Password</h3></header>
                                              <div id="showSuccessPassChange" style="text-align:center;">
-                                                  <?php  
-                                                          if(isset($_POST['updateUserAccount'])){  
-                                                              
+                                                  <?php
+                                                          if(isset($_POST['updateUserAccount'])){
+
                                                                 if($successChangePass == TRUE)
-                                                                    
+
                                                                     echo '<b><p class="bg-success">Password changed!</p></b>';
                                                                 else
                                                                     echo '<b><p class="bg-danger">Password not changed!</p></b>';
                                                     }
                                                  ?>
                                              </div>
-                                         
+
                                          </div>
-                            
-                      
-                    
+
+
+
                                           <div class="form-group">
                                                 <span style="color: red; font-size: 8px" class="glyphicon glyphicon-asterisk"></span>
                                                 <label for="email" class="col-sm-4 control-label">New Password:</label>
-                                              
+
                                             <div class="col-sm-5">
                                               <input type="password" name="userNewPassword" class="form-control" Value="" >
                                             </div>
-                                              
+
                                                <span class="errorAccountSettings"><?php echo $user_userNewPasswordERR;?></span>
                                           </div>
-                                          
-                                         
+
+
                                          <div class="form-group">
-                                             
+
                                             <span style="color: red; font-size: 8px" class="glyphicon glyphicon-asterisk"></span>
                                             <label for="email" class="col-sm-4 control-label">Re-Type Password:</label>
-                                             
+
                                             <div class="col-sm-5">
                                               <input type="password" name="userConfirmPassword" class="form-control" Value="" >
                                             </div>
-                                             
+
                                               <span class="errorAccountSettings"><?php echo $user_userNewRetypePasswordERR;?></span>
                                           </div>
-                                         
+
                                            <div class="form-group">
-                                              <span style="color: red; font-size: 8px" class="glyphicon glyphicon-asterisk"></span>    
+                                              <span style="color: red; font-size: 8px" class="glyphicon glyphicon-asterisk"></span>
                                               <label for="email" class="col-sm-4 control-label">Enter Curent Password:</label>
-                                               
+
                                             <div class="col-sm-5">
                                               <input type="password" name="userAccountPasswordPass" class="form-control" Value="" >
                                             </div>
-                    
-                                               
+
+
                                                 <span class="errorAccountSettings"><?php echo $user_userPasswordPassERR;?></span>
                                           </div>
-                                         
+
                                         <div style="text-align: center; border-bottom-style: solid; border-width: 1px; border-bottom-color: #bce8f1; padding-bottom: 10px;">
                                              <h6><span style="color: red;" class="glyphicon glyphicon-warning-sign"></span> Warming: In order to verify that you're the owner of this account, you must enter your password.</h6>
-                                            
+
                                          </div>
-                                            
+
                                          <div style="text-align: center">
-                                            
+
                                              <p><span style="color: red; font-size: 9px" class="glyphicon glyphicon-asterisk"></span> Required field</p>
-                                         
+
                                          </div>
-                                         
-                                         
+
+
                                           <div class="form-group" style="text-align:center; margin-top: 5%;">
 
-                                                <div style="border-top-style: solid; border-width: 1px; border-top-color: #bce8f1; padding-top: 10px;">                                                  
+                                                <div style="border-top-style: solid; border-width: 1px; border-top-color: #bce8f1; padding-top: 10px;">
                                                      <button id="updateUserButton" type="submit" name="updateUserAccount" class="btn btn-info">Update Changes</button>
-                                            
+
 
                                                 </div>
 
@@ -405,42 +405,42 @@
                                     </form>
 
 
-                                
-                                
-                                                
-                            </div>   
-                    </div>  
-               </div>             
+
+
+
+                            </div>
+                    </div>
+               </div>
 
          </div>
-                    
-     </div>    
+
+     </div>
 </div>
         <!-- /.container -->
 
-    
-    <footer style="text-align: center;">
 
-                <ul class="list-inline">
-                  <li><a href="#">About</a></li>
-                  <li><a href="#">Help</a></li>
-                  <li><a href="#">Directory</a></li>
-                  <li><h5 style="color: #aab8c2">&#169 2015 ServiceU, Inc, All rights reserved.</h5></li>
-                </ul>
-         
-    </footer>
-    
-    
+        <footer style="text-align: center;">
+
+        <ul class="list-inline">
+        <li><a href="about.php">About</a></li>
+         <li><a href="contactus.php">Contact Us</a></li>
+        <li><a href="services.php">Home</a></li>
+        <li><h5 style="color: #aab8c2">&#169 2015 ServiceU, Inc, All rights reserved.</h5></li>
+        </ul>
+
+        </footer>
+
+
     <script>
-        
-      
-          
-        
+
+
+
+
         //AJAX
         $(function(){
-            
+
                 $('input[type=updateUserAccount]').click(function(){
-                    
+
                     $.ajax({
                         type: "POST",
                         url: "editsettings.php",
@@ -448,33 +448,33 @@
                         success: function(data){
                             $('#result').html(data);
                         }
-                        
-                        
+
+
                     });
-                    
-                    
-                    
+
+
+
                 });
-            
-       
+
+
             });
-        
+
         /*$(document).ready(function(){
-                  
-            
+
+
                 $('#updateUserButton').click(function(){
-                    
+
                     $.post();
-                    
+
                 });
-                          
+
            });*/
-    
+
     </script>
-    
-    
-    
-    
+
+
+
+
 
     <script>
       function Show_Div(Div_id) {
@@ -484,8 +484,8 @@
             }
         }
     </script>
-    
-        
+
+
 
     <!-- Custom Theme JavaScript -->
     <script>
@@ -509,34 +509,34 @@
         .find("input,textarea")
            .val('')
            .end();
-   
+
       $('select option:first-child').attr("selected", "selected");
-    
+
     });
     </script>
-    
+
     <!-- Custom for project -->
     <script src="js/editProfileactions.js"></script>
 
     <script type="text/javascript">
-    <?php 
+    <?php
         if(!checkVerification($userEmail))
         {
     ?>
             $('#confirmCode').modal('show');
-    <?php 
+    <?php
         }
     ?>
     </script>
 
-    
+
       <!-- jQuery -->
     <script src="js/jquery.js"></script>
     <script src="js/bootbox.js"></script>
     <script src="js/bootbox.min.js"></script>
     <!-- Bootstrap Core JavaScript -->
-    <script src="js/bootstrap.min.js"></script> 
-    
+    <script src="js/bootstrap.min.js"></script>
+
     <!--Start online JSS first-->
     <script src="https://code.jquery.com/jquery-1.11.2.min.js"></script>
     <!--Bootstrap JSS-->
@@ -544,7 +544,7 @@
     <!--Customized JSS-->
     <script src="js/myjs.js"></script>
     <!--change active mode in the navbar-->
-    <script> 
+    <script>
         $(".nav a").on("click", function(){
            $(".nav").find(".active").removeClass("active");
            $(this).parent().addClass("active");
@@ -561,6 +561,6 @@
     </script>
 
 
-    
+
 </body>
 </html>

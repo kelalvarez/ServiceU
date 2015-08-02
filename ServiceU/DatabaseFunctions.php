@@ -1,8 +1,8 @@
 <?php
 
 // Change it if necessary for your localhost
-//$con=mysqli_connect("us-cdbr-azure-central-a.cloudapp.net","b1d6ea18aa71c7","d41e125d","serviceuDB");
-$con=mysqli_connect("localhost","root","","serviceu");
+$con=mysqli_connect("us-cdbr-azure-central-a.cloudapp.net","b1d6ea18aa71c7","d41e125d","serviceuDB");
+//$con=mysqli_connect("localhost","root","","serviceu");
 
 function register($email, $firstName, $lastName, $password)
 {

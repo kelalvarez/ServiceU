@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
-<?php 
-    include("DatabaseFunctions.php"); 
+<?php
+    include("DatabaseFunctions.php");
     include("functions.php");
 ?>
-<?php 
+<?php
     session_start();
     if (!isset($_SESSION["loginEmail"]))
      {
@@ -21,17 +21,17 @@
         $D1P2 = $_POST['degree1Part2'];
 
         $degree1 = $D1P1 . " " . $D1P2;
-        
-        
+
+
         editDegree1($userEmail, $degree1);
     }
-    
+
     /*if (isset($_POST['submitInterest'])) {
         $newInterest = $_POST['interest1'];
-        
+
         insertInterest($userEmail, $newInterest);
     }*/
-    
+
     if (isset($_POST['changePassword'])) {
 	$oldPassword = $_POST['oldpassword'];
 	$newPassword = $_POST['newpassword'];
@@ -54,10 +54,10 @@
             }
 
     }
-    
+
     if (isset($_POST['verifyCode'])) {
         $code = $_POST['verificationCode'];
-        
+
         if (verifyCode($userEmail, $code)) {
             verifyAccount($userEmail);
             echo '<script type="text/javascript">';
@@ -69,8 +69,8 @@
             echo '</script>';
 	}
     }
-    
-       
+
+
 ?>
 
 
@@ -96,38 +96,38 @@
     <!-- Custom Fonts -->
     <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
     <link href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css">
-    
+
     <!--Customized CSS-->
     <link rel="stylesheet" href="css/mycss.css">
-    
-    
+
+
 </head>
 
-    
+
 <body>
-    
-    
-    <?php 
-    
+
+
+    <?php
+
             $result = getUserJobs($userEmail);
 
             if (!$result) {
             echo "Could not  successfully ";
             }
-             
+
             if (mysqli_num_rows($result) == 0) {
-              
+
             echo '<script type="text/javascript">';
             echo 'alert("You have not created any post yet.")';
             echo '</script>';
 
             }
     ?>
-    
+
 
 <!-- Navigation Sidebar -->
     <?php include 'navigationbar.php' ?>
-    
+
 <!-- About -->
 
     <!-- Services -->
@@ -136,19 +136,19 @@
 
     <div class="row" style="">
         <div class="col-xs-6 col-md-5 navLink" style="padding-left: 30px;">
-            
+
             <a href="myjobpost.php" style="color:#0e0e0f; text-decoration: underline;"> My Job Post</a>
             <a href="myapplications.php"> My Applications</a>
             <a href="inbox.php"> Inbox</a>
             <a href="profile.php"> My Profile</a>
-            
-            
+
+
 
         </div>
-        
-                                                                                                                                    
+
+
     </div>
-    
+
      <div class="well well-lg" style="margin-top: 10px">
 
         <div class="row">
@@ -157,45 +157,45 @@
 
 
                 <div style="clear: both;" class="">
-                   
+
                       <ul id="Profile-List">
 
                         <li>
                                 <a href="myjobpost.php"><span class="glyphicon glyphicon-folder-open"></span>&nbsp My Job Post</a>
-                          
+
                         </li>
                         <li>
                                 <a href="myapplications.php"><span class="glyphicon glyphicon-usd"> </span>&nbsp My Applications</a>
-                        
+
                         </li>
 
-                        
-                                               
+
+
 
                       </ul>
-                   
+
 
                 </div>
 
             </div>
 
 
-            
-             <?php include 'confirmCode.php' ?>  
-            
-           
-            
+
+             <?php include 'confirmCode.php' ?>
+
+
+
             <!--style="max-width:500px" will reduce the width of the container-->
-            <div class="col-md-10">        
-                
-               
-                
+            <div class="col-md-10">
+
+
+
                 <div class="panel panel-info">
                     <div class="panel-heading" style="text-align: center"><h3><span class="glyphicon glyphicon-folder-open"></span>&nbsp <b>My Job Post</b></h3></div>
                         <div class="panel-body">
-                            
-      
-                                  
+
+
+
                                 <table class="table table-bordered">
 
                                     <thead>
@@ -210,16 +210,16 @@
 
                                     <tbody>
 
-                                        <?php     
-                                                while ($row = mysqli_fetch_assoc($result)) 
+                                        <?php
+                                                while ($row = mysqli_fetch_assoc($result))
                                                 {
 
                                                   echo '<tr>';
 
                                                     echo '<td>'. "<a href=\"postComplete.php?jobID=" . $row['jobID'] . "\" target=\"_parent\">" . '<b>' . $row['jobTitle'] . '</b>' . "</a>" . "</td>";
-                                                   
+
                                                     echo '<td style="width: 70%">' . '<p class="showHide">' . $row['jobDescription'] . '</p>' . '</td>';
-                                                 
+
                                                     echo '</td>';
 
                                                     echo '<td>' . '$' . $row['payment'] . '</td>';
@@ -235,95 +235,95 @@
 
                                                     echo '</td>';
 
-                                                  echo '</tr>';                                              
-                                                
-                                                }    
-                
+                                                  echo '</tr>';
+
+                                                }
+
                                         ?>
 
 
                                     </tbody>
 
-  
+
                                 </table>
-                               
+
                                <div style="text-align:center;">
                                  <?php include('newPost.php'); ?>
                                  <a class="btn btn-success" href="#newPost" data-toggle="modal" data-target="#newPost" role="button">Create Job Now!</a>
                                </div>
 
-                             
-                        
-                          
-                                
+
+
+
+
                             </div>
- 
-                                
+
+
                          </div>
-                    
-                                         
-                               
-                                    
-                    
-                    
+
+
+
+
+
+
                 </div>
 
 
-                
-                
-            
-                </div>         
+
+
+
+                </div>
 
             </div>
-                    
-     </div>    
+
+     </div>
 </div>
         <!-- /.container -->
 
-    <footer style="text-align: center;">
+        <footer style="text-align: center;">
 
-                <ul class="list-inline">
-                  <li><a href="about.php">About</a></li>
-                  <li><a href="help.php">Help</a></li>
-                  <li><a href="#">Directory</a></li>
-                  <li><h5 style="color: #aab8c2">&#169 2015 ServiceU, Inc, All rights reserved.</h5></li>
-                </ul>
-         
-    </footer>
-    
+        <ul class="list-inline">
+        <li><a href="about.php">About</a></li>
+         <li><a href="contactus.php">Contact Us</a></li>
+        <li><a href="services.php">Home</a></li>
+        <li><h5 style="color: #aab8c2">&#169 2015 ServiceU, Inc, All rights reserved.</h5></li>
+        </ul>
+
+        </footer>
 
 
-    
-    
+
+
+
     <!-- Custom for project -->
     <script src="js/editProfileactions.js"></script>
 
     <script type="text/javascript">
-    <?php 
+    <?php
         if(!checkVerification($userEmail))
         {
     ?>
             $('#confirmCode').modal('show');
-    <?php 
+    <?php
         }
     ?>
     </script>
 
-    
+
       <!-- jQuery -->
     <script src="js/jquery.js"></script>
     <script src="js/bootbox.js"></script>
     <script src="js/bootbox.min.js"></script>
     <!-- Bootstrap Core JavaScript -->
-    <script src="js/bootstrap.min.js"></script> 
-    
+    <script src="js/bootstrap.min.js"></script>
+
     <!--Start online JSS first-->
     <script src="https://code.jquery.com/jquery-1.11.2.min.js"></script>
     <!--Bootstrap JSS-->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
     <!--Customized JSS-->
     <script src="js/myjs.js"></script>
-    
+
      <script>
 
    $('[data-dismiss=modal]').on('click', function (e) {
@@ -334,55 +334,55 @@
         .find("input,textarea")
            .val('')
            .end();
-   
+
       $('select option:first-child').attr("selected", "selected");
-    
+
     });
     </script>
 
 
     <!--change acive mode in the navbar-->
-    <script> 
+    <script>
         $(".nav a").on("click", function(){
            $(".nav").find(".active").removeClass("active");
            $(this).parent().addClass("active");
         });
     </script>
-    
+
 
     <script>
 
     jQuery(function(){
 
         var minimized_elements = $('p.showHide');
-        
-        minimized_elements.each(function(){    
-            var t = $(this).text();        
+
+        minimized_elements.each(function(){
+            var t = $(this).text();
             if(t.length < 100) return;
-            
+
             $(this).html(
                 t.slice(0,100) + '<span> <b>...</b></span><a href="#" class="more" style="color: black;"><b>More</b></a>' + '<span style="display:none;">'+ t.slice(100,t.length)+' <a href="#" class="less" style="color: black;"><b>Less</b></a></span>'
             );
-            
-        }); 
-        
+
+        });
+
         $('a.more', minimized_elements).click(function(event){
             event.preventDefault();
             $(this).hide().prev().hide();
-            $(this).next().show();        
+            $(this).next().show();
         });
-        
+
         $('a.less', minimized_elements).click(function(event){
             event.preventDefault();
-            $(this).parent().hide().prev().show().prev().show();    
+            $(this).parent().hide().prev().show().prev().show();
         });
 
     });
 
 </script>
-    
-    
 
-    
+
+
+
 </body>
 </html>

@@ -73,13 +73,13 @@ body{
 	height:100%;
 	min-width: 1300px;
 	min-height: 850px;
-   
+
 }
 
 .indexBody{
        overflow-y: hidden;
      background: black;
-       
+
 }
 
 .carousel, .item, .active{
@@ -102,7 +102,7 @@ body{
 .img-responsive{
     width: 100%;
     background-size: cover;
-   
+
        opacity: 0.45;
 }
 
@@ -135,14 +135,19 @@ body{
 }
 
 #OuterWelcomeContainer{
-    color: #fff;
-    padding-left: 5px;
-    font-size: 20px;
-    font-weight: 300;
-    line-height: 22px;
-	float: left;
-	height: 64%;
-	width: 59%;
+color: #fff;
+padding-left: 5px;
+font-size: 20px;
+font-weight: 300;
+line-height: 22px;
+float: left;
+height: 64%;
+width: 59%;
+border-radius: 10px;
+text-align: left;
+background-color: rgba(0, 0, 0, 0.6);
+padding: 10px 15px;
+text-shadow: 1px 1px 1px black;
 	/*background-color: #F6F6F6;
 	box-shadow: 0px 0px 10px 4px;*/
 	border-radius: 10px;
@@ -157,7 +162,7 @@ body{
     margin-top: 5%;
     padding-top: 7%;
     color: #fff;
-    
+
 }
 
 .OuterFooterContainer ul li a{
@@ -226,7 +231,7 @@ body{
 /***BELOW CSS FOR NAVBAR**/
 
 #mainColor{
-	color: #2B2B2B;	
+	color: #2B2B2B;
 }
 
 #body1{
@@ -291,12 +296,12 @@ body{
 	text-decoration: none;
 	list-style-type: none;
 	padding-top: 8px;
-	
+
 }
 
 #Profile-List a{
 	text-decoration: none;
-	
+
 }
 
 #editGlyp{
@@ -321,19 +326,19 @@ body{
     background-color: #d9edf7;
     color: #333;
     border: none;
-      
-    
+
+
 }
 
 #inputTextColor{
     border-color: #ccc;
     margin-top: -5px;
-    
+
 }
 
 #delInterestIcon{
     background-color: #ffffff;
-    
+
 }
 
 #myprofileName{
@@ -344,15 +349,15 @@ body{
 
 #myprofileDividerLine{
     padding-top: 10px;
-    border-top-style: solid; 
-    border-width: 1px; 
+    border-top-style: solid;
+    border-width: 1px;
     border-color: #D9EDF7;
 }
 
 #userImageStyle{
    border: 5px solid #ccc;
    height: 130px;
-   width: 130px; 
+   width: 130px;
    float: left;
 }
 
@@ -360,7 +365,7 @@ body{
 #userViewProfileImageStyle{
    border: 5px solid #ccc;
    height: 150px;
-   width: 150px; 
+   width: 150px;
    float: left;
 }
 
@@ -371,21 +376,21 @@ body{
 }
 
 .myHeaderInbox{
-    
+
     text-transform: uppercase;
     font-weight: 700;
     color: #777777;
-   
-  
+
+
 }
 
 .myBodyInbox{
     padding-bottom: 20px;
-    /*border-bottom-style: solid; 
-    border-width: 1px; 
+    /*border-bottom-style: solid;
+    border-width: 1px;
     border-bottom-color: #bce8f1; */
     padding-top: 5px;
-    
+
 }
 
 .navLink a{
@@ -394,7 +399,7 @@ body{
     text-transform: uppercase;
     text-decoration: none;
     letter-spacing: -1px;
-    
+
 }
 
 /* unvisited link */
