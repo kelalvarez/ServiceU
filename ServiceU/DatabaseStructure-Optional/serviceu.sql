@@ -37,7 +37,7 @@ CREATE TABLE IF NOT EXISTS `alertstable` (
 --
 -- Dumping data for table `alertstable`
 --
-/*
+
 INSERT INTO `alertstable` (`email`, `alertTime`, `orderNum`, `message`) VALUES
 ('testemail1@gmail.com', '2015-07-21 21:10:28', 1, 'New Test Notification'),
 ('testemail1@gmail.com', '2015-07-21 21:10:54', 2, 'New Notification 2'),
@@ -74,7 +74,7 @@ INSERT INTO `alertstable` (`email`, `alertTime`, `orderNum`, `message`) VALUES
 ('testemail4@gmail.com', '2015-07-22 14:06:46', 33, '<strong> <a href="postComplete.php?jobID=9" target="_parent"></a> </strong> :: The job has been closed. Thank you for your application.'),
 ('testemail4@gmail.com', '2015-07-22 14:08:51', 34, '<strong> Sample Job Title 1 </strong> :: You have been selected for the job. <a href="postComplete.php?jobID=9" target="_parent">Click here </a> to review job'),
 ('testemail1@gmail.com', '2015-07-22 14:09:48', 35, '<strong> Sample Job Title 1 </strong> :: The applicant that you selected has deny the job offer. <a href="postComplete.php?jobID=9" target="_parent">Click here </a> to review the job');
-*/
+
 -- --------------------------------------------------------
 
 --
