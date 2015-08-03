@@ -48,21 +48,6 @@ CREATE TABLE IF NOT EXISTS `usertable` (
 -- Dumping data for table `usertable`
 --
 
-INSERT INTO `usertable` (`userID`, `email`, `firstName`, `lastName`, `userPhone`, `password`, `verify`, `degree`, `skill`, `interest`, `rate`, `verificationCode`, `admin`) VALUES
-(49, 'admin@serviceu.com', 'Admin', 'Admin', NULL, 'passwordadmin', 0, 0, 'na', 'na', 0, '2STj1tcmqQ', 1),
-(41, 'dad@yahoo.com', 'James', 'Esward', '0', 'dada', 0, 0, 'na', 'na', 0, 'rMFbHUlqQd', 0),
-(40, 'das@ka.com', 'Michelle', 'Tong', '0', 'dasda', 0, 0, 'na', 'na', 0, 'XE86WS4cWC', 0),
-(42, 'fada@yahoo.com', 'Eric', 'Meng', '0', 'dad', 0, 0, 'na', 'na', 0, 'GJzsOzu8pA', 0),
-(38, 'fd@laalo.com', 'lo', 'ds', '0', '12', 0, 0, 'na', 'na', 0, 'C87KMKI1ij', 0),
-(37, 'mark@gmail.com', 'Marvin', 'Caragay', '(925)325-0540', 'volcom12', 0, 1, 'C++ Java PHP JavaScript Ajax', 'Music Movie', 0, 'hD02NfEP94', 0),
-(36, 'marv@gmail.com', 'k', 'm', '0', 'volcom12', 0, 0, 'na', 'na', 0, 'jyKFcwO1VV', 0),
-(47, 'SADAM@GMAIL.COM', 'Lo', 'Desenberg', '0', '123', 0, 0, 'na', 'na', 0, 'LOmiMStOXB', 0),
-(48, 'sadamn2@yahoo.com', 'sadamn2', 'mike', '0', '123', 0, 0, 'na', 'na', 0, 'EliG7XGKh0', 0),
-(1, 'testemail1@gmail.com', 'Michael', 'Johnson', '', 'password1', 1, 0, 'na', 'computers software css php groceries', 0, '', 0),
-(2, 'testemail2@gmail.com', 'Luke', 'Walker', '0', 'password2', 0, 0, 'na', 'na', 0, '', 0),
-(3, 'testemail3@gmail.com', 'Test Name3', 'Last Name3', '0', 'password3', 1, 0, 'na', 'BS Software Engineering', 0, '', 0),
-(4, 'testmail4@gmail.com', 'Test Name4', 'Last Name4', '0', 'password4', 1, 1, 'na', 'groceries, computers', 0, '', 0);
-
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
