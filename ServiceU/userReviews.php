@@ -172,9 +172,7 @@
                                 drawStars(getRate($employeeEmail));
                             ?>
                             
-                            <a href="#newReview" data-toggle="modal" data-target="#newReview" class="btn btn-sm btn-warning">
-                                <i class="icon-hand-right"></i>Edit
-                            </a>        
+                        
                     
                 </div>
             </div>
