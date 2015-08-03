@@ -74,14 +74,14 @@
                                                 <a href="userReviews.php?employeeEmail=<?php echo $row['employeeID']; ?>&jobID=<?php echo $jobID; ?>">
                                                 
                                                 <!--<a data-toggle="modal" href="#reviewShort">-->
-                                                    <span class="glyphicon glyphicon-open-file"></span>
+                                                    <span class="glyphicon glyphicon-plus-sign"></span>
                                                 </a>
                                             </td>
                                             <td>
                                                 &nbsp;&nbsp;
                                                 <!-- <a data-toggle="modal" href="#confirmApplicant" data-book-id="asd1">-->
                                                 <button name="submitApplicant" type="submit">    
-                                                    <span class="glyphicon glyphicon-ok"></span></button>
+                                                    <span class="glyphicon glyphicon-ok-circle"></span></button>
                                                 
                                             </td>
                                             <?php } 
@@ -90,9 +90,11 @@
                                                 <a href="userReviews.php?employeeEmail=<?php echo $row['employeeID']; ?>&jobID=<?php echo $jobID; ?>">
                                                 
                                                 <!--<a data-toggle="modal" href="#reviewShort">-->
-                                                    <span class="glyphicon glyphicon-open-file"></span>
+                                                    <span class="glyphicon glyphicon-plus-sign"></span>
                                                 </a>
                                             </td>
+                                            
+                                            
                                             <?php
                                                 }
                                             ?>

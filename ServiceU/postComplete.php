@@ -87,8 +87,8 @@
         applicantSelected($applicantEmail, $jobID);
         $appSubmit = 1;
         $jobT = getJobTitle($jobID);
-         newNotification( $applicantEmail , "<strong> ". $jobT ." </strong> :: You have been selected for the job. <a href=\"postComplete.php?jobID=" . $jobID . "\" target=\"_parent\">Click here </a> to review job" );
-
+        newNotification( $applicantEmail , "<strong> ". $jobT ." </strong> :: You have been selected for the job. <a href=\"postComplete.php?jobID=" . $jobID . "\" target=\"_parent\">Click here </a> to review job" );
+        closePost($jobID);
     } 
     
     $yes = 0;
@@ -122,20 +122,70 @@
     }
     
     if (isset($_POST['confirmPayment'])) {
-        
         $employeerEmail = getJobOwner($jobID);
         $employeeEmail = selectedApplicant($jobID);
         $amount = getJobPayment($jobID);
         createPayment($jobID, $employeerEmail, $employeeEmail, $amount);
-        
-        
-        
         submitPayment($jobID);
         echo '<script type="text/javascript">';
         echo 'alert("Payment Agreement accepted")';
         echo '</script>';
+    } 
+    
+    $resubmit =  0;
+    $cancelpay = 0;
+    if (isset($_POST['resubmitPayment'])) {
+        $payID = retrievePayment($jobID);
+        resubmitPayment($jobID, $payID);
+        $resubmit = 1;
+    }
+    
+    if (isset($_POST['cancelPayment'])) {
+        $payID = retrievePayment($jobID);
+        cancelPayment($jobID, $payID);
+        $cancelpay = 1;
+        $appSubmit = 0;
+    }
 
+    $employeeComplete = 0;
+    $employerComplete = 0;
+    if (isset($_POST['completeJobApp'])) {
+        completePaymentEmployee($jobID);
+        $employeeComplete = 1;
     }    
+    
+    if (isset($_POST['completeJobOwner'])) {
+        completePaymentEmployer($jobID);
+        $employerComplete = 1;
+        
+    }  
+    
+    if (isset($_POST['submitReview'])) {
+        
+        $overallStars = $_POST['overRadio'];
+        $reviewText = $_POST['reviewText'];
+        $recommend = $_POST['recomRadio'];
+        
+        $employeerEmail = getJobOwner($jobID);
+        $employeeEmail = selectedApplicant($jobID);
+        
+        $senderID = $userEmail;
+        
+        if($senderID == $employeeEmail){
+            $receiverID = $employerEmail;
+        }else {
+            $receiverID = $employeeEmail;
+        }
+        
+        if($recommend == 1 ){
+            $textRecommend = 'yes';
+        } else {
+            $textRecommend = 'no';
+        }
+        
+        submitNewReview($receiverID, $senderID, $reviewText, $overallStars, $textRecommend, $jobID);
+
+    } 
 ?>
 
 
@@ -186,54 +236,74 @@
     $selectedApplicant = selectedApplicant($jobID);   
     $paymentStatus = isPaymentDone($jobID);
     $paymentClear = isPaymentRejected($jobID);
+    $needEmployerVerification = employeeCompletedJob($jobID);
     
-
+    $employeeFinished =  employeeCompletedJob($jobID);
+    $employerVerified = verifyJobCompleted($jobID);
+    $finished = isJobCompleted($jobID);
+    
+    $reviewSubmit =  isReviewSubmitted($jobID);
+    
+    
     if ($appSubmit == 1) { ?> 
             <div class="alert alert-success fade in">
         <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
         <strong>Success!</strong> You have selected applicant <?php echo getFullName($applicantEmail); ?> to complete the Job.
         
       </div>
-<?php } ?>
+<?php } 
+    if($resubmit == 1){ ?>
+        <div class="alert alert-success fade in">
+            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+            <strong>Payment Resubmit Confirmed!</strong>
+        </div>  
+<?php
+    }
+    if( $employeeComplete == 1) {    
+?>
+        <div class="alert alert-success fade in">
+            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+            <strong>Job Completed Submission Confirmed! Your alert has been successfully sent</strong>
+        </div> 
+    <?php }   
+ 
+  if ($employeeFinished == 1 && $employerVerified == 1 && $finished == 1){ ?>
+     <div class="alert alert-success">
+         <strong>Job Completed!</strong> All payments have been done and this service has been successfully completed. <br>
+    </div>
+  <?php } elseif ($employeeFinished == 1 && $employerVerified == 1){ ?>
+    <div class="alert alert-warning">
+         <strong>Payment to Employer Processing!</strong> Allow ServiceU to forward the payment to the employer in 24-72 hours. You will be notified <br>
+    </div>      
+<?php  
 
-<?php 
-  
-   if ($select == 1 && $owner == 1 && $selectedApplicant != 'na' && $paymentDone == 1 && $paymentStatus == 1 && $paymentClear == 0 ) { ?>
-     <div class="alert alert-warning">
+  }elseif ($select == 1 && $owner == 1 && $selectedApplicant != 'na' && $paymentDone == 1 && $paymentStatus == 1 && $paymentClear == 0 ) { 
+?>
+    <div class="alert alert-warning">
          <strong>Payment ready to be Processed !</strong> Submit your payment through the PayPal button. A notification will be sent to you when ServiceU clear it. <br>
     </div>
 <?php 
 
-   } elseif ($select == 1 && $owner == 1 && $selectedApplicant != 'na' && $paymentDone == 1 && $paymentStatus == 1 && $paymentClear == 1 ) { ?>
+   } elseif ($select == 1 && $owner == 1 && $selectedApplicant != 'na' && $paymentDone == 1 && $paymentStatus == 1 && $paymentClear == 1 && $employeeFinished == 0 ) { ?>
      <div class="alert alert-success">
          <strong>Payment Cleared and Completed!</strong> Your employee may now be able to complete the requested service. <br>
     </div>
 <?php 
+   } elseif ($select == 1 && $owner == 1 && $selectedApplicant != 'na' && $paymentDone == 1 && $paymentStatus == 1 && $paymentClear == 1  && $employeeFinished == 1) { ?>
+    <div class="alert alert-warning">
+         <strong>Job Completed Verification Pending!</strong> Your employee has requested a verification for his/her service. Click on Complete to complete the transaction. <br>
+    </div>
 
-   } elseif ($select == 1 && $owner == 1 && $selectedApplicant != 'na' && $paymentDone == 1 && $paymentStatus == 1 && $paymentClear == 2 ) { ?>
+<?php }    
+   elseif ($select == 1 && $owner == 1 && $selectedApplicant != 'na' && $paymentDone == 1 && $paymentStatus == 1 && $paymentClear == 2 ) { ?>
      <div class="alert alert-danger">
-        <strong>Payment Rejected!</strong> Choose one of the following options. <br>
-        <?php ///////////////////////////DO SOMETHING /////////////////////////////// 
-         
-         
-        // CANCEL MODAL
+        <strong>Payment Rejected!</strong> Choose one of the following options.         
+ 
         
-         
-         
-         
-         
-         
-
-
-
-        // RESUBMIT MODAL
-         
-         
-         
-         
-         
-         
-         ?>
+        <form id="paymentRejected" class="form-horizontal" action="#" name="payReject" method="POST">
+         <button name="resubmitPayment" type="submit">Resubmit</button> or <button name="cancelPayment" type="submit">Cancel Payment</button>
+        </form>
+        
     </div>    
 <?php
    } elseif ($select == 1 && $owner == 1 && $selectedApplicant != 'na' && $paymentDone == 0) { ?>
@@ -288,19 +358,21 @@
         <strong>Payment Confirmation Pending !</strong> Waiting for ServiceU to clear the payment.
     </div>
 <?php
-  } else if( $select == 1 && $userEmail == $selectedApplicant && $paymentClear == 1){ ?>
+  } else if( $select == 1 && $userEmail == $selectedApplicant && $paymentClear == 1 && $employeeFinished == 0 ){ ?>
     <div class="alert alert-success fade in">
-               <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
         <strong>Payment Confirmed!</strong> You may now work on the requested service.
     </div>
     <div class="alert alert-warning fade in">
        <strong>Job on Progress! </strong> Click the complete button when finished  
      </div>
 <?php
-  }
+  } else if( $select == 1 && $userEmail == $selectedApplicant && $paymentClear == 1 && $employeeFinished == 1 ){
 ?>
-    
-    
+   <div class="alert alert-warning fade in">
+        <strong>Job Completed Verification Pending!</strong> Please wait until the owner verify your work.
+    </div>
+  <?php } 
+  ?>
   
     
 <!----------------------- DATA --------------->    
@@ -332,17 +404,17 @@
                                         <a href="#viewApplication" data-toggle="modal" data-target="#viewApplication" class="btn btn-sm btn-warning btn-block">
                                             View Applications <span class="badge"><?php echo $numApp ?></span></a>
 
-                                        <a href="#editPost" data-toggle="modal" data-target="#editPost" class="btn btn-sm btn-warning btn-block <?php if($jobClose == 1) { echo "disabled"; }?>">
+                                        <a href="#editPost" data-toggle="modal" data-target="#editPost" class="btn btn-sm btn-warning btn-block <?php if($jobClose == 1 ||  $selectedApplicant != 'na') { echo "disabled"; }?>">
                                             <i class="icon-hand-right"></i>Edit
                                         </a>
 
                                         <?php if($jobClose != 1) {?>
-                                        <a href="#closePost" data-toggle="modal" data-target="#closePost" class="btn btn-sm btn-warning btn-block">
+                                        <a href="#closePost" data-toggle="modal" data-target="#closePost" class="btn btn-sm btn-warning btn-block <?php if( $selectedApplicant != 'na') { echo "disabled"; }?>">">
                                                     <i class="icon-hand-right"></i>Close Job
                                         </a>
                                         <?php  }
                                         else{ ?>
-                                        <a href="#openPost" data-toggle="modal" data-target="#openPost" class="btn btn-sm btn-warning btn-block <?php if($select == 1) { echo "disabled"; }?>">
+                                        <a href="#openPost" data-toggle="modal" data-target="#openPost" class="btn btn-sm btn-warning btn-block <?php if($select == 1 || $selectedApplicant != 'na') { echo "disabled"; }?>">
                                                     <i class="icon-hand-right"></i>Open Job
                                         </a>
                                         <?php
@@ -367,6 +439,35 @@
 
 
                                         </span>
+                                        <hr class="small"> 
+       
+                                    <?php
+                                    if ( $finished != 1){
+                                        if($select == 1 && $userEmail == $selectedApplicant && $paymentClear == 1){
+                                        ?>
+                                            <form id="completeApplicant" class="form-horizontal" action="#" name="completeApp" method="POST">
+                                                <button name="completeJobApp" class="btn btn-success <?php if($employeeFinished == 1 ) { echo "disabled"; }?>" type="submit">Complete</button>
+                                            </form>
+                                        <?php } ?>
+
+                                        <?php 
+                                        if($select == 1 && $owner == 1 && $selectedApplicant != 'na' && $paymentDone == 1 && $paymentStatus == 1 && $paymentClear == 1 &&  $needEmployerVerification == 1 ) { 
+                                        ?>
+                                            <form id="completeJobOwner" class="form-horizontal" action="#" name="completeApp" method="POST">
+                                                <button name="completeJobOwner" class="btn btn-success <?php if($employeeFinished == 1 && $employerVerified == 1 ) { echo "disabled"; }?>" type="submit">Complete</button>
+                                            </form>                
+
+                                        <?php }
+                                    }elseif ($reviewSubmit == 0) { ?>
+
+                                            <a href="#newReview" data-toggle="modal" data-target="#newReview" class="btn btn-success">
+                                                            <i class="icon-hand-right"></i>Leave a Review
+                                            </a>      
+
+                                    <?php
+                                    }
+                                    ?>    
+                                        
                                 </div>
 
 
@@ -441,6 +542,7 @@
                 <?php include('viewAppModal.php'); ?>
                 <?php //include('selectApplicantConfirmationModal.php'); ?>
                 <?php include('openJobModal.php'); ?>
+                <?php include('newReviewModal.php'); ?>
                 <!-- /.col-lg-10 -->
                 
             </div>
@@ -497,7 +599,25 @@
                  
                  
                  </div>
-                 
+                 <div class="row">
+                        <div class="col-sm-10 col-lg-push-4">
+                    <?php  if ($select == 1 && $owner == 1 && $selectedApplicant != 'na' && $paymentStatus == 0) { ?>
+                    
+                        <a href="#confirmPayment" data-toggle="modal" data-target="#confirmPayment">    
+                        <button type="button" class="btn btn-success">Read Terms</button>
+                        </a>
+                    <?php } elseif ($select == 1 && $owner == 1 && $selectedApplicant != 'na' && $paymentStatus == 1){
+                        ?>
+                            <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
+                            <input type="hidden" name="cmd" value="_s-xclick">
+                            <input type="hidden" name="hosted_button_id" value="AKKK98HQR4UVU">
+                            <input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_buynowCC_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
+                            <img alt="" border="0" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1">
+                        </form>
+
+                    <?php
+                    } ?>
+                    </div>  
              </div>
              
              

@@ -1841,6 +1841,160 @@ function getReceiverPayment($jobID, $paymentID){
     return $row['employeeEmail'];   
 }
 
+/////////////////////////////
+function cancelPayment($jobID, $paymentID){
+    global $con;
+    
+    $query = "UPDATE paymentTable SET clearstatus='3' WHERE jobID='$jobID' AND paymentID='$paymentID'";
+    $result = mysqli_query($con,$query );
+    
+    $applicant = selectedApplicant($jobID);
+    
+    mysqli_query($con,
+                "UPDATE historyTable SET completestat='2' WHERE jobID='$jobID' AND userEmail='$applicant' AND completestat='0'"
+                );
+    
+    $jobTitle = getJobTitle($jobID);
+    
+    newNotification( $applicant , "<strong> ". $jobTitle ." </strong> :: The employer has cancel the payment. Therefore the service was cancelled"
+            . ". <a href=\"postComplete.php?jobID=" . $jobID . "\" target=\"_parent\">Click here </a> to review the job" ); 
+    
+    
+    mysqli_query($con,
+                "UPDATE jobTable SET applicantSelected='na', paymentID = '0' WHERE jobID='$jobID'"
+                );
+
+    
+    clearApplicant($applicant, $jobID);
+    
+    return TRUE;
+}
+
+function resubmitPayment($jobID, $paymentID){
+    global $con;
+    
+    $query = "UPDATE paymentTable SET clearstatus='0' WHERE jobID='$jobID' AND paymentID='$paymentID'";
+    $result = mysqli_query($con,$query );
+    
+    return TRUE;
+}
+
+function employeeCompletedJob($jobID){
+    global $con;
+    $paymentID = retrievePayment($jobID);
+    
+    $query = "SELECT completeEmployee FROM paymenttable WHERE jobID='$jobID' AND paymentID='$paymentID'";
+    $result = mysqli_query($con, $query);
+    $row = mysqli_fetch_Assoc($result);
+    return $row['completeEmployee'];   
+}
+
+function verifyJobCompleted($jobID){
+    global $con;
+    $paymentID = retrievePayment($jobID);
+    
+    $query = "SELECT completeEmployer FROM paymenttable WHERE jobID='$jobID' AND paymentID='$paymentID'";
+    $result = mysqli_query($con, $query);
+    $row = mysqli_fetch_Assoc($result);
+    return $row['completeEmployer'];    
+}
+
+function completePaymentEmployee($jobID){
+    global $con;
+    
+    $paymentID = retrievePayment($jobID);
+    $query = "UPDATE paymentTable SET completeEmployee='1' WHERE jobID='$jobID' AND paymentID='$paymentID'";
+    $result = mysqli_query($con,$query );
+    
+    return TRUE;
+}
+
+function completePaymentEmployer($jobID){
+    global $con;
+    $paymentID = retrievePayment($jobID);
+    $query = "UPDATE paymentTable SET completeEmployer='1' WHERE jobID='$jobID' AND paymentID='$paymentID'";
+    $result = mysqli_query($con,$query );
+    
+    return TRUE;
+}
+
+function isJobCompleted($jobID){
+    global $con;
+    $paymentID = retrievePayment($jobID);
+    
+    $query = "SELECT finished FROM paymenttable WHERE jobID='$jobID' AND paymentID='$paymentID'";
+    $result = mysqli_query($con, $query);
+    $row = mysqli_fetch_Assoc($result);
+    return $row['finished'];   
+}
+
+
+
+
+function getCompletedPayments(){
+    global $con;
+    
+    $query = "SELECT * FROM paymentTable WHERE completeEmployee='1' AND completeEmployer='1' ORDER BY submitTime DESC";
+    $result = mysqli_query($con,$query);
+    
+    return $result;
+}
+
+function forwardPayment($jobID){
+    global $con;
+    
+    $paymentID = retrievePayment($jobID);
+    
+    
+    $query = "UPDATE paymentTable SET finished='1' WHERE jobID='$jobID' AND paymentID='$paymentID'";
+    $result = mysqli_query($con,$query );
+    
+    $applicant = selectedApplicant($jobID);
+    
+    $jobOwner = getJobOwner($jobID);
+ 
+    $jobTitle = getJobTitle($jobID);
+    
+    newNotification( $applicant , "<strong> ". $jobTitle ." </strong> :: ServiceU has forward you the payment to your PayPal account from this service"
+            . ". <a href=\"postComplete.php?jobID=" . $jobID . "\" target=\"_parent\">Click here </a> to review the job" ); 
+        
+    newNotification( $jobOwner , "<strong> ". $jobTitle ." </strong> :: ServiceU has forward the payment to your employer. Thank you for using ServiceU"
+            . ". <a href=\"postComplete.php?jobID=" . $jobID . "\" target=\"_parent\">Click here </a> to review the job" ); 
+       
+    
+   // mysqli_query($con,
+     //           "UPDATE historyTable SET completestat='1' WHERE jobID='$jobID' AND userEmail='$applicant' AND completestat='0'"
+     //           );    
+    
+    return TRUE;
+}
+
+function isReviewSubmitted($jobID){
+    global $con;
+
+    $query = "SELECT COUNT(*) as total FROM commenttable WHERE jobID='$jobID'";
+    $result = mysqli_query($con, $query);
+    $row = mysqli_fetch_Assoc($result);
+    
+    return $row['total'];   
+}
+
+function submitNewReview($receiverID, $senderID, $comment, $stars, $recommend, $jobID){
+    global $con;
+    
+    mysqli_query($con,
+                "INSERT INTO commentTable (receiverID, senderID, comment, stars, recommend, jobID) "
+                . "values('$receiverID', '$senderID', '$comment', '$stars', '$recommend', '$jobID');"
+                );
+    
+     $jobTitle = getJobTitle($jobID);
+    newNotification( $receiverID , "<strong> ". $jobTitle ." </strong> :: You have received a review from this job. "
+            . ". <a href=\"postComplete.php?jobID=" . $jobID . "\" target=\"_parent\">Click here </a> to review the job" ); 
+       
+    
+    
+    return TRUE;        
+}
 
 
 

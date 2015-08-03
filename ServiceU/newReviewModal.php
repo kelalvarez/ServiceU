@@ -9,70 +9,9 @@
                         <button class="close" data-dismiss="modal"><span style="color: #fff">×</span></button>
                     </div>
                     <div class="panel-body" >
-                        <form id="newReviewform" class="form-horizontal" action="postComplete.php?jobID=<?php echo $jobID ?>" name="editDegree" method="POST">
+                        <form id="newReviewform" class="form-horizontal" action="" name="editDegree" method="POST">
                             <div class="form-group">           
                                 <div class="form-group" style="color: #2e6da4">
-                                    
-                                    <div id="puncR" class="row" >
-                                        <div class="col-md-4">
-                                            Punctuality Stars:
-                                        </div>
-                                        <div class="col-sm-1 col-md-1">
-                                                <input type="radio" name="puncRadio" id="puncRadios1" required value="1">
-                                                1
-                                        </div>
-                                        <div class="col-sm-1 col-md-1">
-                                                <input type="radio" name="puncRadio" id="puncRadios2" value="2">
-                                                2
-                                        </div>    
-                                        <div class="col-sm-1 col-md-1 ">
-                                                <input type="radio" name="puncRadio" id="puncRadios3" value="3">
-                                                3
-                                        </div>  
-                                        <div class="col-sm-1 col-md-1">
-                                                <input type="radio" name="puncRadio" id="puncRadios4" value="4">
-                                                4
-                                        </div>
-                                        <div class="col-sm-1 col-md-1">
-                                                <input type="radio" name="puncRadio" id="puncRadios5" value="5">
-                                                5                                        
-                                        </div>
-                                        <div class="col-sm-1 col-md-1">
-                                                <input type="radio" name="puncRadio" id="puncRadiosNone" value="0">
-                                                None
-                                        </div>  
-                                    </div>
-                                    <br>
-                                    <div id="perfR" class="row" >
-                                        
-                                        <div class="col-md-4">
-                                            Performance Stars:
-                                        </div>
-                                        <div class="col-sm-1 col-md-1">
-                                                <input type="radio" name="perfRadio" id="perfRadios1" required value="1">
-                                                1
-                                        </div>
-                                        <div class="col-sm-1 col-md-1">
-                                                <input type="radio" name="perfRadio" id="perfRadios2" value="2">
-                                                2
-                                        </div>    
-                                        <div class="col-sm-1 col-md-1 ">
-                                                <input type="radio" name="perfRadio" id="perfRadios3" value="3">
-                                                3
-                                        </div>  
-                                        <div class="col-sm-1 col-md-1">
-                                                <input type="radio" name="perfRadio" id="perfRadios4" value="4">
-                                                4
-                                        </div>
-                                        <div class="col-sm-1 col-md-1">
-                                                <input type="radio" name="perfRadio" id="perfRadios5" value="5">
-                                                5                                        
-                                        </div>
-                                        <div class="col-sm-1 col-md-1">
-                                                <input type="radio" name="perfRadio" id="perfRadiosNone" value="0">
-                                                None
-                                        </div>  
-                                    </div>
                                     
                                     <br>
                                     <div id="review" class="row" >
@@ -80,7 +19,7 @@
                                             Review:
                                         </div>
                                         <div class="col-sm-2 col-md-7">
-                                                <textarea class="form-control" rows="3"></textarea>
+                                                <textarea name="reviewText" class="form-control" rows="3"></textarea>
                                         </div>
                                     </div>
                                     
