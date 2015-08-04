@@ -98,10 +98,10 @@ if (isset($_POST['createJob'])) {
               <a style="color: blue" class="h2" href="postComplete.php?jobID=<?php echo $search_rs['jobID']; ?>">
                 <strong>
             <?php echo $search_rs['jobTitle']; ?>
-                </strong>
+                </strong></a>
 
                 <label class="label label-success pull-right">$<?php echo $search_rs['payment'] ?></label>
-              </a>
+              
             </div>
             <div class="panel-body">
             <?php echo $search_rs['jobDescription']; ?>
