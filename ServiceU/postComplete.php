@@ -409,7 +409,7 @@
                                         </a>
 
                                         <?php if($jobClose != 1) {?>
-                                        <a href="#closePost" data-toggle="modal" data-target="#closePost" class="btn btn-sm btn-warning btn-block <?php if( $selectedApplicant != 'na') { echo "disabled"; }?>">">
+                                        <a href="#closePost" data-toggle="modal" data-target="#closePost" class="btn btn-sm btn-warning btn-block <?php if( $selectedApplicant != 'na') { echo "disabled"; }?>">
                                                     <i class="icon-hand-right"></i>Close Job
                                         </a>
                                         <?php  }
