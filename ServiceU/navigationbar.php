@@ -52,9 +52,9 @@
                 </div>
             </form>-->
             </ul>
-
+       
             <ul class="nav navbar-nav pull-right"> <!--user  nav bar-->
-                 <li><a href="notifications.php"> <span style="font-size: 17px; margin-right: 5px;" class="glyphicon glyphicon-flash" data-toggle="tooltip" data-placement="bottom" title="Notification"></span><span class="badge">
+                 <li><a href="notifications.php"> <span style="font-size: 17px; margin-right: 5px;" class="glyphicon glyphicon-bell" data-toggle="tooltip" data-placement="bottom" title="Notification"></span><span class="badge">
                 <?php
 
 
@@ -96,7 +96,6 @@
 
                 <li role="presentation"><a role="menuitem" tabindex="-1" href="profile.php"><span class="glyphicon glyphicon-cog"></span>&nbsp My Profile</a></li>
                 <li role="presentation"><a role="menuitem" tabindex="-1" href="mydashboard.php"><span class="glyphicon glyphicon-bookmark"></span>&nbsp My Dashboard</a></li>
-                <li role="presentation"><a role="menuitem" tabindex="-1" href="notifications.php"><span class="glyphicon glyphicon-bell"></span>&nbsp Notifications</a></li>
                 <li role="presentation"><a role="menuitem" tabindex="-1" href="logout.php"><span class="glyphicon glyphicon-remove"></span>&nbsp Log Out</a></li>
 
             </ul>
