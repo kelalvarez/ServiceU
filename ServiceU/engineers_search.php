@@ -218,7 +218,7 @@ else{
     <div class="col-sm-6">
       <div class="thumbnail"> <img src="img/engineer1.jpg" alt="Thumbnail Image 1" class="img-responsive">
         <div class="caption">
-          <h3>Get Legal Advice</h3>
+          <h3>Technology Starts with Us</h3>
           <p>ServiceU provides experienced and best engineers.</p>
           <hr>
         <p><a href="searchresult_engineer.php" class="btn btn-primary" role="button">Search for an engineer</a></p>
@@ -228,7 +228,7 @@ else{
     <div class="col-sm-6">
       <div class="thumbnail"> <img src="img/engineer2.jpg" alt="Thumbnail Image 1" class="img-responsive">
         <div class="caption">
-          <h3>Choose the Right Lawyere</h3>
+          <h3>Choose the Right Engineer</h3>
           <p>ServiceU is the perfect platform to find &nbsp;excellent and best lawyers</p>
           <hr>
           <p><a href="searchresult_engineer.php" class="btn btn-primary" role="button">Search for an engineer</a></p>

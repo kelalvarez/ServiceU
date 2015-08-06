@@ -12,7 +12,7 @@ mysql_select_db("serviceuDB", $db);
 //if(!isset($_POST['search'])){
   //header("Location:services.php");
 
-$result = mysql_query("SELECT * FROM jobtable WHERE jobTitle LIKE '%event%' OR jobDescription LIKE '%event%' OR category LIKE '%event-organizer%'" , $db);
+$result = mysql_query("SELECT * FROM jobtable WHERE jobTitle LIKE '%event%' OR jobDescription LIKE '%event%' OR category LIKE '%eventorganizer%'" , $db);
 
 // echo 'Results'.$result;
 if(mysql_num_rows($result) != 0){

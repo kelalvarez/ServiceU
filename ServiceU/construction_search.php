@@ -164,7 +164,7 @@ else{
             
          <!-- </div>-->
         </div>
-      <p class="text-center">Online cloud based software stage with accessible and instant legal services.<br>
+      <p class="text-center"> Online cloud based software stage with accessible and instant construction services.<br>
       </p>
       <center> <img src="img/main_image_construction.jpg" alt="" class="img-responsive"></center></div>
 	  
@@ -173,7 +173,7 @@ else{
   <div class="row">
     <div class="text-center col-sm-6">
       <h3>Become Employers</h3>
-      <p>ServiceU is the best place to find experience lawyers. </p>
+      <p>ServiceU is the best place to find experience constructors. </p>
       <a class="btn btn-danger btn-lg" href="mydashboard.php" role="button">Dashboard</a></div>
     <div class="text-center col-sm-6">
       <h3>Become Employee</h3>
@@ -206,7 +206,7 @@ else{
     <div class="col-lg-3 col-md-6 col-sm-6">
      <h2>Step 3:</h2>
      <h3> Pick an employee</h3>
-     <p>Choose an employee from various emplpyees accrording to price range.</p>
+     <p>Choose an employee from various employees according to price range.</p>
     </div>
   </div>
 </div>

@@ -173,7 +173,7 @@ else{
   <div class="row">
     <div class="text-center col-sm-6">
       <h3>Become Employers</h3>
-      <p>ServiceU is the best place to find experience lawyers. </p>
+      <p>ServiceU is the best place to find experience doctors. </p>
       <a class="btn btn-danger btn-lg" href="mydashboard.php" role="button">Dashboard</a></div>
     <div class="text-center col-sm-6">
       <h3>Become Employee</h3>
@@ -219,7 +219,7 @@ else{
       <div class="thumbnail"> <img src="img/primary_health.jpg" alt="Thumbnail Image 1" class="img-responsive">
         <div class="caption">
           <h3>Primary Health Care</h3>
-          <p>ServiceU provides experienced and best lawyers.</p>
+          <p>ServiceU provides experienced and best doctors.</p>
           <hr>
         <p><a href="searchresult_doctor.php" class="btn btn-primary" role="button">Search Doctors</a></p>
         </div>
@@ -229,7 +229,7 @@ else{
       <div class="thumbnail"> <img src="img/Nursing_Care.png" alt="Thumbnail Image 1" class="img-responsive">
         <div class="caption">
           <h3>Nursing Care</h3>
-          <p>ServiceU is the perfect platoform to find &nbsp;excellent and best lawyers</p>
+          <p>ServiceU is the perfect platoform to find &nbsp;excellent and best doctors.</p>
           <hr>
           <p><a href="searchresult_doctor.php" class="btn btn-primary" role="button">Search Doctors</a></p>
         </div>

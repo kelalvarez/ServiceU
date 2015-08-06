@@ -228,7 +228,7 @@ else{
     <div class="col-sm-6">
       <div class="thumbnail"> <img src="img/lawyers4.jpg" alt="Thumbnail Image 1" class="img-responsive">
         <div class="caption">
-          <h3>Choose the Right Lawyere</h3>
+          <h3>Choose the Right Lawyer</h3>
           <p>ServiceU is the perfect platform to find &nbsp;excellent and best lawyers</p>
           <hr>
           <p><a href="serchresult_lawyers.php" class="btn btn-primary" role="button">Search for lawyer</a></p>

@@ -173,7 +173,7 @@ else{
   <div class="row">
     <div class="text-center col-sm-6">
       <h3>Become Employers</h3>
-      <p>ServiceU is the best place to find experience lawyers. </p>
+      <p>ServiceU is the best place to find experience auto repair mechanics. </p>
       <a class="btn btn-danger btn-lg" href="mydashboard.php" role="button">Dashboard</a></div>
     <div class="text-center col-sm-6">
       <h3>Become Employee</h3>
@@ -206,7 +206,7 @@ else{
     <div class="col-lg-3 col-md-6 col-sm-6">
      <h2>Step 3:</h2>
      <h3> Pick an employee</h3>
-     <p>Choose an employee from various emplpyees accrording to price range.</p>
+     <p>Choose an employee from various employees according to price range.</p>
     </div>
   </div>
 </div>
@@ -218,8 +218,8 @@ else{
     <div class="col-sm-6">
       <div class="thumbnail"> <img src="img/auto_repair2.jpg" alt="Thumbnail Image 1" class="img-responsive">
         <div class="caption">
-          <h3>Get Legal Advice</h3>
-          <p>ServiceU provides experienced and best lawyers.</p>
+          <h3>Passion For Excellence</h3>
+          <p>ServiceU provides experienced and best auto repair mechanics.</p>
           <hr>
         <p><a href="searchresult_autorepair.php" class="btn btn-primary" role="button">Search Auto-Repair</a></p>
         </div>
@@ -228,8 +228,8 @@ else{
     <div class="col-sm-6">
       <div class="thumbnail"> <img src="img/auto_repair1.jpg" alt="Thumbnail Image 1" class="img-responsive">
         <div class="caption">
-          <h3>Choose the Right Lawyere</h3>
-          <p>ServiceU is the perfect platform to find &nbsp;excellent and best lawyers</p>
+          <h3>First Class Performance</h3>
+          <p>ServiceU is the perfect platform to find &nbsp;excellent and best auto repair mechanics.</p>
           <hr>
           <p><a href="searchresult_autorepair.php" class="btn btn-primary" role="button">Search Auto-Repair</a></p>
         </div>
